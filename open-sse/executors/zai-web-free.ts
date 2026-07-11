@@ -165,13 +165,11 @@ function extractZaiError(j: ZaiSSEChunk): string {
 function resolveFeatures(
   bodyObj: Record<string, unknown>
 ): Record<string, unknown> {
+  // Match Go zai-api: only send flags + image_generation by default.
+  // web_search, think, preview_mode are only included if explicitly requested.
   const features: Record<string, unknown> = {
-    web_search: false,
-    auto_web_search: false,
-    think: false,
-    enable_thinking: false,
-    image_generation: false,
     flags: [],
+    image_generation: false,
   };
 
   // Per-request overrides
