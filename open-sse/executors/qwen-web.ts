@@ -356,7 +356,7 @@ export class QwenWebExecutor extends BaseExecutor {
 
     // 4. Send the message
     const completionUrl = `${CHAT_COMPLETIONS_URL}?chat_id=${chatId}`;
-    const msgPayload = this.buildMessagePayload(chatId, modelId, prompt, requestedModel);
+    const msgPayload = this.buildMessagePayload(chatId, modelId, prompt, requestedModel, bodyObj);
 
     let upstream: Response;
     try {
@@ -522,10 +522,23 @@ export class QwenWebExecutor extends BaseExecutor {
     chatId: string,
     modelId: string,
     prompt: string,
-    requestedModel: string
+    requestedModel: string,
+    bodyObj: Record<string, unknown>
   ): Record<string, unknown> {
     const fid = uuid();
-    const enableThinking = /think|reason|r1/i.test(requestedModel);
+    // Thinking is controlled by:
+    // 1. reasoning_effort field (from client) — if set and not "none", enable thinking
+    // 2. enable_thinking field (from client) — explicit boolean
+    // 3. Model name suffix -thinking (legacy convention)
+    // 4. Default: disabled (Qwen's "fast mode")
+    const reasoningEffort = bodyObj.reasoning_effort;
+    const enableThinkingExplicit = bodyObj.enable_thinking;
+    const enableThinking =
+      enableThinkingExplicit === true ||
+      (typeof reasoningEffort === "string" &&
+        reasoningEffort !== "none" &&
+        reasoningEffort !== "") ||
+      /think|reason|r1/i.test(requestedModel);
     const featureConfig: Record<string, unknown> = {
       thinking_enabled: enableThinking,
       output_schema: "phase",
@@ -533,6 +546,10 @@ export class QwenWebExecutor extends BaseExecutor {
       research_mode: "normal",
       auto_search: false,
     };
+    // thinking_budget controls reasoning depth (Qwen supports 0-38 for qwen3 series)
+    if (typeof bodyObj.thinking_budget === "number") {
+      featureConfig.thinking_budget = bodyObj.thinking_budget;
+    }
     return {
       stream: true,
       incremental_output: true,
