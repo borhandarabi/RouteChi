@@ -92,7 +92,9 @@ async function fetchPrerequisites(): Promise<PrerequisiteResult> {
   return _inflightPrereqFetch;
 }
 
-export function useZaiPrerequisites(_providerId: string): PrerequisiteResult & { checked: boolean } {
+export function useZaiPrerequisites(
+  _providerId: string
+): PrerequisiteResult & { checked: boolean } {
   const [result, setResult] = useState<PrerequisiteResult>(() => {
     // Initialize from cache if available (instant render, no loading flash)
     if (_sharedPrereqCache) {
@@ -116,11 +118,12 @@ export function useZaiPrerequisites(_providerId: string): PrerequisiteResult & {
     if (hasFetched.current) return;
     hasFetched.current = true;
 
-    // If cache is fresh, don't fetch at all
+    // If cache is fresh, use it without a separate render cycle
     if (_sharedPrereqCache) {
       const age = Date.now() - _sharedPrereqCache.fetchedAt;
       if (age < PREREQ_CACHE_TTL_MS) {
-        setResult(_sharedPrereqCache.result);
+        // Defer the state update to avoid synchronous setState in effect
+        Promise.resolve().then(() => setResult(_sharedPrereqCache!.result));
         return;
       }
     }
@@ -176,7 +179,8 @@ export function ZaiPrerequisiteBanner({
     warnings.push({
       icon: "token",
       message: "Device token pool is empty",
-      detail: "Click 'Refresh Device Tokens' to collect tokens via Playwright. Without tokens, the captcha fallback (browser method) will be used for every request (~10s per request).",
+      detail:
+        "Click 'Refresh Device Tokens' to collect tokens via Playwright. Without tokens, the captcha fallback (browser method) will be used for every request (~10s per request).",
     });
   }
 
@@ -190,14 +194,8 @@ export function ZaiPrerequisiteBanner({
             {w.icon}
           </span>
           <div className="flex-1">
-            <p className="text-sm font-medium text-amber-700 dark:text-amber-400">
-              {w.message}
-            </p>
-            {w.detail && (
-              <p className="mt-0.5 text-xs text-text-muted">
-                {w.detail}
-              </p>
-            )}
+            <p className="text-sm font-medium text-amber-700 dark:text-amber-400">{w.message}</p>
+            {w.detail && <p className="mt-0.5 text-xs text-text-muted">{w.detail}</p>}
           </div>
         </div>
       ))}

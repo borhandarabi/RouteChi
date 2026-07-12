@@ -35,8 +35,18 @@ export interface ZaiWebFreeSettings {
 }
 
 // In-memory cache
+type SqliteDb = {
+  prepare(sql: string): {
+    run(...params: unknown[]): { changes: number };
+    get(...params: unknown[]): unknown;
+    all(...params: unknown[]): unknown[];
+  };
+  exec(sql: string): void;
+  pragma(str: string, options?: { simple?: boolean }): unknown;
+  close(): void;
+};
 let _settings: ZaiWebFreeSettings | null = null;
-let _db: any = null;
+let _db: SqliteDb | null = null;
 let _dbPath: string | null = null;
 
 /**
@@ -51,7 +61,7 @@ export function initSettingsStore(dbPath: string): void {
  * Get a database handle (better-sqlite3 via createRequire, matching
  * the device-token-pool pattern).
  */
-function getDb(): any | null {
+function getDb(): SqliteDb | null {
   if (_db) return _db;
   if (!_dbPath) return null;
   try {
@@ -94,7 +104,10 @@ function writeSetting(key: string, value: string): void {
        ON CONFLICT(namespace, key) DO UPDATE SET value = excluded.value`
     ).run(key, value);
   } catch (err) {
-    log.error?.("settings.write_failed", { key, error: err instanceof Error ? err.message : String(err) });
+    log.error?.("settings.write_failed", {
+      key,
+      error: err instanceof Error ? err.message : String(err),
+    });
   }
 }
 

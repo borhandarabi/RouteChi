@@ -43,10 +43,26 @@ function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+type PlaywrightPage = {
+  goto(url: string, options?: Record<string, unknown>): Promise<unknown>;
+  locator(selector: string): {
+    waitFor(options?: Record<string, unknown>): Promise<void>;
+    fill(value: string): Promise<void>;
+    click(options?: Record<string, unknown>): Promise<void>;
+  };
+  evaluate<T>(fn: (args: unknown) => T | Promise<T>, arg?: unknown): Promise<T>;
+  waitForTimeout(ms: number): Promise<void>;
+  close(): Promise<void>;
+};
+type PlaywrightBrowser = {
+  newPage(): Promise<PlaywrightPage>;
+  close(): Promise<void>;
+};
+
 /**
  * Collect `total` device tokens from a single browser page.
  */
-async function collectTokensOnPage(page: any, total: number): Promise<string[]> {
+async function collectTokensOnPage(page: PlaywrightPage, total: number): Promise<string[]> {
   await page.goto(ZAI_URL, {
     waitUntil: "domcontentloaded",
     timeout: 60000,
@@ -73,24 +89,30 @@ async function collectTokensOnPage(page: any, total: number): Promise<string[]> 
 
   await sleep(SEND_WAIT_MS);
 
-  const collectPromise = page.evaluate(async (args: { total: number }) => {
-    const total = args.total;
-    const out = new Array(total);
-    for (let i = 0; i < total; i++) {
-      const tok = (window as any).z_um.getToken();
-      out[i] = tok && typeof tok.then === "function" ? await tok : tok;
-      if (i % 50 === 0) {
-        await new Promise((r) => setTimeout(r, 0));
+  const collectPromise = page.evaluate(
+    async (args: { total: number }) => {
+      const total = args.total;
+      const out = new Array(total);
+      for (let i = 0; i < total; i++) {
+        const tok = (window as unknown as { z_um: { getToken: () => unknown } }).z_um.getToken();
+        out[i] = tok && typeof tok.then === "function" ? await tok : tok;
+        if (i % 50 === 0) {
+          await new Promise((r) => setTimeout(r, 0));
+        }
       }
-    }
-    return out;
-  }, { total });
+      return out;
+    },
+    { total }
+  );
 
   const tokens = await Promise.race([
     collectPromise,
     new Promise<never>((_, reject) =>
       setTimeout(
-        () => reject(new Error(`token collection timed out after ${TOKEN_COLLECTION_TIMEOUT_MS / 1000}s`)),
+        () =>
+          reject(
+            new Error(`token collection timed out after ${TOKEN_COLLECTION_TIMEOUT_MS / 1000}s`)
+          ),
         TOKEN_COLLECTION_TIMEOUT_MS
       )
     ),
@@ -99,7 +121,11 @@ async function collectTokensOnPage(page: any, total: number): Promise<string[]> 
   return (tokens || []).filter((t: unknown) => typeof t === "string" && (t as string).length > 0);
 }
 
-async function runBatch(browser: any, total: number, batchNum: number): Promise<string[]> {
+async function runBatch(
+  browser: PlaywrightBrowser,
+  total: number,
+  batchNum: number
+): Promise<string[]> {
   let lastErr: unknown;
   for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
     const page = await browser.newPage();
@@ -112,7 +138,9 @@ async function runBatch(browser: any, total: number, batchNum: number): Promise<
       await page.close().catch(() => {});
     }
   }
-  throw new Error(`batch ${batchNum} failed: ${lastErr instanceof Error ? lastErr.message : String(lastErr)}`);
+  throw new Error(
+    `batch ${batchNum} failed: ${lastErr instanceof Error ? lastErr.message : String(lastErr)}`
+  );
 }
 
 export interface RefreshOptions {
@@ -200,7 +228,7 @@ export async function refreshDeviceTokens(options: RefreshOptions): Promise<Refr
     }
   }
 
-  const browser = await chromium.launch(launchOptions as any);
+  const browser = await chromium.launch(launchOptions as Parameters<typeof chromium.launch>[0]);
   try {
     const allTokens: string[] = [];
 
@@ -209,15 +237,17 @@ export async function refreshDeviceTokens(options: RefreshOptions): Promise<Refr
       for (let b = 1; b <= batchCount; b++) batchQueue.push(b);
       const workers: Promise<void>[] = [];
       for (let w = 0; w < parallel; w++) {
-        workers.push((async () => {
-          while (batchQueue.length > 0) {
-            const batchNum = batchQueue.shift();
-            if (batchNum === undefined) break;
-            const tokens = await runBatch(browser, tokenCount, batchNum);
-            addTokens(tokens);
-            allTokens.push(...tokens);
-          }
-        })());
+        workers.push(
+          (async () => {
+            while (batchQueue.length > 0) {
+              const batchNum = batchQueue.shift();
+              if (batchNum === undefined) break;
+              const tokens = await runBatch(browser, tokenCount, batchNum);
+              addTokens(tokens);
+              allTokens.push(...tokens);
+            }
+          })()
+        );
       }
       await Promise.all(workers);
     } else {

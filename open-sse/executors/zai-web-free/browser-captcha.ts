@@ -137,7 +137,8 @@ export async function getFreshDeviceTokenViaBrowser(): Promise<string> {
 
     // Collect a single fresh token
     const token = await page.evaluate(() => {
-      const tok = (window as any).z_um.getToken();
+      const w = window as unknown as { z_um?: { getToken: () => unknown } };
+      const tok = w.z_um?.getToken();
       return tok && typeof tok.then === "function" ? tok : Promise.resolve(tok);
     });
 

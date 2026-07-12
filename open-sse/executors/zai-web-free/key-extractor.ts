@@ -38,7 +38,10 @@ function urlEncode(s: string): string {
       (code >= 48 && code <= 57) ||
       (code >= 65 && code <= 90) ||
       (code >= 97 && code <= 122) ||
-      code === 45 || code === 95 || code === 46 || code === 126
+      code === 45 ||
+      code === 95 ||
+      code === 46 ||
+      code === 126
     ) {
       out += ch;
     } else {
@@ -66,7 +69,7 @@ function urlEncode(s: string): string {
 export async function extractAliyunKeys(): Promise<ExtractedKeys> {
   log.info?.("extract.start");
 
-  let browser: any = null;
+  let browser: { close: () => Promise<void> } | null = null;
   try {
     const { chromium } = await import("playwright");
     browser = await chromium.launch({ headless: true });
@@ -79,7 +82,7 @@ export async function extractAliyunKeys(): Promise<ExtractedKeys> {
       fullBody: string;
     }> = [];
 
-    context.on("request", (request: any) => {
+    context.on("request", (request: { url: () => string; postData: () => string | null }) => {
       const url = request.url();
       if (url.includes("captcha-open-southeast.aliyuncs.com")) {
         const postData = request.postData() || "";
