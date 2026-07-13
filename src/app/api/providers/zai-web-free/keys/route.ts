@@ -40,6 +40,9 @@ export async function GET(request: Request) {
     minPoolSize: settings.minPoolSize,
     autoRefreshEnabled: settings.autoRefreshEnabled,
     autoRefreshIntervalMs: settings.autoRefreshIntervalMs,
+    captchaStrategy: settings.captchaStrategy,
+    captchaRetries: settings.captchaRetries,
+    captchaTimeoutMs: settings.captchaTimeoutMs,
     daemon: daemonStatus,
   });
 }
@@ -90,6 +93,16 @@ export async function PATCH(request: Request) {
   if (typeof body.autoRefreshIntervalMs === "number" && body.autoRefreshIntervalMs >= 60000) {
     updates.autoRefreshIntervalMs = body.autoRefreshIntervalMs;
   }
+  const validStrategies = ["auto", "a_only", "b_only", "c_only", "a_then_c", "a_then_b"];
+  if (typeof body.captchaStrategy === "string" && validStrategies.includes(body.captchaStrategy)) {
+    updates.captchaStrategy = body.captchaStrategy;
+  }
+  if (typeof body.captchaRetries === "number" && body.captchaRetries >= 1 && body.captchaRetries <= 10) {
+    updates.captchaRetries = body.captchaRetries;
+  }
+  if (typeof body.captchaTimeoutMs === "number" && body.captchaTimeoutMs >= 10000 && body.captchaTimeoutMs <= 300000) {
+    updates.captchaTimeoutMs = body.captchaTimeoutMs;
+  }
 
   if (Object.keys(updates).length === 0) {
     return NextResponse.json({ error: "No valid fields to update" }, { status: 400 });
@@ -109,5 +122,8 @@ export async function PATCH(request: Request) {
     minPoolSize: updated.minPoolSize,
     autoRefreshEnabled: updated.autoRefreshEnabled,
     autoRefreshIntervalMs: updated.autoRefreshIntervalMs,
+    captchaStrategy: updated.captchaStrategy,
+    captchaRetries: updated.captchaRetries,
+    captchaTimeoutMs: updated.captchaTimeoutMs,
   });
 }

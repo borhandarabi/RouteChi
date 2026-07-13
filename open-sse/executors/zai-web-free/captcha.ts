@@ -482,17 +482,20 @@ async function tryCompute(
 
 /**
  * Compute the final `captcha_verify_param` value by trying up to
- * `MAX_TOKEN_RETRIES` device tokens from the pool. Returns the base64-encoded
+ * `maxRetries` device tokens from the pool. Returns the base64-encoded
  * payload string, or throws if all retries are exhausted.
  *
  * @param getNextToken  Pool accessor that returns the next device token (FIFO).
  * @param consumeToken  Pool mutator that removes a token after use.
+ * @param maxRetries    Number of tokens to try (default: MAX_TOKEN_RETRIES = 2).
  */
 export async function getCaptchaVerifyParam(
   getNextToken: () => string | null,
-  consumeToken: (token: string) => void
+  consumeToken: (token: string) => void,
+  maxRetries?: number
 ): Promise<string> {
-  for (let attempt = 0; attempt < MAX_TOKEN_RETRIES; attempt++) {
+  const retries = maxRetries && maxRetries > 0 ? maxRetries : MAX_TOKEN_RETRIES;
+  for (let attempt = 0; attempt < retries; attempt++) {
     const deviceToken = getNextToken();
     if (!deviceToken) {
       throw new Error(`No device tokens remaining (attempt ${attempt + 1}/${MAX_TOKEN_RETRIES})`);
@@ -506,7 +509,7 @@ export async function getCaptchaVerifyParam(
       console.error(`[Captcha] tryCompute failed: ${err instanceof Error ? err.message : String(err)}`);
     }
   }
-  throw new Error(`All ${MAX_TOKEN_RETRIES} token retries exhausted`);
+  throw new Error(`All ${retries} token retries exhausted`);
 }
 
 // Re-export internal helpers for unit testing

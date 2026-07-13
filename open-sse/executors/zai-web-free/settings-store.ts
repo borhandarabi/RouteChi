@@ -34,13 +34,33 @@ export const DEFAULT_MIN_POOL_SIZE = 10;
 export const DEFAULT_AUTO_REFRESH_ENABLED = true;
 export const DEFAULT_AUTO_REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
+// Captcha strategy defaults
+// Strategy options:
+//   "auto"      → A (retries) → B (fresh token) → C (browser) — current behavior
+//   "a_only"    → A only (retries), no fallback — fastest but fails if pool/Aliyun is down
+//   "b_only"    → B only (skip A, get fresh token via Playwright, then A computation)
+//   "c_only"    → C only (full browser captcha) — slowest but most reliable
+//   "a_then_c"  → A (retries) → C (skip B) — avoids the extra Playwright token fetch
+//   "a_then_b"  → A (retries) → B (no browser fallback) — no Method C
+export const DEFAULT_CAPTCHA_STRATEGY = "auto" as const;
+export const DEFAULT_CAPTCHA_RETRIES = 2;
+export const DEFAULT_CAPTCHA_TIMEOUT_MS = 90_000;
+
 // Types
+export type CaptchaStrategy = "auto" | "a_only" | "b_only" | "c_only" | "a_then_c" | "a_then_b";
+
 export interface ZaiWebFreeSettings {
   accessKey: string;
   secretKey: string;
   minPoolSize: number;
   autoRefreshEnabled: boolean;
   autoRefreshIntervalMs: number;
+  /** Which captcha strategy to use (A/B/C or a combination). */
+  captchaStrategy: CaptchaStrategy;
+  /** Number of retries per captcha method (e.g. Method A tries N tokens). */
+  captchaRetries: number;
+  /** Timeout in ms for each captcha method attempt. */
+  captchaTimeoutMs: number;
 }
 
 // In-memory cache
@@ -155,6 +175,9 @@ export function getSettings(): ZaiWebFreeSettings {
     autoRefreshEnabled: readSetting("autoRefreshEnabled") !== "false",
     autoRefreshIntervalMs:
       parseInt(readSetting("autoRefreshIntervalMs") || "", 10) || DEFAULT_AUTO_REFRESH_INTERVAL_MS,
+    captchaStrategy: (readSetting("captchaStrategy") as CaptchaStrategy) || DEFAULT_CAPTCHA_STRATEGY,
+    captchaRetries: parseInt(readSetting("captchaRetries") || "", 10) || DEFAULT_CAPTCHA_RETRIES,
+    captchaTimeoutMs: parseInt(readSetting("captchaTimeoutMs") || "", 10) || DEFAULT_CAPTCHA_TIMEOUT_MS,
   };
 
   log.info?.("settings.loaded", {
@@ -166,6 +189,8 @@ export function getSettings(): ZaiWebFreeSettings {
         : "default",
     minPoolSize: _settings.minPoolSize,
     autoRefresh: _settings.autoRefreshEnabled,
+    captchaStrategy: _settings.captchaStrategy,
+    captchaRetries: _settings.captchaRetries,
   });
 
   return _settings;
@@ -205,6 +230,18 @@ export function updateSettings(updates: Partial<ZaiWebFreeSettings>): ZaiWebFree
   if (updates.autoRefreshIntervalMs !== undefined) {
     writeSetting("autoRefreshIntervalMs", String(updates.autoRefreshIntervalMs));
     current.autoRefreshIntervalMs = updates.autoRefreshIntervalMs;
+  }
+  if (updates.captchaStrategy !== undefined) {
+    writeSetting("captchaStrategy", updates.captchaStrategy);
+    current.captchaStrategy = updates.captchaStrategy;
+  }
+  if (updates.captchaRetries !== undefined) {
+    writeSetting("captchaRetries", String(updates.captchaRetries));
+    current.captchaRetries = updates.captchaRetries;
+  }
+  if (updates.captchaTimeoutMs !== undefined) {
+    writeSetting("captchaTimeoutMs", String(updates.captchaTimeoutMs));
+    current.captchaTimeoutMs = updates.captchaTimeoutMs;
   }
 
   // Invalidate cache so next getSettings() re-reads from DB / env

@@ -58,6 +58,7 @@ import {
   initDeviceTokenPool,
   addDeviceTokens,
 } from "./zai-web-free/device-token-pool.ts";
+import { getSettings, type CaptchaStrategy } from "./zai-web-free/settings-store.ts";
 import {
   getFreshDeviceTokenViaBrowser,
   getCaptchaParamViaBrowser,
@@ -321,69 +322,100 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     //      but always works.
     //
     // Note: captcha is ALWAYS required, even with a user-supplied JWT.
+    //
+    // Strategy is configurable from the dashboard (Settings → Aliyun Captcha
+    // Keys → Captcha Strategy). See settings-store.ts for the full list.
+    const settings = getSettings();
+    const strategy: CaptchaStrategy = settings.captchaStrategy;
+    const retries = settings.captchaRetries;
+    const timeoutMs = settings.captchaTimeoutMs;
     const poolSize = getPoolSize();
-    let captchaParam: string;
+    let captchaParam = "";
 
-    // ?��?�� Method A: Fast server-side captcha (device token from pool) ?��?��
-    if (poolSize > 0) {
-      try {
-        const captchaPromise = getCaptchaVerifyParam(getNextToken, consumeToken);
-        const timeoutPromise = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error("Captcha generation timeout after 90s")), 90_000)
-        );
-        captchaParam = await Promise.race([captchaPromise, timeoutPromise]);
-        log?.debug?.(
-          "ZAI-WEB-FREE",
-          `captcha via fast path A (pool: ${poolSize} ?�� ${getPoolSize()})`
-        );
-      } catch (fastErr) {
-        log?.warn?.(
-          "ZAI-WEB-FREE",
-          `Fast path A failed: ${fastErr instanceof Error ? fastErr.message : String(fastErr)}`
-        );
-        captchaParam = "";
+    // Helper: run Method A (server-side crypto with device tokens from pool)
+    const runMethodA = async (label: string): Promise<string> => {
+      if (getPoolSize() === 0) {
+        log?.warn?.("ZAI-WEB-FREE", `${label}: pool empty, skipping`);
+        return "";
       }
-    } else {
-      captchaParam = "";
-    }
+      try {
+        const captchaPromise = getCaptchaVerifyParam(getNextToken, consumeToken, retries);
+        const timeoutPromise = new Promise<never>((_, reject) =>
+          setTimeout(() => reject(new Error(`Captcha generation timeout after ${timeoutMs / 1000}s`)), timeoutMs)
+        );
+        const result = await Promise.race([captchaPromise, timeoutPromise]);
+        log?.debug?.("ZAI-WEB-FREE", `captcha via ${label} (pool: ${poolSize} → ${getPoolSize()})`);
+        return result;
+      } catch (err) {
+        log?.warn?.("ZAI-WEB-FREE", `${label} failed: ${err instanceof Error ? err.message : String(err)}`);
+        return "";
+      }
+    };
 
-    // ?��?�� Method B: Get a fresh device token via Playwright, then retry fast path ?��?��
-    if (!captchaParam) {
-      log?.info?.("ZAI-WEB-FREE", "Getting fresh device token via Playwright (fast path B)...");
+    // Helper: run Method B (get fresh device token via Playwright, then Method A)
+    const runMethodB = async (): Promise<string> => {
+      log?.info?.("ZAI-WEB-FREE", "Getting fresh device token via Playwright (Method B)...");
       try {
         const freshToken = await getFreshDeviceTokenViaBrowser();
-        // Add the fresh token to the pool so it can be consumed
         addDeviceTokens([freshToken]);
         log?.debug?.("ZAI-WEB-FREE", "Fresh token obtained, retrying server-side captcha...");
-
-        const captchaPromise = getCaptchaVerifyParam(getNextToken, consumeToken);
-        const timeoutPromise = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error("Captcha generation timeout after 90s")), 90_000)
-        );
-        captchaParam = await Promise.race([captchaPromise, timeoutPromise]);
-        log?.debug?.("ZAI-WEB-FREE", "captcha via fast path B (fresh token)");
+        return await runMethodA("Method B (fresh token)");
       } catch (freshErr) {
-        log?.warn?.(
-          "ZAI-WEB-FREE",
-          `Fast path B failed: ${freshErr instanceof Error ? freshErr.message : String(freshErr)}`
-        );
+        log?.warn?.("ZAI-WEB-FREE", `Method B failed: ${freshErr instanceof Error ? freshErr.message : String(freshErr)}`);
+        return "";
       }
+    };
+
+    // Helper: run Method C (full Playwright browser captcha)
+    const runMethodC = async (): Promise<string> => {
+      log?.info?.("ZAI-WEB-FREE", "Using browser captcha fallback (Method C)...");
+      try {
+        const result = await getCaptchaParamViaBrowser();
+        log?.debug?.("ZAI-WEB-FREE", "captcha via Method C (browser)");
+        return result;
+      } catch (browserErr) {
+        log?.warn?.("ZAI-WEB-FREE", `Method C failed: ${browserErr instanceof Error ? browserErr.message : String(browserErr)}`);
+        return "";
+      }
+    };
+
+    // Execute strategy
+    log?.info?.("ZAI-WEB-FREE", `captcha strategy=${strategy} retries=${retries} timeout=${timeoutMs}ms pool=${poolSize}`);
+
+    switch (strategy) {
+      case "a_only":
+        captchaParam = await runMethodA("Method A");
+        break;
+      case "b_only":
+        captchaParam = await runMethodB();
+        break;
+      case "c_only":
+        captchaParam = await runMethodC();
+        break;
+      case "a_then_c":
+        captchaParam = await runMethodA("Method A");
+        if (!captchaParam) captchaParam = await runMethodC();
+        break;
+      case "a_then_b":
+        captchaParam = await runMethodA("Method A");
+        if (!captchaParam) captchaParam = await runMethodB();
+        break;
+      case "auto":
+      default:
+        // A → B → C (original behavior)
+        captchaParam = await runMethodA("Method A");
+        if (!captchaParam) captchaParam = await runMethodB();
+        if (!captchaParam) captchaParam = await runMethodC();
+        break;
     }
 
-    // ?��?�� Method C: Browser fallback (full Playwright captcha) ?��?��
     if (!captchaParam) {
-      log?.info?.("ZAI-WEB-FREE", "Using browser captcha fallback (Playwright full flow)...");
-      try {
-        captchaParam = await getCaptchaParamViaBrowser();
-        log?.debug?.("ZAI-WEB-FREE", "captcha via browser fallback C");
-      } catch (browserErr) {
-        return makeErrorResult(
-          502,
-          `Captcha verification failed (all paths A/B/C exhausted): ${browserErr instanceof Error ? browserErr.message : String(browserErr)}`,
-          body,
-          CHAT_COMPLETIONS_URL
-        );
-      }
+      return makeErrorResult(
+        502,
+        `Captcha verification failed (strategy=${strategy}, all configured paths exhausted)`,
+        body,
+        CHAT_COMPLETIONS_URL
+      );
     }
 
     // 4. Compute the X-Signature header

@@ -41,6 +41,9 @@ export default function ZaiDeviceTokenPanel() {
     minPoolSize: 10,
     autoRefreshEnabled: true,
     autoRefreshIntervalMs: 300000,
+    captchaStrategy: "auto" as string,
+    captchaRetries: 2,
+    captchaTimeoutMs: 90000,
   });
   const [accessKeySource, setAccessKeySource] = useState<string>("");
   const [secretKeySource, setSecretKeySource] = useState<string>("");
@@ -67,6 +70,9 @@ export default function ZaiDeviceTokenPanel() {
         minPoolSize: data.minPoolSize ?? 10,
         autoRefreshEnabled: data.autoRefreshEnabled ?? true,
         autoRefreshIntervalMs: data.autoRefreshIntervalMs ?? 300000,
+        captchaStrategy: data.captchaStrategy || "auto",
+        captchaRetries: data.captchaRetries ?? 2,
+        captchaTimeoutMs: data.captchaTimeoutMs ?? 90000,
       });
       setAccessKeySource(data.accessKeySource || "");
       setSecretKeySource(data.secretKeySource || "");
@@ -368,6 +374,78 @@ export default function ZaiDeviceTokenPanel() {
 
         {showAdvanced && (
           <div className="mt-4 space-y-3 rounded-md border border-border bg-surface p-3">
+            {/* Captcha Strategy settings */}
+            <div className="space-y-2 rounded-md border border-amber-500/20 bg-amber-500/5 p-3">
+              <div className="flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-[16px] text-amber-500">
+                  shield
+                </span>
+                <span className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+                  Captcha Strategy
+                </span>
+              </div>
+              <label className="block">
+                <span className="text-xs font-medium text-text-muted">Strategy</span>
+                <select
+                  value={keySettings.captchaStrategy}
+                  onChange={(e) =>
+                    setKeySettings((prev) => ({ ...prev, captchaStrategy: e.target.value }))
+                  }
+                  className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm"
+                >
+                  <option value="auto">Auto (A → B → C) — default, best reliability</option>
+                  <option value="a_only">A only — server-side crypto, fastest</option>
+                  <option value="b_only">B only — fresh token via Playwright + A</option>
+                  <option value="c_only">C only — full browser captcha, slowest</option>
+                  <option value="a_then_c">A → C — skip Playwright token fetch</option>
+                  <option value="a_then_b">A → B — no browser fallback</option>
+                </select>
+              </label>
+              <div className="grid grid-cols-2 gap-2">
+                <label className="block">
+                  <span className="text-xs font-medium text-text-muted">
+                    Retries per method
+                  </span>
+                  <input
+                    type="number"
+                    min={1}
+                    max={10}
+                    value={keySettings.captchaRetries}
+                    onChange={(e) =>
+                      setKeySettings((prev) => ({
+                        ...prev,
+                        captchaRetries: Math.max(1, Math.min(10, Number(e.target.value) || 2)),
+                      }))
+                    }
+                    className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm"
+                  />
+                </label>
+                <label className="block">
+                  <span className="text-xs font-medium text-text-muted">
+                    Timeout (seconds)
+                  </span>
+                  <input
+                    type="number"
+                    min={10}
+                    max={300}
+                    value={Math.round(keySettings.captchaTimeoutMs / 1000)}
+                    onChange={(e) =>
+                      setKeySettings((prev) => ({
+                        ...prev,
+                        captchaTimeoutMs: Math.max(10, Math.min(300, Number(e.target.value) || 90)) * 1000,
+                      }))
+                    }
+                    className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm"
+                  />
+                </label>
+              </div>
+              <p className="text-xs text-text-subtle">
+                <strong>A:</strong> Server-side crypto with pool tokens (~2s).{" "}
+                <strong>B:</strong> Fresh token via Playwright + A (~5s).{" "}
+                <strong>C:</strong> Full browser captcha (~10s, most reliable).
+              </p>
+            </div>
+
             {/* Auto-refresh settings */}
             <div className="space-y-2 rounded-md border border-blue-500/20 bg-blue-500/5 p-3">
               <div className="flex items-center gap-1.5">
