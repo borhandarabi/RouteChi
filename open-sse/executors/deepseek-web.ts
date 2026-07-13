@@ -370,7 +370,7 @@ async function solvePow(challenge: PowChallenge): Promise<string> {
 
 // ── SSE Transform (DeepSeek → OpenAI) ───────────────────────────────────
 
-function transformSSE(deepseekStream: ReadableStream, model: string, thinkMode: ThinkMode, onComplete?: (responseMessageId: number | undefined, tokenUsage: number) => void): ReadableStream {
+function transformSSE(deepseekStream: ReadableStream, model: string, thinkMode: ThinkMode, onComplete?: (responseMessageId: number | undefined, tokenUsage: number) => void, onMessageIdCaptured?: (responseMessageId: number) => void): ReadableStream {
   const encoder = new TextEncoder();
   const decoder = new TextDecoder();
   const streamModel = model || "deepseek-web";
@@ -513,6 +513,11 @@ function transformSSE(deepseekStream: ReadableStream, model: string, thinkMode: 
                 // Capture message_id (assistant message ID for parent_message_id chaining)
                 if (v.response.message_id != null && responseMessageId === undefined) {
                   responseMessageId = Number(v.response.message_id);
+                  // Phase 1: Save to registry IMMEDIATELY (not in onComplete) to
+                  // eliminate the race condition where turn 2 arrives before the
+                  // stream is fully consumed. The first frame carrying message_id
+                  // is enough to chain the next turn.
+                  onMessageIdCaptured?.(responseMessageId);
                 }
                 const fragments = v.response.fragments;
                 if (Array.isArray(fragments)) {
@@ -528,6 +533,8 @@ function transformSSE(deepseekStream: ReadableStream, model: string, thinkMode: 
               // Capture response_message_id from the first frame
               if ((data as any)?.response_message_id != null && responseMessageId === undefined) {
                 responseMessageId = Number((data as any).response_message_id);
+                // Phase 1: Save to registry IMMEDIATELY (see comment above).
+                onMessageIdCaptured?.(responseMessageId);
               }
 
               if (p === "response/fragments") {
@@ -600,7 +607,8 @@ function transformSSE(deepseekStream: ReadableStream, model: string, thinkMode: 
 
 async function collectSSEContent(
   deepseekStream: ReadableStream,
-  model: string
+  model: string,
+  onMessageIdCaptured?: (responseMessageId: number) => void
 ): Promise<{ content: string; reasoningContent: string; usage?: Record<string, unknown>; responseMessageId?: number }> {
   const decoder = new TextDecoder();
   const reader = deepseekStream.getReader();
@@ -666,6 +674,8 @@ async function collectSSEContent(
           // Capture message_id (assistant message ID for parent_message_id chaining)
           if (v.response.message_id != null) {
             responseMessageId = Number(v.response.message_id);
+            // Phase 1: Save to registry IMMEDIATELY to eliminate race condition.
+            onMessageIdCaptured?.(responseMessageId);
           }
           if (Array.isArray(v.response.fragments)) {
             for (const frag of v.response.fragments) handleFragment(frag, false);
@@ -680,6 +690,8 @@ async function collectSSEContent(
         // Capture response_message_id from the first frame
         if (data?.response_message_id != null && !responseMessageId) {
           responseMessageId = Number(data.response_message_id);
+          // Phase 1: Save to registry IMMEDIATELY to eliminate race condition.
+          onMessageIdCaptured?.(responseMessageId);
         }
 
         if (p === "response/fragments") {
@@ -1223,10 +1235,18 @@ export class DeepSeekWebExecutor extends BaseExecutor {
 
       // Tool (agentic) requests replay the whole trajectory — prior tool calls and their
       // results — so the model keeps context across turns instead of restarting each time.
-      // Plain chat keeps the legacy last-user-message / rolling-window behavior.
+      // Plain chat: Phase 3 — when there's no agentChatId (standard OpenAI client),
+      // send the FULL conversation history in the prompt (like zai-web) so multi-turn
+      // works without registry/server-side chaining. When agentChatId IS present, we
+      // rely on registry + parent_message_id chaining (like qwen-web) and send only
+      // the latest user message (server-side context).
+      const effectiveHistoryWindow =
+        !agentChatId && promptMessages.length > 1 && historyWindow === 0
+          ? promptMessages.length // send full history when no agentChatId
+          : historyWindow;
       const prompt = hasTools
         ? buildToolConversationPrompt(messages, toolSystemPrompt)
-        : messagesToPrompt(promptMessages, historyWindow);
+        : messagesToPrompt(promptMessages, effectiveHistoryWindow);
       const refFileIds = Array.isArray(bodyObj.ref_file_ids) ? bodyObj.ref_file_ids : [];
       log?.info?.(
         "DEEPSEEK-WEB",
@@ -1249,6 +1269,9 @@ export class DeepSeekWebExecutor extends BaseExecutor {
           "X-Ds-Pow-Response": powAnswer,
           "X-Client-Timezone-Offset": String(new Date().getTimezoneOffset() * -60),
           Cookie: generateFakeCookie(),
+          // Phase 2: Real DeepSeek web client sends Referer with the chat_session_id
+          // in the URL path. Server may use this to validate session ownership.
+          Referer: `${DEEPSEEK_WEB_BASE}/a/chat/s/${sid}`,
         };
         const requestPayload = {
           chat_session_id: sid,
@@ -1258,6 +1281,9 @@ export class DeepSeekWebExecutor extends BaseExecutor {
           ref_file_ids: refFileIds,
           thinking_enabled: thinkingEnabled,
           search_enabled: searchEnabled,
+          // Phase 2: Real DeepSeek web client sends "action": null.
+          // Without this field the server may misinterpret the request.
+          action: null,
           preempt: false,
         };
         const resp = await fetch(COMPLETION_URL, {
@@ -1423,7 +1449,21 @@ export class DeepSeekWebExecutor extends BaseExecutor {
       // OpenAI tool_calls. Buffering (even for stream clients) is acceptable because
       // tool invocations are short and need the complete block to parse. (#2820)
       if (hasTools) {
-        const { content, reasoningContent, usage: capturedUsage, responseMessageId } = await collectSSEContent(resp.body!, clientModel);
+        const { content, reasoningContent, usage: capturedUsage, responseMessageId } = await collectSSEContent(
+          resp.body!,
+          clientModel,
+          // Phase 1: onMessageIdCaptured — fires IMMEDIATELY for race-condition fix.
+          agentChatId
+            ? (respMsgId: number) => {
+                saveMapping({
+                  connectionId, agentChatId, provider: "deepseek",
+                  providerConversationId: sessionId,
+                  metadata: { parentMessageId: respMsgId },
+                });
+                log?.debug?.("DEEPSEEK-WEB", `registry: EARLY parentMessageId=${respMsgId} saved (tool path, race-condition fix)`);
+              }
+            : undefined
+        );
         await cleanupFn();
 
         // Save response_message_id to registry for multi-turn parent_message_id chaining
@@ -1454,17 +1494,37 @@ export class DeepSeekWebExecutor extends BaseExecutor {
       }
 
       if (stream !== false) {
-        const openaiStream = transformSSE(resp.body!, clientModel, thinkMode, (respMsgId, _tokenUsage) => {
-          // Save response_message_id to registry for multi-turn parent_message_id chaining
-          if (agentChatId && respMsgId) {
-            saveMapping({
-              connectionId, agentChatId, provider: "deepseek",
-              providerConversationId: sessionId,
-              metadata: { parentMessageId: respMsgId },
-            });
-            log?.debug?.("DEEPSEEK-WEB", `registry: updated parentMessageId=${respMsgId} for next turn (stream)`);
-          }
-        });
+        const openaiStream = transformSSE(
+          resp.body!,
+          clientModel,
+          thinkMode,
+          // onComplete: fires when stream ends (kept for back-compat / logging)
+          (respMsgId, _tokenUsage) => {
+            // Save response_message_id to registry for multi-turn parent_message_id chaining
+            if (agentChatId && respMsgId) {
+              saveMapping({
+                connectionId, agentChatId, provider: "deepseek",
+                providerConversationId: sessionId,
+                metadata: { parentMessageId: respMsgId },
+              });
+              log?.debug?.("DEEPSEEK-WEB", `registry: updated parentMessageId=${respMsgId} for next turn (stream onComplete)`);
+            }
+          },
+          // Phase 1: onMessageIdCaptured — fires IMMEDIATELY when message_id is
+          // captured from the first SSE frame (not at stream end). This eliminates
+          // the race condition where turn 2 arrives before the stream is fully
+          // consumed. saveMapping is called here so turn 2's getMapping finds it.
+          agentChatId
+            ? (respMsgId: number) => {
+                saveMapping({
+                  connectionId, agentChatId, provider: "deepseek",
+                  providerConversationId: sessionId,
+                  metadata: { parentMessageId: respMsgId },
+                });
+                log?.debug?.("DEEPSEEK-WEB", `registry: EARLY parentMessageId=${respMsgId} saved (stream, race-condition fix)`);
+              }
+            : undefined
+        );
         const wrappedStream = wrapStreamWithCleanup(openaiStream, cleanupFn);
         return {
           response: new Response(wrappedStream, {
@@ -1477,7 +1537,23 @@ export class DeepSeekWebExecutor extends BaseExecutor {
         };
       }
 
-      const { content, reasoningContent, usage: capturedUsage, responseMessageId } = await collectSSEContent(resp.body!, clientModel);
+      const { content, reasoningContent, usage: capturedUsage, responseMessageId } = await collectSSEContent(
+        resp.body!,
+        clientModel,
+        // Phase 1: onMessageIdCaptured — fires IMMEDIATELY when message_id is
+        // captured from the first SSE frame. For non-streaming path this is
+        // less critical (the await already blocks), but kept for consistency.
+        agentChatId
+          ? (respMsgId: number) => {
+              saveMapping({
+                connectionId, agentChatId, provider: "deepseek",
+                providerConversationId: sessionId,
+                metadata: { parentMessageId: respMsgId },
+              });
+              log?.debug?.("DEEPSEEK-WEB", `registry: EARLY parentMessageId=${respMsgId} saved (non-stream, race-condition fix)`);
+            }
+          : undefined
+      );
       await cleanupFn();
 
       // Save response_message_id to registry for multi-turn parent_message_id chaining
