@@ -653,6 +653,24 @@ export default function ZaiDeviceTokenPanel() {
                 </span>
               )}
             </p>
+
+            {/* Save button for Captcha Strategy + Auto-Refresh settings */}
+            <div className="flex items-center gap-2 border-t border-border pt-3">
+              <button
+                type="button"
+                onClick={handleSaveKeys}
+                disabled={savingKeys}
+                className="inline-flex items-center gap-1.5 rounded-md bg-amber-600 px-4 py-2 text-xs font-medium text-white transition hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                <span className="material-symbols-outlined text-[16px]">
+                  {savingKeys ? "progress_activity" : "save"}
+                </span>
+                {savingKeys ? "Saving..." : "Save Settings"}
+              </button>
+              <span className="text-xs text-text-subtle">
+                Saves Captcha Strategy + Auto-Refresh settings to DB
+              </span>
+            </div>
           </div>
         )}
       </div>
