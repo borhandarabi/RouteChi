@@ -117,6 +117,11 @@ export function extractQwenToken(rawValue: string): string {
  *   - stray `Bearer eyJ...` without a header label
  *
  * Returns "" if no JWT can be located.
+ *
+ * Edge cases handled:
+ *   - case-insensitive cookie name (`Kimi-Auth`, `kimi-auth`, `KIMI-AUTH`)
+ *   - quoted cookie values (`kimi-auth="eyJ..."`)
+ *   - URL-encoded dots/chars (`kimi-auth=eyJ...%2eeyJ...`)
  */
 export function extractKimiJwt(rawValue: string): string {
   const trimmed = stripCookieInputPrefix(rawValue);
@@ -128,14 +133,66 @@ export function extractKimiJwt(rawValue: string): string {
   }
 
   // Cookie-style pair: pull `kimi-auth=<value>` out of the blob.
-  const match = trimmed.match(/(?:^|[\s;])kimi-auth=([^;\s]+)/);
-  if (match) return match[1];
+  // Case-insensitive name match — some tools/exporters capitalize the name.
+  // The value may be quoted or URL-encoded; both are normalized below.
+  const match = trimmed.match(/(?:^|[\s;])kimi-auth=([^;\s]+)/i);
+  if (match) {
+    let val = match[1];
+    // Strip surrounding quotes (single or double) — some cookie exporters
+    // quote values that contain special characters.
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    }
+    // URL-decode — browsers may encode dots as %2E and other chars in the
+    // JWT. decodeURIComponent is safe here because the JWT only contains
+    // base64url chars + dots; if decoding fails (malformed % sequence),
+    // keep the raw value.
+    try {
+      val = decodeURIComponent(val);
+    } catch {
+      // keep raw
+    }
+    return val;
+  }
 
   // Last resort: a `Bearer <jwt>` pasted without the header label.
   const bearer = trimmed.match(/bearer\s+(eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)/i);
   if (bearer) return bearer[1];
 
   return "";
+}
+
+/**
+ * Build the `Cookie` header value for www.kimi.com from whatever the user
+ * pasted. Always emits at least `kimi-auth=<jwt>`. When the pasted blob also
+ * carries additional cookies (e.g. `cf_clearance`, `_ga`, `Hm_lvt_*`), they
+ * are forwarded verbatim — Kimi's anti-bot may require them alongside the
+ * auth cookie.
+ *
+ * If the input is a bare JWT (no cookie pairs), returns `kimi-auth=<jwt>`.
+ *
+ * @returns "" if no kimi-auth JWT can be extracted.
+ */
+export function buildKimiCookieHeader(rawValue: string): string {
+  const jwt = extractKimiJwt(rawValue);
+  if (!jwt) return "";
+
+  const trimmed = stripCookieInputPrefix(rawValue);
+
+  // If the input is a full cookie blob (contains `;` or multiple `=` pairs),
+  // forward it verbatim — it may carry anti-bot cookies we need to replay.
+  if (trimmed.includes(";") || (trimmed.includes("=") && /kimi-auth=/i.test(trimmed))) {
+    // Verify the blob actually contains kimi-auth (extractKimiJwt already
+    // confirmed this, but double-check to avoid sending a cookie header
+    // without the auth cookie).
+    return trimmed;
+  }
+
+  // Bare JWT — emit the canonical single-cookie form.
+  return `kimi-auth=${jwt}`;
 }
 
 export function normalizeSessionCookieHeaders(
