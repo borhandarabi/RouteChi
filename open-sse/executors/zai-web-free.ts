@@ -258,6 +258,14 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     const { body, credentials, signal, stream: wantStream, log: inputLog } = input;
     const bodyObj = (body || {}) as Record<string, unknown>;
 
+    // Dynamic logger: use "ZAI-WEB-TOKEN" when a user-supplied JWT is present
+    // (zai-web-token provider), otherwise "ZAI-WEB-FREE" (zai-web-free guest).
+    // This makes log output distinguishable between the two providers even
+    // though they share the same executor.
+    const psd0 = credentials?.providerSpecificData as { token?: string } | undefined;
+    const hasUserToken = !!(psd0?.token || (credentials?.apiKey ? String(credentials.apiKey).trim() : ""));
+    const dynLog = logger(hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE");
+
     // Feature flag — default ENABLED. Operator can disable via
     // OMNIROUTE_ZAI_WEB_FREE_DISABLED=1 or OMNIROUTE_ZAI_WEB_FREE_ENABLED=0.
     // When disabled, fail fast with 503 so the upstream retry/fallback
@@ -335,7 +343,7 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     // Helper: run Method A (server-side crypto with device tokens from pool)
     const runMethodA = async (label: string): Promise<string> => {
       if (getPoolSize() === 0) {
-        log?.warn?.("ZAI-WEB-FREE", `${label}: pool empty, skipping`);
+        dynLog?.warn?.(hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE", `${label}: pool empty, skipping`);
         return "";
       }
       try {
@@ -350,43 +358,43 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
         } else {
           result = await captchaPromise;
         }
-        log?.debug?.("ZAI-WEB-FREE", `captcha via ${label} (pool: ${poolSize} → ${getPoolSize()})`);
+        dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `captcha via ${label} (pool: ${poolSize} → ${getPoolSize()})`);
         return result;
       } catch (err) {
-        log?.warn?.("ZAI-WEB-FREE", `${label} failed: ${err instanceof Error ? err.message : String(err)}`);
+        dynLog?.warn?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `${label} failed: ${err instanceof Error ? err.message : String(err)}`);
         return "";
       }
     };
 
     // Helper: run Method B (get fresh device token via Playwright, then Method A)
     const runMethodB = async (): Promise<string> => {
-      log?.info?.("ZAI-WEB-FREE", "Getting fresh device token via Playwright (Method B)...");
+      dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "Getting fresh device token via Playwright (Method B)...");
       try {
         const freshToken = await getFreshDeviceTokenViaBrowser();
         addDeviceTokens([freshToken]);
-        log?.debug?.("ZAI-WEB-FREE", "Fresh token obtained, retrying server-side captcha...");
+        dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "Fresh token obtained, retrying server-side captcha...");
         return await runMethodA("Method B (fresh token)");
       } catch (freshErr) {
-        log?.warn?.("ZAI-WEB-FREE", `Method B failed: ${freshErr instanceof Error ? freshErr.message : String(freshErr)}`);
+        dynLog?.warn?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `Method B failed: ${freshErr instanceof Error ? freshErr.message : String(freshErr)}`);
         return "";
       }
     };
 
     // Helper: run Method C (full Playwright browser captcha)
     const runMethodC = async (): Promise<string> => {
-      log?.info?.("ZAI-WEB-FREE", "Using browser captcha fallback (Method C)...");
+      dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "Using browser captcha fallback (Method C)...");
       try {
         const result = await getCaptchaParamViaBrowser();
-        log?.debug?.("ZAI-WEB-FREE", "captcha via Method C (browser)");
+        dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "captcha via Method C (browser)");
         return result;
       } catch (browserErr) {
-        log?.warn?.("ZAI-WEB-FREE", `Method C failed: ${browserErr instanceof Error ? browserErr.message : String(browserErr)}`);
+        dynLog?.warn?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `Method C failed: ${browserErr instanceof Error ? browserErr.message : String(browserErr)}`);
         return "";
       }
     };
 
     // Execute strategy
-    log?.info?.("ZAI-WEB-FREE", `captcha strategy=${strategy} retries=${retries} timeout=${timeoutMs}ms pool=${poolSize}`);
+    dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `captcha strategy=${strategy} retries=${retries} timeout=${timeoutMs}ms pool=${poolSize}`);
 
     switch (strategy) {
       case "a_only":
@@ -458,14 +466,14 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       const existing = getMapping({ connectionId, agentChatId, provider: "zai" });
       if (existing?.providerConversationId) {
         chatId = existing.providerConversationId;
-        log?.debug?.("ZAI-WEB-FREE", `registry: agentChatId=${agentChatId.slice(0, 16)} -> chatId=${chatId.slice(0, 16)} (reused)`);
+        dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `registry: agentChatId=${agentChatId.slice(0, 16)} -> chatId=${chatId.slice(0, 16)} (reused)`);
       } else {
         chatId = randomUUID();
         saveMapping({
           connectionId, agentChatId, provider: "zai",
           providerConversationId: chatId,
         });
-        log?.debug?.("ZAI-WEB-FREE", `registry: agentChatId=${agentChatId.slice(0, 16)} -> chatId=${chatId.slice(0, 16)} (new)`);
+        dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `registry: agentChatId=${agentChatId.slice(0, 16)} -> chatId=${chatId.slice(0, 16)} (new)`);
       }
     } else {
       // No agentChatId — generate a fresh UUID per request (stateless).
@@ -544,7 +552,7 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
         }
 
         if (tlsResult.status === 401 && attempt === 0) {
-          log?.info?.("ZAI-WEB-FREE", "401 from Z.AI, re-initializing session");
+          dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "401 from Z.AI, re-initializing session");
           resetSession();
           try {
             const newSession = await getSession();
@@ -584,8 +592,8 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
         }
       } catch (err) {
         if (err instanceof TlsClientUnavailableError) {
-          log?.warn?.(
-            "ZAI-WEB-FREE",
+          dynLog?.warn?.(
+            (hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"),
             `TLS client unavailable, falling back to fetch: ${err.message}`
           );
           // Fallback to regular fetch if TLS client is unavailable
@@ -927,8 +935,8 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       choices: [{ index: 0, message, finish_reason: "stop" }],
     };
 
-    log?.debug?.(
-      "ZAI-WEB-FREE",
+    dynLog?.debug?.(
+      (hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"),
       `completed model=${requestedModel} contentLen=${fullContent.length}`
     );
 
