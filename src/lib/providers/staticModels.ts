@@ -107,6 +107,26 @@ const STATIC_MODEL_PROVIDERS: Record<string, () => Array<{ id: string; name: str
     { id: "qwen3-4b", name: "Qwen3 4B" },
     { id: "deepseek-r1-671b", name: "DeepSeek R1 671B" },
   ],
+  "zai-web-free": () => [{ id: "glm-4.7", name: "GLM 4.7 (Free, Guest)" }],
+  "zai-web-token": () => [
+    { id: "glm-5.2", name: "GLM 5.2" },
+    { id: "GLM-5.1", name: "GLM 5.1" },
+    { id: "GLM-5-Turbo", name: "GLM 5 Turbo" },
+    { id: "GLM-5v-Turbo", name: "GLM 5V Turbo (Vision)" },
+    { id: "glm-4.7", name: "GLM 4.7" },
+  ],
+  "xiaomimimo-web": () => [
+    { id: "mimo-7b", name: "MiMo 7B" },
+    { id: "mimo-7b-rl", name: "MiMo 7B RL" },
+    { id: "mimo-coder", name: "MiMo Coder" },
+  ],
+  "qwen-web": () => [
+    { id: "qwen3.7-max", name: "Qwen3.7 Max" },
+    { id: "qwen3.7-plus", name: "Qwen3.7 Plus" },
+    { id: "qwen3.6-plus", name: "Qwen3.6 Plus" },
+    { id: "qwen3-coder-plus", name: "Qwen3 Coder Plus" },
+    { id: "qwen3-coder-flash", name: "Qwen3 Coder Flash" },
+  ],
 };
 
 export function getStaticModelsForProvider(provider: string): LocalCatalogModel[] | undefined {

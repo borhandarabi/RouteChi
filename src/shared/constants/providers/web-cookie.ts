@@ -288,8 +288,9 @@ export const WEB_COOKIE_PROVIDERS = {
     hasFree: true,
     freeNote: "Free — Qwen models via chat.qwen.ai with login token. No subscription required.",
     authHint:
-      "Open chat.qwen.ai, log in, then open DevTools → Application → Local Storage → " +
-      'copy the "token" value (or use tongyi_sso_ticket cookie as Bearer token).',
+      "Open chat.qwen.ai, log in, then open DevTools → Application → Cookies → " +
+      "copy the full Cookie header (must contain token=...). Alternatively, copy " +
+      'the "token" value from Local Storage.',
   },
   "gemini-business": {
     id: "gemini-business",

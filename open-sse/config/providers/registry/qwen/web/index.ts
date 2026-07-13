@@ -12,7 +12,7 @@ export const qwen_webProvider: RegistryEntry = {
   // a retired catalog. Source of truth: pre-#3993 providerRegistry.ts (commit 1ed01dd90^).
   baseUrl: "https://chat.qwen.ai/api/v2/chat/completions",
   authType: "apikey",
-  authHeader: "bearer",
+  authHeader: "cookie",
   // Current upstream catalog (GET https://chat.qwen.ai/api/models). Legacy
   // ids (qwen-plus, qwen3-max, ...) still resolve via the executor's
   // MODEL_ALIASES map for backward compatibility.
