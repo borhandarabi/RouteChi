@@ -21,16 +21,22 @@ export async function GET(request: Request) {
   if (authError) return authError;
 
   const dataDir =
-    process.env.OMNIROUTE_DATA_DIR ||
-    (process.env.HOME ? `${process.env.HOME}/.omniroute` : ".");
+    process.env.OMNIROUTE_DATA_DIR || (process.env.HOME ? `${process.env.HOME}/.omniroute` : ".");
   initSettingsStore(`${dataDir}/omniroute.db`);
 
   const settings = getSettings();
   const daemonStatus = getDaemonStatus();
 
+  // Surface which source the AccessKey/SecretKey came from so the dashboard
+  // can show "env override active" / "DB-stored" / "default constant".
+  const accessKeySource = process.env.OMNIROUTE_ZAI_ALIYUN_ACCESS_KEY ? "env" : "db-or-default";
+  const secretKeySource = process.env.OMNIROUTE_ZAI_ALIYUN_SECRET_KEY ? "env" : "db-or-default";
+
   return NextResponse.json({
     accessKey: settings.accessKey,
     secretKey: settings.secretKey,
+    accessKeySource,
+    secretKeySource,
     minPoolSize: settings.minPoolSize,
     autoRefreshEnabled: settings.autoRefreshEnabled,
     autoRefreshIntervalMs: settings.autoRefreshIntervalMs,
@@ -57,8 +63,7 @@ export async function PATCH(request: Request) {
   if (authError) return authError;
 
   const dataDir =
-    process.env.OMNIROUTE_DATA_DIR ||
-    (process.env.HOME ? `${process.env.HOME}/.omniroute` : ".");
+    process.env.OMNIROUTE_DATA_DIR || (process.env.HOME ? `${process.env.HOME}/.omniroute` : ".");
   initSettingsStore(`${dataDir}/omniroute.db`);
 
   let body: Record<string, unknown> = {};

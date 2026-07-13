@@ -34,6 +34,10 @@ declare namespace NodeJS {
     OMNIROUTE_ZAI_WEB_FREE_ENABLED?: string;
     /** Override device-token TTL in milliseconds (default: 1500000 = 25 min). */
     OMNIROUTE_ZAI_WEB_FREE_TOKEN_TTL_MS?: string;
+    /** Override Aliyun CaptchaV3 AccessKey (default: hardcoded GLM-Free-API value). */
+    OMNIROUTE_ZAI_ALIYUN_ACCESS_KEY?: string;
+    /** Override Aliyun CaptchaV3 SecretKey (default: hardcoded GLM-Free-API value). */
+    OMNIROUTE_ZAI_ALIYUN_SECRET_KEY?: string;
     NODE_ENV?: "development" | "production" | "test";
   }
 }
