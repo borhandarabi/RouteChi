@@ -4,6 +4,13 @@ import { useCallback, useEffect, useState } from "react";
 import { NoAuthAccountCard, NoAuthProviderCard } from "@/shared/components";
 import { getProviderAlias } from "@/shared/constants/providers";
 import { useNotificationStore } from "@/store/notificationStore";
+import dynamic from "next/dynamic";
+
+// Lazy-load ZaiDeviceTokenPanel only on the zai-web-free provider page.
+// The panel pulls in the dashboard's notification store and fetches
+// pool-status/keys endpoints on mount — we don't want that overhead for
+// other no-auth providers (mimocode, opencode, auggie, etc).
+const ZaiDeviceTokenPanel = dynamic(() => import("./ZaiDeviceTokenPanel"), { ssr: false });
 
 const ACCOUNT_PROVIDER_NAMES: Record<string, string> = {
   mimocode: "MiMoCode",
@@ -96,10 +103,15 @@ export default function NoAuthProviderControls({
   }
 
   return (
-    <NoAuthProviderCard
-      enabled={enabled}
-      saving={savingEnabled}
-      onEnabledChange={handleEnabledChange}
-    />
+    <>
+      <NoAuthProviderCard
+        enabled={enabled}
+        saving={savingEnabled}
+        onEnabledChange={handleEnabledChange}
+      />
+      {/* zai-web-free gets an additional Device Token Pool + Aliyun Captcha Keys
+          panel below the standard enable/disable card. */}
+      {providerId === "zai-web-free" && <ZaiDeviceTokenPanel />}
+    </>
   );
 }

@@ -3,6 +3,7 @@
 // Issue #3501 strangler-fig decomposition — Phase 1t (final push)
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { useParams } from "next/navigation";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import { Card, Button, CardSkeleton } from "@/shared/components";
@@ -53,6 +54,12 @@ import EmptyConnectionsPlaceholder from "./components/EmptyConnectionsPlaceholde
 import UpstreamProxyCard from "./components/UpstreamProxyCard";
 import SearchProviderCard from "./components/SearchProviderCard";
 import NoAuthProviderControls from "./components/NoAuthProviderControls";
+// Lazy-load ZaiWebTokenKeyPanel only on the zai-web-token provider page.
+// Same reasoning as ZaiDeviceTokenPanel — avoids the pool-status/keys fetch
+// overhead on every other web-cookie provider page.
+const ZaiWebTokenKeyPanel = dynamic(() => import("./components/ZaiWebTokenKeyPanel"), {
+  ssr: false,
+});
 // providerText used by UpstreamProxyCard (Phase 1t.7)
 
 export default function ProviderDetailPageClient() {
@@ -692,6 +699,11 @@ export default function ProviderDetailPageClient() {
           />
         </Card>
       )}
+
+      {/* zai-web-token gets an additional Aliyun Captcha Keys panel below the
+          standard connections card. Shares the same key_value settings row as
+          zai-web-free (same Aliyun keys power both providers' captcha). */}
+      {providerId === "zai-web-token" && <ZaiWebTokenKeyPanel />}
 
       {/* Search provider info */}
       {isSearchProvider && <SearchProviderCard providerId={providerId} t={t} />}

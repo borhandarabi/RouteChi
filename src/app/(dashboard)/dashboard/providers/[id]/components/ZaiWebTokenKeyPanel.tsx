@@ -26,6 +26,7 @@ export default function ZaiWebTokenKeyPanel() {
     accessKey: "",
     secretKey: "",
   });
+  const [accessKeySource, setAccessKeySource] = useState<string>("");
 
   const fetchKeySettings = useCallback(async () => {
     try {
@@ -36,6 +37,7 @@ export default function ZaiWebTokenKeyPanel() {
         accessKey: data.accessKey || "",
         secretKey: data.secretKey || "",
       });
+      setAccessKeySource(data.accessKeySource || "");
     } catch {
       // ignore
     }
@@ -97,71 +99,84 @@ export default function ZaiWebTokenKeyPanel() {
   return (
     <div className="space-y-4">
       <div className="rounded-lg border border-purple-500/25 bg-purple-500/5 p-4">
-      <div className="flex items-center gap-2 mb-3">
-        <span className="material-symbols-outlined text-[20px] text-purple-500">key</span>
-        <h3 className="text-sm font-medium text-text-main">Aliyun Captcha Keys (Shared)</h3>
-        <span className="ml-auto text-xs text-text-subtle">
-          Shared with Z.AI Free Web (Guest)
-        </span>
-      </div>
-
-      <p className="text-xs text-text-muted mb-4">
-        Z.AI&apos;s captcha verification requires Aliyun AccessKey and SecretKey. These keys
-        are shared between <strong>Z.AI Free Web (Guest)</strong> and{" "}
-        <strong>Z.AI Web (JWT Token)</strong>. If Aliyun rotates the keys, update them here
-        or click &quot;Extract via Browser&quot;.
-      </p>
-
-      <div className="space-y-2">
-        <label className="block">
-          <span className="text-xs font-medium text-text-muted">AccessKey</span>
-          <input
-            type="text"
-            value={keySettings.accessKey}
-            onChange={(e) =>
-              setKeySettings((prev) => ({ ...prev, accessKey: e.target.value }))
-            }
-            placeholder="LTAI..."
-            className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm font-mono"
-          />
-        </label>
-        <label className="block">
-          <span className="text-xs font-medium text-text-muted">SecretKey</span>
-          <input
-            type="text"
-            value={keySettings.secretKey}
-            onChange={(e) =>
-              setKeySettings((prev) => ({ ...prev, secretKey: e.target.value }))
-            }
-            placeholder="YSKfst7..."
-            className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm font-mono"
-          />
-        </label>
-        <div className="flex gap-2">
-          <button
-            type="button"
-            onClick={handleSaveKeys}
-            disabled={savingKeys}
-            className="inline-flex items-center gap-1 rounded-md bg-purple-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-700 disabled:opacity-50"
-          >
-            {savingKeys ? "Saving..." : "Save Keys"}
-          </button>
-          <button
-            type="button"
-            onClick={handleExtractKey}
-            disabled={extractingKey}
-            className="inline-flex items-center gap-1 rounded-md border border-purple-500/30 px-3 py-1.5 text-xs font-medium text-purple-600 hover:bg-purple-500/10 disabled:opacity-50"
-          >
-            {extractingKey ? "Extracting..." : "Extract via Browser"}
-          </button>
+        <div className="flex items-center gap-2 mb-3">
+          <span className="material-symbols-outlined text-[20px] text-purple-500">key</span>
+          <h3 className="text-sm font-medium text-text-main">Aliyun Captcha Keys (Shared)</h3>
+          {accessKeySource === "env" && (
+            <span
+              className="ml-2 rounded-full px-2 py-0.5 text-[10px] font-medium uppercase tracking-wide bg-emerald-500/20 text-emerald-700 dark:text-emerald-300"
+              title="Key is overridden by OMNIROUTE_ZAI_ALIYUN_ACCESS_KEY env var"
+            >
+              env override
+            </span>
+          )}
+          <span className="ml-auto text-xs text-text-subtle">
+            Shared with Z.AI Free Web (Guest)
+          </span>
         </div>
-        <p className="text-xs text-text-subtle">
-          If Aliyun rotates the keys, click &quot;Extract via Browser&quot; to automatically
-          extract the new keys from chat.z.ai, or paste them manually from the
-          GLM-Free-API Go source.
+
+        <p className="text-xs text-text-muted mb-4">
+          Z.AI&apos;s captcha verification requires Aliyun AccessKey and SecretKey. These keys are
+          shared between <strong>Z.AI Free Web (Guest)</strong> and{" "}
+          <strong>Z.AI Web (JWT Token)</strong>. If Aliyun rotates the keys, update them here or
+          click &quot;Extract via Browser&quot;.
         </p>
+
+        {accessKeySource === "env" && (
+          <p className="mb-3 rounded-md bg-amber-500/10 px-2 py-1 text-xs text-amber-700 dark:text-amber-300">
+            <span className="font-semibold">Note:</span> An env var (
+            <code className="font-mono">OMNIROUTE_ZAI_ALIYUN_ACCESS_KEY</code>) is overriding the DB
+            value. Edits below still write to the DB (so they take effect when the env var is
+            unset), but the captcha module will use the env value until then.
+          </p>
+        )}
+
+        <div className="space-y-2">
+          <label className="block">
+            <span className="text-xs font-medium text-text-muted">AccessKey</span>
+            <input
+              type="text"
+              value={keySettings.accessKey}
+              onChange={(e) => setKeySettings((prev) => ({ ...prev, accessKey: e.target.value }))}
+              placeholder="LTAI..."
+              className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm font-mono"
+            />
+          </label>
+          <label className="block">
+            <span className="text-xs font-medium text-text-muted">SecretKey</span>
+            <input
+              type="text"
+              value={keySettings.secretKey}
+              onChange={(e) => setKeySettings((prev) => ({ ...prev, secretKey: e.target.value }))}
+              placeholder="YSKfst7..."
+              className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm font-mono"
+            />
+          </label>
+          <div className="flex gap-2">
+            <button
+              type="button"
+              onClick={handleSaveKeys}
+              disabled={savingKeys}
+              className="inline-flex items-center gap-1 rounded-md bg-purple-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-purple-700 disabled:opacity-50"
+            >
+              {savingKeys ? "Saving..." : "Save Keys"}
+            </button>
+            <button
+              type="button"
+              onClick={handleExtractKey}
+              disabled={extractingKey}
+              className="inline-flex items-center gap-1 rounded-md border border-purple-500/30 px-3 py-1.5 text-xs font-medium text-purple-600 hover:bg-purple-500/10 disabled:opacity-50"
+            >
+              {extractingKey ? "Extracting..." : "Extract via Browser"}
+            </button>
+          </div>
+          <p className="text-xs text-text-subtle">
+            If Aliyun rotates the keys, click &quot;Extract via Browser&quot; to automatically
+            extract the new keys from chat.z.ai, or paste them manually from the GLM-Free-API Go
+            source.
+          </p>
+        </div>
       </div>
-    </div>
     </div>
   );
 }
