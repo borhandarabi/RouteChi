@@ -100,7 +100,8 @@ export async function PATCH(request: Request) {
   if (typeof body.captchaRetries === "number" && body.captchaRetries >= 1 && body.captchaRetries <= 10) {
     updates.captchaRetries = body.captchaRetries;
   }
-  if (typeof body.captchaTimeoutMs === "number" && body.captchaTimeoutMs >= 10000 && body.captchaTimeoutMs <= 300000) {
+  // timeout=0 means no timeout (wait indefinitely). Otherwise 10s-300s.
+  if (typeof body.captchaTimeoutMs === "number" && body.captchaTimeoutMs >= 0 && body.captchaTimeoutMs <= 300000) {
     updates.captchaTimeoutMs = body.captchaTimeoutMs;
   }
 

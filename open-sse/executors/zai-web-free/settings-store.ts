@@ -36,14 +36,20 @@ export const DEFAULT_AUTO_REFRESH_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 
 // Captcha strategy defaults
 // Strategy options:
-//   "auto"      → A (retries) → B (fresh token) → C (browser) — current behavior
-//   "a_only"    → A only (retries), no fallback — fastest but fails if pool/Aliyun is down
+//   "auto"      → A (retries) → B (fresh token) → C (browser) — full fallback chain
+//   "a_only"    → A only (retries), no fallback — fastest, matches Go reference
 //   "b_only"    → B only (skip A, get fresh token via Playwright, then A computation)
 //   "c_only"    → C only (full browser captcha) — slowest but most reliable
 //   "a_then_c"  → A (retries) → C (skip B) — avoids the extra Playwright token fetch
 //   "a_then_b"  → A (retries) → B (no browser fallback) — no Method C
-export const DEFAULT_CAPTCHA_STRATEGY = "auto" as const;
+// Default is "a_only" to match the GLM-Free-API Go reference behavior.
+export const DEFAULT_CAPTCHA_STRATEGY = "a_only" as const;
+// Default retries matches Go's maxTokenRetries = 2.
 export const DEFAULT_CAPTCHA_RETRIES = 2;
+// Default timeout: 90000ms (90 seconds) — matches Go reference:
+//   case <-time.After(90 * time.Second):
+//       return "", errors.New("captcha generation timeout after 90s")
+// 0 = no timeout (wait indefinitely).
 export const DEFAULT_CAPTCHA_TIMEOUT_MS = 90_000;
 
 // Types

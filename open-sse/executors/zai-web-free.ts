@@ -340,10 +340,16 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       }
       try {
         const captchaPromise = getCaptchaVerifyParam(getNextToken, consumeToken, retries);
-        const timeoutPromise = new Promise<never>((_, reject) =>
-          setTimeout(() => reject(new Error(`Captcha generation timeout after ${timeoutMs / 1000}s`)), timeoutMs)
-        );
-        const result = await Promise.race([captchaPromise, timeoutPromise]);
+        // timeout=0 means no timeout (wait indefinitely, matches Go reference).
+        let result: string;
+        if (timeoutMs > 0) {
+          const timeoutPromise = new Promise<never>((_, reject) =>
+            setTimeout(() => reject(new Error(`Captcha generation timeout after ${timeoutMs / 1000}s`)), timeoutMs)
+          );
+          result = await Promise.race([captchaPromise, timeoutPromise]);
+        } else {
+          result = await captchaPromise;
+        }
         log?.debug?.("ZAI-WEB-FREE", `captcha via ${label} (pool: ${poolSize} → ${getPoolSize()})`);
         return result;
       } catch (err) {

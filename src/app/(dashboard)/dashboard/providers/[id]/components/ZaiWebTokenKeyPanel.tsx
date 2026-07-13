@@ -205,16 +205,16 @@ export default function ZaiWebTokenKeyPanel() {
               />
             </label>
             <label className="block">
-              <span className="text-xs font-medium text-text-muted">Timeout (seconds)</span>
+              <span className="text-xs font-medium text-text-muted">Timeout (seconds, 0 = no timeout)</span>
               <input
                 type="number"
-                min={10}
+                min={0}
                 max={300}
                 value={Math.round(keySettings.captchaTimeoutMs / 1000)}
                 onChange={(e) =>
                   setKeySettings((prev) => ({
                     ...prev,
-                    captchaTimeoutMs: Math.max(10, Math.min(300, Number(e.target.value) || 90)) * 1000,
+                    captchaTimeoutMs: Math.max(0, Math.min(300, Number(e.target.value) || 90)) * 1000,
                   }))
                 }
                 className="mt-1 w-full rounded-md border border-border bg-background px-2 py-1 text-sm"
