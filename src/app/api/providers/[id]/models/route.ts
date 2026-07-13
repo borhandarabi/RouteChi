@@ -337,7 +337,13 @@ export async function GET(
       if (cachedDiscoveryModels.length > 0) {
         return buildCachedDiscoveryResponse(cacheWarning);
       }
-      return buildLocalCatalogResponse(localWarning);
+      // If the provider has a static model catalog or registry models,
+      // the local catalog is intentional (not degraded) — model-sync should
+      // import it, not 502. This covers web-cookie providers whose API
+      // discovery fails due to WAF/anti-bot (qwen-web, zai-web-free, etc).
+      const hasStaticCatalog = getStaticModelsForProvider(provider)?.length > 0;
+      const hasRegistryModels = (getModelsByProviderId(provider) || []).length > 0;
+      return buildLocalCatalogResponse(localWarning, hasStaticCatalog || hasRegistryModels);
     };
 
     const buildDiscoveryErrorFallbackResponse = (
