@@ -470,6 +470,7 @@ const LOBE_PROVIDER_ALIASES = {
   xai: "XAI",
   "xiaomi-mimo": "XiaomiMiMo",
   xiaomimimo: "XiaomiMiMo",
+  "xiaomimimo-web": "XiaomiMiMo",
   xinference: "Xinference",
   zai: "ZAI",
   "zai-web-free": "ZAI",
