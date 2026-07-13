@@ -67,6 +67,13 @@ function getDb(): SqliteDatabase | null {
     return null;
   }
   try {
+    // Ensure the parent directory exists before opening the database
+    const path = require("node:path");
+    const fs = require("node:fs");
+    const dir = path.dirname(_dbPath);
+    if (dir && !fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
     _db = new _Database(_dbPath);
     _db.pragma("journal_mode = WAL");
     _db.exec(`
@@ -101,9 +108,9 @@ export function getNextToken(): string | null {
   const db = getDb();
   if (!db) return null;
   try {
-    const row = db.prepare("SELECT token FROM zai_web_free_device_tokens ORDER BY id LIMIT 1").get() as
-      | { token: string }
-      | undefined;
+    const row = db
+      .prepare("SELECT token FROM zai_web_free_device_tokens ORDER BY id LIMIT 1")
+      .get() as { token: string } | undefined;
     return row?.token ?? null;
   } catch (err) {
     log.error?.("pool.next_failed", { error: err instanceof Error ? err.message : String(err) });
@@ -180,8 +187,7 @@ export function getPoolSize(): number {
   if (!db) return 0;
   try {
     const row = db.prepare("SELECT COUNT(*) as count FROM zai_web_free_device_tokens").get() as
-      | { count: number }
-      | undefined;
+      { count: number } | undefined;
     return row?.count ?? 0;
   } catch {
     return 0;
