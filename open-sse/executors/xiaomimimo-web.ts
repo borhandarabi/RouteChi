@@ -125,7 +125,21 @@ function parseCookieHeader(header: string): Record<string, string> {
     const eq = part.indexOf("=");
     if (eq === -1) continue;
     const key = part.slice(0, eq).trim();
-    const val = part.slice(eq + 1).trim();
+    let val = part.slice(eq + 1).trim();
+    // Strip surrounding quotes (some cookie exporters quote values that
+    // contain special characters like + or =).
+    if (
+      (val.startsWith('"') && val.endsWith('"')) ||
+      (val.startsWith("'") && val.endsWith("'"))
+    ) {
+      val = val.slice(1, -1);
+    }
+    // URL-decode (browsers may encode + as %2B and = as %3D in cookie values).
+    try {
+      val = decodeURIComponent(val);
+    } catch {
+      // keep raw if decoding fails
+    }
     if (key) out[key] = val;
   }
   return out;
