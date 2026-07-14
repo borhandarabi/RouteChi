@@ -34,12 +34,11 @@
  * @module zai-web-free
  */
 
-import { BaseExecutor, type ExecuteInput, mergeAbortSignals } from "./base.ts";
+import { BaseExecutor, type ExecuteInput } from "./base.ts";
 import {
   makeExecutorErrorResult as makeErrorResult,
   sanitizeErrorMessage,
 } from "../utils/error.ts";
-import { FETCH_TIMEOUT_MS } from "../config/constants.ts";
 import { Buffer } from "node:buffer";
 import { logger } from "../utils/logger.ts";
 
@@ -63,19 +62,6 @@ import {
   getFreshDeviceTokenViaBrowser,
   getCaptchaParamViaBrowser,
 } from "./zai-web-free/browser-captcha.ts";
-import {
-  tlsFetchZai,
-  TlsClientUnavailableError,
-  isAliyunWafChallenge,
-} from "../services/zaiTlsClient.ts";
-import {
-  buildZaiToolRegistry,
-  parseZaiToolCallDelta,
-  enqueueStreamingToolCalls,
-  ToolCallAccumulator,
-  type ZaiToolRegistry,
-  type OpenAIToolCall,
-} from "./zai-web-free/tool-bridge.ts";
 import { applyThinkMode } from "../utils/thinkModeProcessor.ts";
 import { resolveThinkMode } from "../services/thinkOutputMode.ts";
 import { isZaiWebFreeDisabled } from "./zai-web-free/feature-flag.ts";
@@ -505,10 +491,7 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     // 4. Compute the X-Signature header
     const sig = generateZaSignature(prompt, session.token, session.userId);
 
-    // 4b. Build tool registry (if tools are present in the request)
-    const toolRegistry = buildZaiToolRegistry(bodyObj);
-
-    // 4c. Resolve think mode (passthrough / strip / separate)
+    // 4b. Resolve think mode (passthrough / strip / separate)
     const thinkMode = resolveThinkMode({
       headers: input.clientHeaders as Record<string, unknown> | undefined,
       body: bodyObj,
@@ -570,14 +553,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       features,
     };
 
-    // Add tools if present in the request
-    if (toolRegistry.enabled && Array.isArray((bodyObj as Record<string, unknown>).tools)) {
-      requestBody.tools = (bodyObj as Record<string, unknown>).tools;
-    }
-    if (bodyObj.tool_choice) {
-      requestBody.tool_choice = bodyObj.tool_choice;
-    }
-
     const requestUrl = `${CHAT_COMPLETIONS_URL}?${sig.urlParams}`;
     const reqHeaders: Record<string, string> = {
       Authorization: `Bearer ${session.token}`,
@@ -586,115 +561,46 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       "x-fe-Version": session.feVersion,
       "x-region": "overseas",
       "x-signature": sig.signature,
-      // Browser headers — required by Aliyun WAF (without these, WAF returns 405)
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-      Origin: "https://chat.z.ai",
-      Referer: "https://chat.z.ai/",
-      "Accept-Language": "en-US,en;q=0.9",
-      "Sec-Ch-Ua": '"Chromium";v="131", "Not_A Brand";v="24"',
-      "Sec-Ch-Ua-Mobile": "?0",
-      "Sec-Ch-Ua-Platform": '"macOS"',
     };
 
-    // 6. Send the request via TLS-impersonating client (bypasses Aliyun WAF)
+    // 6. Send the request (with one 401 retry that re-inits the session)
     let upstream: Response;
     const bodyStr = JSON.stringify(requestBody);
 
-    // Combine caller's abort signal with a fetch timeout
-    const timeoutSignal = AbortSignal.timeout(FETCH_TIMEOUT_MS);
-    const combinedSignal = signal ? mergeAbortSignals(signal, timeoutSignal) : timeoutSignal;
-
     for (let attempt = 0; attempt < 2; attempt++) {
       try {
-        const tlsResult = await tlsFetchZai(requestUrl, {
+        upstream = await fetch(requestUrl, {
           method: "POST",
           headers: reqHeaders,
           body: bodyStr,
-          stream: true,
-          streamEofSymbol: "[DONE]",
-          signal: combinedSignal,
-          timeoutMs: FETCH_TIMEOUT_MS,
+          signal,
         });
-
-        if (tlsResult.status === 405 || isAliyunWafChallenge(tlsResult.text)) {
-          return makeErrorResult(
-            405,
-            `Z.AI WAF blocked the request. The Aliyun WAF may be rate-limiting this IP.`,
-            body,
-            requestUrl
-          );
-        }
-
-        if (tlsResult.status === 401 && attempt === 0) {
-          dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "401 from Z.AI, re-initializing session");
-          resetSession();
-          try {
-            const newSession = await getSession();
-            reqHeaders.Authorization = `Bearer ${newSession.token}`;
-            reqHeaders["x-fe-Version"] = newSession.feVersion;
-          } catch (err) {
-            return makeErrorResult(
-              502,
-              `Z.AI session re-init failed: ${err instanceof Error ? err.message : String(err)}`,
-              body,
-              requestUrl
-            );
-          }
-          continue;
-        }
-
-        if (tlsResult.status === 429) {
-          return makeErrorResult(
-            429,
-            `Z.AI rate limited. Wait a moment and retry.`,
-            body,
-            requestUrl
-          );
-        }
-
-        // Build a Response object from the TLS result
-        if (tlsResult.body) {
-          upstream = new Response(tlsResult.body, {
-            status: tlsResult.status,
-            headers: tlsResult.headers,
-          });
-        } else {
-          upstream = new Response(tlsResult.text ?? "", {
-            status: tlsResult.status,
-            headers: tlsResult.headers,
-          });
-        }
       } catch (err) {
-        if (err instanceof TlsClientUnavailableError) {
-          dynLog?.warn?.(
-            (hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"),
-            `TLS client unavailable, falling back to fetch: ${err.message}`
-          );
-          // Fallback to regular fetch if TLS client is unavailable
-          try {
-            upstream = await fetch(requestUrl, {
-              method: "POST",
-              headers: reqHeaders,
-              body: bodyStr,
-              signal: combinedSignal,
-            });
-          } catch (fetchErr) {
-            return makeErrorResult(
-              502,
-              `Z.AI fetch failed: ${fetchErr instanceof Error ? fetchErr.message : String(fetchErr)}`,
-              body,
-              requestUrl
-            );
-          }
-        } else {
+        return makeErrorResult(
+          502,
+          `Z.AI fetch failed: ${err instanceof Error ? err.message : String(err)}`,
+          body,
+          requestUrl
+        );
+      }
+
+      if (upstream.status === 401 && attempt === 0) {
+        // Session expired — re-init and retry once
+        dynLog?.info?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), "401 from Z.AI, re-initializing session");
+        resetSession();
+        try {
+          const newSession = await getSession();
+          reqHeaders.Authorization = `Bearer ${newSession.token}`;
+          reqHeaders["x-fe-Version"] = newSession.feVersion;
+        } catch (err) {
           return makeErrorResult(
             502,
-            `Z.AI TLS fetch failed: ${err instanceof Error ? err.message : String(err)}`,
+            `Z.AI session re-init failed: ${err instanceof Error ? err.message : String(err)}`,
             body,
             requestUrl
           );
         }
+        continue;
       }
       break;
     }
@@ -712,7 +618,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     // 7. Stream or collect the response
     const id = `chatcmpl-zaifree-${Date.now().toString(36)}`;
     const created = Math.floor(Date.now() / 1000);
-    const fingerprint = `zai-${requestedModel}`;
     const sourceStream = upstream!.body ?? new ReadableStream({ start: (c) => c.close() });
 
     if (wantStream) {
@@ -725,7 +630,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
               object: "chat.completion.chunk",
               created,
               model: requestedModel,
-              system_fingerprint: fingerprint,
               choices: [{ index: 0, delta, finish_reason: finish }],
             };
             controller.enqueue(encoder.encode(`data: ${JSON.stringify(chunk)}\n\n`));
@@ -739,7 +643,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
           let buffer = "";
           const reader = sourceStream.getReader();
           const decoder = new TextDecoder();
-          const toolAccumulator = new ToolCallAccumulator();
 
           // Keep-alive ticker ?�� Z.AI streams can have long pauses; send a
           // heartbeat every 5s so the client doesn't time out.
@@ -788,7 +691,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
                       object: "chat.completion.chunk",
                       created,
                       model: requestedModel,
-                      system_fingerprint: fingerprint,
                       choices: [{ index: 0, delta: {}, finish_reason: "stop" }],
                       error: {
                         message: `Z.AI inline error: ${errDetail}`,
@@ -810,50 +712,10 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
 
                 // Detect phase "done"
                 if (j.data?.phase === "done") {
-                  // Check for completed tool calls before finishing
-                  if (toolAccumulator.hasPending()) {
-                    const completedCalls = toolAccumulator.getCompleted();
-                    if (completedCalls.length > 0) {
-                      enqueueStreamingToolCalls(controller, encoder, {
-                        id,
-                        created,
-                        model: requestedModel,
-                        fingerprint,
-                        toolCalls: completedCalls,
-                      });
-                      controller.close();
-                      return;
-                    }
-                  }
                   emit({}, "stop");
                   controller.enqueue(encoder.encode("data: [DONE]\n\n"));
                   controller.close();
                   return;
-                }
-
-                // Check for tool_calls in the SSE chunk (OpenAI format)
-                const toolCallDeltas = parseZaiToolCallDelta(j as Record<string, unknown>);
-                if (toolCallDeltas) {
-                  toolAccumulator.feed(toolCallDeltas);
-                  // Emit tool call deltas directly
-                  for (const d of toolCallDeltas) {
-                    const toolChunk = {
-                      id,
-                      object: "chat.completion.chunk",
-                      created,
-                      model: requestedModel,
-                      system_fingerprint: fingerprint,
-                      choices: [
-                        {
-                          index: 0,
-                          delta: { tool_calls: [d] },
-                          finish_reason: null,
-                        },
-                      ],
-                    };
-                    controller.enqueue(encoder.encode(`data: ${JSON.stringify(toolChunk)}\n\n`));
-                  }
-                  continue;
                 }
 
                 // Extract content delta
@@ -923,7 +785,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     let buffer = "";
     const reader = sourceStream.getReader();
     const decoder = new TextDecoder();
-    const nonStreamToolAccumulator = new ToolCallAccumulator();
 
     try {
       while (true) {
@@ -964,13 +825,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
             break;
           }
 
-          // Check for tool calls
-          const toolCallDeltas = parseZaiToolCallDelta(j as Record<string, unknown>);
-          if (toolCallDeltas) {
-            nonStreamToolAccumulator.feed(toolCallDeltas);
-            continue;
-          }
-
           let chunk = "";
           if (j.data?.edit_content) chunk = j.data.edit_content;
           else if (j.data?.delta_content) chunk = j.data.delta_content;
@@ -991,35 +845,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       /* best-effort ?�� return what we have */
     }
 
-    // Check for completed tool calls
-    const completedToolCalls = nonStreamToolAccumulator.getCompleted();
-    if (completedToolCalls.length > 0) {
-      const toolCompletion = {
-        id,
-        object: "chat.completion",
-        created,
-        model: requestedModel,
-        system_fingerprint: fingerprint,
-        choices: [
-          {
-            index: 0,
-            message: { role: "assistant", content: null, tool_calls: completedToolCalls },
-            finish_reason: "tool_calls",
-            logprobs: null,
-          },
-        ],
-        usage: { prompt_tokens: 0, completion_tokens: 0, total_tokens: 0 },
-      };
-      return {
-        response: new Response(JSON.stringify(toolCompletion), {
-          headers: { "Content-Type": "application/json" },
-        }),
-        url: requestUrl,
-        headers: reqHeaders,
-        transformedBody: requestBody,
-      };
-    }
-
     // Apply think mode to non-streaming response
     const { content: contentAfterThink, reasoning: reasoningAfterThink } = applyThinkMode(
       fullContent + (reasoningContent ? `<think>${reasoningContent}</think>` : ""),
@@ -1033,7 +858,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
       object: "chat.completion",
       created,
       model: requestedModel,
-      system_fingerprint: fingerprint,
       choices: [{ index: 0, message, finish_reason: "stop" }],
     };
 
