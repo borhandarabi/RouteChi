@@ -36,7 +36,7 @@ export function buildSlackPayload(
         elements: [
           {
             type: "mrkdwn",
-            text: `RouteChi · ${new Date().toISOString()}`,
+            text: `OmniRoute · ${new Date().toISOString()}`,
           },
         ],
       },

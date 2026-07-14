@@ -25,8 +25,8 @@ const getOpenClawDir = () => path.dirname(getOpenClawSettingsPath());
 // "installed but not configured" instead of a 500 misread as "not installed".
 const readSettings = async () => readJsoncConfig(getOpenClawSettingsPath());
 
-// Check if settings has RouteChi config
-const hasRouteChiConfig = (settings: any) => {
+// Check if settings has OmniRoute config
+const hasOmniRouteConfig = (settings: any) => {
   if (!settings || !settings.models || !settings.models.providers) return false;
   return !!settings.models.providers["omniroute"];
 };
@@ -65,7 +65,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings,
-      hasRouteChi: hasRouteChiConfig(settings),
+      hasOmniRoute: hasOmniRouteConfig(settings),
       settingsPath: getOpenClawSettingsPath(),
     });
   } catch (error) {
@@ -74,7 +74,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Update RouteChi settings (merge with existing settings)
+// POST - Update OmniRoute settings (merge with existing settings)
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -175,7 +175,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE - Remove RouteChi settings only (keep other settings)
+// DELETE - Remove OmniRoute settings only (keep other settings)
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -206,7 +206,7 @@ export async function DELETE(request: Request) {
       throw error;
     }
 
-    // Remove RouteChi from models.providers
+    // Remove OmniRoute from models.providers
     if (settings.models && settings.models.providers) {
       delete settings.models.providers["omniroute"];
 
@@ -233,7 +233,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "RouteChi settings removed successfully",
+      message: "OmniRoute settings removed successfully",
     });
   } catch (error) {
     console.log("Error resetting openclaw settings:", error);

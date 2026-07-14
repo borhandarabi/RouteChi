@@ -234,9 +234,9 @@ export async function runSingleModelTest(
   const testBody = isRerank
     ? {
         model: fullModelStr,
-        query: "What is RouteChi?",
+        query: "What is OmniRoute?",
         documents: [
-          "RouteChi routes AI requests across configured providers.",
+          "OmniRoute routes AI requests across configured providers.",
           "This document is unrelated to the test query.",
         ],
         top_n: 1,

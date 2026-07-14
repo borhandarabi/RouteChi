@@ -419,7 +419,7 @@ export function findKiroConnectionByProfileArn(
   return null;
 }
 
-// ── Save to RouteChi DB ──────────────────────────────────────────────────────
+// ── Save to OmniRoute DB ──────────────────────────────────────────────────────
 
 type SaveAndRespondResult = Awaited<ReturnType<typeof tryKiroCliSqlite>> & {
   // Fields added by tryAwsSsoCache for IDC tokens (#2059)

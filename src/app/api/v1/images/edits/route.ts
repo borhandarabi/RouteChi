@@ -39,7 +39,7 @@ const ImageEditJsonSchema = z
  *
  * Two upstream shapes are supported:
  *  - **chatgpt-web**: an "edit" only makes sense if the uploaded image was originally
- *    generated through RouteChi — we then have its `{conversationId, parentMessageId}`
+ *    generated through OmniRoute — we then have its `{conversationId, parentMessageId}`
  *    cached and can continue the saved chatgpt.com conversation node (the only way to
  *    actually edit the image instead of generating an unrelated one).
  *  - **custom OpenAI-compatible providers** (#3214/#3215): forward a multipart edit to

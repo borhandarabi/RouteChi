@@ -43,13 +43,13 @@ const readEnv = async () => {
   }
 };
 
-// Check if settings has RouteChi config
-const hasRouteChiConfig = (settings: any) => {
+// Check if settings has OmniRoute config
+const hasOmniRouteConfig = (settings: any) => {
   if (!settings || !settings.modelProviders) return false;
   const openai = settings.modelProviders.openai;
   if (!Array.isArray(openai)) return false;
   return openai.some((p: any) => {
-    if (p.name?.includes("RouteChi") || p.id === "omniroute") return true;
+    if (p.name?.includes("OmniRoute") || p.id === "omniroute") return true;
     if (!p.baseUrl) return false;
     try {
       const urlObj = new URL(p.baseUrl);
@@ -98,7 +98,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       settings,
-      hasRouteChi: hasRouteChiConfig(settings),
+      hasOmniRoute: hasOmniRouteConfig(settings),
       settingsPath: getQwenSettingsPath(),
       envPath: getQwenEnvPath(),
     });
@@ -108,7 +108,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Write RouteChi config to settings.json + .env
+// POST - Write OmniRoute config to settings.json + .env
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -196,10 +196,10 @@ export async function POST(request: Request) {
 
     if (!existingConfig.modelProviders) existingConfig.modelProviders = {};
 
-    // openai provider — primary, supports all models via RouteChi
+    // openai provider — primary, supports all models via OmniRoute
     const openaiEntry = {
       id: resolvedModel,
-      name: `${resolvedModel} (RouteChi)`,
+      name: `${resolvedModel} (OmniRoute)`,
       envKey: "OPENAI_API_KEY",
       baseUrl: normalizedBaseUrl,
       generationConfig: {
@@ -218,10 +218,10 @@ export async function POST(request: Request) {
       openaiProviders.push(openaiEntry);
     }
 
-    // anthropic provider — for Claude models via RouteChi
+    // anthropic provider — for Claude models via OmniRoute
     const anthropicEntry = {
       id: "claude-sonnet-4-6",
-      name: "Claude Sonnet 4.6 (RouteChi)",
+      name: "Claude Sonnet 4.6 (OmniRoute)",
       envKey: "ANTHROPIC_API_KEY",
       baseUrl: normalizedBaseUrl,
       generationConfig: {
@@ -240,10 +240,10 @@ export async function POST(request: Request) {
       anthropicProviders.push(anthropicEntry);
     }
 
-    // gemini provider — for Gemini models via RouteChi
+    // gemini provider — for Gemini models via OmniRoute
     const geminiEntry = {
       id: "gemini-3-flash",
-      name: "Gemini 3 Flash (RouteChi)",
+      name: "Gemini 3 Flash (OmniRoute)",
       envKey: "GEMINI_API_KEY",
       baseUrl: normalizedBaseUrl,
     };
@@ -278,7 +278,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE - Remove RouteChi config from settings.json and .env
+// DELETE - Remove OmniRoute config from settings.json and .env
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -310,12 +310,12 @@ export async function DELETE(request: Request) {
       throw error;
     }
 
-    // Remove RouteChi entries from each provider type
+    // Remove OmniRoute entries from each provider type
     const providerTypes = ["openai", "anthropic", "gemini"];
     for (const type of providerTypes) {
       if (Array.isArray(existingConfig.modelProviders?.[type])) {
         existingConfig.modelProviders[type] = existingConfig.modelProviders[type].filter(
-          (p: any) => !p.name?.includes("RouteChi") && p.id !== "omniroute"
+          (p: any) => !p.name?.includes("OmniRoute") && p.id !== "omniroute"
         );
         // Remove empty provider arrays
         if (existingConfig.modelProviders[type].length === 0) {
@@ -354,7 +354,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "RouteChi settings removed from Qwen Code",
+      message: "OmniRoute settings removed from Qwen Code",
     });
   } catch (error) {
     console.log("Error resetting qwen settings:", error);

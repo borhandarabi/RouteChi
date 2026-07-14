@@ -272,7 +272,7 @@ function buildDispatchErrorResult(
 }
 
 /**
- * Dispatch to RouteChi's own /v1/chat/completions handler for a given
+ * Dispatch to OmniRoute's own /v1/chat/completions handler for a given
  * provider+model — in-process, via a synthetic Request handed directly to the
  * route's POST handler. No network hop, no port dependency. Mirrors the
  * established pattern in src/lib/batches/dispatch.ts and src/lib/evals/runtime.ts

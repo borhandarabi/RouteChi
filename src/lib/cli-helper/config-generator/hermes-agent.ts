@@ -15,11 +15,11 @@
  *
  * interface HermesAgentRoleSelection {
  *   role: 'default' | 'delegation' | 'vision' | 'compression' | 'web_extract' | 'skills_hub' | 'approval' | ...;
- *   model: string;                    // the model name the user chose from RouteChi
+ *   model: string;                    // the model name the user chose from OmniRoute
  * }
  *
  * interface HermesAgentConfigPayload {
- *   baseUrl: string;                  // usually the RouteChi base URL
+ *   baseUrl: string;                  // usually the OmniRoute base URL
  *   keyId?: string | null;            // preferred: reference to a stored key
  *   apiKey?: string | null;           // fallback plaintext key
  *   selections: HermesAgentRoleSelection[];

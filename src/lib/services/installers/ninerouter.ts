@@ -143,7 +143,7 @@ export function resolveSpawnArgs(apiKey: string, port: number): SpawnArgs {
       PORT: String(port),
       HOSTNAME: "127.0.0.1",
       // API_KEY_SECRET is the HMAC secret 9router uses to generate/validate API keys.
-      // RouteChi generates this secret and can derive valid keys from it.
+      // OmniRoute generates this secret and can derive valid keys from it.
       API_KEY_SECRET: apiKey,
       DATA_DIR: path.join(NINEROUTER_INSTALL_DIR, "data"),
       NODE_ENV: "production",

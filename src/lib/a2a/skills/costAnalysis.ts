@@ -5,7 +5,7 @@
  */
 
 import type { A2ATask, TaskArtifact } from "../taskManager";
-import { resolveRouteChiBaseUrl } from "@/shared/utils/resolveRouteChiBaseUrl";
+import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 import { formatCost } from "@/shared/utils/formatting";
 
 type AnalyticsRecord = Record<string, unknown>;
@@ -17,7 +17,7 @@ type CostEntry = {
   tokens: number;
 };
 
-const OMNIROUTE_BASE_URL = resolveRouteChiBaseUrl();
+const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
 const OMNIROUTE_API_KEY = process.env.OMNIROUTE_API_KEY || "";
 
 function detectRange(task: A2ATask): string {

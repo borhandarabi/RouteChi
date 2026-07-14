@@ -287,7 +287,7 @@ function buildExecEnv() {
 
 /**
  * Probe which tailscaled socket is actually live.
- * Priority: system daemon socket → RouteChi custom socket.
+ * Priority: system daemon socket → OmniRoute custom socket.
  * When the system daemon is running (e.g. via systemd), we MUST use its socket
  * because only one tailscaled can hold the TUN device.
  */
@@ -305,7 +305,7 @@ async function getActiveSocketPath(): Promise<string> {
     return systemSocket;
   }
 
-  // Fallback to RouteChi custom socket
+  // Fallback to OmniRoute custom socket
   const customSocket = getTailscaleSocketPath();
   _cachedActiveSocket = customSocket;
   _cachedActiveSocketTimestamp = now;

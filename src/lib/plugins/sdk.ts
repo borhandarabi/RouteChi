@@ -2,7 +2,7 @@
  * Plugin SDK — typed API for plugin developers.
  *
  * Provides `definePlugin()` factory and re-exports all types needed
- * to build RouteChi plugins.
+ * to build OmniRoute plugins.
  *
  * @module plugins/sdk
  */
@@ -34,7 +34,7 @@ export interface PluginDefinition {
 }
 
 /**
- * Define an RouteChi plugin with type safety.
+ * Define an OmniRoute plugin with type safety.
  *
  * @example
  * ```ts

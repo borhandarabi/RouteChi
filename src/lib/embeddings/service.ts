@@ -19,7 +19,7 @@ import { resolveBareModelToConnectionDefault } from "@omniroute/open-sse/service
 import { findEmbeddingComboDimensionConflict } from "./familyGuard";
 import { isPrivateHost, isCloudMetadataHost } from "@/shared/network/outboundUrlGuard";
 import { calculateCost } from "@/lib/usage/costCalculator";
-import { attachRouteChiMetaHeaders } from "@/domain/omnirouteResponseMeta";
+import { attachOmniRouteMetaHeaders } from "@/domain/omnirouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 
 type ValidatedEmbeddingBody = Record<string, unknown> & { model: string };
@@ -284,7 +284,7 @@ export async function createEmbeddingResponse(
     responseHeaders.set("Content-Type", "application/json");
     const usage = (result.data as { usage?: Record<string, number> })?.usage ?? null;
     const costUsd = usage ? await calculateCost(provider, effectiveModel ?? "", usage) : 0;
-    attachRouteChiMetaHeaders(responseHeaders, {
+    attachOmniRouteMetaHeaders(responseHeaders, {
       provider,
       model: effectiveModel,
       usage,

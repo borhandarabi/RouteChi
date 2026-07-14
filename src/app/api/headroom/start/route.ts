@@ -19,11 +19,11 @@ export async function POST(): Promise<Response> {
         : DEFAULT_HEADROOM_URL;
 
     // Pair commit 50ed79fe: refuse to spawn against a non-loopback URL.
-    // External Docker sidecars must be started outside RouteChi.
+    // External Docker sidecars must be started outside OmniRoute.
     if (!isLoopbackHeadroomUrl(url)) {
       return createErrorResponse({
         status: 400,
-        message: "External Headroom proxies must be started outside RouteChi",
+        message: "External Headroom proxies must be started outside OmniRoute",
         type: "invalid_request",
       });
     }

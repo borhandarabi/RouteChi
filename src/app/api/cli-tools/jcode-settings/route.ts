@@ -24,9 +24,9 @@ const getJcodeConfigPath = (): string =>
 const getJcodeDir = () => path.dirname(getJcodeConfigPath());
 
 /**
- * Check if the config file contains RouteChi settings.
+ * Check if the config file contains OmniRoute settings.
  */
-const hasRouteChiConfig = (settings: Record<string, unknown> | null): boolean => {
+const hasOmniRouteConfig = (settings: Record<string, unknown> | null): boolean => {
   if (!settings) return false;
   return (
     typeof settings.baseUrl === "string" &&
@@ -80,7 +80,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasRouteChi: hasRouteChiConfig(config),
+      hasOmniRoute: hasOmniRouteConfig(config),
       configPath: getJcodeConfigPath(),
     });
   } catch (err) {
@@ -91,7 +91,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST — write RouteChi settings to jcode config.json
+// POST — write OmniRoute settings to jcode config.json
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -140,7 +140,7 @@ export async function POST(request: Request) {
       /* No existing config */
     }
 
-    // Merge RouteChi settings (jcode uses OpenAI-compatible config)
+    // Merge OmniRoute settings (jcode uses OpenAI-compatible config)
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
     const updated: Record<string, unknown> = {
       ...existing,
@@ -172,7 +172,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE — remove RouteChi settings from jcode config
+// DELETE — remove OmniRoute settings from jcode config
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -219,7 +219,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "jcode RouteChi settings removed" });
+    return NextResponse.json({ success: true, message: "jcode OmniRoute settings removed" });
   } catch (err) {
     return NextResponse.json(
       { error: { message: sanitizeErrorMessage(err) } },

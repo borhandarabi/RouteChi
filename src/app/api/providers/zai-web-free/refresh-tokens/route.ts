@@ -13,7 +13,7 @@ import { resolveProxyForScopeFromRegistry } from "@/lib/localDb";
 const log = logger("ZAI-WEB-FREE-ADMIN");
 
 /**
- * Convert an RouteChi proxy config object to a URL string that Playwright
+ * Convert an OmniRoute proxy config object to a URL string that Playwright
  * can consume. Supports HTTP, HTTPS, and SOCKS5 proxies with optional auth.
  *
  * The proxy config shape (from `resolveProxyForScopeFromRegistry`):
@@ -67,12 +67,12 @@ function proxyConfigToUrl(
  * `window.z_um.getToken()` values, and inserts them into the device-token
  * pool (SQLite table `zai_web_free_device_tokens`).
  *
- * The Playwright browser automatically uses RouteChi's configured proxy:
+ * The Playwright browser automatically uses OmniRoute's configured proxy:
  *   1. First tries the global proxy (from Proxies ?�� Global in the dashboard)
  *   2. If no global proxy is configured, uses a direct connection
  *
  * This matches the proxy behavior of the executor's fetch calls (which use
- * RouteChi's patched globalThis.fetch). The same proxy that handles Z.AI
+ * OmniRoute's patched globalThis.fetch). The same proxy that handles Z.AI
  * chat requests also handles the Playwright token collection.
  *
  * Body (all optional):
@@ -119,15 +119,15 @@ export async function POST(request: Request) {
     // empty body is fine ?�� use defaults
   }
 
-  // Initialize the pool with the RouteChi database path
+  // Initialize the pool with the OmniRoute database path
   const dataDir =
     process.env.OMNIROUTE_DATA_DIR || (process.env.HOME ? `${process.env.HOME}/.omniroute` : ".");
   initDeviceTokenPool(`${dataDir}/omniroute.db`);
 
-  // Resolve the global proxy from RouteChi's proxy registry.
+  // Resolve the global proxy from OmniRoute's proxy registry.
   // zai-web-free is a noauth provider (no connection DB row), so we use
   // the global scope. The same proxy that handles the executor's fetch
-  // calls (via RouteChi's patched globalThis.fetch) is passed to
+  // calls (via OmniRoute's patched globalThis.fetch) is passed to
   // Playwright so the browser also routes through it.
   let proxyUrl: string | undefined;
   try {

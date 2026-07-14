@@ -11,7 +11,7 @@ const CONFIG_PATH = path.join(os.homedir(), ".config", "opencode", "opencode.jso
 
 /**
  * SSRF guard for the catalog fetch (CodeQL js/request-forgery #326). The catalog
- * source is the user's OWN RouteChi instance, so loopback/private hosts are the
+ * source is the user's OWN OmniRoute instance, so loopback/private hosts are the
  * legitimate default and must stay allowed — we cannot use the public-only guard
  * here. What has NO legitimate use as a catalog source is the cloud-metadata /
  * link-local pivot (169.254.169.254, metadata.google.internal, …): that is the
@@ -95,11 +95,11 @@ export interface CatalogFetchResult {
 }
 
 /**
- * Fetch the live `/v1/models` catalog from RouteChi. The catalog is the
+ * Fetch the live `/v1/models` catalog from OmniRoute. The catalog is the
  * single source of truth for context windows — opencode.json must NOT
  * hardcode values, otherwise we drift from the provider's actual limits.
  */
-export async function fetchRouteChiCatalog(
+export async function fetchOmniRouteCatalog(
   baseUrl: string,
   apiKey: string,
   timeoutMs = 5_000
@@ -128,7 +128,7 @@ export async function fetchRouteChiCatalog(
     });
     if (!response.ok) {
       throw new Error(
-        `RouteChi /v1/models returned ${response.status} ${response.statusText}`
+        `OmniRoute /v1/models returned ${response.status} ${response.statusText}`
       );
     }
     const body = (await response.json()) as unknown;
@@ -308,7 +308,7 @@ export interface GenerateOpencodeOptions {
 }
 
 /**
- * Generate a full `opencode.json` document for RouteChi. The catalog is the
+ * Generate a full `opencode.json` document for OmniRoute. The catalog is the
  * single source of truth for context windows — we never hardcode values.
  *
  * Behavior:
@@ -339,7 +339,7 @@ export async function generateOpencodeConfig(
   // picking the wrong context window.
   let catalogById = new Map<string, CatalogModelEntry>();
   if (fetchCatalog) {
-    const result = await fetchRouteChiCatalog(baseURL, options.apiKey, timeoutMs);
+    const result = await fetchOmniRouteCatalog(baseURL, options.apiKey, timeoutMs);
     catalogById = result.byId;
   } else {
     throw new Error(
@@ -365,7 +365,7 @@ export async function generateOpencodeConfig(
   }
 
   const provider: Record<string, unknown> = {
-    name: existingProvider?.name ?? "RouteChi",
+    name: existingProvider?.name ?? "OmniRoute",
     npm: existingProvider?.npm ?? "@ai-sdk/openai-compatible",
     options: {
       baseURL,

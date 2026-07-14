@@ -1,5 +1,5 @@
 /**
- * Cloudflare Worker source emitter for the RouteChi proxy relay.
+ * Cloudflare Worker source emitter for the OmniRoute proxy relay.
  *
  * Port of upstream decolua/9router PR #1360. The Worker plays the same role
  * the Vercel-relay edge function does (`src/app/api/settings/proxy/vercel-deploy/route.ts`):
@@ -20,7 +20,7 @@
  * ES module (top-level `export`), which Service Worker syntax is not. The
  * `body_part` metadata field is the correct way to point at a non-ESM script.
  *
- * The RouteChi variant intentionally diverges from the upstream PR:
+ * The OmniRoute variant intentionally diverges from the upstream PR:
  *  - The upstream worker had NO auth check, leaving the deployed workers.dev URL
  *    as an open SSRF proxy. We mirror Vercel's x-relay-auth scheme instead so the
  *    same buildVercelRelayHeaders helper (open-sse/utils/proxyDispatcher.ts) and
@@ -51,7 +51,7 @@ export function buildCloudflareWorkerUploadRequest(
   workerScript: string,
   metadata: Record<string, unknown>
 ): { headers: Record<string, string>; body: Buffer } {
-  const boundary = `----RouteChiCFWorker${randomUUID().replace(/-/g, "")}`;
+  const boundary = `----OmniRouteCFWorker${randomUUID().replace(/-/g, "")}`;
   const CRLF = "\r\n";
   const parts: Buffer[] = [
     Buffer.from(
@@ -79,7 +79,7 @@ export function buildCloudflareWorkerScript(relayAuth: string): string {
   // relayAuth is generated server-side via randomBytes(24).toString("hex") — no
   // user-controlled input ever reaches this template, so direct interpolation
   // into the worker source string is safe.
-  return `// RouteChi Cloudflare Worker proxy relay — generated at deploy time.
+  return `// OmniRoute Cloudflare Worker proxy relay — generated at deploy time.
 function isPrivateHostname(h) {
   if (!h) return true;
   const host = h.trim().toLowerCase().replace(/^\\[|\\]$/g, "");

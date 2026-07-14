@@ -1,14 +1,14 @@
 /**
  * A2A Skill: Smart Routing
  *
- * Receives a prompt + metadata → routes via RouteChi pipeline →
+ * Receives a prompt + metadata → routes via OmniRoute pipeline →
  * returns response with routing_explanation, cost_envelope, resilience_trace, policy_verdict.
  */
 
 import type { A2ATask, TaskArtifact } from "../taskManager";
-import { resolveRouteChiBaseUrl } from "@/shared/utils/resolveRouteChiBaseUrl";
+import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
-const OMNIROUTE_BASE_URL = resolveRouteChiBaseUrl();
+const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
 const OMNIROUTE_API_KEY = process.env.OMNIROUTE_API_KEY || "";
 
 async function routeFetch(path: string, options: RequestInit = {}): Promise<any> {

@@ -125,8 +125,8 @@ const readConfig = async () => {
   }
 };
 
-// Check if config has RouteChi settings
-const hasRouteChiConfig = (config: string | null) => {
+// Check if config has OmniRoute settings
+const hasOmniRouteConfig = (config: string | null) => {
   if (!config) return false;
   return (
     config.includes("openai_base_url") ||
@@ -169,7 +169,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasRouteChi: hasRouteChiConfig(config),
+      hasOmniRoute: hasOmniRouteConfig(config),
       configPath: getCodexConfigPath(),
     });
   } catch (error) {
@@ -178,7 +178,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST - Update RouteChi settings (merge with existing config)
+// POST - Update OmniRoute settings (merge with existing config)
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -256,7 +256,7 @@ export async function POST(request: Request) {
     // Carry the user's intent forward off the deprecated Codex feature flag (#1327).
     migrateCodexFeatureFlags(parsed);
 
-    // Update only RouteChi related fields (api_key goes to auth.json, not config.toml)
+    // Update only OmniRoute related fields (api_key goes to auth.json, not config.toml)
     parsed._root.model = model;
 
     if (reasoningEffort && reasoningEffort !== "none") {
@@ -271,7 +271,7 @@ export async function POST(request: Request) {
     // Always create a custom provider to reliably pass wire_api and use OMNIROUTE_API_KEY
     parsed._root.model_provider = "omniroute";
     parsed._sections["model_providers.omniroute"] = {
-      name: "RouteChi",
+      name: "OmniRoute",
       base_url: normalizedBaseUrl,
       wire_api: wireApi || "chat",
       env_key: "OPENAI_API_KEY",
@@ -324,7 +324,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE - Remove RouteChi settings only (keep other settings)
+// DELETE - Remove OmniRoute settings only (keep other settings)
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -358,7 +358,7 @@ export async function DELETE(request: Request) {
     // Carry the user's intent forward off the deprecated Codex feature flag (#1327).
     migrateCodexFeatureFlags(parsed);
 
-    // Remove RouteChi related root fields
+    // Remove OmniRoute related root fields
     delete parsed._root.openai_base_url;
 
     if (parsed._root.model_provider === "omniroute") {
@@ -399,7 +399,7 @@ export async function DELETE(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "RouteChi settings removed successfully",
+      message: "OmniRoute settings removed successfully",
     });
   } catch (error) {
     console.log("Error resetting codex settings:", error);

@@ -461,7 +461,7 @@ export async function getApiKeys() {
 }
 
 /**
- * Select an API key for internal RouteChi operations (combo health checks,
+ * Select an API key for internal OmniRoute operations (combo health checks,
  * cloud-sync verify pings, etc.).
  *
  * Naive selection of `getApiKeys()[0]` is unsafe because the first row is

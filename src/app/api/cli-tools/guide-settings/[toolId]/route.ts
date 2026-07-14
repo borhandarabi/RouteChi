@@ -64,7 +64,7 @@ export async function POST(request, { params }) {
         return await saveContinueConfig({ baseUrl, apiKey, model });
       case "opencode":
         // (#524) OpenCode config was never saved because only 'continue' was handled here.
-        // OpenCode reads ~/.config/opencode/opencode.json — write the RouteChi settings there.
+        // OpenCode reads ~/.config/opencode/opencode.json — write the OmniRoute settings there.
         return await saveOpenCodeConfig({ baseUrl, apiKey, model, models, modelLabels });
       case "qwen":
         return await saveQwenConfig({ baseUrl, apiKey, model });
@@ -106,7 +106,7 @@ async function saveContinueConfig({ baseUrl, apiKey, model }) {
     // No existing config or invalid JSON — start fresh
   }
 
-  // Build the RouteChi model entry
+  // Build the OmniRoute model entry
   const normalizedBaseUrl = String(baseUrl || "")
     .trim()
     .replace(/\/+$/, "");
@@ -129,7 +129,7 @@ async function saveContinueConfig({ baseUrl, apiKey, model }) {
       .toLowerCase();
   }
 
-  // Check if RouteChi entry already exists and update it, or add new
+  // Check if OmniRoute entry already exists and update it, or add new
   const existingIdx = models.findIndex(
     (m) =>
       m &&
@@ -263,7 +263,7 @@ async function saveQwenConfig({ baseUrl, apiKey, model }) {
  * Save Hermes config to ~/.hermes/config.yaml
  *
  * Hermes stores its primary routing settings in YAML. Preserve any existing
- * keys, but make sure the RouteChi provider entry is present and selected.
+ * keys, but make sure the OmniRoute provider entry is present and selected.
  */
 async function saveHermesConfig({ baseUrl, apiKey, model }) {
   const configPath =

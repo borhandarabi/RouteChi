@@ -20,7 +20,7 @@ import {
   isAllRateLimitedCredentials,
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
-import { attachRouteChiMetaToResponse } from "@/domain/omnirouteResponseMeta";
+import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
 import { calculateModalCost } from "@/lib/usage/costCalculator";
 import { generateRequestId } from "@/shared/utils/requestId";
 
@@ -121,7 +121,7 @@ async function postHandler(request, context) {
     const costUsd = await calculateModalCost("audio", provider, resolvedModel || body.model, {
       characters,
     });
-    response = attachRouteChiMetaToResponse(response, {
+    response = attachOmniRouteMetaToResponse(response, {
       provider,
       model: resolvedModel || body.model,
       costUsd,

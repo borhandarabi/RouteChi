@@ -1,8 +1,8 @@
 /**
- * Container runtime providers for the RouteChi skill sandbox.
+ * Container runtime providers for the OmniRoute skill sandbox.
  *
  * The sandbox historically hardcoded the `docker` CLI. This module abstracts
- * the container runtime so RouteChi can pick the most performant / native
+ * the container runtime so OmniRoute can pick the most performant / native
  * runtime available on each host:
  *
  *   - macOS:  Apple Container (`container` CLI)  >  OrbStack (docker shim)  >  Podman  >  Docker

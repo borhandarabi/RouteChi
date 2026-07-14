@@ -7,9 +7,9 @@
 import { NextResponse } from "next/server";
 import { requireCliToolsAuth } from "@/lib/api/requireCliToolsAuth";
 import { getComboModelProvider } from "@/lib/combos/steps";
-import { resolveRouteChiBaseUrl } from "@/shared/utils/resolveRouteChiBaseUrl";
+import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
-const OMNIROUTE_BASE_URL = resolveRouteChiBaseUrl();
+const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
 
 export async function GET(request: Request) {
   const authError = await requireCliToolsAuth(request);

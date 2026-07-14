@@ -5,7 +5,7 @@
  */
 
 import type { A2ATask, TaskArtifact } from "../taskManager";
-import { resolveRouteChiBaseUrl } from "@/shared/utils/resolveRouteChiBaseUrl";
+import { resolveOmniRouteBaseUrl } from "@/shared/utils/resolveOmniRouteBaseUrl";
 
 type JsonRecord = Record<string, unknown>;
 
@@ -16,7 +16,7 @@ type ProviderHealthEntry = {
   lastFailure?: string | null;
 };
 
-const OMNIROUTE_BASE_URL = resolveRouteChiBaseUrl();
+const OMNIROUTE_BASE_URL = resolveOmniRouteBaseUrl();
 const OMNIROUTE_API_KEY = process.env.OMNIROUTE_API_KEY || "";
 
 async function healthFetch(path: string): Promise<JsonRecord> {

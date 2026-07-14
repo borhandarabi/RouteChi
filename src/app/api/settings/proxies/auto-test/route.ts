@@ -40,7 +40,7 @@ async function testSingleProxy(proxy: { id: string; type: string; host: string; 
       method: "HEAD",
       signal: controller.signal,
       dispatcher,
-      headers: { "User-Agent": "RouteChi/1.0" },
+      headers: { "User-Agent": "OmniRoute/1.0" },
     });
     const latencyMs = Date.now() - start;
     const alive = resp.status < 500;

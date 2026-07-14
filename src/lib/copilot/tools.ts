@@ -1,7 +1,7 @@
 /**
- * RouteChi Copilot — Tool definitions
+ * OmniRoute Copilot — Tool definitions
  *
- * Tools the copilot can execute to configure RouteChi on behalf of the user,
+ * Tools the copilot can execute to configure OmniRoute on behalf of the user,
  * query the codebase via CodeGraph, and execute CLI commands for full control.
  */
 
@@ -62,7 +62,7 @@ function formatCodeGraphResult(result: CodeGraphQueryResult): string {
 
 // ── Helper: check if omniroute CLI is available ──────────────────────────────
 
-function getRouteChiCliPath(): string | null {
+function getOmniRouteCliPath(): string | null {
   try {
     const result = execSync("which omniroute 2>/dev/null || command -v omniroute 2>/dev/null", {
       encoding: "utf-8",
@@ -254,7 +254,7 @@ export const COPILOT_TOOLS: CopilotTool[] = [
   {
     name: "searchCodeGraph",
     description:
-      "Search for symbols in the RouteChi codebase by name (functions, classes, types, variables). Use this to understand how the app works internally.",
+      "Search for symbols in the OmniRoute codebase by name (functions, classes, types, variables). Use this to understand how the app works internally.",
     parameters: [
       {
         name: "query",
@@ -297,7 +297,7 @@ export const COPILOT_TOOLS: CopilotTool[] = [
   {
     name: "findCallees",
     description:
-      "Find all functions/symbols that a specific function calls. Useful for understanding dependencies and code flow within RouteChi.",
+      "Find all functions/symbols that a specific function calls. Useful for understanding dependencies and code flow within OmniRoute.",
     parameters: [
       {
         name: "symbol",
@@ -365,9 +365,9 @@ export const COPILOT_TOOLS: CopilotTool[] = [
 
   // ── CLI Execution Tool ──
   {
-    name: "runRouteChiCli",
+    name: "runOmniRouteCli",
     description:
-      "Execute an 'omniroute' CLI command to configure or query the RouteChi app. Gives complete control over the app — use for advanced operations not covered by other tools. Common commands: omniroute list-keys, omniroute switch-combo [id], omniroute set-budget 10, omniroute set-strategy [id] priority, omniroute health, omniroute mcp (starts MCP server), omniroute db-health, omniroute reset-password.",
+      "Execute an 'omniroute' CLI command to configure or query the OmniRoute app. Gives complete control over the app — use for advanced operations not covered by other tools. Common commands: omniroute list-keys, omniroute switch-combo [id], omniroute set-budget 10, omniroute set-strategy [id] priority, omniroute health, omniroute mcp (starts MCP server), omniroute db-health, omniroute reset-password.",
     parameters: [
       {
         name: "command",
@@ -381,8 +381,8 @@ export const COPILOT_TOOLS: CopilotTool[] = [
       const cmd = args.command as string;
       if (!cmd) return "Please provide a command to execute.";
 
-      const cliPath = getRouteChiCliPath();
-      if (!cliPath) return "omniroute CLI not found in PATH. Install RouteChi first.";
+      const cliPath = getOmniRouteCliPath();
+      if (!cliPath) return "omniroute CLI not found in PATH. Install OmniRoute first.";
 
       try {
         const trimmedCmd = cmd.trim();

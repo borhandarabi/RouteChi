@@ -86,7 +86,7 @@ const OAUTH_TEST_CONFIG = {
     method: "GET",
     authHeader: "Authorization",
     authPrefix: "Bearer ",
-    extraHeaders: { "User-Agent": "RouteChi", Accept: "application/vnd.github+json" },
+    extraHeaders: { "User-Agent": "OmniRoute", Accept: "application/vnd.github+json" },
   },
   "gitlab-duo": {
     getUrl: (connection: any) =>

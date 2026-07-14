@@ -29,7 +29,7 @@ const getCrushConfigPath = (): string =>
 const getCrushDir = () => path.dirname(getCrushConfigPath());
 
 /**
- * Crush's config uses a `providers.<id>` map. RouteChi is registered under
+ * Crush's config uses a `providers.<id>` map. OmniRoute is registered under
  * the `omniroute` provider id as an `openai-compat` provider — same shape
  * `buildCrushProvider()`/`mergeCrushConfig()` in setup-crush.mjs produce.
  */
@@ -47,7 +47,7 @@ const ensureV1 = (url: string): string => {
   return s.endsWith("/v1") ? s : `${s}/v1`;
 };
 
-const hasRouteChiConfig = (settings: Record<string, unknown> | null): boolean => {
+const hasOmniRouteConfig = (settings: Record<string, unknown> | null): boolean => {
   if (!settings) return false;
   const providers = settings.providers as Record<string, unknown> | undefined;
   const omniroute = providers?.omniroute as Record<string, unknown> | undefined;
@@ -104,7 +104,7 @@ export async function GET(request: Request) {
       runtimeMode: runtime.runtimeMode,
       reason: runtime.reason,
       config,
-      hasRouteChi: hasRouteChiConfig(config),
+      hasOmniRoute: hasOmniRouteConfig(config),
       configPath: getCrushConfigPath(),
     });
   } catch (err) {
@@ -112,7 +112,7 @@ export async function GET(request: Request) {
   }
 }
 
-// POST — write RouteChi settings to crush.json (providers.omniroute)
+// POST — write OmniRoute settings to crush.json (providers.omniroute)
 export async function POST(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -163,7 +163,7 @@ export async function POST(request: Request) {
       type: "openai-compat",
       base_url: normalizedBaseUrl,
       api_key: apiKey,
-      models: [{ id: model, name: `RouteChi: ${model}`, context_window: DEFAULT_CONTEXT_WINDOW }],
+      models: [{ id: model, name: `OmniRoute: ${model}`, context_window: DEFAULT_CONTEXT_WINDOW }],
     };
 
     const updated: Record<string, unknown> = {
@@ -193,7 +193,7 @@ export async function POST(request: Request) {
   }
 }
 
-// DELETE — remove RouteChi provider from Crush config
+// DELETE — remove OmniRoute provider from Crush config
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -245,7 +245,7 @@ export async function DELETE(request: Request) {
       /* non-critical */
     }
 
-    return NextResponse.json({ success: true, message: "Crush RouteChi settings removed" });
+    return NextResponse.json({ success: true, message: "Crush OmniRoute settings removed" });
   } catch (err) {
     return NextResponse.json({ error: { message: sanitizeErrorMessage(err) } }, { status: 500 });
   }

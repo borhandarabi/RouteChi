@@ -71,18 +71,18 @@ const readAuthFile = async () => {
   }
 };
 
-// ── Check if a base_url points to RouteChi ──────────────────────────────
-const isRouteChiUrl = (baseUrl) => {
+// ── Check if a base_url points to OmniRoute ──────────────────────────────
+const isOmniRouteUrl = (baseUrl) => {
   if (!baseUrl) return false;
   return baseUrl.includes(":20128") || baseUrl.includes(":3000") || baseUrl.includes("omniroute");
 };
 
-// ── Check if RouteChi is configured ─────────────────────────────────────
-const hasRouteChiConfig = (authFile) => {
+// ── Check if OmniRoute is configured ─────────────────────────────────────
+const hasOmniRouteConfig = (authFile) => {
   if (!authFile?.providers) return false;
   const provider = authFile.providers[PROVIDER_NAME];
   if (!provider) return false;
-  return isRouteChiUrl(provider.base_url);
+  return isOmniRouteUrl(provider.base_url);
 };
 
 // ── GET - Check Letta CLI and read current settings ────────────────────
@@ -104,16 +104,16 @@ export async function GET(request: Request) {
     const authFile = await readAuthFile();
     const provider = authFile?.providers?.[PROVIDER_NAME];
 
-    // Detect if lmstudio is already configured for a non-RouteChi endpoint
+    // Detect if lmstudio is already configured for a non-OmniRoute endpoint
     let lmstudioConflict = false;
-    if (provider && !isRouteChiUrl(provider.base_url)) {
+    if (provider && !isOmniRouteUrl(provider.base_url)) {
       lmstudioConflict = true;
     }
 
     return NextResponse.json({
       installed: true,
       config: authFile,
-      hasRouteChi: hasRouteChiConfig(authFile),
+      hasOmniRoute: hasOmniRouteConfig(authFile),
       lmstudioConflict,
       configPath: getProviderAuthPath(),
       letta: {
@@ -129,11 +129,11 @@ export async function GET(request: Request) {
   }
 }
 
-// ── POST - Apply RouteChi as LM Studio provider + switch to local mode ──
+// ── POST - Apply OmniRoute as LM Studio provider + switch to local mode ──
 /**
  * Steps 1-2 of POST: read the existing Letta auth.json, refuse to clobber a real
  * LM Studio configuration unless `overwrite` is set (409 with conflict info), and back
- * up a non-RouteChi provider before it is overwritten. Extracted to keep POST under
+ * up a non-OmniRoute provider before it is overwritten. Extracted to keep POST under
  * the complexity gate.
  */
 async function prepareLettaAuthFile(
@@ -155,7 +155,7 @@ async function prepareLettaAuthFile(
   }
 
   const existingProvider = authFile.providers?.[PROVIDER_NAME];
-  if (existingProvider && !isRouteChiUrl(existingProvider.base_url) && !overwrite) {
+  if (existingProvider && !isOmniRouteUrl(existingProvider.base_url) && !overwrite) {
     // User has lmstudio configured for actual LM Studio — refuse to overwrite
     return {
       conflictResponse: NextResponse.json(
@@ -170,7 +170,7 @@ async function prepareLettaAuthFile(
   }
 
   // Back up existing lmstudio provider before overwriting
-  if (existingProvider && !isRouteChiUrl(existingProvider.base_url)) {
+  if (existingProvider && !isOmniRouteUrl(existingProvider.base_url)) {
     const backupPath = getBackupPath();
     await fs.writeFile(backupPath, JSON.stringify(existingProvider, null, 2));
   }
@@ -197,7 +197,7 @@ export async function POST(request: Request) {
 
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
 
-    // ── 1-2. Read auth.json, guard non-RouteChi conflicts, back up before overwrite ──
+    // ── 1-2. Read auth.json, guard non-OmniRoute conflicts, back up before overwrite ──
     const prepared = await prepareLettaAuthFile(overwrite);
     if ("conflictResponse" in prepared) {
       return prepared.conflictResponse;
@@ -242,7 +242,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: "Settings applied. Restart Letta CLI, then use /model to select a RouteChi model.",
+      message: "Settings applied. Restart Letta CLI, then use /model to select a OmniRoute model.",
       needsRestart: true,
     });
   } catch (error) {
@@ -253,7 +253,7 @@ export async function POST(request: Request) {
   }
 }
 
-// ── DELETE - Remove RouteChi configuration ──────────────────────────────
+// ── DELETE - Remove OmniRoute configuration ──────────────────────────────
 export async function DELETE(request: Request) {
   const authError = await requireCliToolsAuth(request);
   if (authError) return authError;
@@ -312,8 +312,8 @@ export async function DELETE(request: Request) {
     }
 
     const message = restored
-      ? "RouteChi config removed. Your original LM Studio provider has been restored. Restart Letta CLI to take effect."
-      : "RouteChi config removed. Restart Letta CLI to take effect.";
+      ? "OmniRoute config removed. Your original LM Studio provider has been restored. Restart Letta CLI to take effect."
+      : "OmniRoute config removed. Restart Letta CLI to take effect.";
 
     return NextResponse.json({
       success: true,

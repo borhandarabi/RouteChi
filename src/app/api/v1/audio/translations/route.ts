@@ -19,7 +19,7 @@ import {
   isAllRateLimitedCredentials,
   rateLimitedProviderResponse,
 } from "@/app/api/v1/_shared/rateLimit";
-import { attachRouteChiMetaToResponse } from "@/domain/omnirouteResponseMeta";
+import { attachOmniRouteMetaToResponse } from "@/domain/omnirouteResponseMeta";
 import { generateRequestId } from "@/shared/utils/requestId";
 
 /**
@@ -120,7 +120,7 @@ export async function POST(request) {
     await clearRecoveredProviderState(credentials);
     // No text body / playback duration available from the multipart upload, so
     // per-second pricing cannot be applied → cost 0 (ADD-only headers, body intact).
-    response = attachRouteChiMetaToResponse(response, {
+    response = attachOmniRouteMetaToResponse(response, {
       provider,
       model: resolvedModel,
       costUsd: 0,

@@ -30,7 +30,7 @@
  *   2. In production (`NODE_ENV=production`), reject unconditionally unless
  *      OMNIROUTE_LOCAL_ENDPOINTS_ENABLED=1 is set. The flag is opt-in so
  *      accidental dev deployments do not expose the API.
- *   3. Trust-list the RouteChi desktop app via a shared bearer token
+ *   3. Trust-list the OmniRoute desktop app via a shared bearer token
  *      (OMNIROUTE_LOCAL_ENDPOINTS_TOKEN). The desktop app injects the header
  *      and the server verifies it.
  *
