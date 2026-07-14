@@ -106,6 +106,11 @@ interface ZaiSSEChunk {
     delta_content?: string;
     content?: string;
     error?: { detail?: string; message?: string; code?: unknown };
+    // Nested variant: Z.AI sometimes wraps errors in data.data.error
+    data?: {
+      error?: { detail?: string; message?: string; code?: unknown };
+      done?: boolean;
+    };
   };
   choices?: Array<{
     delta?: { content?: string };
@@ -152,14 +157,36 @@ function messagesToPrompt(messages: ZaiMessage[]): string {
 /**
  * Inspect a Z.AI SSE chunk for an inline error (Z.AI sometimes returns HTTP
  * 200 with the error inside the JSON body).
+ *
+ * Checks (ported from GLM-Free-API Go extractZAIError):
+ *   1. data.error — explicit error object
+ *   2. data.data.error — nested variant observed in production (Go has this,
+ *      our TS port was missing it — this is where "Currently in peak hours"
+ *      and FRONTEND_CAPTCHA_REQUIRED errors live)
+ *   3. j.error — top-level error object
+ *   4. data.content / data.delta_content — peak-hour / capacity messages that
+ *      Z.AI sends as regular content (not in an error field). We pattern-match
+ *      known error phrases so we can return 503 (retryable) instead of showing
+ *      the message as normal content.
  */
 function extractZaiError(j: ZaiSSEChunk): string {
-  // data.error
-  if (j.data?.error) {
-    const err = j.data.error;
-    const detail = err.detail || err.message || "";
-    if (detail) {
-      return err.code !== undefined ? `${detail} (code: ${err.code})` : detail;
+  if (j.data) {
+    // data.error
+    if (j.data.error) {
+      const err = j.data.error;
+      const detail = err.detail || err.message || "";
+      if (detail) {
+        return err.code !== undefined ? `${detail} (code: ${err.code})` : detail;
+      }
+    }
+    // data.data.error (nested variant — this is where peak-hours and captcha
+    // errors live in production, matching the Go reference)
+    if (j.data.data?.error) {
+      const err = j.data.data.error;
+      const detail = err.detail || err.message || "";
+      if (detail) {
+        return err.code !== undefined ? `${detail} (code: ${err.code})` : detail;
+      }
     }
   }
   // Top-level error
@@ -167,16 +194,59 @@ function extractZaiError(j: ZaiSSEChunk): string {
     const err = j.error;
     return err.detail || err.message || "";
   }
+  // Z.AI sometimes sends peak-hour / capacity messages as regular content
+  // (not in an error field). Pattern-match known phrases.
+  const contentStr = j.data?.content || j.data?.delta_content || "";
+  if (contentStr && isZaiCapacityMessage(contentStr)) {
+    return contentStr;
+  }
   return "";
 }
 
 /**
+ * Detect Z.AI capacity/peak-hour messages that are sent as regular content
+ * rather than as error objects. These should trigger a 503 (retryable) so
+ * OmniRoute's retry/fallback logic can kick in.
+ */
+function isZaiCapacityMessage(text: string): boolean {
+  const lower = text.toLowerCase();
+  return (
+    lower.includes("peak hours") ||
+    lower.includes("intensifying the coordination") ||
+    (lower.includes("switch to") && lower.includes("for experience")) ||
+    lower.includes("try again later") ||
+    lower.includes("currently in peak") ||
+    (lower.includes("resource") && lower.includes("busy")) ||
+    lower.includes("server is busy") ||
+    lower.includes("temporarily unavailable") ||
+    lower.includes("please try again") ||
+    lower.includes("model is busy") ||
+    lower.includes("high traffic") ||
+    lower.includes("overloaded")
+  );
+}
+
+/**
  * Map a Z.AI inline error string to an appropriate HTTP status code.
- * Capacity/concurrency errors → 503 (retry-able), others → 502.
+ * Capacity/concurrency/peak-hour errors → 503 (retry-able), others → 502.
  */
 function zaiErrorToStatus(errDetail: string): number {
   const lower = errDetail.toLowerCase();
-  if (lower.includes("capacity") || lower.includes("concurrency") || lower.includes("rate limit")) {
+  // Capacity / concurrency / peak-hour errors → 503 (retryable)
+  if (
+    lower.includes("capacity") ||
+    lower.includes("concurrency") ||
+    lower.includes("rate limit") ||
+    lower.includes("peak hours") ||
+    lower.includes("intensifying") ||
+    lower.includes("try again later") ||
+    lower.includes("switch to") ||
+    lower.includes("server is busy") ||
+    lower.includes("overloaded") ||
+    lower.includes("high traffic") ||
+    lower.includes("model is busy") ||
+    lower.includes("temporarily unavailable")
+  ) {
     return 503;
   }
   if (lower.includes("auth") || lower.includes("unauthorized") || lower.includes("token")) {
@@ -705,6 +775,33 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
                 // Detect inline errors
                 const errDetail = extractZaiError(j);
                 if (errDetail) {
+                  const status = zaiErrorToStatus(errDetail);
+                  // For retryable errors (503), emit an OpenAI-shaped error
+                  // event so chatCore's stream-error detection can trigger
+                  // retry/fallback. For non-retryable errors, emit as content
+                  // so the user sees the message.
+                  if (status === 503) {
+                    // Emit error as a proper SSE error chunk — chatCore detects
+                    // this and triggers retry with the mapped status code.
+                    const errorChunk = {
+                      id,
+                      object: "chat.completion.chunk",
+                      created,
+                      model: requestedModel,
+                      system_fingerprint: fingerprint,
+                      choices: [{ index: 0, delta: {}, finish_reason: "stop" }],
+                      error: {
+                        message: `Z.AI inline error: ${errDetail}`,
+                        type: "api_error",
+                        code: status,
+                      },
+                    };
+                    controller.enqueue(encoder.encode(`data: ${JSON.stringify(errorChunk)}\n\n`));
+                    controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+                    controller.close();
+                    return;
+                  }
+                  // Non-retryable: show the error as content to the user
                   emit({ content: `\n\n[error: ${errDetail}]` }, "stop");
                   controller.enqueue(encoder.encode("data: [DONE]\n\n"));
                   controller.close();
