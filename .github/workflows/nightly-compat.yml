@@ -8,15 +8,7 @@ name: Nightly Node Compat
 # fail-fast desligado: numa quebra queremos saber TODAS as versões afetadas de uma vez.
 
 on:
-  schedule:
-    - cron: "47 6 * * *" # 06:47 UTC diário — slot distinto dos demais nightlies
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "Branch to validate (default: highest release/vX.Y.Z)"
-        required: false
-        type: string
-
 permissions:
   contents: read
   issues: write

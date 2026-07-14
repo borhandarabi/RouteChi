@@ -1,14 +1,7 @@
 name: Publish Fork Image to GHCR
 
 on:
-  push:
-    branches: [main]
-    tags:
-      - "v*"
   workflow_dispatch:
-
-# Least-privilege default: read-only at the top level; the build job that pushes to
-# GHCR grants packages: write itself (Scorecard TokenPermissions).
 permissions:
   contents: read
 

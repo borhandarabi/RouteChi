@@ -19,18 +19,7 @@ name: Lock released branch
 # v3.8.3 incident on 2026-05-26 where 6 commits landed post-release).
 
 on:
-  release:
-    types: [published]
-  push:
-    branches:
-      - "release/v*"
   workflow_dispatch:
-    inputs:
-      tag:
-        description: "Tag of the released version (e.g. v3.8.2)"
-        required: true
-        type: string
-
 permissions:
   contents: read
 

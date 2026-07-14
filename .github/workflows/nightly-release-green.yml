@@ -14,15 +14,7 @@ name: Nightly Release-Green
 # package-artifact) flip the issue open.
 
 on:
-  schedule:
-    - cron: "23 5 * * *" # 05:23 UTC daily — off-peak, distinct from other nightlies
   workflow_dispatch:
-    inputs:
-      branch:
-        description: "Release branch to validate (default: highest release/vX.Y.Z)"
-        required: false
-        type: string
-
 permissions:
   contents: read
   issues: write
