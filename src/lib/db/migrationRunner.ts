@@ -452,6 +452,14 @@ function isSchemaAlreadyApplied(
     case "117":
       return hasColumn(db, "proxy_assignments", "position");
     case "118":
+      // Upstream's 118_provider_param_filters.sql is a no-op (comments only,
+      // no schema change). DBs that already applied our old 118_provider_session_mappings
+      // will skip this version — which is fine because the migration creates nothing.
+      return false;
+    case "121":
+      // Retroactive guard for provider_session_mappings migration renumbered
+      // from 118 → 121 (collided with upstream's 118_provider_param_filters).
+      // DBs that already applied it under the old 118 number should not re-run as 121.
       return hasTable(db, "provider_session_mappings");
     default:
       return false;
