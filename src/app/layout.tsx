@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Vazirmatn } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/shared/components/ThemeProvider";
 import { NextIntlClientProvider } from "next-intl";
@@ -14,6 +14,15 @@ import { APP_CONFIG } from "@/shared/constants/appConfig";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
+});
+
+// Vazirmatn — Persian (Farsi) font, also covers Latin glyphs.
+// Used as the primary UI font so Persian text renders with proper letterforms
+// instead of falling back to system fonts. Non-Persian text is unaffected
+// because Vazirmatn includes a complete Latin set.
+const vazirmatn = Vazirmatn({
+  subsets: ["latin", "arabic"],
+  variable: "--font-vazirmatn",
 });
 
 export const viewport: Viewport = {
@@ -102,7 +111,7 @@ export default async function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${vazirmatn.variable} font-sans antialiased`} suppressHydrationWarning>
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#6366f1] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"

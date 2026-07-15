@@ -209,8 +209,12 @@
   --shadow-warm: var(--shadow-warm);
   --shadow-elevated: var(--shadow-elevated);
 
-  /* Font - macOS system fonts */
+  /* Font — Vazirmatn primary (covers Persian + Latin), macOS system stack as fallback.
+     Vazirmatn is loaded via next/font/google in src/app/layout.tsx and exposes
+     --font-vazirmatn on <body>. It is a modern Persian/Latin font that renders
+     Farsi text with proper letterforms; Latin text is unaffected. */
   --font-sans:
+    var(--font-vazirmatn), var(--font-inter),
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
   /* Monospace stack (parity with the site) — code blocks, IDs, endpoints, terminals */
   --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", monospace;
