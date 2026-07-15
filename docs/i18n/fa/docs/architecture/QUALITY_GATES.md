@@ -4,7 +4,7 @@ title: "مرجع Quality Gates"
 
 # مرجع Quality Gates
 
-این سند مرجع معتبر برای همه quality gate‌های CI در RouteChi است.
+این سند مرجع معتبر برای همه quality gate‌های CI در OmniRoute است.
 این سند هر gate، آنچه اعتبارسنجی می‌کند، در کدام job CI اجرا می‌شود، آیا از یک baseline ratchet یا سیاست pass/fail استفاده می‌کند، و آیا build را مسدود می‌کند یا صرفاً اطلاع‌رسانی است را توصیف می‌کند.
 
 برای خلاصه کوتاه و سیاست allowlist، به بخش «Quality Gates & Ratchets» در
@@ -138,7 +138,7 @@ title: "مرجع Quality Gates"
 | `nightly-property`     | آزمون‌های property fast-check با seed تصادفی + run count بالا                                                                                        | **اطلاع‌رسانی** |
 | `nightly-resilience`   | gate رشد heap، تزریق خطای chaos، load/soak با k6                                                                                                    | **اطلاع‌رسانی** |
 | `nightly-llm-security` | حفاظ تزریق promptfoo (حالت block) + probe‌های garak (بدون یک secret provider عبور می‌شوند)                                                          | **اطلاع‌رسانی** |
-| `nightly-schemathesis` | fuzzing قرارداد OpenAPI (schemathesis) علیه یک RouteChi زنده با استفاده از `docs/openapi.yaml` — نقض spec / ۵۰۰‌های مدیریت‌نشده را آشکار می‌کند (Fase 8 B.4) | **اطلاع‌رسانی** |
+| `nightly-schemathesis` | fuzzing قرارداد OpenAPI (schemathesis) علیه یک OmniRoute زنده با استفاده از `docs/openapi.yaml` — نقض spec / ۵۰۰‌های مدیریت‌نشده را آشکار می‌کند (Fase 8 B.4) | **اطلاع‌رسانی** |
 
 ---
 
@@ -221,7 +221,7 @@ flag `--update` مقادیر اندازه‌گیری‌شده فعلی را در
 
 ## ابزار agent: LSP-in-the-loop (اختیاری)
 
-علاوه بر gate‌های CI، RouteChi یک داربست `agent-lsp` **اختیاری** ارائه می‌دهد
+علاوه بر gate‌های CI، OmniRoute یک داربست `agent-lsp` **اختیاری** ارائه می‌دهد
 (یک `.mcp.json` سطح پروژه، Fase 7 Task 15). `.mcp.json` بسازید
 تا یک زبان سرور TypeScript را به agent‌های کدنویسی暴露 کند، تا symbol‌ها / diagnostic‌ها را **قبل از** نوشتن کد حل کنند —
 همراه compile-before-claim با `typecheck:core` که خطاهای «symbol جعلی» را در منبع کاهش می‌دهد. این عمداً

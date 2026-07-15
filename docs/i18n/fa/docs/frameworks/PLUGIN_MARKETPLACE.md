@@ -11,7 +11,7 @@ lastUpdated: 2026-06-28
 > `src/app/(dashboard)/dashboard/plugins/`
 > **آخرین به‌روزرسانی:** 2026-06-28 — v3.8.40
 
-RouteChi یک سیستم پلاگین به سبک وردپرس عرضه می‌کند. پلاگین‌ها دایرکتوری‌های
+OmniRoute یک سیستم پلاگین به سبک وردپرس عرضه می‌کند. پلاگین‌ها دایرکتوری‌های
 خودکافی هستند — هر کدام با یک manifest مربوط به `plugin.json` و یک فایل ورودی — که به
 pipeline درخواست (`onRequest` / `onResponse` / `onError`) و به
 رویدادهای چرخه حیات (`onInstall` / `onActivate` / `onDeactivate` / `onUninstall`) متصل می‌شوند.
@@ -153,7 +153,7 @@ curl -X PUT http://localhost:20128/api/plugins/my-plugin/config \
 
 ### دایرکتوری پلاگین
 
-پلاگین‌ها زیر دایرکتوری داده RouteChi قرار دارند:
+پلاگین‌ها زیر دایرکتوری داده OmniRoute قرار دارند:
 
 ```
 ~/.omniroute/plugins/<plugin-name>/

@@ -10,17 +10,17 @@ lastUpdated: 2026-06-28
 
 🌐 **Languages:** 🇺🇸 [English](./TROUBLESHOOTING.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/guides/TROUBLESHOOTING.md) | 🇪🇸 [Español](../i18n/es/docs/guides/TROUBLESHOOTING.md) | 🇫🇷 [Français](../i18n/fr/docs/guides/TROUBLESHOOTING.md) | 🇮🇹 [Italiano](../i18n/it/docs/guides/TROUBLESHOOTING.md) | 🇷🇺 [Русский](../i18n/ru/docs/guides/TROUBLESHOOTING.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/guides/TROUBLESHOOTING.md) | 🇩🇪 [Deutsch](../i18n/de/docs/guides/TROUBLESHOOTING.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/guides/TROUBLESHOOTING.md) | 🇹🇭 [ไทย](../i18n/th/docs/guides/TROUBLESHOOTING.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/guides/TROUBLESHOOTING.md) | 🇸🇦 [العربية](../i18n/ar/docs/guides/TROUBLESHOOTING.md) | 🇯🇵 [日本語](../i18n/ja/docs/guides/TROUBLESHOOTING.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/guides/TROUBLESHOOTING.md) | 🇧🇬 [Български](../i18n/bg/docs/guides/TROUBLESHOOTING.md) | 🇩🇰 [Dansk](../i18n/da/docs/guides/TROUBLESHOOTING.md) | 🇫🇮 [Suomi](../i18n/fi/docs/guides/TROUBLESHOOTING.md) | 🇮🇱 [עברית](../i18n/he/docs/guides/TROUBLESHOOTING.md) | 🇭🇺 [Magyar](../i18n/hu/docs/guides/TROUBLESHOOTING.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/guides/TROUBLESHOOTING.md) | 🇰🇷 [한국어](../i18n/ko/docs/guides/TROUBLESHOOTING.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/guides/TROUBLESHOOTING.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/guides/TROUBLESHOOTING.md) | 🇳🇴 [Norsk](../i18n/no/docs/guides/TROUBLESHOOTING.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/guides/TROUBLESHOOTING.md) | 🇷🇴 [Română](../i18n/ro/docs/guides/TROUBLESHOOTING.md) | 🇵🇱 [Polski](../i18n/pl/docs/guides/TROUBLESHOOTING.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/guides/TROUBLESHOOTING.md) | 🇸🇪 [Svenska](../i18n/sv/docs/guides/TROUBLESHOOTING.md) | 🇵🇭 [Filipino](../i18n/phi/docs/guides/TROUBLESHOOTING.md) | 🇨🇿 [Čeština](../i18n/cs/docs/guides/TROUBLESHOOTING.md)
 
-مشکلات و راه‌حل‌های رایج برای RouteChi.
+مشکلات و راه‌حل‌های رایج برای OmniRoute.
 
 ---
 
 ## مرجع سریع
 
-**با RouteChi تازه آشنا شده‌اید؟** از اینجا شروع کنید — این موارد ۹۰٪ مشکلات را حل می‌کنند:
+**با OmniRoute تازه آشنا شده‌اید؟** از اینجا شروع کنید — این موارد ۹۰٪ مشکلات را حل می‌کنند:
 
 | این را می‌بینم          | معنی                                | چه کاری انجام دهید                                                                                 |
 | ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------- |
-| "Can't connect"         | RouteChi اجرا نمی‌شود               | `omniroute` یا `docker restart omniroute` را اجرا کنید                                              |
+| "Can't connect"         | OmniRoute اجرا نمی‌شود               | `omniroute` یا `docker restart omniroute` را اجرا کنید                                              |
 | "Invalid API key"       | کلید شما اشتباه یا منقضی است         | کلید را از وب‌سایت ارائه‌دهنده دوباره کپی کنید                                                       |
 | "Rate limit exceeded"   | درخواست‌های زیادی می‌فرستید          | ۱ دقیقه صبر کنید، یا برای fallback خودکار از `model: "auto"` استفاده کنید                          |
 | "Quota exceeded"        | سهمیهٔ رایگان/پرداختی‌تان تمام شده   | ارائه‌دهنده‌های بیشتری متصل کنید، یا از ارائه‌دهنده‌های رایگان (Kiro، Pollinations) استفاده کنید |
@@ -59,7 +59,7 @@ lastUpdated: 2026-06-28
 
 ### صفحهٔ ورود کرش می‌کند یا خطای "Module self-registration" نشان می‌دهد
 
-**علت:** در حال اجرای یک نسخهٔ Node.js خارج از کف زمان‌اجرای امن تأییدشدهٔ RouteChi هستید. رایج‌ترین حالت اجرای یک patch level قدیمی‌تر Node 22 یا 24 است که زیر کف امنیتی patch‌شده‌ای که RouteChi نیاز دارد قرار می‌گیرد.
+**علت:** در حال اجرای یک نسخهٔ Node.js خارج از کف زمان‌اجرای امن تأییدشدهٔ OmniRoute هستید. رایج‌ترین حالت اجرای یک patch level قدیمی‌تر Node 22 یا 24 است که زیر کف امنیتی patch‌شده‌ای که OmniRoute نیاز دارد قرار می‌گیرد.
 
 **علامت‌ها:**
 
@@ -75,7 +75,7 @@ lastUpdated: 2026-06-28
    nvm use 24
    ```
 2. نسخهٔ خود را تأیید کنید: `node --version` باید `v24.0.0` یا جدیدتر روی خط LTS 24.x را نشان دهد
-3. نصب مجدد RouteChi: `npm install -g omniroute`
+3. نصب مجدد OmniRoute: `npm install -g omniroute`
 4. راه‌اندازی مجدد: `omniroute`
 
 > **نسخه‌های امن پشتیبانی‌شده:** `>=22.22.2 <23` یا `>=24.0.0 <27`. Node.js 24.x LTS (Krypton) و Node.js 26 کاملاً پشتیبانی می‌شوند.
@@ -128,13 +128,13 @@ omniroute
 
 **علت:** در Node.js 22، dispatcher مربوط به undici@8 با پیاده‌سازی `fetch()` داخلی Node ناسازگار است.
 
-**راه‌حل (v3.5.5+):** RouteChi اکنون هنگامی که یک dispatcher پروکسی فعال است، از تابع `fetch()` خود undici استفاده می‌کند و رفتار یکسان را تضمین می‌کند. به v3.5.5+ به‌روزرسانی کنید.
+**راه‌حل (v3.5.5+):** OmniRoute اکنون هنگامی که یک dispatcher پروکسی فعال است، از تابع `fetch()` خود undici استفاده می‌کند و رفتار یکسان را تضمین می‌کند. به v3.5.5+ به‌روزرسانی کنید.
 
 ### پروکسی MITM تحت WSL: برنامه‌های دسکتاپ روی میزبان ویندوز intercept نمی‌شوند
 
-**علت:** پروکسی MITM و گواهی CA آن در محیطی که RouteChi در آن اجرا می‌شود نصب می‌شوند. تحت WSL آن محیط guest لینوکس است، در حالی که برنامه‌های دسکتاپ AI (Kiro، Trae، Copilot، Zed، …) روی میزبان ویندوز اجرا می‌شوند. برنامه‌های میزبان به مخزن گواهی guest اعتماد نمی‌کنند و از پروکسی سامانهٔ guest عبور نمی‌کنند، بنابراین intercept دسکتاپ آنجا درگیر نمی‌شود.
+**علت:** پروکسی MITM و گواهی CA آن در محیطی که OmniRoute در آن اجرا می‌شود نصب می‌شوند. تحت WSL آن محیط guest لینوکس است، در حالی که برنامه‌های دسکتاپ AI (Kiro، Trae، Copilot، Zed، …) روی میزبان ویندوز اجرا می‌شوند. برنامه‌های میزبان به مخزن گواهی guest اعتماد نمی‌کنند و از پروکسی سامانهٔ guest عبور نمی‌کنند، بنابراین intercept دسکتاپ آنجا درگیر نمی‌شود.
 
-**توصیه:** RouteChi را به‌صورت بومی روی همان سیستم‌عامل برنامه‌های دسکتاپی که می‌خواهید intercept کنید اجرا کنید (ویندوز برای برنامه‌های ویندوز؛ به همین ترتیب macOS/لینوکس). نگه‌داشتن RouteChi درون WSL در حالی که برنامه‌های میزبان را هدف قرار می‌دهید، نیازمند اعتماد دستی به گواهی CA تولیدشده روی میزبان ویندوز و هدایت تنظیمات شبکه/پروکسی هر برنامهٔ میزبان به نقطهٔ پایانی پروکسی WSL است — یک راه‌اندازی پشتیبانی‌نشده و شکننده.
+**توصیه:** OmniRoute را به‌صورت بومی روی همان سیستم‌عامل برنامه‌های دسکتاپی که می‌خواهید intercept کنید اجرا کنید (ویندوز برای برنامه‌های ویندوز؛ به همین ترتیب macOS/لینوکس). نگه‌داشتن OmniRoute درون WSL در حالی که برنامه‌های میزبان را هدف قرار می‌دهید، نیازمند اعتماد دستی به گواهی CA تولیدشده روی میزبان ویندوز و هدایت تنظیمات شبکه/پروکسی هر برنامهٔ میزبان به نقطهٔ پایانی پروکسی WSL است — یک راه‌اندازی پشتیبانی‌نشده و شکننده.
 
 ---
 
@@ -161,7 +161,7 @@ omniroute
 
 ### انقضای توکن OAuth
 
-RouteChi به‌طور خودکار توکن‌ها را بازنشانی می‌کند. اگر مشکلات ادامه یافتند:
+OmniRoute به‌طور خودکار توکن‌ها را بازنشانی می‌کند. اگر مشکلات ادامه یافتند:
 
 1. Dashboard → Provider → Reconnect
 2. حذف و افزودن مجدد اتصال ارائه‌دهنده
@@ -352,7 +352,7 @@ curl http://localhost:20128/api/monitoring/health
 
 ### ضد thundering herd
 
-هنگامی که بسیاری از درخواست‌های هم‌زمان به یک ارائه‌دهندهٔ rate-limited می‌رسند، RouteChi
+هنگامی که بسیاری از درخواست‌های هم‌زمان به یک ارائه‌دهندهٔ rate-limited می‌رسند، OmniRoute
 از mutex + rate-limiting خودکار برای serialize کردن درخواست‌ها و جلوگیری از شکست‌های
 آبشاری استفاده می‌کند. این برای ارائه‌دهنده‌های کلید API خودکار است.
 
@@ -360,8 +360,8 @@ curl http://localhost:20128/api/monitoring/health
 
 ## Taxonomy اختیاری شکست RAG / LLM (۱۶ مشکل)
 
-برخی کاربران RouteChi gateway را در جلوی پشته‌های RAG یا agent قرار می‌دهند. در این راه‌اندازی‌ها
-مشاهدهٔ یک الگوی عجیب رایج است: RouteChi سالم به نظر می‌رسد (ارائه‌دهنده‌ها فعال، پروفایل‌های
+برخی کاربران OmniRoute gateway را در جلوی پشته‌های RAG یا agent قرار می‌دهند. در این راه‌اندازی‌ها
+مشاهدهٔ یک الگوی عجیب رایج است: OmniRoute سالم به نظر می‌رسد (ارائه‌دهنده‌ها فعال، پروفایل‌های
 مسیریابی ok، هیچ هشدار rate limit) اما پاسخ نهایی همچنان اشتباه است.
 
 در عمل این حوادث معمولاً از خط لولهٔ RAG پایین‌دست می‌آیند، نه از خود gateway.
@@ -383,10 +383,10 @@ curl http://localhost:20128/api/monitoring/health
 
 1. هنگام بررسی یک پاسخ بد، ضبط کنید:
    - وظیفه و درخواست کاربر
-   - combo مسیر یا ارائه‌دهنده در RouteChi
+   - combo مسیر یا ارائه‌دهنده در OmniRoute
    - هر context مربوط به RAG استفاده‌شده در پایین‌دست (اسناد بازیابی‌شده، tool callها و...)
 2. حادثه را به یک یا دو شمارهٔ WFGY ProblemMap نگاشت کنید (`No.1` … `No.16`).
-3. شماره را در داشبورد، runbook یا ردیاب حادثهٔ خود کنار لاگ‌های RouteChi ذخیره کنید.
+3. شماره را در داشبورد، runbook یا ردیاب حادثهٔ خود کنار لاگ‌های OmniRoute ذخیره کنید.
 4. از صفحهٔ WFGY مربوطه استفاده کنید تا تصمیم کنید آیا نیاز به تغییر پشتهٔ RAG، retriever یا
    استراتژی مسیریابی دارید.
 
@@ -394,7 +394,7 @@ curl http://localhost:20128/api/monitoring/health
 
 [WFGY ProblemMap README](https://github.com/onestardao/WFGY/blob/main/ProblemMap/README.md)
 
-اگر RAG یا خطوط لولهٔ agent را پشت RouteChi اجرا نمی‌کنید، می‌توانید این بخش را نادیده بگیرید.
+اگر RAG یا خطوط لولهٔ agent را پشت OmniRoute اجرا نمی‌کنید، می‌توانید این بخش را نادیده بگیرید.
 
 ---
 
@@ -419,7 +419,7 @@ curl http://localhost:20128/api/monitoring/health
 **راه‌حل:**
 
 1. تأیید کنید که هم `WINDSURF_FIREBASE_API_KEY` و هم `WINDSURF_API_KEY` در `.env` تنظیم شده‌اند
-2. RouteChi را راه‌اندازی مجدد کنید تا مقادیر env جدید گرفته شوند
+2. OmniRoute را راه‌اندازی مجدد کنید تا مقادیر env جدید گرفته شوند
 3. جریان OAuth را از **Dashboard → Providers → Windsurf → Reconnect** دوباره اجرا کنید
 
 ### شکست احراز هویت Devin CLI
@@ -438,7 +438,7 @@ curl http://localhost:20128/api/monitoring/health
 
 1. Devin CLI را برای پلتفرم خود نصب کنید
 2. `CLI_DEVIN_BIN=/usr/local/bin/devin` (یا مسیر واقعی) را در `.env` تنظیم کنید
-3. RouteChi را راه‌اندازی مجدد و از **Dashboard → CLI Tools** دوباره آزمایش کنید
+3. OmniRoute را راه‌اندازی مجدد و از **Dashboard → CLI Tools** دوباره آزمایش کنید
 
 ### cooldown مدل گیر کرده (بازنشانی دستی)
 
@@ -495,7 +495,7 @@ curl http://localhost:20128/api/monitoring/health
 
 1. تولید یک راز تصادفی: `openssl rand -hex 32`
 2. `OMNIROUTE_WS_BRIDGE_SECRET=<random-secret>` را در env سرور تولیدی (و هر کلاینتی که با پل صحبت می‌کند) تنظیم کنید
-3. راه‌اندازی مجدد RouteChi
+3. راه‌اندازی مجدد OmniRoute
 
 ### Responses API: حالت پس‌زمینه به هم‌زمان تنزل یافت
 

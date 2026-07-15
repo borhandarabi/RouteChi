@@ -10,7 +10,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     name: "Claude Code",
     icon: "terminal",
     color: "#D97757",
-    description: "Anthropic Claude Code CLI — ANTHROPIC_BASE_URL points to RouteChi",
+    description: "Anthropic Claude Code CLI — ANTHROPIC_BASE_URL points to OmniRoute",
     docsUrl: "https://docs.anthropic.com/en/docs/claude-code/overview",
     configType: "env",
     category: "code",
@@ -71,7 +71,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     id: "codex",
     name: "OpenAI Codex CLI",
     color: "#10A37F",
-    description: "OpenAI Codex CLI — OpenAI-compatible base URL targets RouteChi",
+    description: "OpenAI Codex CLI — OpenAI-compatible base URL targets OmniRoute",
     docsUrl: "https://github.com/openai/codex",
     configType: "custom",
     category: "code",
@@ -298,7 +298,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
   "provider": {
     "omniroute": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "RouteChi",
+      "name": "OmniRoute",
       "options": {
         "baseURL": "{{baseUrl}}",
         "apiKey": "{{apiKey}}"
@@ -344,7 +344,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       {
         step: 5,
         title: "Save Provider Block",
-        desc: "Use the JSON block below as the OpenAI-compatible provider definition for RouteChi.",
+        desc: "Use the JSON block below as the OpenAI-compatible provider definition for OmniRoute.",
       },
     ],
     codeBlock: {
@@ -404,7 +404,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     icon: "psychology",
     color: "#10B981",
     description:
-      "Alibaba Qwen Code CLI — supports OpenAI, Anthropic & Gemini providers via RouteChi",
+      "Alibaba Qwen Code CLI — supports OpenAI, Anthropic & Gemini providers via OmniRoute",
     docsUrl: "https://qwenlm.github.io/qwen-code-docs/en/users/configuration/model-providers/",
     configType: "guide",
     category: "code",
@@ -415,11 +415,11 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     notes: [
       {
         type: "info",
-        text: "Qwen Code supports multiple provider types (openai, anthropic, gemini) via modelProviders in settings.json. RouteChi works as an OpenAI-compatible endpoint.",
+        text: "Qwen Code supports multiple provider types (openai, anthropic, gemini) via modelProviders in settings.json. OmniRoute works as an OpenAI-compatible endpoint.",
       },
       {
         type: "info",
-        text: "Any model available in RouteChi can be used — not just Qwen models. Select from Qwen, Claude, Gemini, GPT, and more.",
+        text: "Any model available in OmniRoute can be used — not just Qwen models. Select from Qwen, Claude, Gemini, GPT, and more.",
       },
       {
         type: "warning",
@@ -427,7 +427,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
       },
       {
         type: "error",
-        text: "Qwen OAuth free tier was discontinued on 2026-04-15. Use RouteChi with bailian-coding-plan/alibaba/alibaba-cn/openrouter/anthropic/gemini providers instead.",
+        text: "Qwen OAuth free tier was discontinued on 2026-04-15. Use OmniRoute with bailian-coding-plan/alibaba/alibaba-cn/openrouter/anthropic/gemini providers instead.",
       },
     ],
     modelAliases: [
@@ -512,7 +512,7 @@ export const CLI_TOOLS: Record<string, CliCatalogEntry> = {
     ],
     codeBlock: {
       language: "json",
-      code: `# ~/.qwen/settings.json — RouteChi via security.auth
+      code: `# ~/.qwen/settings.json — OmniRoute via security.auth
 {
   "security": {
     "auth": {
@@ -802,7 +802,7 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     image: "/providers/omp.png",
     color: "#111111",
     docsUrl: "https://github.com/can1357/oh-my-pi",
-    description: "Oh My Pi terminal coding agent via RouteChi",
+    description: "Oh My Pi terminal coding agent via OmniRoute",
     configType: "custom",
     category: "agent",
     vendor: "OSS",
@@ -812,7 +812,7 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     notes: [
       {
         type: "info",
-        text: "Oh My Pi reads custom OpenAI-compatible providers from ~/.omp/agent/models.yml. RouteChi adds itself as a provider with auto-discovery — models appear automatically in omp's /model menu.",
+        text: "Oh My Pi reads custom OpenAI-compatible providers from ~/.omp/agent/models.yml. OmniRoute adds itself as a provider with auto-discovery — models appear automatically in omp's /model menu.",
       },
       {
         type: "warning",
@@ -836,11 +836,11 @@ OPENAI_API_KEY: "{{apiKey}}"`,
     notes: [
       {
         type: "info",
-        text: "Letta CLI uses pi-ai which sends OpenAI-compatible requests. RouteChi configures it as an OpenAI provider with custom base URL.",
+        text: "Letta CLI uses pi-ai which sends OpenAI-compatible requests. OmniRoute configures it as an OpenAI provider with custom base URL.",
       },
       {
         type: "info",
-        text: "CLI (Local Mode): RouteChi auto-configures ~/.letta/lc-local-backend/providers/auth.json. Use 'letta --info' to check if local mode is enabled.",
+        text: "CLI (Local Mode): OmniRoute auto-configures ~/.letta/lc-local-backend/providers/auth.json. Use 'letta --info' to check if local mode is enabled.",
       },
       {
         type: "warning",

@@ -806,7 +806,7 @@ export default function ProvidersPage() {
             </h2>
             <p className="text-sm text-text-muted mt-2 max-w-md">
               {t("addFirstProviderDesc") ||
-                "Connect an AI provider to start routing requests through RouteChi. You can use free providers, API keys, or OAuth accounts."}
+                "Connect an AI provider to start routing requests through OmniRoute. You can use free providers, API keys, or OAuth accounts."}
             </p>
             <div className="mt-4 flex flex-wrap items-center justify-center gap-2">
               <Button icon="add" onClick={() => router.push("/dashboard/providers/new")}>

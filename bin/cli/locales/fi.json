@@ -15,7 +15,7 @@
     "yesOpt": "Ohita vahvistuspyyntö"
   },
   "program": {
-    "description": "RouteChi — Älykäs AI-reititin automaattisella fallbackilla",
+    "description": "OmniRoute — Älykäs AI-reititin automaattisella fallbackilla",
     "version": "Tulosta versio ja poistu",
     "output": "Tulostusmuoto (table, json, jsonl, csv)",
     "quiet": "Piilota epäolennaiset tulosteet",

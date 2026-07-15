@@ -42,7 +42,7 @@ export default function KiloToolCard({
 
   const getConfigStatus = () => {
     if (!cliReady) return null;
-    if (!kiloStatus.hasRouteChi) return "not_configured";
+    if (!kiloStatus.hasOmniRoute) return "not_configured";
     return "configured";
   };
 

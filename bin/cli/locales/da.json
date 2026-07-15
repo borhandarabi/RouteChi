@@ -15,7 +15,7 @@
     "yesOpt": "Spring bekræftelse over"
   },
   "program": {
-    "description": "RouteChi — Smart AI-router med automatisk fallback",
+    "description": "OmniRoute — Smart AI-router med automatisk fallback",
     "version": "Vis version og afslut",
     "output": "Outputformat (table, json, jsonl, csv)",
     "quiet": "Undertryk ikke-essentielt output",

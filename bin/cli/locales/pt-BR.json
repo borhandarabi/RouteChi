@@ -1,7 +1,7 @@
 {
   "common": {
     "error": "Erro: {message}",
-    "serverOffline": "Servidor RouteChi offline. Inicie com: omniroute serve",
+    "serverOffline": "Servidor OmniRoute offline. Inicie com: omniroute serve",
     "authRequired": "Autenticação necessária. Configure OMNIROUTE_API_KEY ou execute: omniroute setup",
     "rateLimited": "Limite de requisições atingido. Tente novamente em {seconds}s.",
     "timeout": "Requisição expirou após {ms}ms.",
@@ -15,7 +15,7 @@
     "yesOpt": "Pular confirmação"
   },
   "setup": {
-    "title": "Configuração do RouteChi",
+    "title": "Configuração do OmniRoute",
     "passwordPrompt": "Senha de administrador",
     "providerPrompt": "Provedor padrão (deixe em branco para pular)",
     "done": "Configuração concluída",
@@ -29,7 +29,7 @@
     "providerInfo": "Provedor: {info}"
   },
   "doctor": {
-    "title": "RouteChi Doctor",
+    "title": "OmniRoute Doctor",
     "dbOk": "Banco de dados: OK ({path})",
     "dbMissing": "Banco de dados: não inicializado — execute `omniroute setup`",
     "portOk": "Porta {port}: disponível",
@@ -81,7 +81,7 @@
       "providerOpt": "Filtrar por nome do provedor",
       "header": "ID         Provedor       Nome                     Validade Status  Status Teste  Cooldown Até",
       "noData": "Nenhum dado de conexão de provedor disponível.",
-      "requiresServer": "providers status requer o servidor RouteChi em execução."
+      "requiresServer": "providers status requer o servidor OmniRoute em execução."
     }
   },
   "keys": {
@@ -89,8 +89,8 @@
     "addDescription": "Adicionar ou atualizar uma chave de API para um provedor",
     "listDescription": "Listar todas as chaves de API configuradas",
     "removeDescription": "Remover uma chave de API de um provedor",
-    "regenerateDescription": "Regenerar uma chave de API do RouteChi",
-    "revokeDescription": "Revogar uma chave de API do RouteChi",
+    "regenerateDescription": "Regenerar uma chave de API do OmniRoute",
+    "revokeDescription": "Revogar uma chave de API do OmniRoute",
     "revealDescription": "Revelar o valor completo da chave (sem máscara)",
     "usageDescription": "Exibir uso recente de uma chave de API",
     "usageLimitOpt": "Número de requisições recentes",
@@ -208,7 +208,7 @@
     "noCombo": "Nenhum combo correspondente encontrado. Configure um com: omniroute combo create"
   },
   "chat": {
-    "description": "Enviar um prompt único ao RouteChi",
+    "description": "Enviar um prompt único ao OmniRoute",
     "file": "Ler prompt de arquivo",
     "stdin": "Ler prompt da entrada padrão",
     "system": "Prompt de sistema",
@@ -227,8 +227,8 @@
     }
   },
   "serve": {
-    "description": "Iniciar o servidor RouteChi (ação padrão)",
-    "starting": "Iniciando servidor RouteChi na porta {port}...",
+    "description": "Iniciar o servidor OmniRoute (ação padrão)",
+    "starting": "Iniciando servidor OmniRoute na porta {port}...",
     "ready": "Pronto em http://localhost:{port}",
     "stopping": "Parando servidor (PID {pid})...",
     "stopped": "Servidor parado.",
@@ -244,7 +244,7 @@
   },
   "backup": {
     "title": "Backup",
-    "description": "Criar backup dos dados do RouteChi",
+    "description": "Criar backup dos dados do OmniRoute",
     "creating": "Criando backup...",
     "done": "Backup salvo em {path}",
     "noFiles": "Nenhum arquivo para backup (banco não inicializado)",
@@ -256,7 +256,7 @@
     "noBackups": "Nenhum backup encontrado.",
     "notFound": "Backup não encontrado: {name}",
     "confirmRestore": "Substituir dados atuais pelo backup de {ts}?",
-    "createDescription": "Criar backup dos dados do RouteChi",
+    "createDescription": "Criar backup dos dados do OmniRoute",
     "nameOpt": "Nome personalizado para o backup",
     "cloudOpt": "Fazer upload do backup para armazenamento na nuvem",
     "encryptOpt": "Criptografar backup com AES-256-GCM",
@@ -300,7 +300,7 @@
     "clearFailed": "Falha ao limpar cache."
   },
   "redis": {
-    "description": "Iniciar um contêiner Redis local com um clique (Podman ou Docker) para cache e rastreamento de cotas do RouteChi"
+    "description": "Iniciar um contêiner Redis local com um clique (Podman ou Docker) para cache e rastreamento de cotas do OmniRoute"
   },
   "test": {
     "description": "Testar conexão com um provedor",
@@ -388,7 +388,7 @@
     }
   },
   "policy": {
-    "description": "Gerenciar políticas de autorização do RouteChi",
+    "description": "Gerenciar políticas de autorização do OmniRoute",
     "list": {
       "description": "Listar políticas",
       "kind": "Filtrar por tipo (allow|deny|rate-limit|cost-cap)",
@@ -425,7 +425,7 @@
     }
   },
   "compression": {
-    "description": "Configurar e inspecionar o pipeline de compressão do RouteChi",
+    "description": "Configurar e inspecionar o pipeline de compressão do OmniRoute",
     "status": {
       "description": "Exibir status atual de compressão e configurações"
     },
@@ -479,18 +479,18 @@
     "confirmRotate": "Rotacionar túnel {type}? (uma nova URL será gerada)"
   },
   "stop": {
-    "description": "Parar o servidor RouteChi",
+    "description": "Parar o servidor OmniRoute",
     "stopping": "Parando servidor (PID {pid})...",
     "stopped": "Servidor parado.",
     "notRunning": "Nenhum servidor está em execução.",
     "portFallback": "Arquivo PID não encontrado, tentando parar pela porta..."
   },
   "restart": {
-    "description": "Reiniciar o servidor RouteChi",
-    "restarting": "Reiniciando servidor RouteChi..."
+    "description": "Reiniciar o servidor OmniRoute",
+    "restarting": "Reiniciando servidor OmniRoute..."
   },
   "dashboard": {
-    "description": "Abrir o painel RouteChi no navegador",
+    "description": "Abrir o painel OmniRoute no navegador",
     "opening": "Abrindo painel em {url}",
     "urlOnly": "Exibir URL do painel sem abrir o navegador",
     "tui": "Abrir painel TUI interativo (terminal UI, 7 abas)"
@@ -530,7 +530,7 @@
     }
   },
   "skills": {
-    "description": "Gerenciar skills do RouteChi (sandbox, builtin, custom, hybrid, skillssh)",
+    "description": "Gerenciar skills do OmniRoute (sandbox, builtin, custom, hybrid, skillssh)",
     "list": {
       "description": "Listar skills instaladas",
       "type": "Filtrar por tipo (sandbox|custom|builtin|hybrid|skillssh)",
@@ -603,7 +603,7 @@
     }
   },
   "memory": {
-    "description": "Gerenciar memória conversacional do RouteChi (FTS5 + vetorial)",
+    "description": "Gerenciar memória conversacional do OmniRoute (FTS5 + vetorial)",
     "search": {
       "description": "Buscar entradas de memória por query semântica",
       "type": "Filtrar por tipo (user|feedback|project|reference)",
@@ -761,7 +761,7 @@
     }
   },
   "webhooks": {
-    "description": "Gerenciar webhooks do RouteChi",
+    "description": "Gerenciar webhooks do OmniRoute",
     "events": {
       "description": "Listar todos os tipos de evento disponíveis para webhooks"
     },
@@ -793,14 +793,14 @@
     }
   },
   "program": {
-    "description": "RouteChi — Roteador de IA com Fallback Automático",
+    "description": "OmniRoute — Roteador de IA com Fallback Automático",
     "version": "Exibir versão e sair",
     "output": "Formato de saída (table, json, jsonl, csv)",
     "quiet": "Suprimir saída não essencial",
     "no_color": "Desativar saída colorida",
     "timeout": "Timeout de requisições HTTP em milissegundos",
-    "api_key": "Chave de API para o servidor RouteChi",
-    "base_url": "URL base do servidor RouteChi",
+    "api_key": "Chave de API para o servidor OmniRoute",
+    "base_url": "URL base do servidor OmniRoute",
     "context": "Contexto/perfil do servidor a usar neste comando",
     "lang": "Definir idioma de exibição do CLI (substitui OMNIROUTE_LANG)"
   },
@@ -1046,7 +1046,7 @@
     }
   },
   "openapi": {
-    "description": "Acessar e testar o spec OpenAPI do RouteChi",
+    "description": "Acessar e testar o spec OpenAPI do OmniRoute",
     "dump": {
       "description": "Exportar spec OpenAPI para stdout ou arquivo",
       "format": "Formato de saída: yaml|json (padrão: yaml)",
@@ -1116,7 +1116,7 @@
     }
   },
   "open": {
-    "description": "Abrir uma página específica do dashboard RouteChi no navegador",
+    "description": "Abrir uma página específica do dashboard OmniRoute no navegador",
     "url": "Apenas imprime a URL, sem abrir o navegador"
   },
   "telemetry": {
@@ -1133,7 +1133,7 @@
     }
   },
   "sync": {
-    "description": "Sincronizar configuração entre instâncias RouteChi",
+    "description": "Sincronizar configuração entre instâncias OmniRoute",
     "push": {
       "description": "Enviar config para cloud ou instância remota",
       "target": "Destino (cloud ou context:nome)",
@@ -1209,7 +1209,7 @@
     "filter": "Filtrar por nível (error,warn,info) — separados por vírgula",
     "lines": "Número de linhas a buscar",
     "timeout": "Timeout de conexão em ms",
-    "baseUrl": "URL base da API do RouteChi",
+    "baseUrl": "URL base da API do OmniRoute",
     "requestId": "Filtrar por ID do request",
     "apiKey": "Filtrar por chave de API",
     "combo": "Filtrar por nome do combo",
@@ -1225,10 +1225,10 @@
     "description": "Controlar o ícone na bandeja do sistema",
     "show": "Mostrar o ícone na bandeja (se o servidor estiver rodando com --tray)",
     "hide": "Ocultar o ícone na bandeja",
-    "quit": "Encerrar RouteChi via bandeja"
+    "quit": "Encerrar OmniRoute via bandeja"
   },
   "autostart": {
-    "description": "Gerenciar inicialização automática do RouteChi no login",
+    "description": "Gerenciar inicialização automática do OmniRoute no login",
     "enable": "Habilitar inicialização automática no login",
     "disable": "Desabilitar inicialização automática no login",
     "toggle": "Alternar inicialização automática no login",
@@ -1260,16 +1260,16 @@
     "scaffold": "Gerar boilerplate de novo plugin"
   },
   "launch": {
-    "description": "Inicia o Claude Code apontando para o RouteChi (local ou remoto, com --profile)",
+    "description": "Inicia o Claude Code apontando para o OmniRoute (local ou remoto, com --profile)",
     "token": "Token que o cliente Claude deve enviar (ANTHROPIC_AUTH_TOKEN)",
-    "notRunning": "RouteChi não está acessível em {port}. Inicie com 'omniroute serve'.",
+    "notRunning": "OmniRoute não está acessível em {port}. Inicie com 'omniroute serve'.",
     "notFound": "O CLI 'claude' não foi encontrado no PATH."
   },
   "setupClaude": {
-    "description": "Gera profiles do Claude Code em ~/.claude/profiles a partir do catálogo de modelos do RouteChi"
+    "description": "Gera profiles do Claude Code em ~/.claude/profiles a partir do catálogo de modelos do OmniRoute"
   },
   "connect": {
-    "description": "Conecta a um servidor RouteChi remoto e entra no modo remoto"
+    "description": "Conecta a um servidor OmniRoute remoto e entra no modo remoto"
   },
   "tokens": {
     "description": "Gerencia tokens de acesso CLI com escopo (modo remoto)"
@@ -1278,9 +1278,9 @@
     "description": "Escolhe um provedor+modelo do servidor ativo e grava uma configuração de CLI local"
   },
   "launchCodex": {
-    "description": "Inicia o Codex CLI apontando para o RouteChi (local ou VPS remoto)"
+    "description": "Inicia o Codex CLI apontando para o OmniRoute (local ou VPS remoto)"
   },
   "setupCodex": {
-    "description": "Gera os arquivos de perfil ~/.codex a partir do catálogo de modelos ao vivo do RouteChi"
+    "description": "Gera os arquivos de perfil ~/.codex a partir do catálogo de modelos ao vivo do OmniRoute"
   }
 }

@@ -113,7 +113,7 @@ export async function generateMetadata(props: {
   if (!page) return {};
 
   return {
-    title: `${page.data.title} — RouteChi Docs`,
-    description: page.data.description ?? `RouteChi documentation: ${page.data.title}`,
+    title: `${page.data.title} — OmniRoute Docs`,
+    description: page.data.description ?? `OmniRoute documentation: ${page.data.title}`,
   };
 }

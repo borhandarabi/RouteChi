@@ -15,7 +15,7 @@ lastUpdated: 2026-06-28
 
 ## این چیست
 
-RouteChi به یک vault مربوط به **Obsidian** به‌عنوان یک **منبع بافتار** متصل می‌شود — یک
+OmniRoute به یک vault مربوط به **Obsidian** به‌عنوان یک **منبع بافتار** متصل می‌شود — یک
 پایگاه دانش Markdown محلی که عوامل از طریق MCP server داخلی آن را می‌خوانند و می‌نویسند. این
 یکپارچه‌سازی با پلاگین کامینیتی **Obsidian Local REST API** که داخل اپ دسکتاپ در حال اجراست صحبت می‌کند،
 تا عوامل بتوانند یادداشت‌ها را جستجو کنند، فایل‌ها را بخوانند/بنویسند/patch کنند، vault را فهرست کنند، با
@@ -76,7 +76,7 @@ curl -X DELETE http://localhost:20128/api/settings/obsidian
 ### همگام‌سازی vault با WebDAV
 
 `src/app/api/settings/obsidian/webdav/route.ts` یک همگام‌سازی vault اختیاری مبتنی بر WebDAV را
-مدیریت می‌کند (هدایت‌شده توسط `src/lib/obsidianSync.ts`). فعال‌کردن آن، RouteChi را به یک
+مدیریت می‌کند (هدایت‌شده توسط `src/lib/obsidianSync.ts`). فعال‌کردن آن، OmniRoute را به یک
 دایرکتوری vault محلی اشاره می‌دهد و یک جفت نام کاربری/رمز عبور WebDAV تصادفی تولید می‌کند:
 
 ```bash
@@ -103,8 +103,8 @@ curl -X DELETE http://localhost:20128/api/settings/obsidian/webdav
 
 در `open-sse/mcp-server/tools/obsidianTools.ts` تعریف شده‌اند. توکن/base-URL به ازای هر
 فراخوانی حل می‌شوند (ابتدا به ازای کلید API، سپس سراسری). ابزارهایی که به sync server مربوط به
-RouteChi (چهار ابزار `obsidian_sync_*`) می‌رسند، علاوه بر این نیازمند توکن احراز هویت همگام‌سازی
-پیکربندی‌شده در تنظیمات RouteChi هستند.
+OmniRoute (چهار ابزار `obsidian_sync_*`) می‌رسند، علاوه بر این نیازمند توکن احراز هویت همگام‌سازی
+پیکربندی‌شده در تنظیمات OmniRoute هستند.
 
 ### ابزارهای خواندن (`read:obsidian`)
 
@@ -121,7 +121,7 @@ RouteChi (چهار ابزار `obsidian_sync_*`) می‌رسند، علاوه ب
 | `obsidian_get_periodic_note` | دریافت یادداشت دوره‌ای روزانه/هفتگی/ماهانه برای یک تاریخ (اگر حذف شود، امروز).            |
 | `obsidian_get_tags`          | فهرست‌کردن تمام تگ‌های vault با فرکانس‌های آنها.                                          |
 | `obsidian_list_commands`     | فهرست‌کردن شناسه‌های دستورات Obsidian در دسترس (با `obsidian_execute_command` استفاده شود).           |
-| `obsidian_sync_status`       | وضعیت sync server مربوط به RouteChi: در حال اجرا، نام vault، پورت، uptime، آخرین همگام‌سازی.          |
+| `obsidian_sync_status`       | وضعیت sync server مربوط به OmniRoute: در حال اجرا، نام vault، پورت، uptime، آخرین همگام‌سازی.          |
 | `obsidian_sync_conflicts`    | فهرست‌کردن تعارضات همگام‌سازی حل‌نشده (مسیر، مسیر تعارض، زمان تشخیص).                   |
 
 ### ابزارهای نوشتن (`write:obsidian`)

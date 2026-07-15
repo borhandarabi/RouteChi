@@ -115,7 +115,7 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
           {showZedManual && (
             <div className="flex flex-col gap-3 mt-1">
               <p className="text-sm text-text-muted">
-                Use this when RouteChi runs in Docker or the keychain is unavailable. Paste the
+                Use this when OmniRoute runs in Docker or the keychain is unavailable. Paste the
                 API key that Zed stored under{" "}
                 <code className="font-mono text-xs">~/.config/zed/settings.json</code> or copy
                 it from the Zed AI settings panel.

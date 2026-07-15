@@ -20,10 +20,10 @@ export const CURSOR_TARGET: MitmTarget = {
   ],
   setupTutorial: {
     steps: [
-      "Install RouteChi's root certificate",
+      "Install OmniRoute's root certificate",
       "Enable DNS routing for Cursor",
       "Restart Cursor IDE",
-      "Done — Cursor traffic now routes through RouteChi",
+      "Done — Cursor traffic now routes through OmniRoute",
     ],
     detection: { command: "which cursor", platform: "all" },
   },

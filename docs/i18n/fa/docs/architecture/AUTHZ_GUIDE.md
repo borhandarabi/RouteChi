@@ -9,7 +9,7 @@ lastUpdated: 2026-06-28
 > **منبع حقیقت:** `src/server/authz/`، `src/shared/constants/publicApiRoutes.ts`، `src/lib/api/requireManagementAuth.ts`، `src/shared/utils/apiAuth.ts`
 > **آخرین به‌روزرسانی:** 2026-06-28 — v3.8.40
 
-RouteChi یک خط لوله احراز دسترسی آگاه-از-مسیر دارد که هر درخواست API را دروازه‌بندی می‌کند. طبقه‌بندی **قطعی** و **fail-closed** است — هر چیزی که قابل طبقه‌بندی نباشد در `MANAGEMENT` قرار می‌گیرد و نیازمند نشست یا token سطح management است. این صفحه مدل را برای مهندسانی که مسیرها را نگهداری یا endpoint‌های جدید طراحی می‌کنند توضیح می‌دهد.
+OmniRoute یک خط لوله احراز دسترسی آگاه-از-مسیر دارد که هر درخواست API را دروازه‌بندی می‌کند. طبقه‌بندی **قطعی** و **fail-closed** است — هر چیزی که قابل طبقه‌بندی نباشد در `MANAGEMENT` قرار می‌گیرد و نیازمند نشست یا token سطح management است. این صفحه مدل را برای مهندسانی که مسیرها را نگهداری یا endpoint‌های جدید طراحی می‌کنند توضیح می‌دهد.
 
 ![خط لوله AuthZ (۳ کلاس مسیر + ارزیابی سیاست)](../diagrams/exported/authz-pipeline.svg)
 

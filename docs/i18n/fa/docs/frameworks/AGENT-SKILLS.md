@@ -1,17 +1,17 @@
 ---
-title: "کاتالوگ Agent Skills مربوط به RouteChi"
+title: "کاتالوگ Agent Skills مربوط به OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# کاتالوگ Agent Skills مربوط به RouteChi
+# کاتالوگ Agent Skills مربوط به OmniRoute
 
 > **منبع اصلی:** `src/lib/agentSkills/` (catalog، generator، parserها) + دایرکتوری `skills/` (فایل‌های SKILL.md)
 > **آخرین به‌روزرسانی:** 2026-06-28 — v3.8.40
 
 Agent Skills فایل‌های ساختاریافته‌ی SKILL.md هستند که به عامل‌های خارجی، کلاینت‌های MCP و
-orchestratorهای A2A یاد می‌دهند چگونه از REST API و CLI مربوط به RouteChi استفاده کنند. برخلاف
-[Omni Skills](./SKILLS.md) (که تعاریف ابزار LLM هستند و داخل RouteChi اجرا می‌شوند)،
+orchestratorهای A2A یاد می‌دهند چگونه از REST API و CLI مربوط به OmniRoute استفاده کنند. برخلاف
+[Omni Skills](./SKILLS.md) (که تعاریف ابزار LLM هستند و داخل OmniRoute اجرا می‌شوند)،
 Agent Skills یک _کاتالوگ مستندات_ است — markdown استاتیک که می‌تواند مستقیماً به context عامل تزریق شود.
 
 ---

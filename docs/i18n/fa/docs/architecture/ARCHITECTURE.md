@@ -1,10 +1,10 @@
 ---
-title: "معماری RouteChi"
+title: "معماری OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# معماری RouteChi
+# معماری OmniRoute
 
 🌐 **زبان‌ها:** 🇺🇸 [English](./ARCHITECTURE.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/architecture/ARCHITECTURE.md) | 🇪🇸 [Español](../i18n/es/docs/architecture/ARCHITECTURE.md) | 🇫🇷 [Français](../i18n/fr/docs/architecture/ARCHITECTURE.md) | 🇮🇹 [Italiano](../i18n/it/docs/architecture/ARCHITECTURE.md) | 🇷🇺 [Русский](../i18n/ru/docs/architecture/ARCHITECTURE.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/architecture/ARCHITECTURE.md) | 🇩🇪 [Deutsch](../i18n/de/docs/architecture/ARCHITECTURE.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/architecture/ARCHITECTURE.md) | 🇹🇭 [ไทย](../i18n/th/docs/architecture/ARCHITECTURE.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/architecture/ARCHITECTURE.md) | 🇸🇦 [العربية](../i18n/ar/docs/architecture/ARCHITECTURE.md) | 🇯🇵 [日本語](../i18n/ja/docs/architecture/ARCHITECTURE.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/architecture/ARCHITECTURE.md) | 🇧🇬 [Български](../i18n/bg/docs/architecture/ARCHITECTURE.md) | 🇩🇰 [Dansk](../i18n/da/docs/architecture/ARCHITECTURE.md) | 🇫🇮 [Suomi](../i18n/fi/docs/architecture/ARCHITECTURE.md) | 🇮🇱 [עברית](../i18n/he/docs/architecture/ARCHITECTURE.md) | 🇭🇺 [Magyar](../i18n/hu/docs/architecture/ARCHITECTURE.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/architecture/ARCHITECTURE.md) | 🇰🇷 [한국어](../i18n/ko/docs/architecture/ARCHITECTURE.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/architecture/ARCHITECTURE.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/architecture/ARCHITECTURE.md) | 🇳🇴 [Norsk](../i18n/no/docs/architecture/ARCHITECTURE.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/architecture/ARCHITECTURE.md) | 🇷🇴 [Română](../i18n/ro/docs/architecture/ARCHITECTURE.md) | 🇵🇱 [Polski](../i18n/pl/docs/architecture/ARCHITECTURE.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/architecture/ARCHITECTURE.md) | 🇸🇪 [Svenska](../i18n/sv/docs/architecture/ARCHITECTURE.md) | 🇵🇭 [Filipino](../i18n/phi/docs/architecture/ARCHITECTURE.md) | 🇨🇿 [Čeština](../i18n/cs/docs/architecture/ARCHITECTURE.md)
 
@@ -12,7 +12,7 @@ _آخرین به‌روزرسانی: 2026-06-28_
 
 ## خلاصه اجرایی
 
-RouteChi یک gateway و داشبورد محلی مسیریابی AI است که بر بستر Next.js ساخته شده است.
+OmniRoute یک gateway و داشبورد محلی مسیریابی AI است که بر بستر Next.js ساخته شده است.
 یک endpoint منفرد سازگار با OpenAI (`/v1/*`) فراهم می‌کند و ترافیک را در میان چندین provider بالادستی با ترجمه، fallback، refresh token و ردیابی استفاده مسیریابی می‌کند.
 
 قابلیت‌های اصلی:
@@ -166,7 +166,7 @@ flowchart LR
         BROWSER[Browser Dashboard]
     end
 
-    subgraph Router[RouteChi Local Process]
+    subgraph Router[OmniRoute Local Process]
         API[V1 Compatibility API\n/v1/*]
         DASH[Dashboard + Management API\n/api/*]
         CORE[SSE + Translation Core\nopen-sse + src/sse]
@@ -329,7 +329,7 @@ flowchart LR
 
 ## ۵) سرویس‌های تعبیه‌شده (v3.8.4)
 
-RouteChi می‌تواند فرآیندهای ابزار AI محلی-در حال اجرا را نصب، نظارت، و به آن‌ها مسیریابی کند که
+OmniRoute می‌تواند فرآیندهای ابزار AI محلی-در حال اجرا را نصب، نظارت، و به آن‌ها مسیریابی کند که
 **سرویس‌های تعبیه‌شده** نامیده می‌شوند. دو مورد در v3.8.4 عرضه شده‌اند: 9Router و CLIProxyAPI.
 
 لایه‌های معماری:
@@ -433,7 +433,7 @@ Jules) را پشت یک چرخه حیات وظیفه مبتنی‌بر DB یکن
 - cache سهمیه: `src/domain/quotaCache.ts`
 - حالت تنزل: `src/domain/degradation.ts`
 - ممیزی پیکربندی: `src/domain/configAudit.ts`
-- سازنده metadata پاسخ RouteChi: `src/domain/omnirouteResponseMeta.ts`
+- سازنده metadata پاسخ OmniRoute: `src/domain/omnirouteResponseMeta.ts`
 - زیرسیستم ارزیابی: `src/domain/assessment/` — job‌های ارزیابی دوره‌ای
 
 ### E. خط لوله احراز دسترسی
@@ -813,7 +813,7 @@ flowchart LR
         Browser[Dashboard Browser]
     end
 
-    subgraph ContainerOrProcess[RouteChi Runtime]
+    subgraph ContainerOrProcess[OmniRoute Runtime]
         Next[Next.js Server\nPORT=20128]
         Core[SSE Core + Executors]
         MainDB[(storage.sqlite)]
@@ -933,7 +933,7 @@ flowchart LR
 ## ماتریس سازگاری Provider
 
 > **توجه:** ماتریس زیر یک نمونه نماینده از ۲۳۷ provider ثبت‌شده در
-> RouteChi v3.8.0 است. برای فهرست کانونی و به‌طور پیوسته به‌روزرسانی‌شده، به
+> OmniRoute v3.8.0 است. برای فهرست کانونی و به‌طور پیوسته به‌روزرسانی‌شده، به
 > [`docs/reference/PROVIDER_REFERENCE.md`](../reference/PROVIDER_REFERENCE.md) (تولید خودکار) یا منبع
 > حقیقت در `src/shared/constants/providers.ts` (اعتبارسنجی‌شده با Zod در زمان load) مراجعه کنید.
 
@@ -1117,7 +1117,7 @@ capture payload درخواست تفصیلی تا چهار مرحله payload JSO
 - درخواست raw دریافت‌شده از کلاینت
 - درخواست ترجمه‌شده واقعاً ارسال‌شده به upstream
 - پاسخ provider به‌عنوان JSON بازسازی‌شده؛ پاسخ‌های streaming به خلاصه نهایی به اضافه metadata استریم فشرده می‌شوند
-- پاسخ نهایی کلاینت برگردانده‌شده توسط RouteChi؛ پاسخ‌های streaming به همان شکل خلاصه فشرده ذخیره می‌شوند
+- پاسخ نهایی کلاینت برگردانده‌شده توسط OmniRoute؛ پاسخ‌های streaming به همان شکل خلاصه فشرده ذخیره می‌شوند
 
 ## مرزهای حساس به امنیت
 

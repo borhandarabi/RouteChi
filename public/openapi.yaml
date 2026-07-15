@@ -1,6 +1,6 @@
 openapi: 3.1.0
 info:
-  title: RouteChi API
+  title: OmniRoute API
   version: 3.8.35
   description: |
     OmniRoute is a local-first AI API proxy router. It provides an OpenAI-compatible

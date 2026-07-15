@@ -491,7 +491,7 @@ export function useProviderConnections(
       notify.success(
         enabled
           ? "Requests now route through CLIProxyAPI (deeper emulation)"
-          : "Requests now use native RouteChi (direct)"
+          : "Requests now use native OmniRoute (direct)"
       );
     } catch {
       notify.error("Failed to update CLIProxyAPI routing");

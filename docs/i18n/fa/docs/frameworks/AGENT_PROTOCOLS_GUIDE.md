@@ -9,15 +9,15 @@ lastUpdated: 2026-06-28
 > **منبع:** `src/lib/{a2a,acp,cloudAgent}/`, `src/app/api/{a2a,acp,cloud}/`, `src/app/api/v1/agents/`
 > **آخرین به‌روزرسانی:** 2026-06-28 — v3.8.40
 
-RouteChi سه سطح متفاوت مرتبط با عامل ارائه می‌دهد. آن‌ها در نگاه اول مشابه به‌نظر می‌رسند اما مسائل متفاوتی را حل می‌کنند. از این صفحه برای انتخاب درست استفاده کنید.
+OmniRoute سه سطح متفاوت مرتبط با عامل ارائه می‌دهد. آن‌ها در نگاه اول مشابه به‌نظر می‌رسند اما مسائل متفاوتی را حل می‌کنند. از این صفحه برای انتخاب درست استفاده کنید.
 
 ## خلاصه
 
 | سطح                          | بهترین برای                                                                                                                                | ترنسپورت                   | استاندارد           |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------- | ------------------- |
 | **A2A — Agent-to-Agent**     | همکاری بین‌عاملی با عامل‌های همتا که به پروتکل A2A صحبت می‌کنند                                                                             | JSON-RPC 2.0 از طریق HTTP   | A2A v0.3 (spec باز) |
-| **ACP — رجیستری عامل‌های CLI** | تشخیص / ثبت / راه‌اندازی عامل‌های کدنویسی CLI نصب‌شده روی ماشین کاربر (Cursor، Cline، Codex CLI، Claude Code، Aider و غیره)                  | HTTP REST                   | اختصاصی RouteChi    |
-| **Cloud Agents**             | ارسال وظایف کدنویسی طولانی‌مدت به سرویس‌های ابری خارجی (Codex Cloud، Devin، Jules، Cursor Cloud)                                            | HTTP REST + taskهای مبتنی بر DB | اختصاصی RouteChi    |
+| **ACP — رجیستری عامل‌های CLI** | تشخیص / ثبت / راه‌اندازی عامل‌های کدنویسی CLI نصب‌شده روی ماشین کاربر (Cursor، Cline، Codex CLI، Claude Code، Aider و غیره)                  | HTTP REST                   | اختصاصی OmniRoute    |
+| **Cloud Agents**             | ارسال وظایف کدنویسی طولانی‌مدت به سرویس‌های ابری خارجی (Codex Cloud، Devin، Jules، Cursor Cloud)                                            | HTTP REST + taskهای مبتنی بر DB | اختصاصی OmniRoute    |
 
 این سه مستقل هستند — هر زیرمجموعه‌ای را انتخاب کنید.
 
@@ -40,14 +40,14 @@ Do you need a cloud service to do work outside this machine (Codex Cloud / Devin
 ## 1. A2A — Agent-to-Agent
 
 **Spec:** [A2A v0.3](https://a2a-protocol.org)
-**endpoint مربوط به RouteChi:** `POST /a2a` (JSON-RPC 2.0)
+**endpoint مربوط به OmniRoute:** `POST /a2a` (JSON-RPC 2.0)
 **Agent Card:** `GET /.well-known/agent.json`
 
 ### زمان استفاده
 
-- ساخت یک سیستم چندعاملی که RouteChi یکی از همتایان است
-- در معرض قرار دادن هوش routing مربوط به RouteChi (smart-routing، مدیریت سهمیه و غیره) برای عامل‌هایی در فریم‌ورک‌هایی مثل Google ADK یا meshهای عمومی عامل
-- پوشاندن RouteChi پشت یک سطح کشف + فراخوانی استاندارد
+- ساخت یک سیستم چندعاملی که OmniRoute یکی از همتایان است
+- در معرض قرار دادن هوش routing مربوط به OmniRoute (smart-routing، مدیریت سهمیه و غیره) برای عامل‌هایی در فریم‌ورک‌هایی مثل Google ADK یا meshهای عمومی عامل
+- پوشاندن OmniRoute پشت یک سطح کشف + فراخوانی استاندارد
 
 ### متدها
 
@@ -71,12 +71,12 @@ Do you need a cloud service to do work outside this machine (Codex Cloud / Devin
 
 ## 2. ACP — رجیستری عامل‌های CLI
 
-**endpoint مربوط به RouteChi:** `GET /api/acp/agents`
+**endpoint مربوط به OmniRoute:** `GET /api/acp/agents`
 **منبع:** `src/lib/acp/{index,manager,registry}.ts`
 
 ### چیست
 
-ACP **فهرست عامل‌های CLI محلی** RouteChi است. این ماژول تشخیص می‌دهد کدام CLIهای کدنویسی روی میزبان نصب شده‌اند (Cursor، Cline، Claude Code، Codex CLI، Continue و غیره)، نسخه‌های آن‌ها را resolve کرده و در داشبورد نمایش می‌دهد تا کاربر بتواند هر CLI را به‌سمت RouteChi هدایت کند.
+ACP **فهرست عامل‌های CLI محلی** OmniRoute است. این ماژول تشخیص می‌دهد کدام CLIهای کدنویسی روی میزبان نصب شده‌اند (Cursor، Cline، Claude Code، Codex CLI، Continue و غیره)، نسخه‌های آن‌ها را resolve کرده و در داشبورد نمایش می‌دهد تا کاربر بتواند هر CLI را به‌سمت OmniRoute هدایت کند.
 
 این یک پروتکل خارجی **نیست** — یک رجیستری داخلی است که رابط کاربری "CLI Tools" و پیگیری fingerprint مربوط به CLI را راه می‌اندازد (به [CLI-TOOLS.md](../reference/CLI-TOOLS.md) مراجعه کنید).
 
@@ -112,22 +112,22 @@ ACP **فهرست عامل‌های CLI محلی** RouteChi است. این ماژ
 
 ### موارد استفاده
 
-- صفحه‌ی "CLI Tools" در داشبورد فهرستی از نصب‌شده‌ها را نشان داده و به شما کمک می‌کند هر کدام را به‌سمت RouteChi هدایت کنید
-- عامل‌های سفارشی به کاربران قدرتمند اجازه می‌دهد CLIهای داخلی/اختصاصی که RouteChi به‌طور پیش‌فرض نمی‌شناسد را ثبت کنند
+- صفحه‌ی "CLI Tools" در داشبورد فهرستی از نصب‌شده‌ها را نشان داده و به شما کمک می‌کند هر کدام را به‌سمت OmniRoute هدایت کنید
+- عامل‌های سفارشی به کاربران قدرتمند اجازه می‌دهد CLIهای داخلی/اختصاصی که OmniRoute به‌طور پیش‌فرض نمی‌شناسد را ثبت کنند
 - نتیجه‌ی تشخیص، ماتریس fingerprint مربوط به `cli-tools` را تغذیه می‌کند
 
 ### چه زمان از ACP استفاده نکنید
 
-- ACP taskها را _اجرا_ نمی‌کند. فقط CLIها را تشخیص + پیکربندی می‌کند. برای فراخوانی واقعی یک CLI، آن را خودتان با متغیرهای محیطی که RouteChi ارائه می‌کند (`OPENAI_BASE_URL`، `OPENAI_API_KEY` و غیره) راه‌اندازی کنید.
+- ACP taskها را _اجرا_ نمی‌کند. فقط CLIها را تشخیص + پیکربندی می‌کند. برای فراخوانی واقعی یک CLI، آن را خودتان با متغیرهای محیطی که OmniRoute ارائه می‌کند (`OPENAI_BASE_URL`، `OPENAI_API_KEY` و غیره) راه‌اندازی کنید.
 
 ## 3. Cloud Agents
 
-**endpointهای مربوط به RouteChi:** `/api/v1/agents/tasks/*` (چرخه‌حیات) + `/api/cloud/*` (plumbing)
+**endpointهای مربوط به OmniRoute:** `/api/v1/agents/tasks/*` (چرخه‌حیات) + `/api/cloud/*` (plumbing)
 **منبع:** `src/lib/cloudAgent/`
 
 ### چیست
 
-یک رابط یکنواخت روی عامل‌های کدنویسی ابری شخص ثالث. یک prompt + URL repo ارسال می‌کنید، RouteChi به عامل ابری مناسب dispatch کرده، وضعیت را poll می‌کند، نتایج را برمی‌گرداند.
+یک رابط یکنواخت روی عامل‌های کدنویسی ابری شخص ثالث. یک prompt + URL repo ارسال می‌کنید، OmniRoute به عامل ابری مناسب dispatch کرده، وضعیت را poll می‌کند، نتایج را برمی‌گرداند.
 
 ### عامل‌های پشتیبانی‌شده (3، همگی در `src/lib/cloudAgent/agents/` تأیید شده)
 
@@ -168,8 +168,8 @@ DELETE /api/v1/agents/tasks/[id]
 
 | جنبه             | A2A                                                                               | Cloud Agents                             |
 | ----------------- | --------------------------------------------------------------------------------- | ---------------------------------------- |
-| استاندارد         | A2A v0.3 باز                                                                       | اختصاصی RouteChi                         |
-| محل اجرای محاسبات | داخل RouteChi (از comboهای پیکربندی‌شده استفاده می‌کند)                            | خارجی (سرورهای Codex / Devin / Jules)    |
+| استاندارد         | A2A v0.3 باز                                                                       | اختصاصی OmniRoute                         |
+| محل اجرای محاسبات | داخل OmniRoute (از comboهای پیکربندی‌شده استفاده می‌کند)                            | خارجی (سرورهای Codex / Devin / Jules)    |
 | مدت task          | TTL پیش‌فرض ۵ دقیقه (قابل پیکربندی در `TaskManager`)                              | از چند دقیقه تا چند ساعت                  |
 | آگاه از repo      | خیر (فقط prompt ارسال می‌کند)                                                      | بله (URL repo + branch)                  |
 | مورد استفاده      | همکاری بین‌عاملی، smart routing به‌عنوان سرویس                                    | تفویض "feature X را در repo Y پیاده کن" |
@@ -177,7 +177,7 @@ DELETE /api/v1/agents/tasks/[id]
 
 ## نمونه‌های یکپارچه‌سازی
 
-### کشف قابلیت‌های A2A مربوط به RouteChi
+### کشف قابلیت‌های A2A مربوط به OmniRoute
 
 ```bash
 curl http://localhost:20128/.well-known/agent.json
@@ -185,7 +185,7 @@ curl http://localhost:20128/.well-known/agent.json
 
 Agent Card را با همه‌ی ۵ مهارت، ترنسپورت‌ها و نسخه برمی‌گرداند.
 
-### فراخوانی RouteChi به‌عنوان یک عامل A2A
+### فراخوانی OmniRoute به‌عنوان یک عامل A2A
 
 ```bash
 curl -X POST http://localhost:20128/a2a \
@@ -256,7 +256,7 @@ curl http://localhost:20128/api/v1/agents/tasks/<task-id> \
 
 ```
                 ┌─────────────────────┐
-                │   RouteChi Core     │
+                │   OmniRoute Core     │
                 └─────────────────────┘
                   ↑       ↑        ↑
         ┌─────────┘       │        └─────────┐

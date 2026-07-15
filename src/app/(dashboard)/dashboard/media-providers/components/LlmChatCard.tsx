@@ -36,7 +36,7 @@ function resolvePlaygroundKeyId(
 
 /**
  * Qualify a provider-scoped playground model with its `providerId/` prefix so
- * RouteChi can resolve it unambiguously. The previous heuristic only prefixed
+ * OmniRoute can resolve it unambiguously. The previous heuristic only prefixed
  * models without a `/`, which skipped vendor-namespaced ids like
  * `moonshotai/kimi-k2.6` or `nvidia/zyphra/zamba2-7b-instruct` — those already
  * contain a slash, so they were sent bare and rejected with
@@ -163,7 +163,7 @@ export function LlmChatCard({
 
   const firstModel = models[0]?.id ?? "";
   const effectiveModel = model || firstModel || initialModel || "";
-  // Auto-prefix model with providerId to avoid RouteChi "Ambiguous model"
+  // Auto-prefix model with providerId to avoid OmniRoute "Ambiguous model"
   // rejection when the same id is registered under multiple providers. This
   // also covers vendor-namespaced ids (e.g. `moonshotai/kimi-k2.6`) that already
   // contain a slash but still need the provider prefix (#3050).

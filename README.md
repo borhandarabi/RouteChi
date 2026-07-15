@@ -1,10 +1,10 @@
 <div align="center">
 
-<img src="./docs/screenshots/MainRouteChi.png" alt="RouteChi Dashboard" width="820"/>
+<img src="./docs/screenshots/MainOmniRoute.png" alt="OmniRoute Dashboard" width="820"/>
 
 <br/>
 
-# 🚀 RouteChi — The Free AI Gateway
+# 🚀 OmniRoute — The Free AI Gateway
 
 ### Never stop coding. Connect every AI tool to **250 providers** — **90+ free** — through one endpoint.
 
@@ -25,9 +25,9 @@
 
 </h3>
 
-[![Stars](https://img.shields.io/github/stars/diegosouzapw/RouteChi?style=social)](https://github.com/diegosouzapw/RouteChi)
-<a href="https://trendshift.io/repositories/23589" target="_blank"><img src="https://trendshift.io/api/badge/repositories/23589" alt="diegosouzapw%2FRouteChi | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
-[![Star History Rank](https://api.star-history.com/badge?repo=diegosouzapw/RouteChi&theme=dark)](https://www.star-history.com/diegosouzapw/omniroute)
+[![Stars](https://img.shields.io/github/stars/diegosouzapw/OmniRoute?style=social)](https://github.com/diegosouzapw/OmniRoute)
+<a href="https://trendshift.io/repositories/23589" target="_blank"><img src="https://trendshift.io/api/badge/repositories/23589" alt="diegosouzapw%2FOmniRoute | Trendshift" style="width: 250px; height: 55px;" width="250" height="55"/></a>
+[![Star History Rank](https://api.star-history.com/badge?repo=diegosouzapw/OmniRoute&theme=dark)](https://www.star-history.com/diegosouzapw/omniroute)
 
 </br>
 
@@ -130,7 +130,7 @@
 
 </div>
 
-> Stacking free tiers by hand is painful — dozens of SDKs, dozens of rate limits, and no idea how much you actually have. RouteChi aggregates the **documented** free tiers of **40+ provider pools / 500+ models** into one honest number and shows it live on the dashboard (`/dashboard/free-tiers`).
+> Stacking free tiers by hand is painful — dozens of SDKs, dozens of rate limits, and no idea how much you actually have. OmniRoute aggregates the **documented** free tiers of **40+ provider pools / 500+ models** into one honest number and shows it live on the dashboard (`/dashboard/free-tiers`).
 
 - **~1.6B free tokens / month** (steady) — and **up to ~2.1B in your first month** with signup credits.
 - **Pool-deduped, honest** — we count each shared free pool **once**, so the headline isn't inflated by rate-limit ceilings the way multi-billion competitor claims are. (Counting every rate limit 24/7 would read ~10B; we don't publish that.)
@@ -149,7 +149,7 @@
 
 </div>
 
-> One endpoint. **250 providers.** Never stop building — and let RouteChi pick the cheapest one that works.
+> One endpoint. **250 providers.** Never stop building — and let OmniRoute pick the cheapest one that works.
 
 <table>
   <tr>
@@ -169,13 +169,13 @@
 
 <div align="center">
 
-# 🤔 Why RouteChi?
+# 🤔 Why OmniRoute?
 
 </div>
 
 > Stop juggling 10 dashboards, dead API keys, and surprise bills.
 
-| ❌ The daily pain                                      | ✅ How RouteChi fixes it                                                     |
+| ❌ The daily pain                                      | ✅ How OmniRoute fixes it                                                     |
 | ------------------------------------------------------ | ----------------------------------------------------------------------------- |
 | 📉 Subscription quota expires unused every month       | **Maximize subscriptions** — track quota, use every token before reset        |
 | 🛑 Rate limits stop you mid-coding                     | **4-tier auto-fallback** — Subscription → API → Cheap → Free, in milliseconds |
@@ -193,7 +193,7 @@
                           │ http://localhost:20128/v1
                           ▼
 ┌──────────────────────────────────────────────────────────┐
-│                  RouteChi — Smart Router                  │
+│                  OmniRoute — Smart Router                  │
 │  RTK + Caveman compression · 18 routing strategies         │
 │  Circuit breakers · TLS stealth · MCP · A2A · Guardrails   │
 └─────────────────────────┬──────────────────────────────────┘
@@ -215,11 +215,11 @@
 
 </div>
 
-> A **combo** is a chain of models RouteChi routes across **automatically**. Quota runs out, a provider fails, or costs spike — the combo silently slides to the next model. **This is what makes RouteChi unbreakable.** 🛡️
+> A **combo** is a chain of models OmniRoute routes across **automatically**. Quota runs out, a provider fails, or costs spike — the combo silently slides to the next model. **This is what makes OmniRoute unbreakable.** 🛡️
 
 ### ⚡ Zero-config — just use `auto`
 
-No combo to create. Set your model to `auto` (or a variant) and RouteChi builds a virtual combo from your connected providers, scored live:
+No combo to create. Set your model to `auto` (or a variant) and OmniRoute builds a virtual combo from your connected providers, scored live:
 
 | Model ID       | What it optimizes for                                          |
 | -------------- | -------------------------------------------------------------- |
@@ -281,7 +281,7 @@ Generous mode (<50% pool used) → idle shares are lent out
 Strict mode  (≥50% pool used)  → each key held to its fair share
 ```
 
-<sub>Enforced in the hot path **before** the request leaves RouteChi, with per-(key, model) caps + session stickiness for prompt-cache integrity (now with a per-combo / global disable toggle). 📖 [Quota Sharing Engine](docs/routing/QUOTA_SHARE.md)</sub>
+<sub>Enforced in the hot path **before** the request leaves OmniRoute, with per-(key, model) caps + session stickiness for prompt-cache integrity (now with a per-combo / global disable toggle). 📖 [Quota Sharing Engine](docs/routing/QUOTA_SHARE.md)</sub>
 
 ##
 
@@ -308,11 +308,11 @@ Result: 4 layers of fallback = zero downtime
 
 <div align="center">
 
-# 🏆 What Sets RouteChi Apart
+# 🏆 What Sets OmniRoute Apart
 
 </div>
 
-| Feature                                | RouteChi                                                           | Other routers |
+| Feature                                | OmniRoute                                                           | Other routers |
 | -------------------------------------- | ------------------------------------------------------------------- | ------------- |
 | 🌐 Providers                           | **250**                                                             | 20–100        |
 | 🆓 Free providers                      | **90+ (11 free forever)**                                           | 1–5           |
@@ -342,8 +342,8 @@ Result: 4 layers of fallback = zero downtime
 - **🗜️ Compression hardening** — a default-on **inflation guard** (discard the stacked result and send the verbatim original whenever compression would _grow_ the prompt), completed **Caveman rule packs** for German / French / Japanese (dedup + ultra) plus a new **Chinese (文言 / wényán) input pack** with zh-vs-ja auto-detection, and **RTK filters for Gradle & .NET (`dotnet`)** build output. → [Compression](docs/compression/COMPRESSION_ENGINES.md)
 - **💸 Honest flat-rate cost** — subscription / coding-plan providers (ChatGPT Web, grok-web, the Minimax / Kimi / GLM / Alibaba Coding plans, Xiaomi MiMo…) now read **$0** in cost analytics instead of an inflated per-token estimate, while budget / quota / routing keep estimating unchanged. → [API Reference](docs/reference/API_REFERENCE.md)
 - **⚖️ Quota-Share routing** — a dedicated combo strategy that spreads load across accounts by _available quota_: Deficit-Round-Robin scheduling, per-connection `max_concurrent` with cooldown-wait queueing, multi-window usage buckets (5h / 7d / per-model), per-(key, model) caps, session stickiness for prompt-cache integrity (now with a per-combo / global disable toggle), and proactive saturation from upstream token-usage headers. → [Resilience Guide](docs/architecture/RESILIENCE_GUIDE.md)
-- **🤖 One-command CLI/agent setup** — a dedicated `setup-*` command configures each coding tool to route through RouteChi (Claude Code, Codex, Cline, Continue, Cursor, Roo Code, Kilo Code, Crush, Goose, Qwen Code, Aider, OpenCode); `omniroute launch` / `omniroute launch-codex` are zero-config launchers. → [CLI Integrations](docs/guides/CLI-INTEGRATIONS.md)
-- **🛰️ Remote mode** — drive a remote RouteChi from any machine with scoped access tokens (`omniroute connect` / `omniroute contexts` / `omniroute tokens`), plus an `omniroute login antigravity` helper that runs Google "native/desktop" OAuth on your own machine and pastes a credential blob into a remote/VPS install (where the loopback redirect is unreachable). → [Remote Mode](docs/guides/REMOTE-MODE.md)
+- **🤖 One-command CLI/agent setup** — a dedicated `setup-*` command configures each coding tool to route through OmniRoute (Claude Code, Codex, Cline, Continue, Cursor, Roo Code, Kilo Code, Crush, Goose, Qwen Code, Aider, OpenCode); `omniroute launch` / `omniroute launch-codex` are zero-config launchers. → [CLI Integrations](docs/guides/CLI-INTEGRATIONS.md)
+- **🛰️ Remote mode** — drive a remote OmniRoute from any machine with scoped access tokens (`omniroute connect` / `omniroute contexts` / `omniroute tokens`), plus an `omniroute login antigravity` helper that runs Google "native/desktop" OAuth on your own machine and pastes a credential blob into a remote/VPS install (where the loopback redirect is unreachable). → [Remote Mode](docs/guides/REMOTE-MODE.md)
 - **🧭 Smarter auto-routing** — OpenRouter-style `auto/<category>:<tier>` combos (e.g. `auto/coding:fast`, `auto/reasoning:pro`), a **Fusion** strategy (fan out to a panel of models in parallel, then synthesize via a judge), **task-aware routing** (best-fit connection per task type), per-request `X-Route-Model` override, live Arena-ELO + models.dev model intelligence, per-step account allowlists, provider-wildcard combo steps, nested combo-ref execution, sticky weighted selection, `web_search`-aware routing (now with **per-model web-search/web-fetch interception rules**), native **xAI Grok `/v1/responses`** routing, and **per-request Auto-Combo controls** (`X-OmniRoute-Mode` mode-preset override + `X-OmniRoute-Budget` hard USD cost ceiling, scoped to a single request). Embeddings-only and rerank-only models (JinaAI, OpenRouter custom, reranker models…) no longer disappear from the combo builder's model picker. → [Auto-Combo](docs/routing/AUTO-COMBO.md)
 - **🗜️ Pluggable compression** — an async pipeline of **10 composable engines** with Compression Studios, an LLMLingua-2 ONNX engine and a heuristic/SLM two-tier **Ultra**, RTK, delegated Anthropic Context Editing, **Output Styles** (output-axis steering: terse-prose / less-code / terse-CJK), an **adaptive context-budget dial** (escalate only as far as needed to fit the context window), per-request `x-omniroute-compression` control, an opt-in offline eval harness, one-click **Headroom** proxy lifecycle management from the dashboard (Docker sidecar supported), a synthetic **compression playground** (Play lanes + A/B Compare with USD-capped fidelity verdicts), an opt-in **per-step fidelity gate** that rejects a lossy engine before it degrades the prompt, a **best-of-N candidate encoder** (GCF vs TOON — keep whichever is shorter, with an A/B bytes/token table in the studio), the vendored **GCF codec updated to spec v3.2** (nested flattening — deeply-nested payloads go from ~3% to ~32% compression vs JSON), a new **omniglyph** engine (context-as-image, ~10× fewer tokens on the converted block), **CCR ranged/grep/stats retrieval** (pull an exact byte/line slice or summary of a stored block instead of re-expanding it), a unified panel with named profiles + an active-profile selector, an opt-in **per-engine pipeline circuit-breaker**, an opt-in **LLM-tier engine** (a model pass for higher-ratio semantic compression), a **read-lifecycle engine** that collapses superseded file reads, **usage-observed prefix freeze**, a graduated **CCR retrieval-feedback ramp**, a `preserveSystemPrompt` mode enum, and a **drag-reorder pipeline editor** in the studio. → [Compression](docs/compression/COMPRESSION_ENGINES.md)
 - **🕵️ Transparent MITM decrypt (TPROXY)** — capture & translate traffic from CLIs that ignore proxy env vars, with a per-SNI certificate authority and a trust-store installer. → [MITM/TPROXY](docs/security/MITM-TPROXY-DECRYPT.md)
@@ -351,7 +351,7 @@ Result: 4 layers of fallback = zero downtime
 - **🧠 Memory you control** — opt-in int8 vector quantization (Qdrant + sqlite-vec), opt-in **typed memory decay** (aged low-value memories fade on a per-type schedule), memory off by default, and a per-request `x-omniroute-no-memory` header. → [Memory](docs/frameworks/MEMORY.md)
 - **🛡️ Security** — a prompt-injection guard across every LLM route (backed by a red-team suite), plus a free DuckDuckGo last-resort web search. → [Guardrails](docs/security/GUARDRAILS.md)
 - **🖼️ New endpoints** — `/v1/ocr` (Mistral OCR) and `/v1/audio/translations` (Whisper-style audio translation) round out the media API surface. → [API Reference](docs/reference/API_REFERENCE.md)
-- **🌍 Deployment & ops** — reverse-proxy `basePath` deployment (`OMNIROUTE_BASE_PATH`, e.g. serving RouteChi under `/omniroute/`), browser-language auto-detect on first visit, per-API-key device/connection tracking (IP+UA fingerprint, masked, in-memory only), root-less MITM cert trust for user-namespaced containers (`OMNIROUTE_NO_SUDO`), server-side configured-only / available-only filters on the Free Provider Rankings page, and **Traditional Chinese (zh-TW)** localization for the frontend + CLI. → [Environment](docs/reference/ENVIRONMENT.md)
+- **🌍 Deployment & ops** — reverse-proxy `basePath` deployment (`OMNIROUTE_BASE_PATH`, e.g. serving OmniRoute under `/omniroute/`), browser-language auto-detect on first visit, per-API-key device/connection tracking (IP+UA fingerprint, masked, in-memory only), root-less MITM cert trust for user-namespaced containers (`OMNIROUTE_NO_SUDO`), server-side configured-only / available-only filters on the Free Provider Rankings page, and **Traditional Chinese (zh-TW)** localization for the frontend + CLI. → [Environment](docs/reference/ENVIRONMENT.md)
 - **🤝 More providers & agents** — Cursor Cloud Agent (a 4th cloud agent), CodeBuddy CN (`copilot.tencent.com`), a Google Flow video-generation provider, new gateways **DGrid** and **Pioneer AI** (Fastino Labs), inbound **xAI Grok** translators plus **Grok Build (xAI)** with an OAuth import-token flow, GPT-4 / GPT-4o-mini on the GitHub Copilot provider, multi-model **Factory Droid**, **ZenMux Free** (session-cookie free tier), **Alibaba DashScope** text-to-video (`wan2.7-t2v`), a refreshed 250-provider catalog (OrcaRouter, Wafer AI, OpenAdapter, dit.ai, TokenRouter, …), Vertex AI media generation (speech/transcription/music/video), a first-class **Ollama** local-provider card, the **SenseNova** free Token Plan (chat + text-to-image), one-click account import from CLIProxyAPI (`~/.cli-proxy-api/`), **Claude Sonnet 5** wired end-to-end, a new provider wave (**Kenari**, **SumoPod**, **X5Lab**, **Charm Hyper**, **Nube.sh**, **b.ai**, **Qiniu**, **ModelScope**, **Augment/Auggie CLI**, **ClinePass**, NVIDIA NIM image generation), Codex account import from a raw ChatGPT access token, the **Requesty** gateway (BYOK, ~200 free req/day), **Yuanbao (web)** as a cookie-session provider (DeepSeek V3/R1 + Hunyuan), the **Zed** hosted LLM aggregator (OAuth), **Claude 5 Sonnet** on the Claude Web provider, Kiro **adaptive-thinking reasoning** surfaced as `reasoning_content`, **bulk API-key add for Cloudflare Workers AI**, and **OpenVecta** (AI inference gateway). → [Providers](docs/reference/PROVIDER_REFERENCE.md)
 - **⚡ Local performance & infra** — a one-click local Redis launcher (`omniroute redis up`, plus a dashboard Redis panel), one-click **Cloudflare Workers** and **Deno Deploy** relay deployers wired into the proxy pool, a relay-backend selector (`OMNIROUTE_RELAY_BACKEND=ts|bifrost|auto`) so `/v1/relay` stays the stable surface while choosing the fastest backend internally, **Bifrost** (Go AI-gateway) and **Mux** (agent-orchestration daemon) promoted to first-class embedded/supervised services alongside 9Router/CLIProxyAPI, **Webshare** added as a paid fourth source in the free-proxy provider framework, and **shorthand proxy formats + protocol header mode** for bulk proxy import. → [Embedded Services](docs/frameworks/EMBEDDED-SERVICES.md)
 
@@ -459,7 +459,7 @@ Result: 4 layers of fallback = zero downtime
 
 <div align="center">
 
-# 🖥️ Where RouteChi Runs — Anywhere
+# 🖥️ Where OmniRoute Runs — Anywhere
 
 </div>
 
@@ -486,9 +486,9 @@ Result: 4 layers of fallback = zero downtime
 
 </div>
 
-> Your keys, your machine, your data. RouteChi is a **local proxy** — it never phones home.
+> Your keys, your machine, your data. OmniRoute is a **local proxy** — it never phones home.
 
-- 🏠 **Runs 100% on your hardware** — npm, Docker, desktop, or your phone. No RouteChi cloud sits in the request path.
+- 🏠 **Runs 100% on your hardware** — npm, Docker, desktop, or your phone. No OmniRoute cloud sits in the request path.
 - 🔐 **Credentials encrypted at rest** — API keys & OAuth tokens sealed with **AES-256-GCM**.
 - 🚫 **Zero telemetry by default** — your prompts go only to the providers _you_ choose, nowhere else.
 - 🛡️ **Hardened gateway** — API-key scoping, IP filtering, rate limits, prompt-injection guard, loopback-only process routes.
@@ -504,7 +504,7 @@ Result: 4 layers of fallback = zero downtime
 
 </div>
 
-> RouteChi isn't just a server — it's a **full command-line cockpit** with **80+ commands**, plus open agent protocols so an AI agent can drive RouteChi **by itself**.
+> OmniRoute isn't just a server — it's a **full command-line cockpit** with **80+ commands**, plus open agent protocols so an AI agent can drive OmniRoute **by itself**.
 
 ### ⌨️ A real CLI (not just `start`)
 
@@ -515,9 +515,9 @@ omniroute setup         # guided first-run wizard
 omniroute doctor        # diagnose providers, ports, native deps
 ```
 
-### 🛰️ Remote mode — run the CLI here, RouteChi on a VPS
+### 🛰️ Remote mode — run the CLI here, OmniRoute on a VPS
 
-RouteChi on a server? Drive it from your laptop with the **same CLI**. Log in once
+OmniRoute on a server? Drive it from your laptop with the **same CLI**. Log in once
 with a scoped access token; every command then targets the remote.
 
 ```bash
@@ -537,9 +537,9 @@ Tokens are scoped `read` / `write` / `admin`; process-spawning routes stay loopb
 
 </div>
 
-### 🤝 Connect an agent — and it controls RouteChi itself
+### 🤝 Connect an agent — and it controls OmniRoute itself
 
-Expose RouteChi over **MCP** or **A2A** and any capable agent gets the keys to the whole gateway — routing, providers, combos, cache, compression, memory — autonomously.
+Expose OmniRoute over **MCP** or **A2A** and any capable agent gets the keys to the whole gateway — routing, providers, combos, cache, compression, memory — autonomously.
 
 | Protocol           | Endpoint                                        | Use it for                                             |
 | ------------------ | ----------------------------------------------- | ------------------------------------------------------ |
@@ -549,7 +549,7 @@ Expose RouteChi over **MCP** or **A2A** and any capable agent gets the keys to t
 | 🤝 **A2A**         | `http://localhost:20128/.well-known/agent.json` | Agent-to-agent, **JSON-RPC 2.0** + SSE, 6 skills       |
 
 ```bash
-# Give Claude Code the full RouteChi toolset over MCP:
+# Give Claude Code the full OmniRoute toolset over MCP:
 claude mcp add-server omniroute --type http --url http://localhost:20128/api/mcp/stream
 ```
 
@@ -563,7 +563,7 @@ claude mcp add-server omniroute --type http --url http://localhost:20128/api/mcp
 
 </div>
 
-> **Why use many tokens when few tokens do the trick?** Every request passes through RouteChi's compression pipeline **transparently** — no client changes. It's now a **stack of 10 composable engines** that run in order and mix & match per routing combo — building on ideas from [RTK](https://github.com/rtk-ai/rtk), [Caveman](https://github.com/JuliusBrussee/caveman) (⭐ 78K+), [LLMLingua-2](https://github.com/microsoft/LLMLingua), and [Troglodita](https://github.com/leninejunior/troglodita) (PT-BR).
+> **Why use many tokens when few tokens do the trick?** Every request passes through OmniRoute's compression pipeline **transparently** — no client changes. It's now a **stack of 10 composable engines** that run in order and mix & match per routing combo — building on ideas from [RTK](https://github.com/rtk-ai/rtk), [Caveman](https://github.com/JuliusBrussee/caveman) (⭐ 78K+), [LLMLingua-2](https://github.com/microsoft/LLMLingua), and [Troglodita](https://github.com/leninejunior/troglodita) (PT-BR).
 
 ### 🧱 The 10-engine stack
 
@@ -614,7 +614,7 @@ Code blocks, URLs and structured data are **always preserved** byte-perfect. **O
 ### 📖 How it works — pipeline, architecture & savings math
 
 ```
-Client (10,000 tok) ──▶ RouteChi Compression (10 engines) ──▶ Provider (~1,080 tok, up to 95% saved)
+Client (10,000 tok) ──▶ OmniRoute Compression (10 engines) ──▶ Provider (~1,080 tok, up to 95% saved)
 ```
 
 Default stacked combo runs `RTK → Caveman`. When both act on the same tool/context payload, savings compound:
@@ -677,9 +677,9 @@ Model:    auto            (zero-config smart routing — or any provider/model)
 curl http://localhost:20128/v1/models -H "Authorization: Bearer YOUR_KEY"
 ```
 
-You should see your connected models listed. 🎉 That's it — start coding, and RouteChi auto-routes & falls back for you.
+You should see your connected models listed. 🎉 That's it — start coding, and OmniRoute auto-routes & falls back for you.
 
-If your client cannot send custom headers, RouteChi also exposes tokenized compatibility aliases:
+If your client cannot send custom headers, OmniRoute also exposes tokenized compatibility aliases:
 
 ```txt
 OpenAI catalog:   http://localhost:20128/vscode/YOUR_KEY/
@@ -773,7 +773,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 <div align="center">
 
-# 🎬 RouteChi in Action
+# 🎬 OmniRoute in Action
 
 </div>
 
@@ -798,7 +798,7 @@ same process on one port, so there is no separate CLI-only package today.
 
 <div align="center">
 
-> 🎬 **Made a video about RouteChi?** Open an [issue](https://github.com/diegosouzapw/RouteChi/issues/new) or [discussion](https://github.com/diegosouzapw/RouteChi/discussions) with the link — we'll feature it here.
+> 🎬 **Made a video about OmniRoute?** Open an [issue](https://github.com/diegosouzapw/OmniRoute/issues/new) or [discussion](https://github.com/diegosouzapw/OmniRoute/discussions) with the link — we'll feature it here.
 
 <br/>
 </div>
@@ -834,7 +834,7 @@ same process on one port, so there is no separate CLI-only package today.
 | **NVIDIA NIM**    | `nvidia/`   | 129 models                                      | ~40 RPM            |
 | **Cerebras**      | `cerebras/` | Qwen3 235B, GPT-OSS 120B                        | 1M tok/day         |
 
-> 💡 The dashboard "cost" is a **savings tracker**, not a bill — RouteChi never charges you. A "$290 total cost" using free models means **$290 saved**.
+> 💡 The dashboard "cost" is a **savings tracker**, not a bill — OmniRoute never charges you. A "$290 total cost" using free models means **$290 saved**.
 
 📖 Complete free directory → [`docs/reference/FREE_TIERS.md`](docs/reference/FREE_TIERS.md) — 25+ providers, quotas, base URLs.
 
@@ -866,7 +866,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 
 <br/>
 
-🇷🇺 🇨🇳 🇮🇷 🇨🇺 🇹🇷 In a blocked region? RouteChi's **3-level proxy** (Global / Per-Provider / Per-Connection) proxies API requests, OAuth flows, connection tests, token refresh & model sync.
+🇷🇺 🇨🇳 🇮🇷 🇨🇺 🇹🇷 In a blocked region? OmniRoute's **3-level proxy** (Global / Per-Provider / Per-Connection) proxies API requests, OAuth flows, connection tests, token refresh & model sync.
 
 - **Protocols:** HTTP/HTTPS, SOCKS5, authenticated proxies
 - **🆓 1proxy marketplace** — hundreds of free validated proxies, quality scores, auto-rotation
@@ -904,7 +904,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 | `REQUIRE_API_KEY` | `false`        | Require API key for all requests |
 | `DATA_DIR`        | `~/.omniroute` | Database & config storage        |
 
-**Will I be charged by RouteChi?** No — it's free, open-source software on your machine. You only pay paid providers directly. RouteChi has no billing system.
+**Will I be charged by OmniRoute?** No — it's free, open-source software on your machine. You only pay paid providers directly. OmniRoute has no billing system.
 **Are FREE providers really unlimited?** Mostly — Qoder, Pollinations, LongCat, and Cloudflare are free with no per-account credit cap. Kiro is free too but capped at ~50 credits/month per account. Stack multiple free providers in a combo and auto-fallback keeps you serving for $0.
 **Will compression hurt quality?** No — it only compresses the **input**; code, URLs, JSON are always protected.
 **Does it work where AI is blocked?** Yes — 3-level proxy + 1proxy marketplace reach all 250 providers.
@@ -954,8 +954,8 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 > 💬 **Chat with the community** — Discord, Telegram & WhatsApp (🌍 / 🇧🇷) links are at the [top of this README](#-join-the-community).
 
 - 🌍 **Website**: [omniroute.online](https://omniroute.online)
-- 🐙 **GitHub**: [github.com/diegosouzapw/RouteChi](https://github.com/diegosouzapw/RouteChi)
-- 🐛 **Issues**: [report a bug](https://github.com/diegosouzapw/RouteChi/issues) (attach `npm run system-info` output)
+- 🐙 **GitHub**: [github.com/diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute)
+- 🐛 **Issues**: [report a bug](https://github.com/diegosouzapw/OmniRoute/issues) (attach `npm run system-info` output)
 - 🤝 **Contributing**: see [CONTRIBUTING.md](CONTRIBUTING.md) or pick a `good first issue`
 
 </div>
@@ -1000,8 +1000,8 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 | [User Guide](docs/guides/USER_GUIDE.md)                        | Providers, combos, CLI integration, deployment                                   |
 | [Setup Guide](docs/guides/SETUP_GUIDE.md)                      | Full install methods, CLI tool configs, protocol setup, timeout tuning           |
 | [CLI Tools Guide](docs/reference/CLI-TOOLS.md)                 | Per-tool setup for Claude Code, Codex, Cursor, Cline, OpenClaw, Kilo, Copilot    |
-| [Remote Mode](docs/guides/REMOTE-MODE.md)                      | Drive a remote RouteChi (VPS) from your laptop CLI via scoped access tokens     |
-| [Claude Code Config](docs/guides/CLAUDE-CODE-CONFIGURATION.md) | Point Claude Code at RouteChi (local/remote) with `launch` + per-model profiles |
+| [Remote Mode](docs/guides/REMOTE-MODE.md)                      | Drive a remote OmniRoute (VPS) from your laptop CLI via scoped access tokens     |
+| [Claude Code Config](docs/guides/CLAUDE-CODE-CONFIGURATION.md) | Point Claude Code at OmniRoute (local/remote) with `launch` + per-model profiles |
 | [Quick Start](README.md#-quick-start)                          | 3-step install → connect → configure                                             |
 
 ### 🔧 Operations & Deployment
@@ -1012,7 +1012,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 | [Podman Guide](contrib/podman/README.md)                 | Quadlet systemd integration, podman-compose, SELinux           |
 | [VM Deployment](docs/ops/VM_DEPLOYMENT_GUIDE.md)         | Complete guide: VM + nginx + Cloudflare setup                  |
 | [Fly.io Deployment](docs/ops/FLY_IO_DEPLOYMENT_GUIDE.md) | Deploy to Fly.io with persistent storage                       |
-| [Termux Guide](docs/guides/TERMUX_GUIDE.md)              | Run RouteChi on Android via Termux                            |
+| [Termux Guide](docs/guides/TERMUX_GUIDE.md)              | Run OmniRoute on Android via Termux                            |
 | [PWA Guide](docs/guides/PWA_GUIDE.md)                    | Progressive Web App install, caching, architecture             |
 | [Uninstall Guide](docs/guides/UNINSTALL.md)              | Clean removal for all install methods                          |
 | [Environment Config](docs/reference/ENVIRONMENT.md)      | Complete `.env` variables and references                       |
@@ -1062,7 +1062,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 
 # ⭐ Top Contributors
 
-> RouteChi is shaped by a passionate open-source community. These individuals have made exceptional contributions that directly impact the quality, stability, and reach of the project. **Thank you.**
+> OmniRoute is shaped by a passionate open-source community. These individuals have made exceptional contributions that directly impact the quality, stability, and reach of the project. **Thank you.**
 
 <table>
   <tr>
@@ -1117,7 +1117,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
   </tr>
 </table>
 
-> 🙏 These contributors' features, bug fixes, and infrastructure improvements are a **core part** of what makes RouteChi reliable and feature-rich. Every pull request, every test case, and every i18n translation file matters. Open source is built by people like them.
+> 🙏 These contributors' features, bug fixes, and infrastructure improvements are a **core part** of what makes OmniRoute reliable and feature-rich. Every pull request, every test case, and every i18n translation file matters. Open source is built by people like them.
 
 </div>
 
@@ -1131,7 +1131,7 @@ Compression: aggressive (~50%) → double your free quota · Cost: $0/mo
 
 </div>
 
-[![Contributors](https://contrib.rocks/image?repo=diegosouzapw/RouteChi&max=200&columns=20&anon=1)](https://github.com/diegosouzapw/RouteChi/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=diegosouzapw/OmniRoute&max=200&columns=20&anon=1)](https://github.com/diegosouzapw/OmniRoute/graphs/contributors)
 
 ### How to Contribute
 
@@ -1156,11 +1156,11 @@ gh release create v3.8.2 --title "v3.8.2" --generate-notes
 
 ## 📊 Stars
 
-<a href="https://www.star-history.com/?repos=diegosouzapw%2FRouteChi&type=date&legend=top-left">
+<a href="https://www.star-history.com/?repos=diegosouzapw%2FOmniRoute&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/RouteChi&type=date&theme=dark&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/RouteChi&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=diegosouzapw/RouteChi&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&theme=dark&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=diegosouzapw/OmniRoute&type=date&legend=top-left&sealed_token=XP_ycEjv7s31p1edvhsMOXry51OWYsUjDRWjflSG7jQKRpO9hPGg7i_EHvwhI6QtrARTMH-YGjJhi8sumRYflEJD0DPlH_MMHjizhBYCX8fbHFrHEiNvVA" />
  </picture>
 </a>
 
@@ -1187,13 +1187,13 @@ gh release create v3.8.2 --title "v3.8.2" --generate-notes
 
 </div>
 
-RouteChi stands on the shoulders of giants. It started as a fork of **[9router](https://github.com/decolua/9router)** and a TypeScript port of the Go project **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** — and from there, every subsystem below was inspired by an open-source project that got there first. Each one shaped a concrete piece of RouteChi. This is our thank-you to all of them. 🙏
+OmniRoute stands on the shoulders of giants. It started as a fork of **[9router](https://github.com/decolua/9router)** and a TypeScript port of the Go project **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** — and from there, every subsystem below was inspired by an open-source project that got there first. Each one shaped a concrete piece of OmniRoute. This is our thank-you to all of them. 🙏
 
 > ⭐ star counts as of June 2026 — go give these projects a star.
 
 ### 🧬 Lineage & gateway
 
-| Project                                                                         |    ⭐ | How it inspired RouteChi                                                                                                             |
+| Project                                                                         |    ⭐ | How it inspired OmniRoute                                                                                                             |
 | ------------------------------------------------------------------------------- | ----: | ------------------------------------------------------------------------------------------------------------------------------------- |
 | **[9router](https://github.com/decolua/9router)** · decolua                     | 19.0k | The original project this fork is built on — extended here with multi-modal APIs and a full TypeScript rewrite.                       |
 | **[CLIProxyAPI](https://github.com/router-for-me/CLIProxyAPI)** · router-for-me | 38.8k | The Go implementation that inspired this JavaScript / TypeScript port.                                                                |
@@ -1201,7 +1201,7 @@ RouteChi stands on the shoulders of giants. It started as a fork of **[9router](
 
 ### 🗜️ Context & token compression — engines
 
-| Project                                                                       |    ⭐ | How it inspired RouteChi                                                                                                                                                                                |
+| Project                                                                       |    ⭐ | How it inspired OmniRoute                                                                                                                                                                                |
 | ----------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[Caveman](https://github.com/JuliusBrussee/caveman)** · JuliusBrussee       | 78.2k | The viral "why use many token when few token do trick" project — its caveman-speak philosophy powers our standard compression mode and 30+ filler/condensation rules.                                    |
 | **[RTK – Rust Token Killer](https://github.com/rtk-ai/rtk)** · rtk-ai         | 67.3k | High-performance command-output compression — inspired our RTK engine, JSON filter DSL, raw-output recovery and the stacked RTK → Caveman pipeline.                                                      |
@@ -1213,7 +1213,7 @@ RouteChi stands on the shoulders of giants. It started as a fork of **[9router](
 
 ### 🧩 Compact formats, token research & code-aware tooling
 
-| Project                                                                                        |    ⭐ | How it inspired RouteChi                                                                                                                                                                                      |
+| Project                                                                                        |    ⭐ | How it inspired OmniRoute                                                                                                                                                                                      |
 | ---------------------------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[TOON](https://github.com/toon-format/toon)** · toon-format                                  | 24.7k | Token-Oriented Object Notation — its columnar, header-plus-rows model shaped our tabular compaction stage.                                                                                                     |
 | **[GCF – Graph Compact Format](https://github.com/blackwell-systems/gcf)** · Blackwell Systems |    14 | First inspired our tabular compaction stage; now its zero-dependency, lossless generic-profile encoder is **vendored directly** as the Headroom codec (MIT, SPDX-marked), current with GCF spec v3.2. |
@@ -1230,7 +1230,7 @@ RouteChi stands on the shoulders of giants. It started as a fork of **[9router](
 
 ### 🧠 Memory & RAG
 
-| Project                                                            |    ⭐ | How it inspired RouteChi                                                                                           |
+| Project                                                            |    ⭐ | How it inspired OmniRoute                                                                                           |
 | ------------------------------------------------------------------ | ----: | ------------------------------------------------------------------------------------------------------------------- |
 | **[Mem0](https://github.com/mem0ai/mem0)** · mem0ai                | 59.8k | Universal memory layer — its proxy-as-write/read-boundary model shaped our memory architecture.                     |
 | **[Letta (MemGPT)](https://github.com/letta-ai/letta)** · letta-ai | 23.6k | Stateful agents with tiered memory — inspired our Context Control & Recovery (CCR) tiered model.                    |
@@ -1238,14 +1238,14 @@ RouteChi stands on the shoulders of giants. It started as a fork of **[9router](
 
 ### 🛰️ Traffic inspection, MITM & transparent proxy
 
-| Project                                                                           |   ⭐ | How it inspired RouteChi                                                                                                                                                        |
+| Project                                                                           |   ⭐ | How it inspired OmniRoute                                                                                                                                                        |
 | --------------------------------------------------------------------------------- | ---: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **[llm-interceptor](https://github.com/chouzz/llm-interceptor)** · chouzz         |   48 | MITM interception/analysis of coding-assistant ↔ LLM traffic — our Traffic Inspector ports its SSE merge, conversation normalization, host passthrough and secret masking (MIT). |
 | **[ProxyBridge](https://github.com/InterceptSuite/ProxyBridge)** · InterceptSuite | 5.3k | Transparent per-process proxy routing — inspired our crash-safe MITM teardown, socket idle-timeouts, `/proc` process attribution and TPROXY capture.                             |
 
 ### 📚 Model data, observability & UI
 
-| Project                                                                    |    ⭐ | How it inspired RouteChi                                                                                                  |
+| Project                                                                    |    ⭐ | How it inspired OmniRoute                                                                                                  |
 | -------------------------------------------------------------------------- | ----: | -------------------------------------------------------------------------------------------------------------------------- |
 | **[models.dev](https://github.com/anomalyco/models.dev)** · SST / OpenCode |  5.6k | Open database of AI model specs, pricing and capabilities — synced natively into our model catalog.                        |
 | **[React Flow / xyflow](https://github.com/xyflow/xyflow)** · xyflow       | 37.4k | The node-based graph library powering our real-time Compression Studio and Combo/Routing Studio.                           |
@@ -1256,23 +1256,23 @@ RouteChi stands on the shoulders of giants. It started as a fork of **[9router](
 
 ### 🛡️ Security
 
-| Project                                                                                     |  ⭐ | How it inspired RouteChi                                                                                                                        |
+| Project                                                                                     |  ⭐ | How it inspired OmniRoute                                                                                                                        |
 | ------------------------------------------------------------------------------------------- | --: | ------------------------------------------------------------------------------------------------------------------------------------------------ |
 | **[awesome-secure-defaults](https://github.com/tldrsec/awesome-secure-defaults)** · tldrsec | 708 | A curated list of secure-by-default libraries that guides our security choices (Helmet.js, DOMPurify, ssrf-req-filter, safe-regex, Google Tink). |
 
 ### 🧭 Complementary tools
 
-| Project                                                                       | How it composes with RouteChi                                                                                                                                                                             |
+| Project                                                                       | How it composes with OmniRoute                                                                                                                                                                             |
 | ----------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **[CodeWebChat](https://github.com/robertpiosik/CodeWebChat)** · robertpiosik | Editor-side companion — VS Code + browser extension that autofills 15+ chatbot web UIs with editor context. Owns the free-web-UI rail alongside RouteChi's API rail; can point its API mode at RouteChi. |
+| **[CodeWebChat](https://github.com/robertpiosik/CodeWebChat)** · robertpiosik | Editor-side companion — VS Code + browser extension that autofills 15+ chatbot web UIs with editor context. Owns the free-web-UI rail alongside OmniRoute's API rail; can point its API mode at OmniRoute. |
 
 ## ❤️ Support
 
-RouteChi is free and open source, built and maintained in the open. If it saves you time or money, consider supporting development:
+OmniRoute is free and open source, built and maintained in the open. If it saves you time or money, consider supporting development:
 
 - ⭐ **Star the repo** — it genuinely helps visibility
 - 💖 **[GitHub Sponsors](https://github.com/sponsors/diegosouzapw)** — fund ongoing maintenance and new providers
-- 🐛 **Report bugs and share feedback** in [Discussions](https://github.com/diegosouzapw/RouteChi/discussions)
+- 🐛 **Report bugs and share feedback** in [Discussions](https://github.com/diegosouzapw/OmniRoute/discussions)
 
 ## 📄 License
 
@@ -1284,7 +1284,7 @@ MIT License - see [LICENSE](LICENSE) for details.
 
 **[⬆ Back to top](#-omniroute)** · Built with ❤️ for the open-source AI community.
 
-<sub>RouteChi v3.8.43 · Node ≥22.0.0 · MIT License · <a href="https://omniroute.online">omniroute.online</a></sub>
+<sub>OmniRoute v3.8.43 · Node ≥22.0.0 · MIT License · <a href="https://omniroute.online">omniroute.online</a></sub>
 
 </div>
 <!-- GitHub Discussions enabled for community Q&A -->

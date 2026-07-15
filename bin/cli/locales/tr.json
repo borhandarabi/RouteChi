@@ -1,7 +1,7 @@
 {
   "common": {
     "error": "Hata: {message}",
-    "serverOffline": "RouteChi sunucusu çevrimdışı. Başlatın: omniroute serve",
+    "serverOffline": "OmniRoute sunucusu çevrimdışı. Başlatın: omniroute serve",
     "authRequired": "Kimlik doğrulama gerekli. OMNIROUTE_API_KEY ayarlayın veya çalıştırın: omniroute setup",
     "rateLimited": "İstek limiti aşıldı. {seconds}s sonra tekrar deneyin.",
     "timeout": "İstek {ms}ms sonra zaman aşımına uğradı.",
@@ -15,18 +15,18 @@
     "yesOpt": "Onayı atla"
   },
   "program": {
-    "description": "RouteChi — Otomatik Fallback ile Akıllı AI Yönlendirici",
+    "description": "OmniRoute — Otomatik Fallback ile Akıllı AI Yönlendirici",
     "version": "Sürümü yazdır ve çık",
     "output": "Çıktı formatı (table, json, jsonl, csv)",
     "quiet": "Önemsiz çıktıyı gizle",
     "no_color": "Renkli çıktıyı devre dışı bırak",
     "timeout": "HTTP istek zaman aşımı (milisaniye)",
-    "api_key": "RouteChi sunucusu için API anahtarı",
-    "base_url": "RouteChi sunucusu temel URL'si",
+    "api_key": "OmniRoute sunucusu için API anahtarı",
+    "base_url": "OmniRoute sunucusu temel URL'si",
     "context": "Bu komut için sunucu bağlamı/profili",
     "lang": "CLI görüntüleme dilini ayarla (OMNIROUTE_LANG'ı geçersiz kılar)"
   },
   "redis": {
-    "description": "RouteChi önbelleği ve kota takibi için tek tıkla yerel Redis konteyneri (Podman veya Docker) başlatın"
+    "description": "OmniRoute önbelleği ve kota takibi için tek tıkla yerel Redis konteyneri (Podman veya Docker) başlatın"
   }
 }

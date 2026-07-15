@@ -2389,7 +2389,7 @@ function readNonEmptyUrlToken(request: AuthRequestLike): string | null {
  *
  * Honors explicit auth headers and (for client-facing routes only) a
  * path-scoped URL token:
- * - `Authorization: Bearer <key>` (OpenAI / RouteChi / Codex CLI / Bearer clients)
+ * - `Authorization: Bearer <key>` (OpenAI / OmniRoute / Codex CLI / Bearer clients)
  * - `x-api-key: <key>` (Anthropic Messages API contract — Claude Code,
  *   `@anthropic-ai/sdk`, any SDK that sets `anthropic-version`)
  * - `/vscode/<key>/...` (path-scoped tokenized aliases — only when `allowUrl`)
@@ -2401,7 +2401,7 @@ function readNonEmptyUrlToken(request: AuthRequestLike): string | null {
  * speaking the Anthropic Messages API contract. Without this scoping,
  * non-Anthropic SDKs that happen to set `x-api-key` (or local-mode tools
  * with placeholder keys) would be treated as authenticated attempts and
- * rejected by per-route gates that compare against RouteChi keys.
+ * rejected by per-route gates that compare against OmniRoute keys.
  *
  * `opts.allowUrl` (default `true`) gates the path-scoped URL token. Management
  * auth MUST pass `allowUrl: false` — a credential in the URL must never

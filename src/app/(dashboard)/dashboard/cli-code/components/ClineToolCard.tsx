@@ -42,7 +42,7 @@ export default function ClineToolCard({
 
   const getConfigStatus = () => {
     if (!cliReady) return null;
-    if (!clineStatus.hasRouteChi) return "not_configured";
+    if (!clineStatus.hasOmniRoute) return "not_configured";
     const baseUrlVal = clineStatus.settings?.openAiBaseUrl || "";
     const localMatch = baseUrlVal.includes("localhost") || baseUrlVal.includes("127.0.0.1");
     const cloudMatch = cloudEnabled && CLOUD_URL && baseUrlVal.startsWith(CLOUD_URL);

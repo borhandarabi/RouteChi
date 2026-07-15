@@ -1,12 +1,12 @@
 ---
-title: "📖 راهنمای راه‌اندازی — RouteChi"
+title: "📖 راهنمای راه‌اندازی — OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# 📖 راهنمای راه‌اندازی — RouteChi
+# 📖 راهنمای راه‌اندازی — OmniRoute
 
-> مرجع کامل راه‌اندازی RouteChi. برای نسخهٔ کوتاه، [Quick Start در README](../README.md#-quick-start) را ببینید.
+> مرجع کامل راه‌اندازی OmniRoute. برای نسخهٔ کوتاه، [Quick Start در README](../README.md#-quick-start) را ببینید.
 
 ## فهرست مطالب
 
@@ -47,7 +47,7 @@ yay -S omniroute-bin
 systemctl --user enable --now omniroute.service
 ```
 
-[بستهٔ AUR](https://aur.archlinux.org/packages/omniroute-bin) RouteChi را نصب کرده و یک سرویس systemd کاربر ارائه می‌دهد.
+[بستهٔ AUR](https://aur.archlinux.org/packages/omniroute-bin) OmniRoute را نصب کرده و یک سرویس systemd کاربر ارائه می‌دهد.
 
 ### از کدمنبع
 
@@ -64,7 +64,7 @@ PORT=20128 DASHBOARD_PORT=20129 NEXT_PUBLIC_BASE_URL=http://localhost:20129 npm 
 
 ### اپ دسکتاپ (Electron)
 
-RouteChi یک wrapper دسکتاپ مبتنی بر Electron 41 + electron-builder 26.10 عرضه می‌کند. اسکریپت‌های موجود (ریشهٔ workspace):
+OmniRoute یک wrapper دسکتاپ مبتنی بر Electron 41 + electron-builder 26.10 عرضه می‌کند. اسکریپت‌های موجود (ریشهٔ workspace):
 
 ```bash
 npm run electron:dev          # اجرای دسکتاپ با hot-reload
@@ -86,7 +86,7 @@ omniroute setup --non-interactive
 omniroute providers test-batch
 ```
 
-ترکیب با متغیرهای محیطی (`INITIAL_PASSWORD`، `OMNIROUTE_WS_BRIDGE_SECRET` و غیره)، به شما اجازه می‌دهد یک نمونهٔ RouteChi کاملاً قابل اسکریپت‌نویسی راه‌اندازی کنید.
+ترکیب با متغیرهای محیطی (`INITIAL_PASSWORD`، `OMNIROUTE_WS_BRIDGE_SECRET` و غیره)، به شما اجازه می‌دهد یک نمونهٔ OmniRoute کاملاً قابل اسکریپت‌نویسی راه‌اندازی کنید.
 
 ### گزینه‌های CLI
 
@@ -99,7 +99,7 @@ omniroute providers test-batch
 | `omniroute config`      | پیکربندی ابزار CLI — فهرست، get، set، اعتبارسنجی پیکربندی‌ها      |
 | `omniroute status`      | داشبورد وضعیت آفلاین — نسخه، DB، ابزارها، پیکربندی          |
 | `omniroute logs`        | استریم لاگ‌های استفاده از API (پشتیبانی از `--follow`)           |
-| `omniroute update`      | بررسی یا اعمال به‌روزرسانی‌های RouteChi                           |
+| `omniroute update`      | بررسی یا اعمال به‌روزرسانی‌های OmniRoute                           |
 | `omniroute provider`    | مدیریت اتصالات ارائه‌دهنده — افزودن، فهرست، حذف، تست، پیش‌فرض |
 | `omniroute --port 3000` | تنظیم پورت canonical/API روی ۳۰۰۰                                 |
 | `omniroute --mcp`       | راه‌اندازی سرور MCP (انتقال stdio)                             |
@@ -165,7 +165,7 @@ Ollama Tags URL: http://localhost:20128/api/v1/vscode/YOUR_KEY/api/tags
 
 #### پیکربندی خودکار با `setup-*`
 
-به‌جای اینکه URL پایه و کلید را دستی جای‌گذاری کنید، اجازه دهید RouteChi فایل پیکربندی هر ابزار را از کاتالوگ مدل زنده بنویسد. یک دستور به ازای هر ابزار:
+به‌جای اینکه URL پایه و کلید را دستی جای‌گذاری کنید، اجازه دهید OmniRoute فایل پیکربندی هر ابزار را از کاتالوگ مدل زنده بنویسد. یک دستور به ازای هر ابزار:
 
 ```bash
 omniroute setup-codex        # پروفایل‌های ~/.codex/<name>.config.toml
@@ -182,7 +182,7 @@ omniroute setup-qwen         # ~/.qwen/settings.json
 omniroute setup-aider        # ~/.aider.conf.yml
 ```
 
-هر کدام `--remote <url> --api-key <key>` را برای پیکربندی یک ابزار محلی در برابر یک RouteChi **دوردست** می‌پذیرد، به‌علاوهٔ `--dry-run` برای پیش‌نمایش. راه‌اندازهای `omniroute launch` (Claude Code) و `omniroute launch-codex` (Codex) CLI را با env درست تزریق‌شده spawn می‌کنند و اصلاً هیچ پیکربندی نمی‌نویسند.
+هر کدام `--remote <url> --api-key <key>` را برای پیکربندی یک ابزار محلی در برابر یک OmniRoute **دوردست** می‌پذیرد، به‌علاوهٔ `--dry-run` برای پیش‌نمایش. راه‌اندازهای `omniroute launch` (Claude Code) و `omniroute launch-codex` (Codex) CLI را با env درست تزریق‌شده spawn می‌کنند و اصلاً هیچ پیکربندی نمی‌نویسند.
 
 برای جدول کامل (آنچه هر دستور می‌نویسد، هر پرچم، محلی در برابر دوردست، قراردادهای `/v1` base-URL)، به **[CLI Integrations](./CLI-INTEGRATIONS.md)** مراجعه کنید.
 
@@ -269,15 +269,15 @@ curl -X POST http://localhost:20128/a2a \
 | متغیر                   | پیش‌فرض                       | هدف                                                                                                                                      |
 | ------------------------ | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `REQUEST_TIMEOUT_MS`     | `600000`                      | پایهٔ مشترک برای timeout شروع پاسخ upstream، timeoutهای پنهان Undici، درخواست‌های fingerprint TLS، و timeoutهای درخواست/پروکسی API bridge |
-| `STREAM_IDLE_TIMEOUT_MS` | ارث‌بری از `REQUEST_TIMEOUT_MS` | حداکثر فاصلهٔ بین chunkهای استریم پیش از آنکه RouteChi جریان SSE را قطع کند                                                                  |
+| `STREAM_IDLE_TIMEOUT_MS` | ارث‌بری از `REQUEST_TIMEOUT_MS` | حداکثر فاصلهٔ بین chunkهای استریم پیش از آنکه OmniRoute جریان SSE را قطع کند                                                                  |
 
 سازگاری به‌عقب حفظ شده: `FETCH_TIMEOUT_MS`، `API_BRIDGE_PROXY_TIMEOUT_MS` و سایر متغیرهای timeout به‌ازای-لایه‌ موجود همچنان کار می‌کنند و پایهٔ مشترک را بازنویسی می‌کنند.
 
 ### نکات خاص ارائه‌دهنده
 
-برای upstreamهای سازگار با Claude Code (`anthropic-compatible-cc-*`)، RouteChi هدر خروجی `X-Stainless-Timeout` را از timeout fetch حل‌شده مشتق می‌کند تا timeoutهای خواندن سمت ارائه‌دهنده با پیکربندی env شما هم‌راستا بمانند.
+برای upstreamهای سازگار با Claude Code (`anthropic-compatible-cc-*`)، OmniRoute هدر خروجی `X-Stainless-Timeout` را از timeout fetch حل‌شده مشتق می‌کند تا timeoutهای خواندن سمت ارائه‌دهنده با پیکربندی env شما هم‌راستا بمانند.
 
-برای پروکسی‌های معکوس شخص ثالث سازگار با Claude Code، RouteChi مجموعهٔ `anthropic-beta` پیش‌فرض را محافظه‌کارانه نگه می‌دارد و هنگامی که `Client Cache Control` روی `Auto` است، تنها نشانگرهای `cache_control` ارائه‌شده توسط کلاینت را ارسال می‌کند. فعال‌سازی toggle هر-اتصال "Enable redact-thinking beta" تنها زمانی ضروری است که upstream به‌طور خاص به جریان‌های تفکر Claude redact‌شده نیاز داشته باشد.
+برای پروکسی‌های معکوس شخص ثالث سازگار با Claude Code، OmniRoute مجموعهٔ `anthropic-beta` پیش‌فرض را محافظه‌کارانه نگه می‌دارد و هنگامی که `Client Cache Control` روی `Auto` است، تنها نشانگرهای `cache_control` ارائه‌شده توسط کلاینت را ارسال می‌کند. فعال‌سازی toggle هر-اتصال "Enable redact-thinking beta" تنها زمانی ضروری است که upstream به‌طور خاص به جریان‌های تفکر Claude redact‌شده نیاز داشته باشد.
 
 ### بازنویسی‌های پیشرفتهٔ timeout
 
@@ -295,11 +295,11 @@ curl -X POST http://localhost:20128/a2a \
 | `API_BRIDGE_SERVER_KEEPALIVE_TIMEOUT_MS` | `5000`                                     | timeout keep-alive روی سرور API bridge                          |
 | `API_BRIDGE_SERVER_SOCKET_TIMEOUT_MS`    | `0`                                        | timeout بی‌تحری سوکت روی سرور API bridge (`0` غیرفعال می‌کند) |
 
-> **نکته:** برای درخواست‌های استریم، `FETCH_TIMEOUT_MS` تنها راه‌اندازی اتصال / انتظار برای اولین پاسخ upstream را پوشش می‌دهد. هنگامی که استریم فعال است، RouteChi تنها بر یک stall واقعی (`STREAM_IDLE_TIMEOUT_MS`) یا بی‌تحری بدنهٔ Undici (`FETCH_BODY_TIMEOUT_MS`) قطع می‌شود.
+> **نکته:** برای درخواست‌های استریم، `FETCH_TIMEOUT_MS` تنها راه‌اندازی اتصال / انتظار برای اولین پاسخ upstream را پوشش می‌دهد. هنگامی که استریم فعال است، OmniRoute تنها بر یک stall واقعی (`STREAM_IDLE_TIMEOUT_MS`) یا بی‌تحری بدنهٔ Undici (`FETCH_BODY_TIMEOUT_MS`) قطع می‌شود.
 
 ### سازگاری پروکسی معکوس
 
-اگر RouteChi را پشت Nginx، Caddy، Cloudflare یا یک پروکسی معکوس دیگر اجرا می‌کنید، اطمینان حاصل کنید timeoutهای پروکسی نیز بزرگ‌تر از timeoutهای استریم/fetch RouteChi شما هستند.
+اگر OmniRoute را پشت Nginx، Caddy، Cloudflare یا یک پروکسی معکوس دیگر اجرا می‌کنید، اطمینان حاصل کنید timeoutهای پروکسی نیز بزرگ‌تر از timeoutهای استریم/fetch OmniRoute شما هستند.
 
 ---
 

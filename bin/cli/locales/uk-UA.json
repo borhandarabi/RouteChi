@@ -1,7 +1,7 @@
 {
   "common": {
     "error": "Помилка: {message}",
-    "serverOffline": "Сервер RouteChi відключено. Запустіть: omniroute serve",
+    "serverOffline": "Сервер OmniRoute відключено. Запустіть: omniroute serve",
     "authRequired": "Потрібна автентифікація. Встановіть OMNIROUTE_API_KEY або виконайте: omniroute setup",
     "rateLimited": "Перевищено ліміт запитів. Повторіть через {seconds}с.",
     "timeout": "Запит завершився через {ms}мс.",
@@ -15,18 +15,18 @@
     "yesOpt": "Пропустити підтвердження"
   },
   "program": {
-    "description": "RouteChi — Розумний AI-маршрутизатор з автоматичним перемиканням",
+    "description": "OmniRoute — Розумний AI-маршрутизатор з автоматичним перемиканням",
     "version": "Вивести версію та вийти",
     "output": "Формат виведення (table, json, jsonl, csv)",
     "quiet": "Приховати несуттєвий вивід",
     "no_color": "Вимкнути кольоровий вивід",
     "timeout": "Тайм-аут HTTP-запитів у мілісекундах",
-    "api_key": "API-ключ для сервера RouteChi",
-    "base_url": "Базовий URL сервера RouteChi",
+    "api_key": "API-ключ для сервера OmniRoute",
+    "base_url": "Базовий URL сервера OmniRoute",
     "context": "Контекст/профіль сервера для цієї команди",
     "lang": "Встановити мову відображення CLI (замінює OMNIROUTE_LANG)"
   },
   "redis": {
-    "description": "Запустити локальний контейнер Redis одним натисканням (Podman або Docker) для кешування та відстеження квот RouteChi"
+    "description": "Запустити локальний контейнер Redis одним натисканням (Podman або Docker) для кешування та відстеження квот OmniRoute"
   }
 }

@@ -1,12 +1,12 @@
 ---
-title: "حالت راهور — هدایت یک RouteChi راهور از لپ‌تاپ خود"
+title: "حالت راهور — هدایت یک OmniRoute راهور از لپ‌تاپ خود"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
 # حالت راهور
 
-CLI مربوط به `omniroute` را روی لپ‌تاپ خود اجرا کنید در حالی که RouteChi خود در جای دیگری
+CLI مربوط به `omniroute` را روی لپ‌تاپ خود اجرا کنید در حالی که OmniRoute خود در جای دیگری
 (VPS، سرور خانگی، ماشین دیگری روی Tailnet شما) اجرا می‌شود. شما یک‌بار با
 `omniroute connect` وارد می‌شوید و از آن پس **هر** دستور CLI به آن سرور راهور هدف می‌گیرد —
 همان دستورات، همان خروجی، فقط در برابر راهور اجرا می‌شود.
@@ -109,9 +109,9 @@ Antigravity از صفحهٔ consent firstparty/nativeapp مربوط به Google 
 consent **برای همیشه hang می‌شود و هرگز کدی آزاد نمی‌کند** — fallback عادی "URL callback
 را جای‌گذاری کنید" چیزی برای جای‌گذاری ندارد. (این یک محدودیت سمت Google است: همین
 hang در هر پروکسی که از کلاینت دسکتاپ همراه Antigravity استفاده می‌کند رخ می‌دهد، نه فقط
-RouteChi.)
+OmniRoute.)
 
-دو راه پشتیبانی‌شده برای اتصال Antigravity به یک RouteChi راهور وجود دارد.
+دو راه پشتیبانی‌شده برای اتصال Antigravity به یک OmniRoute راهور وجود دارد.
 
 ### گزینهٔ الف — helper ورود محلی (توصیه‌شده)
 
@@ -130,7 +130,7 @@ npx omniroute login antigravity
 
 سپس، در داشبورد **راهور**: **Providers → Antigravity → Connect**، و blob
 `omniroute-cred-v1.…` را در فیلد **Step 2** جای‌گذاری کنید (این هم URL callback و هم
-credential blob را می‌پذیرد). RouteChi آن را decode می‌کند، onboarding مربوط به Cloud Code را
+credential blob را می‌پذیرد). OmniRoute آن را decode می‌کند، onboarding مربوط به Cloud Code را
 سمت سرور اجرا و اتصال را ماندگار می‌کند.
 
 > blob شامل یک refresh token است — با آن مانند گذرواژه رفتار کنید. این یک‌بار از طریق

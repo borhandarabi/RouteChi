@@ -6,7 +6,7 @@
  * Before a user enables zai-web-free or adds a zai-web-token connection,
  * this component checks that:
  *   1. Playwright + Chromium are installed
- *   2. The RouteChi database is accessible
+ *   2. The OmniRoute database is accessible
  *   3. (zai-web-free only) Device token pool is not empty
  *
  * Shows a warning banner with install instructions if any check fails.

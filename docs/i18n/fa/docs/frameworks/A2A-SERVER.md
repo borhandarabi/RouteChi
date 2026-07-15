@@ -1,12 +1,12 @@
 ---
-title: "مستندات سرور A2A ی RouteChi"
+title: "مستندات سرور A2A ی OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# مستندات سرور A2A ی RouteChi
+# مستندات سرور A2A ی OmniRoute
 
-> پروتکل Agent-to-Agent نسخه‌ی v0.3 — RouteChi به‌عنوان یک عامل مسیریابی هوشمند
+> پروتکل Agent-to-Agent نسخه‌ی v0.3 — OmniRoute به‌عنوان یک عامل مسیریابی هوشمند
 
 سطح A2A دو چهره دارد:
 
@@ -21,7 +21,7 @@ lastUpdated: 2026-06-28
 curl http://localhost:20128/.well-known/agent.json
 ```
 
-Agent Card را برمی‌گرداند که قابلیت‌ها، مهارت‌ها و الزامات احراز هویت RouteChi را توصیف می‌کند.
+Agent Card را برمی‌گرداند که قابلیت‌ها، مهارت‌ها و الزامات احراز هویت OmniRoute را توصیف می‌کند.
 
 فیلد `version` ی Agent Card از `process.env.npm_package_version` تامین می‌شود (به `src/app/.well-known/agent.json/route.ts:13` مراجعه کنید)، بنابراین در هر انتشار با `package.json` به‌صورت خودکار همگام می‌ماند.
 
@@ -139,22 +139,22 @@ curl -X POST http://localhost:20128/a2a \
 
 ## مهارت‌های موجود
 
-RouteChi ۶ مهارت A2A افشا می‌کند که در `src/lib/a2a/taskExecution.ts::A2A_SKILL_HANDLERS` متصل شده‌اند. هر ماژول مهارت در `src/lib/a2a/skills/` قرار دارد.
+OmniRoute ۶ مهارت A2A افشا می‌کند که در `src/lib/a2a/taskExecution.ts::A2A_SKILL_HANDLERS` متصل شده‌اند. هر ماژول مهارت در `src/lib/a2a/skills/` قرار دارد.
 
 | Skill              | ID                   | Description                                                                                                     | Tags                       | Examples                               |
 | :----------------- | :------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------------------- | :------------------------------------- |
-| Smart Routing      | `smart-routing`      | Routes a prompt through the optimal provider/combo using RouteChi's combo engine + scoring                     | routing, providers         | "Route this prompt via the best model" |
+| Smart Routing      | `smart-routing`      | Routes a prompt through the optimal provider/combo using OmniRoute's combo engine + scoring                     | routing, providers         | "Route this prompt via the best model" |
 | Quota Management   | `quota-management`   | Reports per-provider quota state, helps callers decide when to throttle/switch                                  | quota, providers           | "Check quota for anthropic"            |
 | Provider Discovery | `provider-discovery` | Lists installed providers with capabilities, free-tier flags, OAuth status                                      | providers, discovery       | "What providers are available?"        |
 | Cost Analysis      | `cost-analysis`      | Estimates cost of a request/conversation given the catalog + recent usage                                       | cost, usage                | "Estimate cost for this conversation"  |
 | Health Report      | `health-report`      | Aggregates circuit breaker, cooldown, lockout state per provider                                                | health, resilience         | "Show health status of all providers"  |
-| List Capabilities  | `list-capabilities`  | Returns the full 42-entry Agent Skills catalog as a markdown table with raw SKILL.md URLs for context injection | catalog, discovery, skills | "List all RouteChi capabilities"      |
+| List Capabilities  | `list-capabilities`  | Returns the full 42-entry Agent Skills catalog as a markdown table with raw SKILL.md URLs for context injection | catalog, discovery, skills | "List all OmniRoute capabilities"      |
 
 > نکته: توصیف Agent Card در حال حاضر «36+ providers» را تبلیغ می‌کند (`src/app/.well-known/agent.json/route.ts:26` و `:55`). فهرست واقعی به ۱۸۰+ پروایدر رشد کرده است — این رشته باید در یک تغییر پیگیری‌شده به‌روزرسانی شود (به‌عنوان یک TODO جداگانه‌ی مستند/کد پیگیری شده؛ در اینجا تغییر نکرده است).
 
 ### جزئیات مهارت `list-capabilities`
 
-مهارت `list-capabilities` به‌ویژه برای عامل‌های خارجی که نیاز دارند پیش از ارسال فراخوانی‌های API بدانند RouteChi چه چیزی افشا می‌کند، مفید است. یک آرتیفکت جدول markdown ساختاریافته برمی‌گرداند:
+مهارت `list-capabilities` به‌ویژه برای عامل‌های خارجی که نیاز دارند پیش از ارسال فراخوانی‌های API بدانند OmniRoute چه چیزی افشا می‌کند، مفید است. یک آرتیفکت جدول markdown ساختاریافته برمی‌گرداند:
 
 ```
 | ID | Name | Category | Area | Endpoints/Commands | Raw URL |

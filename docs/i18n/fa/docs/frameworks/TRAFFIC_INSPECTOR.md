@@ -6,7 +6,7 @@ lastUpdated: 2026-06-28
 
 # بازرس ترافیک
 
-بازرس ترافیک اشکال‌زدای HTTPS داخلی RouteChi است — ابزاری شبیه Charles Proxy / mitmweb / HTTP Toolkit که **آگاه به LLM** و **آگاه به عامل** است. این ابزار در `/dashboard/tools/traffic-inspector` قرار دارد و ترافیک زنده را از حداکثر ۵ منبع capture همزمان دریافت می‌کند.
+بازرس ترافیک اشکال‌زدای HTTPS داخلی OmniRoute است — ابزاری شبیه Charles Proxy / mitmweb / HTTP Toolkit که **آگاه به LLM** و **آگاه به عامل** است. این ابزار در `/dashboard/tools/traffic-inspector` قرار دارد و ترافیک زنده را از حداکثر ۵ منبع capture همزمان دریافت می‌کند.
 
 **موقعیت داشبورد:** `/dashboard/tools/traffic-inspector`
 **گروه نوار کناری:** Tools (پس از AgentBridge)
@@ -18,7 +18,7 @@ lastUpdated: 2026-06-28
 
 ### چه چیزی بازرس ترافیک را منحصربه‌فرد می‌کند
 
-| قابلیت                                                             | mitmweb | Charles | Fiddler | **بازرس ترافیک RouteChi** |
+| قابلیت                                                             | mitmweb | Charles | Fiddler | **بازرس ترافیک OmniRoute** |
 | ------------------------------------------------------------------- | :-----: | :-----: | :-----: | :-----------------------------: |
 | مبتنی بر وب                                                           |    ✓    |    ✗    |    ✗    |                ✓                |
 | متن‌باز                                                         |    ✓    |    ✗    | جزئی |                ✓                |
@@ -26,7 +26,7 @@ lastUpdated: 2026-06-28
 | **آگاه به LLM** (ساختار OpenAI/Anthropic/Gemini، توکن‌ها، مدل را تجزیه می‌کند) |    ✗    |    ✗    |    ✗    |                ✓                |
 | **نگاشت مدل قابل‌مشاهده** (gemini-3-flash → claude-sonnet-4.7)      |    ✗    |    ✗    |    ✗    |                ✓                |
 | **تفکیک latency پروکسی/upstream**                                    | جزئی |    ✗    |    ✗    |                ✓                |
-| **یکپارچه با مسیریابی، fallback، هزینه RouteChi**               |    ✗    |    ✗    |    ✗    |                ✓                |
+| **یکپارچه با مسیریابی، fallback، هزینه OmniRoute**               |    ✗    |    ✗    |    ✗    |                ✓                |
 | **اشکال‌زدای پروکسی سراسسی** (هر اپ روی ماشین)                |    ✓    |    ✓    |    ✓    |                ✓                |
 | **capture میزبان سفارشی** (تغییر مسیر DNS به ازای میزبان)                     |    ✓    |    ✓    |    ✓    |                ✓                |
 | **حالت env مربوط به HTTP_PROXY**                                             |    ✓    |    ✓    |    ✓    |                ✓                |
@@ -257,7 +257,7 @@ interface LlmMetadata {
   tokensOut: number | null; // usage.completion_tokens / usage.output_tokens
   streamed: boolean; // true اگر پاسخ SSE باشد
   mappedTo: string | null; // هدر x-omniroute-mapped
-  costEstimateUsd: number | null; // برآورد هزینه بر اساس قیمت‌گذاری RouteChi
+  costEstimateUsd: number | null; // برآورد هزینه بر اساس قیمت‌گذاری OmniRoute
 }
 ```
 
@@ -388,7 +388,7 @@ INSPECTOR_HTTP_PROXY_PORT=8888
 
 ### عدم بازگشت پروکسی سیستم
 
-اگر RouteChi هنگامی که حالت پروکسی سراسسی فعال است کرش کند:
+اگر OmniRoute هنگامی که حالت پروکسی سراسسی فعال است کرش کند:
 
 **macOS:**
 
@@ -433,7 +433,7 @@ netsh winhttp reset proxy
 | GET    | `/requests`                 | فهرست درخواست‌ها (قابل فیلتر: `?profile=llm&host=&agent=&status=&source=&sessionId=`) |
 | GET    | `/requests/{id}`            | جزئیات یک درخواست واحد                                                             |
 | DELETE | `/requests`                 | پاک‌کردن بافر درون‌حافظه‌ای                                                         |
-| POST   | `/requests/{id}/replay`     | اجرای مجدد همان درخواست از طریق روتر RouteChi                               |
+| POST   | `/requests/{id}/replay`     | اجرای مجدد همان درخواست از طریق روتر OmniRoute                               |
 | PUT    | `/requests/{id}/annotation` | ذخیره یا به‌روزرسانی یک یادداشت روی یک درخواست                                                 |
 
 ### WebSocket

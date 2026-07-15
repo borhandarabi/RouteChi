@@ -9,29 +9,29 @@ lastUpdated: 2026-06-28
 > **منبع حقیقت:** `src/lib/skills/` و `src/app/api/skills/`
 > **آخرین به‌روزرسانی:** ۲۸-۰۶-۲۰۲۶ — v3.8.40
 
-RouteChi یک چارچوب مهارت‌های قابل‌توسعه افشا می‌کند که به مدل‌های زبانی (و اپراتورها) اجازه می‌دهد قابلیت‌های قابل‌استفاده‌ی مجدد بسازند — از خواندن فایل‌سیستم و درخواست‌های HTTP تا اجرای کد سندباکس‌شده و مهارت‌های انتخاب‌شده‌ی مارکت‌پلیس.
+OmniRoute یک چارچوب مهارت‌های قابل‌توسعه افشا می‌کند که به مدل‌های زبانی (و اپراتورها) اجازه می‌دهد قابلیت‌های قابل‌استفاده‌ی مجدد بسازند — از خواندن فایل‌سیستم و درخواست‌های HTTP تا اجرای کد سندباکس‌شده و مهارت‌های انتخاب‌شده‌ی مارکت‌پلیس.
 
-یک مهارت یک واحد کار نسخه‌گذاری‌شده و تعریف‌شده‌توسط‌شما است. RouteChi می‌تواند مهارت‌ها را به‌عنوان تعاریف ابزار به درخواست‌های خروجی تزریق کند، فراخوانی‌های ابزار برگشتی از مدل را قطع کند، هندلر منطبق را اجرا کند و نتیجه را به مدل بازگرداند تا مکالمه ادامه یابد. مدل هرگز پیاده‌سازی را نمی‌بیند — تنها رابط ابزار را.
+یک مهارت یک واحد کار نسخه‌گذاری‌شده و تعریف‌شده‌توسط‌شما است. OmniRoute می‌تواند مهارت‌ها را به‌عنوان تعاریف ابزار به درخواست‌های خروجی تزریق کند، فراخوانی‌های ابزار برگشتی از مدل را قطع کند، هندلر منطبق را اجرا کند و نتیجه را به مدل بازگرداند تا مکالمه ادامه یابد. مدل هرگز پیاده‌سازی را نمی‌بیند — تنها رابط ابزار را.
 
 ---
 
 ## مهارت‌های Agent در برابر مهارت‌های Omni
 
-RouteChi دو سامانه‌ی مهارتی متمایز اما مکمل دارد:
+OmniRoute دو سامانه‌ی مهارتی متمایز اما مکمل دارد:
 
 | Dimension       | **Omni Skills** (this doc)                                    | **Agent Skills**                                                                            |
 | :-------------- | :------------------------------------------------------------ | :------------------------------------------------------------------------------------------ |
 | Purpose         | LLM tool injection + sandboxed execution                      | SKILL.md catalog for external agents to discover and consume                                |
 | Source of truth | `src/lib/skills/` + marketplace                               | `src/lib/agentSkills/` + `skills/` directory                                                |
 | Runtime mode    | Injected into outbound requests, executed on tool-call events | Static markdown catalog + REST/MCP/A2A discovery endpoints                                  |
-| Who uses it     | RouteChi itself (combo routing, inbound LLM calls)           | External agents, MCP clients, A2A orchestrators                                             |
+| Who uses it     | OmniRoute itself (combo routing, inbound LLM calls)           | External agents, MCP clients, A2A orchestrators                                             |
 | Count           | Variable (marketplace-driven)                                 | 42 canonical entries (22 API + 20 CLI)                                                      |
 | Format          | `SkillDefinition` with tool schema + handler                  | `SKILL.md` frontmatter + markdown body                                                      |
 | Discovery       | `/api/skills/*` REST + `omniroute_skills_*` MCP tools         | `/api/agent-skills/*` REST + `omniroute_agent_skills_*` MCP tools + A2A `list-capabilities` |
 
-**Omni Skills** موتور اجرایی هستند — آن‌ها تعریف می‌کنند RouteChi چه‌کاره است وقتی یک LLM ابزاری را فراخوانی می‌کند.
+**Omni Skills** موتور اجرایی هستند — آن‌ها تعریف می‌کنند OmniRoute چه‌کاره است وقتی یک LLM ابزاری را فراخوانی می‌کند.
 
-**Agent Skills** فهرست مستندات هستند — آن‌ها به عامل‌های خارجی توضیح می‌دهند چگونه از REST API و CLI ی RouteChi استفاده کنند، با فایل‌های SKILL.md ساختاریافته که می‌توانند مستقیماً در promptهای عامل تزریق شوند.
+**Agent Skills** فهرست مستندات هستند — آن‌ها به عامل‌های خارجی توضیح می‌دهند چگونه از REST API و CLI ی OmniRoute استفاده کنند، با فایل‌های SKILL.md ساختاریافته که می‌توانند مستقیماً در promptهای عامل تزریق شوند.
 
 برای فهرست Agent Skills، مولد، ابزارهای MCP و مهارت A2A، به [docs/frameworks/AGENT-SKILLS.md](./AGENT-SKILLS.md) مراجعه کنید.
 
@@ -43,14 +43,14 @@ RouteChi دو سامانه‌ی مهارتی متمایز اما مکمل دار
 
 سه منبع مهارت در یک رجیستری مشترک همزیستی می‌کنند:
 
-1. **مهارت‌های داخلی** (`src/lib/skills/builtins.ts`) — همراه RouteChi توزیع می‌شوند. موارد رایج را پوشش می‌دهند:
+1. **مهارت‌های داخلی** (`src/lib/skills/builtins.ts`) — همراه OmniRoute توزیع می‌شوند. موارد رایج را پوشش می‌دهند:
    - `file_read`، `file_write` — فضای کار سندباکس به‌ازای‌کلید‌API تحت `<DATA_DIR>/skills/workspaces/<hashed-key>/`
    - `http_request` — HTTP خروجی از طریق `safeOutboundFetch` با `guard: "public-only"`
    - `web_search` — پروایدر جستجوی قابل‌تعویض با کش (`executeWebSearch`)
    - `eval_code` — اجرای `node` یا `python` سندباکس‌شده‌در‌Docker
    - `execute_command` — دستور شل سندباکس‌شده‌در‌Docker
    - `browser` — داربست مبتنی بر Playwright، به‌صورت پیش‌فرض غیرفعال (`builtin/browser.ts`)
-2. **SkillsMP** (مارکت‌پلیس RouteChi) — از `https://skillsmp.com/api/v1/skills/search` دریافت می‌شود. نیازمند `skillsmpApiKey` در Settings است.
+2. **SkillsMP** (مارکت‌پلیس OmniRoute) — از `https://skillsmp.com/api/v1/skills/search` دریافت می‌شود. نیازمند `skillsmpApiKey` در Settings است.
 3. **SkillsSH** (`skills.sh` فهرست جامعه) — از `https://skills.sh/api/search` دریافت می‌شود. نیازی به احراز هویت نیست؛ محتوای SKILL.md از GitHub raw دریافت می‌شود.
 
 یک «active provider» واحد کنترل می‌کند که داشبورد از کدام فهرست نصب می‌کند (`src/lib/skills/providerSettings.ts`). آن را تحت **Settings → Memory & Skills** تعویض کنید. پیش‌فرض: `skillsmp`.
@@ -444,7 +444,7 @@ enum SkillMode {
 
 ## فهرست مهارت‌های داخلی
 
-RouteChi با مجموعه‌ای انتخاب‌شده از مهارت‌های داخلی در `src/lib/skills/builtin/` همراه است. رایج‌ترین‌ها:
+OmniRoute با مجموعه‌ای انتخاب‌شده از مهارت‌های داخلی در `src/lib/skills/builtin/` همراه است. رایج‌ترین‌ها:
 
 ### مهارت اتوماسیون مرورگر
 

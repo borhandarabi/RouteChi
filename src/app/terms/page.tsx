@@ -77,7 +77,7 @@ export default function TermsPage() {
           <p>
             {t("questionsVisit")}{" "}
             <a
-              href="https://github.com/diegosouzapw/RouteChi"
+              href="https://github.com/diegosouzapw/OmniRoute"
               className="text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"

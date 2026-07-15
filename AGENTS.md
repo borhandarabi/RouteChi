@@ -470,7 +470,7 @@ custom skill support, interception, and injection.
   Receives skill name + input, looks up the skill, runs it in the sandbox.
 - **`sandbox.ts`**: Isolation layer for custom (user-provided) skills. Limits resource
   access and execution time.
-- **Built-in skills**: Ship with RouteChi (e.g., quota management, routing). Located
+- **Built-in skills**: Ship with OmniRoute (e.g., quota management, routing). Located
   alongside the registry.
 - **Interception/Injection**: Skills can intercept requests in the pipeline (pre/post
   processing) or inject context into prompts.
@@ -566,7 +566,7 @@ For any non-trivial change, read the matching deep-dive first:
 
 ## Fork / Upstream Workflow
 
-This repository is a fork of `diegosouzapw/RouteChi`. Keep fork-only operational
+This repository is a fork of `diegosouzapw/OmniRoute`. Keep fork-only operational
 changes (for example GHCR image publishing, personal deployment workflows, or local
 automation) out of upstream contribution PRs.
 

@@ -1,7 +1,7 @@
 {
   "common": {
     "error": "错误：{message}",
-    "serverOffline": "RouteChi 服务器已离线。请启动：omniroute serve",
+    "serverOffline": "OmniRoute 服务器已离线。请启动：omniroute serve",
     "authRequired": "需要认证。请设置 OMNIROUTE_API_KEY 或运行：omniroute setup",
     "rateLimited": "请求超出限制。请在 {seconds}s 后重试。",
     "timeout": "请求在 {ms}ms 后超时。",
@@ -15,19 +15,19 @@
     "yesOpt": "跳过确认"
   },
   "program": {
-    "description": "RouteChi — 具有自动故障转移的智能 AI 路由器",
+    "description": "OmniRoute — 具有自动故障转移的智能 AI 路由器",
     "version": "打印版本并退出",
     "output": "输出格式（table, json, jsonl, csv）",
     "quiet": "禁止非必要输出",
     "no_color": "禁用彩色输出",
     "timeout": "HTTP 请求超时（毫秒）",
-    "api_key": "RouteChi 服务器的 API 密钥",
-    "base_url": "RouteChi 服务器的基础 URL",
+    "api_key": "OmniRoute 服务器的 API 密钥",
+    "base_url": "OmniRoute 服务器的基础 URL",
     "context": "此命令使用的服务器上下文/配置文件",
     "lang": "设置 CLI 显示语言（覆盖 OMNIROUTE_LANG）"
   },
   "setup": {
-    "title": "RouteChi 设置",
+    "title": "OmniRoute 设置",
     "passwordPrompt": "管理员密码",
     "providerPrompt": "默认提供商（留空跳过）",
     "done": "设置完成",
@@ -41,7 +41,7 @@
     "providerInfo": "提供商：{info}"
   },
   "doctor": {
-    "title": "RouteChi 诊断",
+    "title": "OmniRoute 诊断",
     "dbOk": "数据库：正常（{path}）",
     "dbMissing": "数据库：未初始化 — 运行 omniroute setup",
     "portOk": "端口 {port}：可用",
@@ -93,7 +93,7 @@
       "providerOpt": "按提供商名称筛选",
       "header": "ID         提供商       名称                     过期状态  测试状态  冷却至",
       "noData": "没有可用的提供商连接数据。",
-      "requiresServer": "providers status 需要 RouteChi 服务器正在运行。"
+      "requiresServer": "providers status 需要 OmniRoute 服务器正在运行。"
     }
   },
   "keys": {
@@ -101,8 +101,8 @@
     "addDescription": "为提供商添加或更新 API 密钥",
     "listDescription": "列出所有已配置的 API 密钥",
     "removeDescription": "移除提供商的 API 密钥",
-    "regenerateDescription": "重新生成 RouteChi API 密钥",
-    "revokeDescription": "撤销 RouteChi API 密钥",
+    "regenerateDescription": "重新生成 OmniRoute API 密钥",
+    "revokeDescription": "撤销 OmniRoute API 密钥",
     "revealDescription": "显示未掩码的 API 密钥值",
     "usageDescription": "显示 API 密钥的最近使用情况",
     "usageLimitOpt": "最近请求数",
@@ -220,7 +220,7 @@
     "noCombo": "未找到匹配的组合。使用以下命令配置：omniroute combo create"
   },
   "chat": {
-    "description": "向 RouteChi 发送一次性聊天提示",
+    "description": "向 OmniRoute 发送一次性聊天提示",
     "file": "从文件读取提示",
     "stdin": "从标准输入读取提示",
     "system": "系统提示",
@@ -239,8 +239,8 @@
     }
   },
   "serve": {
-    "description": "启动 RouteChi 服务器（默认操作）",
-    "starting": "正在启动 RouteChi 服务器（端口 {port}）...",
+    "description": "启动 OmniRoute 服务器（默认操作）",
+    "starting": "正在启动 OmniRoute 服务器（端口 {port}）...",
     "ready": "就绪地址：http://localhost:{port}",
     "stopping": "正在停止服务器（PID {pid}）...",
     "stopped": "服务器已停止。",
@@ -256,7 +256,7 @@
   },
   "backup": {
     "title": "备份",
-    "description": "创建 RouteChi 数据备份",
+    "description": "创建 OmniRoute 数据备份",
     "creating": "正在创建备份...",
     "done": "备份已保存至 {path}",
     "noFiles": "没有可备份的文件（数据库未初始化）",
@@ -268,7 +268,7 @@
     "noBackups": "未找到备份。",
     "notFound": "未找到备份：{name}",
     "confirmRestore": "用 {ts} 的备份覆盖当前数据？",
-    "createDescription": "创建 RouteChi 数据备份",
+    "createDescription": "创建 OmniRoute 数据备份",
     "nameOpt": "自定义备份名称",
     "cloudOpt": "将备份上传到云存储",
     "encryptOpt": "使用 AES-256-GCM 加密备份",
@@ -312,7 +312,7 @@
     "clearFailed": "清除缓存失败。"
   },
   "redis": {
-    "description": "一键启动本地 Redis 容器（Podman 或 Docker），用于 RouteChi 缓存和配额跟踪"
+    "description": "一键启动本地 Redis 容器（Podman 或 Docker），用于 OmniRoute 缓存和配额跟踪"
   },
   "test": {
     "description": "测试提供商连接",
@@ -400,7 +400,7 @@
     }
   },
   "policy": {
-    "description": "管理 RouteChi 授权策略",
+    "description": "管理 OmniRoute 授权策略",
     "list": {
       "description": "列出策略",
       "kind": "按类型筛选（allow|deny|rate-limit|cost-cap）",
@@ -437,7 +437,7 @@
     }
   },
   "compression": {
-    "description": "配置和检查 RouteChi 压缩管道",
+    "description": "配置和检查 OmniRoute 压缩管道",
     "status": {
       "description": "显示当前压缩状态和设置"
     },
@@ -491,18 +491,18 @@
     "confirmRotate": "轮换隧道 {type}？（将生成新 URL）"
   },
   "stop": {
-    "description": "停止 RouteChi 服务器",
+    "description": "停止 OmniRoute 服务器",
     "stopping": "正在停止服务器（PID {pid}）...",
     "stopped": "服务器已停止。",
     "notRunning": "没有服务器在运行。",
     "portFallback": "未找到 PID 文件，尝试通过端口停止..."
   },
   "restart": {
-    "description": "重启 RouteChi 服务器",
-    "restarting": "正在重启 RouteChi 服务器..."
+    "description": "重启 OmniRoute 服务器",
+    "restarting": "正在重启 OmniRoute 服务器..."
   },
   "dashboard": {
-    "description": "在浏览器中打开 RouteChi 仪表盘",
+    "description": "在浏览器中打开 OmniRoute 仪表盘",
     "opening": "正在打开仪表盘：{url}",
     "urlOnly": "仅打印仪表盘 URL，不打开浏览器",
     "tui": "打开交互式 TUI 仪表盘（终端 UI，7 个标签页）"
@@ -542,7 +542,7 @@
     }
   },
   "skills": {
-    "description": "管理 RouteChi 技能（沙箱、内置、自定义、混合、skillssh）",
+    "description": "管理 OmniRoute 技能（沙箱、内置、自定义、混合、skillssh）",
     "list": {
       "description": "列出已安装的技能",
       "type": "按类型筛选（sandbox|custom|builtin|hybrid|skillssh）",
@@ -615,7 +615,7 @@
     }
   },
   "memory": {
-    "description": "管理 RouteChi 对话记忆（FTS5 + 向量）",
+    "description": "管理 OmniRoute 对话记忆（FTS5 + 向量）",
     "search": {
       "description": "按语义查询搜索记忆条目",
       "type": "按记忆类型筛选（user|feedback|project|reference）",
@@ -773,7 +773,7 @@
     }
   },
   "webhooks": {
-    "description": "管理 RouteChi Webhook",
+    "description": "管理 OmniRoute Webhook",
     "events": {
       "description": "列出所有可用的 Webhook 事件类型"
     },
@@ -1046,7 +1046,7 @@
     }
   },
   "openapi": {
-    "description": "访问和测试 RouteChi OpenAPI 规范",
+    "description": "访问和测试 OmniRoute OpenAPI 规范",
     "dump": {
       "description": "将 OpenAPI 规范输出到 stdout 或文件",
       "format": "输出格式：yaml|json（默认：yaml）",
@@ -1116,7 +1116,7 @@
     }
   },
   "open": {
-    "description": "在浏览器中打开特定的 RouteChi 仪表盘页面",
+    "description": "在浏览器中打开特定的 OmniRoute 仪表盘页面",
     "url": "仅打印 URL，不打开浏览器"
   },
   "telemetry": {
@@ -1133,7 +1133,7 @@
     }
   },
   "sync": {
-    "description": "在 RouteChi 实例之间同步配置",
+    "description": "在 OmniRoute 实例之间同步配置",
     "push": {
       "description": "将配置推送到云或远程实例",
       "target": "目标（cloud 或 context:name）",
@@ -1209,7 +1209,7 @@
     "filter": "按级别筛选（error,warn,info）— 逗号分隔",
     "lines": "要获取的行数",
     "timeout": "连接超时（毫秒）",
-    "baseUrl": "RouteChi API 基础 URL",
+    "baseUrl": "OmniRoute API 基础 URL",
     "requestId": "按请求 ID 筛选",
     "apiKey": "按 API 密钥筛选",
     "combo": "按组合名称筛选",
@@ -1225,10 +1225,10 @@
     "description": "控制系统托盘图标",
     "show": "显示托盘图标（如果服务器使用 --tray 运行）",
     "hide": "隐藏托盘图标",
-    "quit": "通过托盘退出 RouteChi"
+    "quit": "通过托盘退出 OmniRoute"
   },
   "autostart": {
-    "description": "管理 RouteChi 开机自启（Linux：systemd 用户服务）",
+    "description": "管理 OmniRoute 开机自启（Linux：systemd 用户服务）",
     "enable": "启用开机自启",
     "disable": "禁用开机自启",
     "status": "显示自启状态",

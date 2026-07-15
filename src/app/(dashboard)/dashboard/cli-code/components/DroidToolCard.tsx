@@ -521,7 +521,7 @@ export default function DroidToolCard({
                   variant="outline"
                   size="sm"
                   onClick={handleResetSettings}
-                  disabled={!droidStatus?.hasRouteChi}
+                  disabled={!droidStatus?.hasOmniRoute}
                   loading={restoring}
                 >
                   <span className="material-symbols-outlined text-[14px] mr-1">restore</span>

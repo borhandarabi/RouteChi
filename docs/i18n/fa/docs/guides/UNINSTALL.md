@@ -1,20 +1,20 @@
 ---
-title: "RouteChi — راهنمای حذف نصب"
+title: "OmniRoute — راهنمای حذف نصب"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# RouteChi — راهنمای حذف نصب
+# OmniRoute — راهنمای حذف نصب
 
 🌐 **Languages:** 🇺🇸 [English](./UNINSTALL.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/guides/UNINSTALL.md) | 🇪🇸 [Español](../i18n/es/docs/guides/UNINSTALL.md) | 🇫🇷 [Français](../i18n/fr/docs/guides/UNINSTALL.md) | 🇮🇹 [Italiano](../i18n/it/docs/guides/UNINSTALL.md) | 🇷🇺 [Русский](../i18n/ru/docs/guides/UNINSTALL.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/guides/UNINSTALL.md) | 🇩🇪 [Deutsch](../i18n/de/docs/guides/UNINSTALL.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/guides/UNINSTALL.md) | 🇹🇭 [ไทย](../i18n/th/docs/guides/UNINSTALL.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/guides/UNINSTALL.md) | 🇸🇦 [العربية](../i18n/ar/docs/guides/UNINSTALL.md) | 🇯🇵 [日本語](../i18n/ja/docs/guides/UNINSTALL.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/guides/UNINSTALL.md) | 🇧🇬 [Български](../i18n/bg/docs/guides/UNINSTALL.md) | 🇩🇰 [Dansk](../i18n/da/docs/guides/UNINSTALL.md) | 🇫🇮 [Suomi](../i18n/fi/docs/guides/UNINSTALL.md) | 🇮🇱 [עברית](../i18n/he/docs/guides/UNINSTALL.md) | 🇭🇺 [Magyar](../i18n/hu/docs/guides/UNINSTALL.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/guides/UNINSTALL.md) | 🇰🇷 [한국어](../i18n/ko/docs/guides/UNINSTALL.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/guides/UNINSTALL.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/guides/UNINSTALL.md) | 🇳🇴 [Norsk](../i18n/no/docs/guides/UNINSTALL.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/guides/UNINSTALL.md) | 🇷🇴 [Română](../i18n/ro/docs/guides/UNINSTALL.md) | 🇵🇱 [Polski](../i18n/pl/docs/guides/UNINSTALL.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/guides/UNINSTALL.md) | 🇸🇪 [Svenska](../i18n/sv/docs/guides/UNINSTALL.md) | 🇵🇭 [Filipino](../i18n/phi/docs/guides/UNINSTALL.md) | 🇨🇿 [Čeština](../i18n/cs/docs/guides/UNINSTALL.md)
 
-این راهنما نحوهٔ حذف کامل RouteChi از سامانه شما را پوشش می‌دهد.
+این راهنما نحوهٔ حذف کامل OmniRoute از سامانه شما را پوشش می‌دهد.
 
 ---
 
 ## حذف نصب سریع (v3.6.2 به بعد)
 
-RouteChi دو اسکریپت داخلی برای حذف تمیز ارائه می‌دهد:
+OmniRoute دو اسکریپت داخلی برای حذف تمیز ارائه می‌دهد:
 
 ### نگه‌داشتن داده‌های شما
 
@@ -22,7 +22,7 @@ RouteChi دو اسکریپت داخلی برای حذف تمیز ارائه می
 npm run uninstall
 ```
 
-این دستور برنامهٔ RouteChi را حذف می‌کند اما پایگاه داده، پیکربندی‌ها، کلیدهای API و تنظیمات ارائه‌دهنده را در `~/.omniroute/` **حفظ می‌کند**. اگر قصد دارید بعداً دوباره نصب کنید و می‌خواهید راه‌اندازی فعلی را نگه دارید، از این گزینه استفاده کنید.
+این دستور برنامهٔ OmniRoute را حذف می‌کند اما پایگاه داده، پیکربندی‌ها، کلیدهای API و تنظیمات ارائه‌دهنده را در `~/.omniroute/` **حفظ می‌کند**. اگر قصد دارید بعداً دوباره نصب کنید و می‌خواهید راه‌اندازی فعلی را نگه دارید، از این گزینه استفاده کنید.
 
 ### حذف کامل
 
@@ -116,7 +116,7 @@ rm -rf ~/.omniroute
 
 ## شاخه‌های داده
 
-RouteChi به‌طور پیش‌فرض داده‌ها را در مسیرهای زیر ذخیره می‌کند:
+OmniRoute به‌طور پیش‌فرض داده‌ها را در مسیرهای زیر ذخیره می‌کند:
 
 | پلتفرم       | مسیر پیش‌فرض                  | متغیر بازنویسی            |
 | ------------- | ----------------------------- | ------------------------- |

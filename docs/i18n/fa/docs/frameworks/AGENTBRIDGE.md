@@ -6,7 +6,7 @@ lastUpdated: 2026-06-28
 
 # AgentBridge
 
-AgentBridge پراکسی MITM (Man-in-the-Middle) ی RouteChi است که ترافیک HTTPS از عامل‌های هوش مصنوعی IDE را قطع کرده و آن را از طریق موتور مسیریابی یکپارچه‌ی RouteChi مسیریابی مجدد می‌کند. این پراکسی از **۹ عامل IDE** پشتیبانی می‌کند — Antigravity، Kiro، GitHub Copilot، OpenAI Codex، Cursor، Zed، Claude Code، Open Code و Trae (در حال بررسی) — که RouteChi را به گسترده‌ترین‌پوشش پراکسی MITM برای دستیاران کدنویسی هوش مصنوعی در بازار تبدیل می‌کند.
+AgentBridge پراکسی MITM (Man-in-the-Middle) ی OmniRoute است که ترافیک HTTPS از عامل‌های هوش مصنوعی IDE را قطع کرده و آن را از طریق موتور مسیریابی یکپارچه‌ی OmniRoute مسیریابی مجدد می‌کند. این پراکسی از **۹ عامل IDE** پشتیبانی می‌کند — Antigravity، Kiro، GitHub Copilot، OpenAI Codex، Cursor، Zed، Claude Code، Open Code و Trae (در حال بررسی) — که OmniRoute را به گسترده‌ترین‌پوشش پراکسی MITM برای دستیاران کدنویسی هوش مصنوعی در بازار تبدیل می‌کند.
 
 **محل داشبورد:** `/dashboard/tools/agent-bridge`
 **گروه نوار کناری:** Tools (پس از Cloud Agents)
@@ -18,18 +18,18 @@ AgentBridge پراکسی MITM (Man-in-the-Middle) ی RouteChi است که ترا
 
 ### AgentBridge چیست؟
 
-هنگامی که یک عامل IDE (مثلاً GitHub Copilot، Cursor، Claude Code) یک فراخوانی API انجام می‌دهد، مستقیماً به پروایدر هوش مصنوعی upstream (OpenAI، Anthropic و غیره) متصل می‌شود. AgentBridge آن اتصال را به‌صورت شفاف در سطح TLS قطع می‌کند — بدون نیاز به هیچ تغییری در پیکربندی عامل — و درخواست را از طریق RouteChi بازنویسی می‌کند.
+هنگامی که یک عامل IDE (مثلاً GitHub Copilot، Cursor، Claude Code) یک فراخوانی API انجام می‌دهد، مستقیماً به پروایدر هوش مصنوعی upstream (OpenAI، Anthropic و غیره) متصل می‌شود. AgentBridge آن اتصال را به‌صورت شفاف در سطح TLS قطع می‌کند — بدون نیاز به هیچ تغییری در پیکربندی عامل — و درخواست را از طریق OmniRoute بازنویسی می‌کند.
 
 این بدان معناست که می‌توانید:
 
-- **مسیریابی مجدد هر عامل به هر پروایدر**: Copilot با OpenAI صحبت می‌کند؟ آن را به Anthropic Claude، Gemini یا هر یک از ۲۲۶+ پروایدر RouteChi هدایت مجدد کنید.
+- **مسیریابی مجدد هر عامل به هر پروایدر**: Copilot با OpenAI صحبت می‌کند؟ آن را به Anthropic Claude، Gemini یا هر یک از ۲۲۶+ پروایدر OmniRoute هدایت مجدد کنید.
 - **اعمال نگاشت مدل‌ها**: `gemini-3-flash` → `claude-sonnet-4.7` به‌صورت شفاف در سطح هندلر.
 - **مشاهده‌ی همه‌ی ترافیک عامل**: هر درخواست قطع‌شده به [Traffic Inspector](./TRAFFIC_INSPECTOR.md) منتشر می‌شود.
-- **اعمال تاب‌آوری RouteChi**: مسیریابی combo، circuit breakerها، fallbackها و ردیابی هزینه برای ترافیک عامل IDE نیز کار می‌کنند.
+- **اعمال تاب‌آوری OmniRoute**: مسیریابی combo، circuit breakerها، fallbackها و ردیابی هزینه برای ترافیک عامل IDE نیز کار می‌کنند.
 
 ### موقعیت‌یابی در برابر بازار
 
-| Feature           | 9router | anti-api | llm-interceptor | **RouteChi AgentBridge** |
+| Feature           | 9router | anti-api | llm-interceptor | **OmniRoute AgentBridge** |
 | ----------------- | :-----: | :------: | :-------------: | :-----------------------: |
 | Antigravity       |    ✓    |    ✓     |        —        |             ✓             |
 | GitHub Copilot    |    ✓    |    ✓     |        —        |             ✓             |
@@ -42,7 +42,7 @@ AgentBridge پراکسی MITM (Man-in-the-Middle) ی RouteChi است که ترا
 | Trae              |    —    |    —     |        —        |     🔍 Investigating      |
 | Dashboard UI      |    ✓    |    ✗     |        ✗        |             ✓             |
 | Traffic Inspector |    ✗    |    ✗     |        ✓        |             ✓             |
-| RouteChi routing |    ✗    |    ✗     |        ✗        |             ✓             |
+| OmniRoute routing |    ✗    |    ✗     |        ✗        |             ✓             |
 | Model mapping UI  |    ✗    |    ✗     |        ✗        |             ✓             |
 | Bypass list       |    ✗    |    ✗     |        ✓        |             ✓             |
 | Upstream CA cert  |    ✗    |    ✗     |        ✓        |             ✓             |
@@ -243,7 +243,7 @@ runtime ی Node.js خود را بسته‌بندی می‌کنند که برای
 
 از جدول Model Mapping در هر کارت عامل برای تعریف نگاشت‌های source → target استفاده کنید:
 
-| Source model (agent native) | Target model (RouteChi) |
+| Source model (agent native) | Target model (OmniRoute) |
 | --------------------------- | ------------------------ |
 | `gpt-4o`                    | `claude-sonnet-4.7`      |
 | `*` (wildcard)              | `claude-haiku-4.7`       |
@@ -259,7 +259,7 @@ Wildcard ی `*` هر مدل شناسایی‌نشده‌ای را به target م
 
 ### ۳.۵ اعلان ریسک
 
-AgentBridge اعتبارنامه‌ها (توکن‌های OAuth، کلیدهای API) را که IDE برای احراز هویت با پروایدرهای upstream استفاده می‌کند، قطع می‌کند. این موارد **پیش از log‌کردن نقاب‌دار می‌شوند** (به §2.7 مراجعه کنید) اما برای لایه‌ی MITM ی RouteChi قابل‌مشاهده‌اند. اولین فعال‌سازی هر عامل یک مودال اعلان ریسک قابل‌ردکردن نمایش می‌دهد.
+AgentBridge اعتبارنامه‌ها (توکن‌های OAuth، کلیدهای API) را که IDE برای احراز هویت با پروایدرهای upstream استفاده می‌کند، قطع می‌کند. این موارد **پیش از log‌کردن نقاب‌دار می‌شوند** (به §2.7 مراجعه کنید) اما برای لایه‌ی MITM ی OmniRoute قابل‌مشاهده‌اند. اولین فعال‌سازی هر عامل یک مودال اعلان ریسک قابل‌ردکردن نمایش می‌دهد.
 
 ### ۳.۶ نگهداری و تشخیص
 
@@ -368,7 +368,7 @@ export async function detectAgent(agentId: AgentId): Promise<DetectionResult>;
 
 ### فهرست bypass برای هاست‌های حساس
 
-فهرست bypass تضمین می‌کند که نهادهای مالی، پروایدرهای OAuth/SSO و سایر هاست‌های حساس **هرگز رمزگشایی نمی‌شوند**. ترافیک TLS آن‌ها به‌عنوان یک تونل TCP شفاف عبور می‌کند — RouteChi هرگز متن‌آشکار را نمی‌بیند.
+فهرست bypass تضمین می‌کند که نهادهای مالی، پروایدرهای OAuth/SSO و سایر هاست‌های حساس **هرگز رمزگشایی نمی‌شوند**. ترافیک TLS آن‌ها به‌عنوان یک تونل TCP شفاف عبور می‌کند — OmniRoute هرگز متن‌آشکار را نمی‌بیند.
 
 الگوهای bypass پیش‌فرض شامل:
 
@@ -470,7 +470,7 @@ ipconfig /flushdns
 اگر AgentBridge قطع می‌کند اما همه‌ی درخواست‌ها شکست می‌خورند:
 
 1. تأیید کنید حداقل یک پروایدر در `/dashboard/providers` متصل است
-2. logهای سرور RouteChi را بررسی کنید: `APP_LOG_LEVEL=debug` در `.env`
+2. logهای سرور OmniRoute را بررسی کنید: `APP_LOG_LEVEL=debug` در `.env`
 3. تأیید کنید `OMNIROUTE_BASE_URL` به نقطه‌ی پایانی router درست اشاره می‌کند (پیش‌فرض: `http://127.0.0.1:20128`)
 
 ---

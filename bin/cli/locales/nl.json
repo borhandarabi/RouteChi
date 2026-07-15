@@ -15,7 +15,7 @@
     "yesOpt": "Bevestiging overslaan"
   },
   "program": {
-    "description": "RouteChi — Slimme AI-router met automatische fallback",
+    "description": "OmniRoute — Slimme AI-router met automatische fallback",
     "version": "Versie afdrukken en afsluiten",
     "output": "Uitvoerformaat (table, json, jsonl, csv)",
     "quiet": "Niet-essentiële uitvoer onderdrukken",

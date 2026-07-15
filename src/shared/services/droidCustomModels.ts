@@ -1,8 +1,8 @@
 /**
- * Build the RouteChi `customModels` entries for Factory Droid's `settings.json`.
+ * Build the OmniRoute `customModels` entries for Factory Droid's `settings.json`.
  *
  * Ported from upstream PR decolua/9router#618 (author Anurag Saxena) — multi-model
- * support for the Factory Droid CLI tool. Adapted to RouteChi branding
+ * support for the Factory Droid CLI tool. Adapted to OmniRoute branding
  * (`custom:OmniRoute-<i>`) and extracted as a pure helper so the route-handler
  * logic is unit-testable without touching the filesystem.
  */

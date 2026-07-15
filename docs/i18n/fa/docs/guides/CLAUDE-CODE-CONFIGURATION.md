@@ -1,27 +1,27 @@
 ---
-title: "Claude Code CLI — پیکربندی با RouteChi"
+title: "Claude Code CLI — پیکربندی با OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# Claude Code CLI — پیکربندی با RouteChi
+# Claude Code CLI — پیکربندی با OmniRoute
 
-CLI کلاود کد (**Claude Code**) (`claude`) را به RouteChi — محلی یا VPS راه دور — هدایت کنید، با پروفایل‌های جداگانه برای هر مدل، به‌صورتی مشابه راه‌اندازی Codex.
+CLI کلاود کد (**Claude Code**) (`claude`) را به OmniRoute — محلی یا VPS راه دور — هدایت کنید، با پروفایل‌های جداگانه برای هر مدل، به‌صورتی مشابه راه‌اندازی Codex.
 
 ---
 
 ## راه‌اندازی سریع
 
 ```bash
-# اجرای Claude Code روی یک RouteChi محلی (context فعال را به‌صورت خودکار تشخیص می‌دهد)
+# اجرای Claude Code روی یک OmniRoute محلی (context فعال را به‌صورت خودکار تشخیص می‌دهد)
 omniroute launch
 
-# روی یک RouteChi راه دور (پس از `omniroute connect <host>`، این کار خودکار است)
+# روی یک OmniRoute راه دور (پس از `omniroute connect <host>`، این کار خودکار است)
 omniroute launch --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 
 # ساخت پروفایل برای هر مدل، سپس اجرای یکی از آن‌ها
 omniroute setup-claude            # نوشته می‌شود در ~/.claude/profiles/<name>/settings.json
-omniroute launch --profile glm52  # Claude Code با استفاده از glm/glm-5.2 از طریق RouteChi
+omniroute launch --profile glm52  # Claude Code با استفاده از glm/glm-5.2 از طریق OmniRoute
 ```
 
 ---
@@ -33,7 +33,7 @@ Claude Code از **Anthropic Messages API** استفاده می‌کند و با
 | متغیر                                        | هدف                                                                                    |
 | -------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `ANTHROPIC_BASE_URL`                         | URL ریشه gateway (Claude Code مسیر `/v1/messages` را اضافه می‌کند). **بدون پسوند `/v1`.**            |
-| `ANTHROPIC_AUTH_TOKEN`                       | به‌صورت `Authorization: Bearer …` ارسال می‌شود — از توکن دسترسی / کلید API RouteChi خود استفاده کنید          |
+| `ANTHROPIC_AUTH_TOKEN`                       | به‌صورت `Authorization: Bearer …` ارسال می‌شود — از توکن دسترسی / کلید API OmniRoute خود استفاده کنید          |
 | `ANTHROPIC_API_KEY`                          | جایگزین: به‌صورت `x-api-key` ارسال می‌شود. اگر هر دو تنظیم شده باشند، `ANTHROPIC_AUTH_TOKEN` برنده است             |
 | `ANTHROPIC_MODEL`                            | اجبار به یک مدل مشخص (پیش‌فرض انتخابگر `/model` را نادیده می‌گیرد)                         |
 | `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY` | `1` → انتخابگر بومی `/model` مدل‌های `claude*`/`anthropic*` را از `/v1/models` فهرست می‌کند |
@@ -69,12 +69,12 @@ Claude Code **هیچ فایل پروفایل بومی ندارد** (برخلاف
 
 > **توکن احراز هویت هرگز در پروفایل نوشته نمی‌شود.** با `omniroute launch --profile <name>` اجرا کنید (که `ANTHROPIC_AUTH_TOKEN` را از context فعال تزریق می‌کند)، یا خودتان `ANTHROPIC_AUTH_TOKEN` را export کنید و `CLAUDE_CONFIG_DIR=~/.claude/profiles/<name> claude` را اجرا کنید.
 
-**همگام‌سازی خودکار پس از کشف مدل (اختیاری).** RouteChi می‌تواند همین فایل‌های `~/.claude/profiles/<name>/settings.json` را به‌صورت خودکار هر بار که همگام‌سازی مدل یک ارائه‌دهنده، فهرست زنده را تغییر می‌دهد، بازتولید کند — تا مدل‌های جدید/تغییرنام‌یافته بدون اجرای مجدد فرمان، پروفایل دریافت کنند. این قابلیت **به‌طور پیش‌فرض خاموش است**: آن را از داشبورد **CLI Code** («CLI profile auto-sync» → Claude Code) تغییر دهید، یا `OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES=true` را تنظیم کنید (همچنین `CLI_ALLOW_CONFIG_WRITES` را که به‌طور پیش‌فرض روشن است رعایت می‌کند). هنگام فعال بودن، تنها فایل‌های پروفایل را می‌نویسد؛ هرگز پیکربندی فعال/پیش‌فرض Claude، احراز هویت یا `~/.claude/settings.json` را تغییر نمی‌دهد.
+**همگام‌سازی خودکار پس از کشف مدل (اختیاری).** OmniRoute می‌تواند همین فایل‌های `~/.claude/profiles/<name>/settings.json` را به‌صورت خودکار هر بار که همگام‌سازی مدل یک ارائه‌دهنده، فهرست زنده را تغییر می‌دهد، بازتولید کند — تا مدل‌های جدید/تغییرنام‌یافته بدون اجرای مجدد فرمان، پروفایل دریافت کنند. این قابلیت **به‌طور پیش‌فرض خاموش است**: آن را از داشبورد **CLI Code** («CLI profile auto-sync» → Claude Code) تغییر دهید، یا `OMNIROUTE_AUTO_SYNC_CLAUDE_PROFILES=true` را تنظیم کنید (همچنین `CLI_ALLOW_CONFIG_WRITES` را که به‌طور پیش‌فرض روشن است رعایت می‌کند). هنگام فعال بودن، تنها فایل‌های پروفایل را می‌نویسد؛ هرگز پیکربندی فعال/پیش‌فرض Claude، احراز هویت یا `~/.claude/settings.json` را تغییر نمی‌دهد.
 
 ### ساخت و استفاده از پروفایل‌ها
 
 ```bash
-# RouteChi محلی
+# OmniRoute محلی
 omniroute setup-claude
 
 # VPS راه دور (URL VPS را در هر پروفایل قرار می‌دهد)
@@ -94,7 +94,7 @@ omniroute launch --profile kimi-k27
 
 ## سطوح مدل (اختیاری)
 
-Claude Code به سطوح قابلیت هدایت می‌شود. هر کدام را از طریق env / settings به یک مدل RouteChi نگاشت کنید تا ارائه‌دهنده‌های متفاوتی برای هر سطح داشته باشید:
+Claude Code به سطوح قابلیت هدایت می‌شود. هر کدام را از طریق env / settings به یک مدل OmniRoute نگاشت کنید تا ارائه‌دهنده‌های متفاوتی برای هر سطح داشته باشید:
 
 ```bash
 export ANTHROPIC_DEFAULT_OPUS_MODEL="glm/glm-5.2"

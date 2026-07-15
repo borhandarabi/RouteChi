@@ -1,5 +1,5 @@
 /**
- * Global Type Declarations for RouteChi
+ * Global Type Declarations for OmniRoute
  *
  * Ambient declarations for modules and globals that don't ship their own types.
  */

@@ -635,7 +635,7 @@ export default function ZaiDeviceTokenPanel() {
               </div>
               <p className="mt-1">
                 {t('proxyDescription')}
-                RouteChi&apos;s Proxies ?�� Global settings. No separate proxy configuration needed
+                OmniRoute&apos;s Proxies ?�� Global settings. No separate proxy configuration needed
                 ?�� if a global proxy is set, it&apos;s used; otherwise the browser connects
                 directly.
               </p>

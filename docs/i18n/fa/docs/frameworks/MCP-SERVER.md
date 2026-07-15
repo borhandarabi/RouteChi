@@ -1,10 +1,10 @@
 ---
-title: "مستندات سرور MCP RouteChi"
+title: "مستندات سرور MCP OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# مستندات سرور MCP RouteChi
+# مستندات سرور MCP OmniRoute
 
 > سرور Model Context Protocol با ۹۴ ابزار در حوزه‌های routing، cache، فشرده‌سازی، memory، مهارت‌ها، proxy، pool و عملیات منبع context.
 >
@@ -16,7 +16,7 @@ lastUpdated: 2026-06-28
 
 ## نصب
 
-MCP RouteChi به‌صورت داخلی ارائه می‌شود. آن را با این دستور راه‌اندازی کنید:
+MCP OmniRoute به‌صورت داخلی ارائه می‌شود. آن را با این دستور راه‌اندازی کنید:
 
 ```bash
 omniroute --mcp
@@ -77,7 +77,7 @@ curl -i \
 | `omniroute_get_combo_metrics`   | `read:combos`        | معیارهای عملکرد برای یک combo خاص                            |
 | `omniroute_switch_combo`        | `write:combos`       | فعال یا غیرفعال کردن یک combo                                |
 | `omniroute_check_quota`         | `read:quota`         | سهمیه‌ی استفاده‌شده/کل، درصد باقیمانده، زمان بازنشانی، سلامت توکن |
-| `omniroute_route_request`       | `execute:completions`| ارسال یک chat completion از طریق routing مربوط به RouteChi    |
+| `omniroute_route_request`       | `execute:completions`| ارسال یک chat completion از طریق routing مربوط به OmniRoute    |
 | `omniroute_cost_report`         | `read:usage`         | گزارش هزینه بر اساس دوره (نشست/روز/هفته/ماه)                |
 | `omniroute_list_models_catalog` | `read:models`        | کاتالوگ کامل مدل‌ها با قابلیت‌ها، وضعیت، قیمت‌گذاری         |
 
@@ -85,7 +85,7 @@ curl -i \
 
 | ابزار                  | Scopeها          | توضیحات                                                                                                                        |
 | :--------------------- | :--------------- | :----------------------------------------------------------------------------------------------------------------------------- |
-| `omniroute_web_search` | `execute:search` | جستجوی وب از طریق search gateway مربوط به RouteChi (Serper/Brave/Perplexity/Exa/Tavily/Google PSE/Linkup/SearchAPI/SearXNG) با failover |
+| `omniroute_web_search` | `execute:search` | جستجوی وب از طریق search gateway مربوط به OmniRoute (Serper/Brave/Perplexity/Exa/Tavily/Google PSE/Linkup/SearchAPI/SearXNG) با failover |
 
 ## ابزارهای پیشرفته (11) — فاز 2
 
@@ -127,7 +127,7 @@ curl -i \
 
 ### فیلتر درخت دسترس‌پذیری MCP (v3.8.0)
 
-جدای از ۵ ابزار فشرده‌سازی بالا، RouteChi شامل یک فیلتر پس از اجرا است که
+جدای از ۵ ابزار فشرده‌سازی بالا، OmniRoute شامل یک فیلتر پس از اجرا است که
 **نتایج ابزار** ابزارهای browser/accessibility مربوط به MCP را قبل از بازگرداندن به
 عامل فشرده می‌کند. این فیلتر خود یک ابزار نیست — به‌طور شفاف روی هر نتیجه‌ی ابزاری که حاوی
 متن verbose accessibility-tree یا browser-snapshot (≥2000 کاراکتر) باشد اجرا می‌شود.
@@ -224,7 +224,7 @@ curl -X DELETE http://localhost:20128/api/settings/notion
 ### Cloud Agents
 
 Cloud Agents عامل‌های کدنویسی AI خارج از فرآیند (codex-cloud، devin، jules) هستند که از طریق
-همان مدل اتصال استفاده‌شده برای providerهای LLM به RouteChi متصل می‌شوند. آن‌ها از طریق
+همان مدل اتصال استفاده‌شده برای providerهای LLM به OmniRoute متصل می‌شوند. آن‌ها از طریق
 سطح REST خود (`/api/v1/agents/*`) ارائه می‌شوند و **بخشی از کاتالوگ ابزار MCP نیستند**
 — فراخوانی یک Cloud Agent یک scope MCP را مصرف نمی‌کند.
 
@@ -304,7 +304,7 @@ Scopeهای wildcard پشتیبانی می‌شوند: `read:*` همه‌ی scop
 
 | متغیر                                  | پیش‌فرض                            | هدف                                                                                                                  |
 | :------------------------------------- | :--------------------------------- | :-------------------------------------------------------------------------------------------------------------------- |
-| `OMNIROUTE_BASE_URL`                   | `http://localhost:20128`           | URL پایه که سرور MCP هنگام فراخوانی APIهای داخلی RouteChi از آن استفاده می‌کند                                       |
+| `OMNIROUTE_BASE_URL`                   | `http://localhost:20128`           | URL پایه که سرور MCP هنگام فراخوانی APIهای داخلی OmniRoute از آن استفاده می‌کند                                       |
 | `OMNIROUTE_API_KEY`                    | (خالی)                             | API key به‌عنوان `Authorization: Bearer` به فراخوانی‌های API داخلی ارسال می‌شود                                       |
 | `OMNIROUTE_MCP_ENFORCE_SCOPES`         | `false` (فقط `"true"` آن را فعال می‌کند) | هنگام فعال بودن، scopeهای مفقود فراخوانی‌های ابزار را رد کرده و `scope_denied:<reason>` را در log ممیزی ثبت می‌کند   |
 | `OMNIROUTE_MCP_SCOPES`                 | (خالی)                             | فهرست مجاز scopeهای جدا‌شده با کاما که به‌طور پیش‌فرض "موجود" در نظر گرفته می‌شوند (هنگامی که فراخوان‌کننده scopeهای خودش را ارائه نمی‌دهد استفاده می‌شود) |

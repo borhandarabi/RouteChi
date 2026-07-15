@@ -4,7 +4,7 @@
 import ChaosConfigPageClient from "./ChaosConfigPageClient";
 
 export const metadata = {
-  title: "Chaos Mode — RouteChi",
+  title: "Chaos Mode — OmniRoute",
 };
 
 export default function Page() {

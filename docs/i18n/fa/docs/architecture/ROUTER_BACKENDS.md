@@ -17,9 +17,9 @@ lastUpdated: 2026-07-02
 نقش یک موتور با **دو محور مستقل** توصیف می‌شود که با هم در `RouterBackendDefinition` رجیستری کدگذاری شده‌اند:
 
 1. **چرخه حیات** (`RouterBackendLifecycle`) — _موتور چگونه اجرا می‌شود_:
-   - `in-process` — درون فرآیند Node RouteChi اجرا می‌شود (خط لوله TS بومی).
-   - `supervised` — یک فرآیند فرزند محلی که RouteChi از طریق `ServiceSupervisor` نصب/راه‌اندازی/توقف/بررسی سلامت می‌کند، سپس به‌عنوان اتصال provider مصرف می‌کند.
-   - `external` — یک endpoint HTTP که RouteChi به آن ارسال می‌کند اما مدیریت **نمی‌کند** (با یک URL پایه env پیکربندی می‌شود).
+   - `in-process` — درون فرآیند Node OmniRoute اجرا می‌شود (خط لوله TS بومی).
+   - `supervised` — یک فرآیند فرزند محلی که OmniRoute از طریق `ServiceSupervisor` نصب/راه‌اندازی/توقف/بررسی سلامت می‌کند، سپس به‌عنوان اتصال provider مصرف می‌کند.
+   - `external` — یک endpoint HTTP که OmniRoute به آن ارسال می‌کند اما مدیریت **نمی‌کند** (با یک URL پایه env پیکربندی می‌شود).
    - `disabled` — ثبت‌شده اما قابل انتخاب نیست.
 2. **محور انتخاب** (backend مسیریابی relay) — _آیا relay به آن ارسال می‌کند_:
    `RelayRoutingBackend = "ts" | "bifrost" | "auto"` در

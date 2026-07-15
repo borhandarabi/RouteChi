@@ -1,12 +1,12 @@
 ---
-title: "Codex CLI — پیکربندی با RouteChi"
+title: "Codex CLI — پیکربندی با OmniRoute"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# Codex CLI — پیکربندی با RouteChi
+# Codex CLI — پیکربندی با OmniRoute
 
-راهنمای کامل برای استفاده از Codex CLI که به RouteChi به‌عنوان یک backend سازگار با OpenAI اشاره می‌کند.
+راهنمای کامل برای استفاده از Codex CLI که به OmniRoute به‌عنوان یک backend سازگار با OpenAI اشاره می‌کند.
 
 ---
 
@@ -52,17 +52,17 @@ Codex CLI در فوریهٔ ۲۰۲۶ `wire_api = "chat"` (Chat Completions) را
 
 DeepSeek، GLM، Kimi و سایرین تنها یک نقطهٔ پایانی Chat Completions را ارائه می‌دهند — نه Responses API. اگر Codex را مستقیماً به آن‌ها اشاره می‌کردید، شکست می‌خورد.
 
-**RouteChi این مشکل را به‌صورت شفاف حل می‌کند:**
+**OmniRoute این مشکل را به‌صورت شفاف حل می‌کند:**
 
 ```
 Codex CLI
   → wire_api = "responses"
-  → POST /v1/responses (RouteChi)
-    → مبدل Responses ↔ Chat Completions در RouteChi
+  → POST /v1/responses (OmniRoute)
+    → مبدل Responses ↔ Chat Completions در OmniRoute
     → POST /chat/completions (DeepSeek / Mistral / GLM / Kimi / هر ارائه‌دهنده)
 ```
 
-هنگام استفاده از RouteChi هرگز به یک پروکسی ترجمهٔ جداگانه نیاز ندارید. **همهٔ مدل‌ها از `wire_api = "responses"` استفاده می‌کنند** — RouteChi بقیه را مدیریت می‌کند.
+هنگام استفاده از OmniRoute هرگز به یک پروکسی ترجمهٔ جداگانه نیاز ندارید. **همهٔ مدل‌ها از `wire_api = "responses"` استفاده می‌کنند** — OmniRoute بقیه را مدیریت می‌کند.
 
 > **`wire_api` پیش‌فرض است** — این فیلد به `"responses"` پیش‌فرض است و می‌تواند کاملاً از `config.toml` حذف شود. تنها هنگامی که قصد مستندسازی را دارید آن را به‌صورت صریح تنظیم کنید.
 
@@ -83,7 +83,7 @@ Codex CLI
 
 ### پنجره‌های زمینه به ازای مدل
 
-| مدل                                  | شناسهٔ RouteChi                      | پنجرهٔ زمینه           | `auto_compact` | `tool_output_limit` |
+| مدل                                  | شناسهٔ OmniRoute                      | پنجرهٔ زمینه           | `auto_compact` | `tool_output_limit` |
 | ------------------------------------ | ------------------------------------ | ---------------------- | -------------- | ------------------- |
 | GPT-5.5                              | `cx/gpt-5.5`                         | 400k قابل‌اعتماد (حداکثر 1M) | 350,000        | 32,768              |
 | Kimi K2.7 (thinking)                 | `kmc/kimi-k2.7`                      | 131,072                | 112,000        | 32,768              |
@@ -111,16 +111,16 @@ Codex CLI
 
 ## پیشوند مدل: `cx/`
 
-همهٔ مدل‌های Codex در RouteChi از پیشوند `cx/` استفاده می‌کنند:
+همهٔ مدل‌های Codex در OmniRoute از پیشوند `cx/` استفاده می‌کنند:
 
-| نام Codex CLI            | مدل RouteChi       |
+| نام Codex CLI            | مدل OmniRoute       |
 | ----------------------- | ------------------ |
 | `cx/gpt-5.5`            | GPT-5.5 استاندارد  |
 | `cx/gpt-5.4`            | GPT-5.4 استاندارد  |
 | `cx/gpt-5.4-mini`       | GPT-5.4 mini       |
 | `cx/gpt-5.1-codex-mini` | GPT-5.1 Codex mini |
 
-سایر ارائه‌دهندگان از پیشوند خودشان استفاده می‌کنند (`kmc/`، `glm/`، `ds/`، `ollamacloud/`، `opencode-go/`، `mistral/`) — پیشوند با نام مستعار ارائه‌دهندهٔ RouteChi مطابقت دارد.
+سایر ارائه‌دهندگان از پیشوند خودشان استفاده می‌کنند (`kmc/`، `glm/`، `ds/`، `ollamacloud/`، `opencode-go/`، `mistral/`) — پیشوند با نام مستعار ارائه‌دهندهٔ OmniRoute مطابقت دارد.
 
 ---
 
@@ -222,10 +222,10 @@ codex -p chat     # cx/gpt-5.5, بدون effort (پیش‌فرض سرور)
 
 ## تولید خودکار پروفایل‌ها با `omniroute setup-codex`
 
-اگر RouteChi را روی یک VPS اجرا می‌کنید، می‌توانید فایل‌های پروفایل را از کاتالوگ مدل زنده تولید کنید:
+اگر OmniRoute را روی یک VPS اجرا می‌کنید، می‌توانید فایل‌های پروفایل را از کاتالوگ مدل زنده تولید کنید:
 
 ```bash
-# از یک VPS (از RouteChi محلی روی پورت 20128 استفاده می‌کند)
+# از یک VPS (از OmniRoute محلی روی پورت 20128 استفاده می‌کند)
 omniroute setup-codex
 
 # از هر ماشین — به VPS خود اشاره کنید
@@ -243,16 +243,16 @@ omniroute setup-codex --codex-home /path/to/.codex
 
 این دستور `/v1/models` را واکشی می‌کند، از پروفایل‌های تنظیم‌شده برای مدل‌های شناخته‌شده استفاده می‌کند، برای سایر مدل‌های متنی سازگار به فرادادهٔ کاتالوگ بازمی‌گردد، و `~/.codex/<name>.config.toml` را به ازای هر کدام می‌نویسد. Idempotent است — اجرای مجدد بی‌خطر است.
 
-RouteChi همچنین می‌تواند پس از یک کشف/وارد کردن مدل موفق ارائه‌دهنده که کاتالوگ زنده را تغییر می‌دهد، این فایل‌های پروفایل را به‌صورت **خودکار هماهنگ** کند. این ویژگی **اختیاری و به‌صورت پیش‌فرض خاموش** است: از داشبورد **CLI Code** (بخش "CLI profile auto-sync" → Codex) فعالش کنید، یا `OMNIROUTE_AUTO_SYNC_CODEX_PROFILES=true` را تنظیم کنید (همچنین `CLI_ALLOW_CONFIG_WRITES` را که به‌صورت پیش‌فرض روشن است رعایت می‌کند). هنگام فعال‌بودن تنها فایل‌های پروفایل جداگانهٔ `~/.codex/*.config.toml` را می‌نویسد؛ هرگز `~/.codex/config.toml` فعال/پیش‌فرض، تنظیمات Codex-lb، احراز هویت یا انتخاب ارائه‌دهنده را تغییر نمی‌دهد.
+OmniRoute همچنین می‌تواند پس از یک کشف/وارد کردن مدل موفق ارائه‌دهنده که کاتالوگ زنده را تغییر می‌دهد، این فایل‌های پروفایل را به‌صورت **خودکار هماهنگ** کند. این ویژگی **اختیاری و به‌صورت پیش‌فرض خاموش** است: از داشبورد **CLI Code** (بخش "CLI profile auto-sync" → Codex) فعالش کنید، یا `OMNIROUTE_AUTO_SYNC_CODEX_PROFILES=true` را تنظیم کنید (همچنین `CLI_ALLOW_CONFIG_WRITES` را که به‌صورت پیش‌فرض روشن است رعایت می‌کند). هنگام فعال‌بودن تنها فایل‌های پروفایل جداگانهٔ `~/.codex/*.config.toml` را می‌نویسد؛ هرگز `~/.codex/config.toml` فعال/پیش‌فرض، تنظیمات Codex-lb، احراز هویت یا انتخاب ارائه‌دهنده را تغییر نمی‌دهد.
 
 ---
 
 ## راه‌اندازی Codex با `omniroute launch-codex`
 
-پیش از راه‌اندازی Codex، یک health-check روی نمونهٔ RouteChi شما انجام می‌دهد:
+پیش از راه‌اندازی Codex، یک health-check روی نمونهٔ OmniRoute شما انجام می‌دهد:
 
 ```bash
-# راه‌اندازی در برابر RouteChi محلی (پورت پیش‌فرض 20128)
+# راه‌اندازی در برابر OmniRoute محلی (پورت پیش‌فرض 20128)
 omniroute launch-codex
 
 # راه‌اندازی با پروفایل مشخص
@@ -395,13 +395,13 @@ codex debug models --bundled       # فهرست کاتالوگ مدل bundled ب
 `wire_api = "chat"` را از پیکربندی خود حذف کنید. `wire_api = "responses"` را تنظیم یا فیلد را حذف کنید (از v0.138 به `"responses"` پیش‌فرض است).
 
 **`Error: model not found`**
-راستی‌آزمایی کنید که مدل با پیشوند درست در RouteChi موجود است. از `omniroute models list` استفاده کنید یا `/dashboard/providers/<provider>` را باز کنید.
+راستی‌آزمایی کنید که مدل با پیشوند درست در OmniRoute موجود است. از `omniroute models list` استفاده کنید یا `/dashboard/providers/<provider>` را باز کنید.
 
 **`Authentication error`**
 تأیید کنید `OMNIROUTE_API_KEY` export شده: `echo $OMNIROUTE_API_KEY`.
 
 **`Connection refused`**
-راستی‌آزمایی کنید RouteChi در حال اجراست و `base_url` میزبان/پورت برای شبکهٔ شما (محلی در برابر Tailscale در برابر VPS) درست است.
+راستی‌آزمایی کنید OmniRoute در حال اجراست و `base_url` میزبان/پورت برای شبکهٔ شما (محلی در برابر Tailscale در برابر VPS) درست است.
 
 **خرابی نشست نزدیک حد زمینه**
 `model_context_window` و `model_auto_compact_token_limit` را به‌صورت صریح تنظیم کنید. به جدول پنجرهٔ زمینه در بالا مراجعه کنید.

@@ -320,10 +320,10 @@ export default function OAuthModal({
       let forceManual = false;
 
       // Claude Code and Cline OAuth flows can finish on provider-hosted pages that
-      // show an auth code instead of redirecting back to RouteChi.
+      // show an auth code instead of redirecting back to OmniRoute.
       // Start directly in manual mode so users always have an input to paste code/url.
       // zed-hosted's native-app sign-in always redirects the browser to a local
-      // 127.0.0.1:<port> callback that RouteChi never listens on (the port is
+      // 127.0.0.1:<port> callback that OmniRoute never listens on (the port is
       // arbitrary and unrelated to the dashboard's own port) — nothing can
       // auto-close the popup, so always show the manual paste-URL input.
       if (provider === "claude" || provider === "cline" || provider === "zed-hosted") {
@@ -394,7 +394,7 @@ export default function OAuthModal({
       // Authorization code flow
       // Redirect URI strategy:
       // - Codex/OpenAI: always port 1455 (registered in OAuth app)
-      // - Windsurf/Devin CLI (remote fallback): use localhost with RouteChi port + /auth/callback
+      // - Windsurf/Devin CLI (remote fallback): use localhost with OmniRoute port + /auth/callback
       //   (on true localhost the callback server handles it; this is only reached on remote)
       // - Google OAuth providers (antigravity/agy): default to loopback so the
       //   bundled native/desktop credentials keep working. Prefer 127.0.0.1 over
@@ -408,7 +408,7 @@ export default function OAuthModal({
       if (provider === "codex" || provider === "openai") {
         redirectUri = "http://localhost:1455/auth/callback";
       } else if (provider === "windsurf" || provider === "devin-cli") {
-        // Remote fallback: use RouteChi's port with the /auth/callback path Windsurf expects.
+        // Remote fallback: use OmniRoute's port with the /auth/callback path Windsurf expects.
         // On true localhost this code is never reached (callback server handles the flow above).
         const port = window.location.port || "20128";
         redirectUri = `http://localhost:${port}/auth/callback`;
@@ -864,7 +864,7 @@ export default function OAuthModal({
                           code: (c) => <code className="font-mono">{c}</code>,
                           a: (c) => (
                             <a
-                              href="https://github.com/diegosouzapw/RouteChi#oauth-on-a-remote-server"
+                              href="https://github.com/diegosouzapw/OmniRoute#oauth-on-a-remote-server"
                               target="_blank"
                               rel="noreferrer"
                               className="underline"

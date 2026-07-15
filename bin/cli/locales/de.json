@@ -15,7 +15,7 @@
     "yesOpt": "Bestätigung überspringen"
   },
   "program": {
-    "description": "RouteChi — Intelligenter AI-Router mit automatischem Fallback",
+    "description": "OmniRoute — Intelligenter AI-Router mit automatischem Fallback",
     "version": "Version ausgeben und beenden",
     "output": "Ausgabeformat (table, json, jsonl, csv)",
     "quiet": "Unwesentliche Ausgabe unterdrücken",

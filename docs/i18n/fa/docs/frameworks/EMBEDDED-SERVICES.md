@@ -9,9 +9,9 @@ description: "مرجع 9Router، CLIProxyAPI، Mux و Bifrost"
 > **آخرین به‌روزرسانی:** 2026-07-03
 > **مخاطب:** مهندسانی که سرویس‌های تعبیه‌شده (9Router، CLIProxyAPI، Mux، Bifrost) را اضافه، نگهداری یا دیباگ می‌کنند.
 
-سرویس‌های تعبیه‌شده ابزارهای sidecar فرآیند محلی نصب‌شده هستند که RouteChi نصب، نظارت و
+سرویس‌های تعبیه‌شده ابزارهای sidecar فرآیند محلی نصب‌شده هستند که OmniRoute نصب، نظارت و
 به‌عنوان اهداف routing درجه‌یک در معرض قرار می‌دهد. برخلاف providerهای خارجی (که از طریق
-اینترنت با API key دسترسی پیدا می‌شوند)، سرویس‌های تعبیه‌شده روی همان ماشین RouteChi اجرا می‌شوند
+اینترنت با API key دسترسی پیدا می‌شوند)، سرویس‌های تعبیه‌شده روی همان ماشین OmniRoute اجرا می‌شوند
 و از طریق loopback ارتباط برقرار می‌کنند.
 
 ---
@@ -37,16 +37,16 @@ description: "مرجع 9Router، CLIProxyAPI، Mux و Bifrost"
 
 | سرویس           | بسته‌ی npm                                  | پورت پیش‌فرض | هدف                                                                                                       |
 | --------------- | ------------------------------------------- | :----------: | --------------------------------------------------------------------------------------------------------- |
-| **9Router**     | `9router`                                   |    20130     | مسیریاب AI که RouteChi می‌تواند به‌عنوان sub-provider استفاده کند. مدل‌ها به‌صورت `9router/{sub}/{model}` عرضه می‌شوند |
+| **9Router**     | `9router`                                   |    20130     | مسیریاب AI که OmniRoute می‌تواند به‌عنوان sub-provider استفاده کند. مدل‌ها به‌صورت `9router/{sub}/{model}` عرضه می‌شوند |
 | **CLIProxyAPI** | `@anthropic/cli-proxy` (از طریق باینری `cliproxy`) |     auto     | آداپتور پروکسی محلی برای جریان‌های احراز هویت CLI مربوط به Anthropic. routing fallback را هنگام انقضای توکن‌های OAuth ارائه می‌دهد |
 | **Mux**         | `mux` (headless `mux server`)               |     8322     | daemon هماهنگی عامل محلی (coder/mux). فقط مدیریت چرخه‌حیات — یک هدف routing نیست (بدون LLM proxying)        |
 | **Bifrost**     | `@maximhq/bifrost`                          |    8080      | backend رله‌ی AI-gateway به Go. هنگام اجرا، توسط مسیر relay (`/v1/relay/`) به‌طور خودکار انتخاب می‌شود       |
 
 همه‌ی چهار مورد از همان مدل نظارتی پیروی می‌کنند:
 
-- RouteChi آن‌ها را زیر `DATA_DIR/services/{name}/` نصب می‌کند (جدا از `package.json` خود RouteChi)
-- RouteChi آن‌ها را به‌عنوان فرآیند فرزند spawn کرده و نظارت می‌کند
-- RouteChi یک API key موقت را به محیط فرزند تزریق کرده و بدون downtime چرخش می‌دهد (در صورت وجود)
+- OmniRoute آن‌ها را زیر `DATA_DIR/services/{name}/` نصب می‌کند (جدا از `package.json` خود OmniRoute)
+- OmniRoute آن‌ها را به‌عنوان فرآیند فرزند spawn کرده و نظارت می‌کند
+- OmniRoute یک API key موقت را به محیط فرزند تزریق کرده و بدون downtime چرخش می‌دهد (در صورت وجود)
 - همه‌ی مسیرهای مدیریت (`/api/services/*`) **LOCAL_ONLY** هستند — فقط از loopback قابل دسترسی‌اند (قانون سخت #17)
 
 ### تصمیمات کلیدی (از طرح طراحی)
@@ -56,7 +56,7 @@ description: "مرجع 9Router، CLIProxyAPI، Mux و Bifrost"
 | دسترسی داشبورد به رابط کاربری بومی 9Router | Reverse proxy در `/dashboard/providers/services/9router/embed/*`         |
 | مکانیزم نصب                            | `npm install {package}` از طریق `execFile` (بدون shell interpolation)    |
 | حالت مصرف                              | Provider به‌صورت `9router/{sub}/{model}` در موتور routing ثبت می‌شود      |
-| مدیریت API key                         | RouteChi تولید، در حال استراحت رمزنگاری (AES-256-GCM)، و از طریق env تزریق می‌کند |
+| مدیریت API key                         | OmniRoute تولید، در حال استراحت رمزنگاری (AES-256-GCM)، و از طریق env تزریق می‌کند |
 | محل داشبورد                            | `/dashboard/providers/services` (سه تب)                                   |
 | شروع خودکار                            | Toggle به ازای هر سرویس، پیش‌فرض خاموش                                    |
 
@@ -217,7 +217,7 @@ description: "مرجع 9Router، CLIProxyAPI، Mux و Bifrost"
 #### `POST /api/services/9router/install`
 
 نصب 9Router از npm. `DATA_DIR/services/9router/` را با `package.json` و
-`node_modules/` خودش ایجاد می‌کند. با وابستگی‌های خود RouteChi تداخل ندارد.
+`node_modules/` خودش ایجاد می‌کند. با وابستگی‌های خود OmniRoute تداخل ندارد.
 
 **بدنه‌ی درخواست** (همه‌ی اختیاری):
 
@@ -377,7 +377,7 @@ description: "مرجع 9Router، CLIProxyAPI، Mux و Bifrost"
 
 #### `POST /api/services/9router/auto-start`
 
-Toggle فلگ شروع خودکار. هنگام `enabled: true`، سرویس در دفعه‌ی بعدی که RouteChi بوت می‌شود
+Toggle فلگ شروع خودکار. هنگام `enabled: true`، سرویس در دفعه‌ی بعدی که OmniRoute بوت می‌شود
 به‌طور خودکار شروع می‌شود (اگر سرویس نصب باشد).
 
 **بدنه‌ی درخواست:**
@@ -506,7 +506,7 @@ GET|POST|... /dashboard/providers/services/9router/embed/[...path]
 این proxy:
 
 - درخواست را به `http://127.0.0.1:{port}/{path}` فوروارد می‌کند (فقط loopback)
-- هدرهای ورودی `cookie` و `authorization` را حذف می‌کند (بدون نشت نشست RouteChi)
+- هدرهای ورودی `cookie` و `authorization` را حذف می‌کند (بدون نشت نشست OmniRoute)
 - `Authorization: Bearer {apiKey}` را برای احراز هویت 9Router تزریق می‌کند
 - `set-cookie`، `content-security-policy`، `x-frame-options`، `cross-origin-*` را از پاسخ حذف می‌کند
 - پاسخ‌های HTML را برای تزریق `<base href>` و نرمال‌سازی مسیرهای مطلق بازنویسی می‌کند (`/foo` → `/dashboard/.../embed/foo`)
@@ -542,7 +542,7 @@ spawn فرآیند توسط یک JWT نشت‌کرده (مثلاً از طریق
 ### تزریق API key
 
 9Router و Mux برای endpointهای HTTP خود نیازمند API key/bearer token هستند.
-RouteChi:
+OmniRoute:
 
 1. تولید یک کلید از طریق `crypto.randomBytes(32).toString("base64url")` با یک
    پیشوند مختص سرویس (`nr_` برای 9Router، `mx_` برای Mux).
@@ -698,7 +698,7 @@ auto-start/route.ts POST — toggles auto_start flag
 
 1. بررسی `GET /api/services/{name}/logs` (یا پنل Logs در داشبورد). به دنبال
    خطوطی مانند `Error: ENOENT`، `address already in use` یا `Cannot find module` بگردید.
-2. تأیید `npm` در PATH است: `which npm` از همان حساب کاربری که RouteChi را اجرا می‌کند.
+2. تأیید `npm` در PATH است: `which npm` از همان حساب کاربری که OmniRoute را اجرا می‌کند.
 3. تأیید سرویس نصب شده است: `GET /api/services/{name}/status` را برای
    `installedVersion` بررسی کنید. اگر `null` است، ابتدا install را اجرا کنید.
 4. بررسی `DATA_DIR/services/{name}/node_modules/` موجود است و خالی نیست.
@@ -736,7 +736,7 @@ supervisor یک timeout اعلام کند (اما به poll ادامه می‌د
 3. پورت به ازای هر سرویس در `bootstrap.ts` از طریق فیلد `port` قابل پیکربندی است.
 
 **نکته:** 9Router به‌طور خاص برای جلوگیری از تداخل با
-پورت پیش‌فرض 20128 مربوط به RouteChi، از پورت 20130 استفاده می‌کند.
+پورت پیش‌فرض 20128 مربوط به OmniRoute، از پورت 20130 استفاده می‌کند.
 
 ---
 
@@ -746,13 +746,13 @@ supervisor یک timeout اعلام کند (اما به poll ادامه می‌د
 
 **علل:**
 
-- `DATA_DIR` یا والد آن توسط فرآیند RouteChi قابل نوشتن نیست.
+- `DATA_DIR` یا والد آن توسط فرآیند OmniRoute قابل نوشتن نیست.
 - اجرا داخل Docker rootless بدون دسترسی نوشتن به volume نگاشت‌شده.
 
 **رفع:**
 
 1. بررسی `DATA_DIR` (پیش‌فرض: `~/.omniroute/`): `ls -la ~/.omniroute/`
-2. اطمینان از اینکه کاربر فرآیند RouteChi مالک دایرکتوری است: `chown -R $USER ~/.omniroute/`
+2. اطمینان از اینکه کاربر فرآیند OmniRoute مالک دایرکتوری است: `chown -R $USER ~/.omniroute/`
 3. در Docker، اطمینان از اینکه volume mount دسترسی‌های صحیح برای کاربر container دارد.
 
 ---
@@ -800,16 +800,16 @@ supervisor یک timeout اعلام کند (اما به poll ادامه می‌د
 
 **س: آیا 9Router و CLIProxyAPI در استقرارهای production/cloud در دسترس خواهند بود؟**
 
-بله. هر دو سرویس از همان مدل local-first به‌عنوان خود RouteChi پیروی می‌کنند. آن‌ها روی
+بله. هر دو سرویس از همان مدل local-first به‌عنوان خود OmniRoute پیروی می‌کنند. آن‌ها روی
 همان ماشین اجرا شده و از طریق loopback ارتباط برقرار می‌کنند. "Production" در اینجا به معنای VPS
-یا سرور محلی است که RouteChi روی آن مستقر شده، نه یک provider ابری ریموت.
+یا سرور محلی است که OmniRoute روی آن مستقر شده، نه یک provider ابری ریموت.
 
 ---
 
 **س: چگونه supervisor را دیباگ کنم؟**
 
 1. tail جریان log SSE: `curl -N http://localhost:20128/api/services/9router/logs`.
-2. بررسی logهای ساختاریافته در خروجی pino مربوط به RouteChi فیلتر‌شده بر اساس
+2. بررسی logهای ساختاریافته در خروجی pino مربوط به OmniRoute فیلتر‌شده بر اساس
    namespace `service:supervisor`.
 3. بررسی ردیف DB: `sqlite3 ~/.omniroute/omniroute.db "SELECT * FROM version_manager WHERE tool='9router'"`.
 4. استفاده از `GET /api/services/9router/status` برای دیدن حالت زنده فعلی، PID، سلامت،

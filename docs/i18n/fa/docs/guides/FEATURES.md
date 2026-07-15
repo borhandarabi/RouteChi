@@ -1,14 +1,14 @@
 ---
-title: "RouteChi — گالری ویژگی‌های داشبورد"
+title: "OmniRoute — گالری ویژگی‌های داشبورد"
 version: 3.8.40
 lastUpdated: 2026-06-28
 ---
 
-# RouteChi — گالری ویژگی‌های داشبورد
+# OmniRoute — گالری ویژگی‌های داشبورد
 
 🌐 **ترجمه‌های README اصلی:** 🇺🇸 [English](../README.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/README.md) | 🇪🇸 [Español](../i18n/es/README.md) | 🇫🇷 [Français](../i18n/fr/README.md) | 🇮🇹 [Italiano](../i18n/it/README.md) | 🇷🇺 [Русский](../i18n/ru/README.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/README.md) | 🇩🇪 [Deutsch](../i18n/de/README.md) | 🇮🇳 [हिन्दी](../i18n/in/README.md) | 🇹🇭 [ไทย](../i18n/th/README.md) | 🇺🇦 [Українська](../i18n/uk-UA/README.md) | 🇸🇦 [العربية](../i18n/ar/README.md) | 🇯🇵 [日本語](../i18n/ja/README.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/README.md) | 🇧🇬 [Български](../i18n/bg/README.md) | 🇩🇰 [Dansk](../i18n/da/README.md) | 🇫🇮 [Suomi](../i18n/fi/README.md) | 🇮🇱 [עברית](../i18n/he/README.md) | 🇭🇺 [Magyar](../i18n/hu/README.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/README.md) | 🇰🇷 [한국어](../i18n/ko/README.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/README.md) | 🇳🇱 [Nederlands](../i18n/nl/README.md) | 🇳🇴 [Norsk](../i18n/no/README.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/README.md) | 🇷🇴 [Română](../i18n/ro/README.md) | 🇵🇱 [Polski](../i18n/pl/README.md) | 🇸🇰 [Slovenčina](../i18n/sk/README.md) | 🇸🇪 [Svenska](../i18n/sv/README.md) | 🇵🇭 [Filipino](../i18n/phi/README.md) | 🇨🇿 [Čeština](../i18n/cs/README.md)
 
-راهنمای تصویری برای هر بخش از داشبورد RouteChi.
+راهنمای تصویری برای هر بخش از داشبورد OmniRoute.
 
 > 📅 **آخرین به‌روزرسانی:** 2026-06-28 — **v3.8.40**
 
@@ -57,7 +57,7 @@ lastUpdated: 2026-06-28
 
 مدیریت اتصالات ارائه‌دهندهٔ AI: ارائه‌دهنده‌های OAuth (Claude Code، Codex)، ارائه‌دهنده‌های کلید API (Groq، DeepSeek، OpenRouter) و ارائه‌دهنده‌های رایگان (Qoder، Qwen، Kiro). حساب‌های Kiro شامل پیگیری ماندهٔ اعتبار هستند — اعتبار باقی‌مانده، کل allowance و تاریخ تجدید در Dashboard → Usage قابل مشاهده است.
 
-اتصالات OpenRouter می‌توانند یک `preset` به ازای اتصال در Advanced Settings ذخیره کنند. هنگام تنظیم، RouteChi آن را به‌عنوان فیلد درخواست top-level مربوط به OpenRouter ارسال می‌کند، مثلاً `"preset": "email-copywriter"`، مگر اینکه درخواست کاربر از قبل `preset` خود را ارائه کرده باشد.
+اتصالات OpenRouter می‌توانند یک `preset` به ازای اتصال در Advanced Settings ذخیره کنند. هنگام تنظیم، OmniRoute آن را به‌عنوان فیلد درخواست top-level مربوط به OpenRouter ارسال می‌کند، مثلاً `"preset": "email-copywriter"`، مگر اینکه درخواست کاربر از قبل `preset` خود را ارائه کرده باشد.
 
 ![Providers Dashboard](../screenshots/01-providers.png)
 
@@ -152,7 +152,7 @@ lastUpdated: 2026-06-28
 
 ## 🔗 Context Relay _(v3.5.5+)_
 
-یک استراتژی کامبو که تداوم نشست را هنگام چرخش حساب در میان گفت‌وگو حفظ می‌کند. پیش از آنکه حساب فعال تمام شود، RouteChi یک خلاصهٔ انتقال ساختاریافته در پس‌زمینه تولید می‌کند. پس از آنکه درخواست بعدی به حساب متفاوتی هدایت می‌شود، خلاصه به‌عنوان یک پیام سیستمی تزریق می‌شود تا حساب جدید با context کامل ادامه دهد.
+یک استراتژی کامبو که تداوم نشست را هنگام چرخش حساب در میان گفت‌وگو حفظ می‌کند. پیش از آنکه حساب فعال تمام شود، OmniRoute یک خلاصهٔ انتقال ساختاریافته در پس‌زمینه تولید می‌کند. پس از آنکه درخواست بعدی به حساب متفاوتی هدایت می‌شود، خلاصه به‌عنوان یک پیام سیستمی تزریق می‌شود تا حساب جدید با context کامل ادامه دهد.
 
 قابل پیکربندی از طریق تنظیمات کامبو یا سراسری:
 
@@ -262,7 +262,7 @@ Context & Cache اکنون صفحات اختصاصی برای Caveman، RTK و C
 
 ## 🖥️ برنامهٔ دسکتاپ
 
-برنامهٔ دسکتاپ بومی Electron برای ویندوز، macOS و لینوکس. اجرای RouteChi به‌عنوان یک برنامهٔ مستقل با یکپارچه‌سازی system tray، پشتیبانی آفلاین، به‌روزرسانی خودکار و نصب یک‌کلیکی.
+برنامهٔ دسکتاپ بومی Electron برای ویندوز، macOS و لینوکس. اجرای OmniRoute به‌عنوان یک برنامهٔ مستقل با یکپارچه‌سازی system tray، پشتیبانی آفلاین، به‌روزرسانی خودکار و نصب یک‌کلیکی.
 
 ویژگی‌های کلیدی:
 
@@ -281,7 +281,7 @@ Context & Cache اکنون صفحات اختصاصی برای Caveman، RTK و C
 
 ## 🌐 پل WebSocket V1 _(v3.6.6+)_
 
-RouteChi اکنون از **کلاینت‌های WebSocket سازگار با OpenAI** از طریق نقطهٔ پایانی ارتقای `/v1/ws` پشتیبانی می‌کند. سرور `scripts/dev/v1-ws-bridge.mjs` سفارشی Next.js را wrap می‌کند و اتصالات WS را به نشست‌های streaming دوطرفهٔ کامل ارتقا می‌دهد. احراز هویت از همان کلید API یا cookie نشست به‌عنوان درخواست‌های HTTP استفاده می‌کند.
+OmniRoute اکنون از **کلاینت‌های WebSocket سازگار با OpenAI** از طریق نقطهٔ پایانی ارتقای `/v1/ws` پشتیبانی می‌کند. سرور `scripts/dev/v1-ws-bridge.mjs` سفارشی Next.js را wrap می‌کند و اتصالات WS را به نشست‌های streaming دوطرفهٔ کامل ارتقا می‌دهد. احراز هویت از همان کلید API یا cookie نشست به‌عنوان درخواست‌های HTTP استفاده می‌کند.
 
 رفتارهای کلیدی:
 
@@ -307,7 +307,7 @@ config bundle توسط `src/lib/sync/bundle.ts` ساخته می‌شود. مصر
 
 **GLM Thinking (`glmt`)** اکنون یک ارائه‌دهندهٔ first-class ثبت‌شده است: ۶۵ ۵۳۶ max output token، ۲۴ ۵۷۶ thinking budget، ۹۰۰ s timeout پیش‌فرض، قالب API سازگار با Claude و همگام‌سازی استفادهٔ مشترک با خانوادهٔ GLM.
 
-**شمارش توکن ترکیبی** نیز در v3.6.6 وارد می‌شود: هنگامی که یک ارائه‌دهندهٔ سازگار با Claude، `/messages/count_tokens` را عرضه می‌کند، RouteChi قبل از درخواست‌های بزرگ آن را فراخوانی می‌کند با fallback تخمین آرام.
+**شمارش توکن ترکیبی** نیز در v3.6.6 وارد می‌شود: هنگامی که یک ارائه‌دهندهٔ سازگار با Claude، `/messages/count_tokens` را عرضه می‌کند، OmniRoute قبل از درخواست‌های بزرگ آن را فراخوانی می‌کند با fallback تخمین آرام.
 
 ---
 

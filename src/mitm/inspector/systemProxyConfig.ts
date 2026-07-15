@@ -278,7 +278,7 @@ async function windowsRevert(_state: WindowsPreviousState): Promise<void> {
 // ────────────────────────────────────────────────────────────────────────────
 
 /**
- * Apply RouteChi as the system-wide HTTP/HTTPS proxy at `127.0.0.1:<port>`.
+ * Apply OmniRoute as the system-wide HTTP/HTTPS proxy at `127.0.0.1:<port>`.
  * Captures and returns the prior configuration so callers can revert later.
  *
  * Throws a sanitized `Error` if the underlying command fails (no stack/path

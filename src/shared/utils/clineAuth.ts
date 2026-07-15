@@ -44,7 +44,7 @@ export function buildClineHeaders(
   const headers: Record<string, string> = {
     "HTTP-Referer": "https://cline.bot",
     "X-Title": "Cline",
-    "User-Agent": `RouteChi/${APP_VERSION}`,
+    "User-Agent": `OmniRoute/${APP_VERSION}`,
     "X-PLATFORM": process.platform || "unknown",
     "X-PLATFORM-VERSION": process.version || "unknown",
     "X-CLIENT-TYPE": "omniroute",
