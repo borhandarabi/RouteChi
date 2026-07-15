@@ -2,7 +2,6 @@
 
 import { useSyncExternalStore } from "react";
 import Link from "next/link";
-import { APP_CONFIG } from "@/shared/constants/appConfig";
 
 function subscribeToOnline(callback: () => void) {
   window.addEventListener("online", callback);
