@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import RouteChiLogo from "@/shared/components/RouteChiLogo";
+import OmniRouteLogo from "@/shared/components/OmniRouteLogo";
 
 export default function Footer() {
   const t = useTranslations("landing");
@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-3 mb-6">
               <div className="size-6 rounded bg-[#E54D5E] flex items-center justify-center text-white">
-                <RouteChiLogo size={16} className="text-white" />
+                <OmniRouteLogo size={16} className="text-white" />
               </div>
               <h3 className="text-white text-lg font-bold">{t("brandName")}</h3>
             </div>

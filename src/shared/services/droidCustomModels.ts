@@ -112,7 +112,7 @@ export function buildDroidCustomModels(
   return entries;
 }
 
-/** True when a `customModels` entry was written by RouteChi (any index). */
-export function isRouteChiCustomModel(entry: { id?: unknown } | null | undefined): boolean {
-  return typeof entry?.id === "string" && entry.id.startsWith("custom:RouteChi");
+/** True when a `customModels` entry was written by OmniRoute (any index). */
+export function isOmniRouteCustomModel(entry: { id?: unknown } | null | undefined): boolean {
+  return typeof entry?.id === "string" && entry.id.startsWith("custom:OmniRoute");
 }

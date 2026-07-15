@@ -1,13 +1,13 @@
 /**
- * RouteChi logo SVG — network hub icon with connected nodes.
+ * OmniRoute logo SVG — network hub icon with connected nodes.
  * Matches the favicon and app icon design.
  */
-type RouteChiLogoProps = {
+type OmniRouteLogoProps = {
   size?: number;
   className?: string;
 };
 
-export default function RouteChiLogo({ size = 20, className = "" }: RouteChiLogoProps) {
+export default function OmniRouteLogo({ size = 20, className = "" }: OmniRouteLogoProps) {
   return (
     <svg
       width={size}

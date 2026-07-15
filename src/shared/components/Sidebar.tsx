@@ -7,7 +7,7 @@ import { cn } from "@/shared/utils/cn";
 import { getActiveSidebarHref } from "@/shared/utils/sidebarRouteMatch";
 import { filterSidebarSectionsByQuery } from "@/shared/utils/sidebarSearch";
 import { APP_CONFIG } from "@/shared/constants/appConfig";
-import RouteChiLogo from "./RouteChiLogo";
+import OmniRouteLogo from "./OmniRouteLogo";
 import Button from "./Button";
 import Input from "./Input";
 import { ConfirmModal } from "./Modal";
@@ -512,7 +512,7 @@ export default function Sidebar({
                   className="size-5 object-contain"
                 />
               ) : (
-                <RouteChiLogo size={18} className="text-white" />
+                <OmniRouteLogo size={18} className="text-white" />
               )}
             </div>
             {!collapsed && (
