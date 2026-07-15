@@ -11,12 +11,29 @@
 
 /* Self-hosted Vazirmatn — Persian (Farsi) UI font. Same rationale as Material
    Symbols: next/font/google would fetch from fonts.googleapis.com at build
-   time, which is unreachable on some networks. @fontsource/vazirmatn bundles
-   the woff2 files in node_modules so they're served from our own origin.
-   Vazirmatn also covers Latin glyphs, so non-Persian text renders normally.
-   The browser only downloads the arabic-subset woff2 when Persian text is
-   actually present on the page (unicode-range gating). */
-@import "@fontsource/vazirmatn/index.css";
+   time, which is unreachable on some networks. We copy the woff2 files to
+   public/fonts/ and define @font-face rules here with absolute /fonts/... URLs
+   so the bundler doesn't need to resolve node_modules paths at build time
+   (which Next.js Turbopack sometimes fails to do for @font-face url()).
+   Vazirmatn covers Latin glyphs too, so non-Persian text renders normally.
+   The unicode-range gating makes the browser fetch only the arabic-subset
+   woff2 when Persian text is actually on the page. */
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/vazirmatn-arabic-400-normal.woff2') format('woff2');
+  unicode-range: U+0600-06FF,U+0750-077F,U+0870-088E,U+0890-0891,U+0897-08E1,U+08E3-08FF,U+200C-200E,U+2010-2011,U+204F,U+2E41,U+FB50-FDFF,U+FE70-FE74,U+FE76-FEFC;
+}
+@font-face {
+  font-family: 'Vazirmatn';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url('/fonts/vazirmatn-latin-400-normal.woff2') format('woff2');
+  unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+}
 @source "../../node_modules/fumadocs-ui/css/generated/*.css";
 
 /* Tailwind v4 auto-detection cannot scan directories with parentheses
