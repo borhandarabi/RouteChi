@@ -52,6 +52,19 @@
   --fd-sidebar-width: 220px;
 }
 
+/* Font variables — MUST be in :root, NOT in @theme inline.
+   @theme inline does NOT emit CSS variables to :root at runtime — it only
+   inlines values into utility classes. So var(--font-sans) in custom CSS
+   (like the body rule below) would be undefined at runtime, causing the
+   browser to fall back to the inherited system font. By defining these
+   in :root, both the font-sans utility AND var(--font-sans) references
+   work correctly. */
+:root {
+  --font-sans:
+    "Vazirmatn", var(--font-inter),
+    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+}
+
 /* OpenClaw × ClawHub Color Palette */
 :root {
   --desktop-safe-top: 0px;
@@ -235,14 +248,10 @@
   --shadow-warm: var(--shadow-warm);
   --shadow-elevated: var(--shadow-elevated);
 
-  /* Font — Vazirmatn primary (covers Persian + Latin), macOS system stack as fallback.
-     Vazirmatn is self-hosted via @fontsource/vazirmatn (see @import above) and
-     registers under the standard font-family name 'Vazirmatn'. It renders
-     Farsi text with proper letterforms; Latin text is unaffected because the
-     font includes a complete Latin set. */
-  --font-sans:
-    "Vazirmatn", var(--font-inter),
-    -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
+  /* Font — defined in :root above (NOT here in @theme inline).
+     @theme inline does not emit CSS variables to :root at runtime, so
+     var(--font-sans) would be undefined and the body would fall back to
+     the inherited system font. The :root block above fixes this. */
   /* Monospace stack (parity with the site) — code blocks, IDs, endpoints, terminals */
   --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", monospace;
 
