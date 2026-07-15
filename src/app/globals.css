@@ -2,12 +2,21 @@
 @import "fumadocs-ui/css/neutral.css";
 @import "fumadocs-ui/css/preset.css";
 /* Self-hosted Material Symbols icon font (#3695): the Google Fonts CDN
-   (fonts.googleapis.com) is blocked in some networks (e.g. mainland China),
-   which made every icon ligature fall back to its literal text name and broke
+   (fonts.googleapis.com) is blocked in some networks (e.g. mainland China,
+   Iran), which made every icon ligature fall back to its literal text name and broke
    the layout. Bundling the font locally removes that runtime CDN dependency.
    The bundled @font-face uses family "Material Symbols Outlined", matching the
    .material-symbols-outlined rule defined later in this file. */
 @import "material-symbols/outlined.css";
+
+/* Self-hosted Vazirmatn — Persian (Farsi) UI font. Same rationale as Material
+   Symbols: next/font/google would fetch from fonts.googleapis.com at build
+   time, which is unreachable on some networks. @fontsource/vazirmatn bundles
+   the woff2 files in node_modules so they're served from our own origin.
+   Vazirmatn also covers Latin glyphs, so non-Persian text renders normally.
+   The browser only downloads the arabic-subset woff2 when Persian text is
+   actually present on the page (unicode-range gating). */
+@import "@fontsource/vazirmatn/index.css";
 @source "../../node_modules/fumadocs-ui/css/generated/*.css";
 
 /* Tailwind v4 auto-detection cannot scan directories with parentheses
@@ -210,11 +219,12 @@
   --shadow-elevated: var(--shadow-elevated);
 
   /* Font — Vazirmatn primary (covers Persian + Latin), macOS system stack as fallback.
-     Vazirmatn is loaded via next/font/google in src/app/layout.tsx and exposes
-     --font-vazirmatn on <body>. It is a modern Persian/Latin font that renders
-     Farsi text with proper letterforms; Latin text is unaffected. */
+     Vazirmatn is self-hosted via @fontsource/vazirmatn (see @import above) and
+     registers under the standard font-family name 'Vazirmatn'. It renders
+     Farsi text with proper letterforms; Latin text is unaffected because the
+     font includes a complete Latin set. */
   --font-sans:
-    var(--font-vazirmatn), var(--font-inter),
+    "Vazirmatn", var(--font-inter),
     -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, sans-serif;
   /* Monospace stack (parity with the site) — code blocks, IDs, endpoints, terminals */
   --font-mono: ui-monospace, "JetBrains Mono", "Fira Code", "SF Mono", monospace;
