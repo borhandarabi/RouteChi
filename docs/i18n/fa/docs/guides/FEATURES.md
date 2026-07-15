@@ -1,269 +1,333 @@
-# OmniRoute — Dashboard Features Gallery (فارسی)
+---
+title: "RouteChi — گالری ویژگی‌های داشبورد"
+version: 3.8.40
+lastUpdated: 2026-06-28
+---
 
-🌐 **Languages:** 🇺🇸 [English](../../../../docs/FEATURES.md) · 🇸🇦 [ar](../../ar/docs/FEATURES.md) · 🇧🇬 [bg](../../bg/docs/FEATURES.md) · 🇧🇩 [bn](../../bn/docs/FEATURES.md) · 🇨🇿 [cs](../../cs/docs/FEATURES.md) · 🇩🇰 [da](../../da/docs/FEATURES.md) · 🇩🇪 [de](../../de/docs/FEATURES.md) · 🇪🇸 [es](../../es/docs/FEATURES.md) · 🇮🇷 [fa](../../fa/docs/FEATURES.md) · 🇫🇮 [fi](../../fi/docs/FEATURES.md) · 🇫🇷 [fr](../../fr/docs/FEATURES.md) · 🇮🇳 [gu](../../gu/docs/FEATURES.md) · 🇮🇱 [he](../../he/docs/FEATURES.md) · 🇮🇳 [hi](../../hi/docs/FEATURES.md) · 🇭🇺 [hu](../../hu/docs/FEATURES.md) · 🇮🇩 [id](../../id/docs/FEATURES.md) · 🇮🇹 [it](../../it/docs/FEATURES.md) · 🇯🇵 [ja](../../ja/docs/FEATURES.md) · 🇰🇷 [ko](../../ko/docs/FEATURES.md) · 🇮🇳 [mr](../../mr/docs/FEATURES.md) · 🇲🇾 [ms](../../ms/docs/FEATURES.md) · 🇳🇱 [nl](../../nl/docs/FEATURES.md) · 🇳🇴 [no](../../no/docs/FEATURES.md) · 🇵🇭 [phi](../../phi/docs/FEATURES.md) · 🇵🇱 [pl](../../pl/docs/FEATURES.md) · 🇵🇹 [pt](../../pt/docs/FEATURES.md) · 🇧🇷 [pt-BR](../../pt-BR/docs/FEATURES.md) · 🇷🇴 [ro](../../ro/docs/FEATURES.md) · 🇷🇺 [ru](../../ru/docs/FEATURES.md) · 🇸🇰 [sk](../../sk/docs/FEATURES.md) · 🇸🇪 [sv](../../sv/docs/FEATURES.md) · 🇰🇪 [sw](../../sw/docs/FEATURES.md) · 🇮🇳 [ta](../../ta/docs/FEATURES.md) · 🇮🇳 [te](../../te/docs/FEATURES.md) · 🇹🇭 [th](../../th/docs/FEATURES.md) · 🇹🇷 [tr](../../tr/docs/FEATURES.md) · 🇺🇦 [uk-UA](../../uk-UA/docs/FEATURES.md) · 🇵🇰 [ur](../../ur/docs/FEATURES.md) · 🇻🇳 [vi](../../vi/docs/FEATURES.md) · 🇨🇳 [zh-CN](../../zh-CN/docs/FEATURES.md)
+# RouteChi — گالری ویژگی‌های داشبورد
+
+🌐 **ترجمه‌های README اصلی:** 🇺🇸 [English](../README.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/README.md) | 🇪🇸 [Español](../i18n/es/README.md) | 🇫🇷 [Français](../i18n/fr/README.md) | 🇮🇹 [Italiano](../i18n/it/README.md) | 🇷🇺 [Русский](../i18n/ru/README.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/README.md) | 🇩🇪 [Deutsch](../i18n/de/README.md) | 🇮🇳 [हिन्दी](../i18n/in/README.md) | 🇹🇭 [ไทย](../i18n/th/README.md) | 🇺🇦 [Українська](../i18n/uk-UA/README.md) | 🇸🇦 [العربية](../i18n/ar/README.md) | 🇯🇵 [日本語](../i18n/ja/README.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/README.md) | 🇧🇬 [Български](../i18n/bg/README.md) | 🇩🇰 [Dansk](../i18n/da/README.md) | 🇫🇮 [Suomi](../i18n/fi/README.md) | 🇮🇱 [עברית](../i18n/he/README.md) | 🇭🇺 [Magyar](../i18n/hu/README.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/README.md) | 🇰🇷 [한국어](../i18n/ko/README.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/README.md) | 🇳🇱 [Nederlands](../i18n/nl/README.md) | 🇳🇴 [Norsk](../i18n/no/README.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/README.md) | 🇷🇴 [Română](../i18n/ro/README.md) | 🇵🇱 [Polski](../i18n/pl/README.md) | 🇸🇰 [Slovenčina](../i18n/sk/README.md) | 🇸🇪 [Svenska](../i18n/sv/README.md) | 🇵🇭 [Filipino](../i18n/phi/README.md) | 🇨🇿 [Čeština](../i18n/cs/README.md)
+
+راهنمای تصویری برای هر بخش از داشبورد RouteChi.
+
+> 📅 **آخرین به‌روزرسانی:** 2026-06-28 — **v3.8.40**
 
 ---
 
-Visual guide to every section of the OmniRoute dashboard.
+## ✨ نکات برجستهٔ v3.8.0
+
+چرخهٔ v3.7.x → v3.8.0 مسیریابی خودکار بدون پیکربندی، ارائه‌دهنده‌های جدید، جریان‌های OAuth،
+تاب‌آوری عمیق‌تر و تجربهٔ CLI بسیار غنی‌تر را اضافه کرد. ویژگی‌های اصلی زیر — جزئیات کامل
+در ادامهٔ سند و در مشخصات پیوندشده آمده است.
+
+- 🤖 **Auto Combo / مسیریابی خودکار بدون پیکربندی** — از پیشوندهای `auto/coding`، `auto/fast`،
+  `auto/cheap`، `auto/offline`، `auto/smart`، `auto/lkgp` استفاده کنید. پشتیبانی‌شده توسط یک
+  موتور امتیازدهی ۹ عاملی و ۴ **mode pack** تنتخب‌شده (ship-fast، cost-saver، quality-first، offline-friendly)
+- 🆕 **ارائه‌دهندهٔ Command Code** (#2199) — ثبت first-class با کاتالوگ مدل و پیگیری سهمیه
+- 🆕 **ارائه‌دهندهٔ Z.AI** — ارائه‌دهندهٔ جدید با سطح رایگان و برچسب‌های سهمیه
+- 🎬 **گسترش رسانه‌ای KIE** — کاتالوگ گسترده شامل مدل‌های تولید ویدیو
+- 🔐 **جریان‌های OAuth مربوط به Windsurf + Devin CLI** (#2168) — ورود کامل مبتنی بر مرورگر
+- 🆓 **۸ ارائه‌دهندهٔ رایگان جدید** — LLM7، Lepton، UncloseAI، BazaarLink، Completions، Enally، FreeTheAi، Command Code
+- 🎯 **مسیریابی tier آگاه از manifest، W1–W4** — manifestهای ارائه‌دهنده انتخاب وزن‌دار tier را هدایت می‌کنند
+- 🎨 **پاریتی کامل Cursor با OpenAI** — tool callها، streaming، مدیریت نشست end-to-end
+- 📊 **استفاده از پلن Cursor Pro** — دادهٔ سهمیه و چرخه در داشبورد provider-limits نمایان می‌شود
+- ⚡ **تفکیک service tier / تحلیل‌های Codex fast tier** — دیدگاه مصرف به ازای هر tier
+- 📌 **مسیریابی sticky به ازای نشست** — نشست‌های Codex بین نوبت‌ها به همان حساب متصل می‌شوند
+- 🔊 **بهبودهای Inworld TTS** — کاتالوگ صدا، streaming و بهبود latency
+- 🔑 **احراز هویت headless مربوط به Kiro** — ورود از طریق فروشگاه محلی SQLite مربوط به `kiro-cli`، بدون نیاز به مرورگر
+- 📉 **پایش سهمیه و محدودیت DeepSeek** — استفادهٔ روزانه/ماهانه از طریق داشبورد در دسترس
+- 🔄 **استراتژی مسیریابی آگاه از reset** — کامبوها اکنون حساب‌هایی را ترجیح می‌دهند که پنجرهٔ سهمیهٔ آن‌ها زودتر بازنشانی می‌شود
+- ⏱️ **`fallbackDelayMs`** و **شناسایی پویای محدودیت tool** — زمان‌بندی fallback دقیق‌تر + محدودیت تعداد tool به ازای ارائه‌دهنده
+- 🔧 **تنزل حالت پس‌زمینه (Responses API)** — در صورت نبود polling پس‌زمینه در بالادست، با هشدار ساختاریافته به حالت هم‌زمان fallback می‌کند
+- 🚦 **تفکیب 429 به ازای ارائه‌دهنده** + toggle `useUpstream429BreakerHints` — رفتار breaker دقیق‌تر با استفاده از hintهای rate-limit بالادست
+- 🩺 **داشبورد cooldown مدل‌ها** — مشاهدهٔ lockoutهای به‌ازای مدل و فعال‌سازی دستی مجدد از رابط کاربری
+- 🔒 **شناسایی پویای گواهی MITM لینوکس** — در Debian/Ubuntu، Fedora/RHEL، Arch و سایر توزیع‌ها کار می‌کند
+- 💻 **مجموعهٔ بهبود CLI** — ۲۰+ دستور شامل `omniroute providers`، `omniroute combos`، `omniroute doctor`، `omniroute setup`
+- 🔍 **کشف مدل embedding مربوط به Qdrant** — probe خودکار مدل vector-store
+- 🔑 **کلیدهای API / Bearer keys با scope `manage`** — انجام عملیات مدیریتی به‌صورت برنامه‌نویسی از طریق API
+- 🏥 **تحلیل سلامت target کامبو** + **سازندهٔ کامبو ساختاریافته** — سلامت به‌ازای target و سازندهٔ رابط کاربری برای مونتاژ گام‌های `(provider, model, connection)`
+- 🤝 **ارائه‌دهندهٔ OAuth مربوط به GitLab Duo** — ورود با credentialهای GitLab
+- 🧠 **Reasoning Replay Cache** — ماندگاری ترکیبی درون‌حافظه‌ای + SQLite از رد reasoning
+
+📚 **مستندات مرتبط:** [Skills Framework](../frameworks/SKILLS.md) · [Memory System](../frameworks/MEMORY.md) · [Cloud Agents](../frameworks/CLOUD_AGENT.md) · [Webhooks](../frameworks/WEBHOOKS.md) · [Reasoning Replay Cache](../routing/REASONING_REPLAY.md)
 
 ---
 
-## 🔌 Providers
+## 🔌 ارائه‌دهنده‌ها
 
+مدیریت اتصالات ارائه‌دهندهٔ AI: ارائه‌دهنده‌های OAuth (Claude Code، Codex)، ارائه‌دهنده‌های کلید API (Groq، DeepSeek، OpenRouter) و ارائه‌دهنده‌های رایگان (Qoder، Qwen، Kiro). حساب‌های Kiro شامل پیگیری ماندهٔ اعتبار هستند — اعتبار باقی‌مانده، کل allowance و تاریخ تجدید در Dashboard → Usage قابل مشاهده است.
 
-![Providers Dashboard](screenshots/01-providers.png)
+اتصالات OpenRouter می‌توانند یک `preset` به ازای اتصال در Advanced Settings ذخیره کنند. هنگام تنظیم، RouteChi آن را به‌عنوان فیلد درخواست top-level مربوط به OpenRouter ارسال می‌کند، مثلاً `"preset": "email-copywriter"`، مگر اینکه درخواست کاربر از قبل `preset` خود را ارائه کرده باشد.
 
----
-
-## 🎨 Combos
-
-Create model routing combos with 13 strategies: priority, weighted, round-robin, random, least-used, cost-optimized, strict-random, auto, fill-first, p2c, lkgp, context-optimized, and **context-relay**. Each combo chains multiple models with automatic fallback and includes quick templates and readiness checks.
-
-Recent combo improvements:
-
-- **Structured combo builder** — create each step by selecting provider, model, and exact account/connection
-- **Repeated provider support** — reuse the same provider many times in one combo as long as the `(provider, model, connection)` tuple is unique
-- **Combo target health** — analytics and health surfaces now distinguish individual combo targets/steps instead of collapsing everything into model strings
-- **Composite tier ordering** — `defaultTier -> fallbackTier` now influences runtime execution/fallback order for top-level combo steps
-
-![Combos Dashboard](screenshots/02-combos.png)
+![Providers Dashboard](../screenshots/01-providers.png)
 
 ---
 
-## 📊 Analytics
+## 🎨 کامبوها
 
-Comprehensive usage analytics with token consumption, cost estimates, activity heatmaps, weekly distribution charts, and per-provider breakdowns.
+ایجاد کامبوهای مسیریابی مدل با ۱۷ استراتژی: priority، weighted، fill-first، round-robin، p2c (power-of-two-choices)، random، least-used، cost-optimized، reset-aware، reset-window، headroom، strict-random، auto، lkgp (last-known-good-provider)، context-optimized، context-relay و **fusion** (fan out به پنلی از مدل‌ها به‌صورت موازی، سپس سنتز یک پاسخ از طریق یک judge). هر کامبو چندین مدل را با fallback خودکار زنجیره می‌کند و شامل قالب‌های سریع و بررسی‌های آمادگی است.
 
-![Analytics Dashboard](screenshots/03-analytics.png)
+بهبودهای اخیر کامبو:
+
+- **سازندهٔ کامبو ساختاریافته** — ایجاد هر گام با انتخاب ارائه‌دهنده، مدل و حساب/اتصال دقیق
+- **پشتیبانی از ارائه‌دهندهٔ تکراری** — استفادهٔ مکرر از همان ارائه‌دهنده در یک کامبو تا زمانی که tuple `(provider, model, connection)` یکتا باشد
+- **سلامت target کامبو** — تحلیل‌ها و سطوح سلامت اکنون targetها/گام‌های جداگانه کامبو را متمایز می‌کنند به‌جای فروپاشی همه‌چیز در رشته‌های مدل
+- **ترتیب‌بندی tier مرکب** — `defaultTier -> fallbackTier` اکنون بر ترتیب اجرا/fallback زمان اجرا برای گام‌های top-level کامبو تأثیر می‌گذارد
+
+![Combos Dashboard](../screenshots/02-combos.png)
 
 ---
 
-## 🏥 System Health
+## 📊 تحلیل‌ها
 
-Real-time monitoring: uptime, memory, version, latency percentiles (p50/p95/p99), cache statistics, provider circuit breaker states, active quota-monitored sessions, and combo target health.
+تحلیل‌های جامع استفاده با مصرف توکن، تخمین هزینه، نقشه‌های حرارتی فعالیت، نمودارهای توزیع هفتگی و تفکیک به ازای ارائه‌دهنده.
 
-![Health Dashboard](screenshots/04-health.png)
+![Analytics Dashboard](../screenshots/03-analytics.png)
+
+---
+
+## 🏥 سلامت سامانه
+
+پایش بلادرنگ: uptime، حافظه، نسخه، صدک‌های latency (p50/p95/p99)، آمار کش، وضعیت‌های circuit breaker ارائه‌دهنده، نشست‌های پایش‌شدهٔ سهمیهٔ فعال و سلامت target کامبو.
+
+![Health Dashboard](../screenshots/04-health.png)
 
 ---
 
 ## 🔧 Translator Playground
 
-Four modes for debugging API translations: **Playground** (format converter), **Chat Tester** (live requests), **Test Bench** (batch tests), and **Live Monitor** (real-time stream).
+چهار حالت برای اشکال‌زدایی ترجمه‌های API: **Playground** (مبدل قالب)، **Chat Tester** (درخواست‌های زنده)، **Test Bench** (آزمون‌های دسته‌ای) و **Live Monitor** (جریان بلادرنگ).
 
-![Translator Playground](screenshots/05-translator.png)
+![Translator Playground](../screenshots/05-translator.png)
 
 ---
 
 ## 🎮 Model Playground _(v2.0.9+)_
 
-Test any model directly from the dashboard. Select provider, model, and endpoint, write prompts with Monaco Editor, stream responses in real-time, abort mid-stream, and view timing metrics.
+آزمایش هر مستقیماً از داشبورد. انتخاب ارائه‌دهنده، مدل و نقطهٔ پایانی، نوشتن prompt با Monaco Editor، streaming پاسخ‌ها به‌صورت بلادرنگ، قطع میان‌جریان و مشاهدهٔ معیارهای زمان‌بندی.
 
 ---
 
-## 🎨 Themes _(v2.0.5+)_
+## 🎨 تم‌ها _(v2.0.5+)_
 
-Customizable color themes for the entire dashboard. Choose from 7 preset colors (Coral, Blue, Red, Green, Violet, Orange, Cyan) or create a custom theme by picking any hex color. Supports light, dark, and system mode.
-
----
-
-## ⚙️ Settings
-
-Comprehensive settings panel with tabs:
-
-- **General** — System storage, backup management (export/import database)
-- **Appearance** — Theme selector (dark/light/system), color theme presets and custom colors, health log visibility, sidebar item visibility controls
-- **Security** — API endpoint protection, custom provider blocking, IP filtering, session info
-- **Routing** — Model aliases, background task degradation
-- **Resilience** — Rate limit persistence, circuit breaker tuning, auto-disable banned accounts, provider expiration monitoring, **Context Relay** handoff threshold and summary model configuration
-- **Advanced** — Configuration overrides, configuration audit trail, fallback degradation mode
-
-![Settings Dashboard](screenshots/06-settings.png)
+تم‌های رنگ قابل تنظیم برای کل داشبورد. انتخاب از میان ۷ رنگ preset (Coral، Blue، Red، Green، Violet، Orange، Cyan) یا ایجاد تم سفارشی با انتخاب هر رنگ hex. پشتیبانی از حالت روشن، تیره و سامانه.
 
 ---
 
-## 🔧 CLI Tools
+## ⚙️ تنظیمات
 
-One-click configuration for AI coding tools: Claude Code, Codex CLI, OpenClaw, Kilo Code, Antigravity, Cline, Continue, Cursor, and Factory Droid. Features automated config apply/reset, connection profiles, and model mapping.
+پنل تنظیمات جامع با **۷ تب**:
 
-![CLI Tools Dashboard](screenshots/07-cli-tools.png)
+- **General** — ذخیره‌سازی سامانه، مدیریت پشتیبان (صادرات/واردات پایگاه داده)
+- **Appearance** — انتخابگر تم (تیره/روشن/سامانه)، presetهای تم رنگی و رنگ‌های سفارشی، نمایان‌سازی لاگ سلامت، کنترل نمایان‌سازی آیتم‌های نوار کناری و جداکنندهٔ گروه، کنترل نمایان‌سازی تونل نقطهٔ پایانی
+- **AI** — ویژگی‌های دستیار AI، presetهای مسیریابی پیش‌فرض (Auto Combo `auto/coding`، `auto/fast`، `auto/cheap`، `auto/smart`)، cache reasoning replay و toggleهای skill/memory
+- **Security** — حفاظت نقطهٔ پایانی API، مسدودسازی سفارشی ارائه‌دهنده، فیلتر IP، اطلاعات نشست
+- **Routing** — نام‌های مستعار مدل، تنزل وظیفهٔ پس‌زمینه، مسیریابی tier آگاه از manifest (W1–W4)، `fallbackDelayMs`، مسیریابی sticky به‌ازای نشست
+- **Resilience** — ماندگاری rate limit، تنظیم circuit breaker، غیرفعال‌سازی خودکار حساب‌های banned، پایش انقضای ارائه‌دهنده، آستانهٔ انتقال **Context Relay** و پیکربندی مدل خلاصه، تفکیک 429 به‌ازای ارائه‌دهنده و toggle `useUpstream429BreakerHints`، cooldown مدل‌ها
+- **Advanced** — بازنویسی‌های پیکربندی، سابقهٔ ممیزی پیکربندی، حالت تنزل fallback، تنزل حالت پس‌زمینه برای Responses API
+
+![Settings Dashboard](../screenshots/06-settings.png)
+
+---
+
+## 🔧 ابزارهای CLI
+
+پیکربندی یک‌کلیکی برای ابزارهای کدنویسی AI: Claude Code، Codex CLI، OpenClaw، Kilo Code، Antigravity، Cline، Continue، Cursor و Factory Droid. ویژگی‌ها شامل اعمال/بازنشانی پیکربندی خودکار، پروفایل‌های اتصال و نگاشت مدل است.
+
+![CLI Tools Dashboard](../screenshots/07-cli-tools.png)
 
 ---
 
 ## 🤖 CLI Agents _(v2.0.11+)_
 
-Dashboard for discovering and managing CLI agents. Shows a grid of 17 built-in agents (Codex, Claude, Goose, OpenClaw, Aider, OpenCode, Cline, Qwen Code, ForgeCode, Amazon Q, Open Interpreter, Cursor CLI, Warp, **Windsurf**, **Devin CLI**, **Kimi Coding**, **Command Code**) with:
+داشبورد برای کشف و مدیریت agentهای CLI. نمایش یک شبکه از ۱۷ agent داخلی (Codex، Claude، Goose، OpenClaw، Aider، OpenCode، Cline، Qwen Code، ForgeCode، Amazon Q، Open Interpreter، Cursor CLI، Warp، **Windsurf**، **Devin CLI**، **Kimi Coding**، **Command Code**) با:
 
-- **Installation status** — Installed / Not Found with version detection
-- **Protocol badges** — stdio, HTTP, etc.
-- **Custom agents** — Register any CLI tool via form (name, binary, version command, spawn args)
-- **CLI Fingerprint Matching** — Per-provider toggle to match native CLI request signatures, reducing ban risk while preserving proxy IP
+- **وضعیت نصب** — نصب‌شده / یافت‌نشد با شناسایی نسخه
+- **نشان‌های پروتکل** — stdio، HTTP و...
+- **agentهای سفارشی** — ثبت هر ابزار CLI از طریق فرم (نام، باینری، دستور نسخه، args اجرا)
+- **تطبیق اثرانگشت CLI** — toggle به‌ازای ارائه‌دهنده برای تطبیق امضاهای درخواست CLI بومی، کاهش ریسک ban با حفظ IP پروکسی
+- **agentهای پشتیبان‌شده با OAuth** — Windsurf و Devin CLI اکنون از جریان‌های OAuth مرورگر برای احراز هویت استفاده می‌کنند (v3.8.0+)
 
 ---
 
 ## 🔗 Context Relay _(v3.5.5+)_
 
-A combo strategy that preserves session continuity when account rotation happens mid-conversation. Before the active account is exhausted, OmniRoute generates a structured handoff summary in the background. After the next request resolves to a different account, the summary is injected as a system message so the new account continues with full context.
+یک استراتژی کامبو که تداوم نشست را هنگام چرخش حساب در میان گفت‌وگو حفظ می‌کند. پیش از آنکه حساب فعال تمام شود، RouteChi یک خلاصهٔ انتقال ساختاریافته در پس‌زمینه تولید می‌کند. پس از آنکه درخواست بعدی به حساب متفاوتی هدایت می‌شود، خلاصه به‌عنوان یک پیام سیستمی تزریق می‌شود تا حساب جدید با context کامل ادامه دهد.
 
-Configurable via combo-level or global settings:
+قابل پیکربندی از طریق تنظیمات کامبو یا سراسری:
 
-- **Handoff Threshold** — Quota usage percentage that triggers summary generation (default 85%)
-- **Max Messages For Summary** — How much recent history to condense
-- **Summary Model** — Optional override model for generating the handoff summary
+- **آستانهٔ انتقال** — درصد استفادهٔ سهمیه که تولید خلاصه را راه‌اندازی می‌کند (پیش‌فرض ۸۵٪)
+- **حداکثر پیام‌ها برای خلاصه** — میزان تاریخچهٔ اخیر برای فشرده‌سازی
+- **مدل خلاصه** — بازنویسی اختیاری مدل برای تولید خلاصهٔ انتقال
 
-Currently supports Codex account rotation. See [Context Relay documentation](features/context-relay.md).
-
----
-
-## 🛡️ Proxy Hardening _(v3.5.5+)_
-
-Comprehensive proxy configuration enforcement across the entire request pipeline:
-
-- **Token Health Check** — Background OAuth refresh now resolves proxy config per connection, preventing failures in proxy-required environments
-- **API Key Validation** — Provider key validation (`POST /api/providers/validate`) routes through `runWithProxyContext`, honoring provider-level and global proxy settings
-- **undici Dispatcher Fix** — Proxy dispatchers use undici's own fetch implementation instead of Node's built-in fetch, resolving `invalid onRequestStart method` errors on Node.js 22
-- **Node.js Version Detection** — Login page proactively detects incompatible Node.js versions (24+) and displays a warning banner with instructions to use Node 22 LTS
+در حال حاضر چرخش حساب Codex را پشتیبانی می‌کند. به [مستندات Context Relay](../architecture/ARCHITECTURE.md) مراجعه کنید.
 
 ---
 
-## 📧 Email Privacy Masking _(v3.5.6+)_
+## 🗜️ فشرده‌سازی Prompt _(v3.7.9+)_
 
-OAuth account emails are now masked in the provider dashboard (e.g. `di*****@g****.com`) to prevent accidental exposure when sharing screenshots or recording demos. The full email address remains accessible via hover tooltip (`title` attribute).
+Context & Cache اکنون صفحات اختصاصی برای Caveman، RTK و Compression Combos ارائه می‌دهد:
 
----
+- **Caveman** — بسته‌های قاعده آگاه از زبان، پیش‌نمایش، کنترل‌های حالت خروجی و تحلیل
+- **RTK** — فشرده‌سازی آگاه از دستور برای shell، git، test، build، package، Docker، infra، JSON و خروجی stack-trace
+- **Compression Combos** — خطوط لولهٔ نام‌گذاری‌شده مانند `rtk -> caveman` اختصاص یافته به کامبوهای مسیریابی؛ میانگین ریاضی انباشته‌شدهٔ پیش‌فرض به `~89%` و صرفه‌جویی‌های eligible-context ۷۸-۹۵٪ می‌رسد هنگامی که هر دو موتور اعمال می‌شوند
+- **بازیابی خروجی خام** — pointerهای اختیاری RTK خام redactشده برای اشکال‌زدایی شکست‌های فشرده‌شده
 
-## 👁️ Model Visibility Toggle _(v3.5.6+)_
-
-The provider page model list now includes:
-
-- **Real-time search/filter bar** — Quickly find specific models
-- **Per-model visibility toggle** (👁 icon) — Hidden models are grayed out and excluded from the `/v1/models` catalog
-- **Active-count badge** (`N/M active`) — Shows at a glance how many models are enabled vs total
+به [راهنمای فشرده‌سازی](../compression/COMPRESSION_GUIDE.md)، [RTK Compression](../compression/RTK_COMPRESSION.md) و
+[موتورهای فشرده‌سازی](../compression/COMPRESSION_ENGINES.md) مراجعه کنید.
 
 ---
 
-## 🔧 OAuth Env Repair _(v3.6.1+)_
+## 🛡️ سخت‌سازی پروکسی _(v3.5.5+)_
 
-One-click "Repair env" action for OAuth providers that restores missing environment variables and fixes broken auth state. Accessible from `Dashboard → Providers → [OAuth Provider] → Repair env`. Automatically detects and repairs:
+اعمال جامع پیکربندی پروکسی در کل خط لولهٔ درخواست:
 
-- Missing OAuth client credentials
-- Corrupted env file entries
-- Backup path sanitization
-
----
-
-## 🗑️ Uninstall / Full Uninstall _(v3.6.2+)_
-
-Clean removal scripts for all installation methods:
-
-| Command                  | Action                                                                              |
-| ------------------------ | ----------------------------------------------------------------------------------- |
-| `npm run uninstall`      | Removes the system app but **keeps your DB and configurations** in `~/.omniroute`.  |
-| `npm run uninstall:full` | Removes the app AND permanently **erases all configurations, keys, and databases**. |
+- **بررسی سلامت توکن** — بازنشانی OAuth پس‌زمینه اکنون پیکربندی پروکسی را به ازای اتصال تحلیل می‌کند و از شکست در محیط‌های نیازمند پروکسی جلوگیری می‌کند
+- **اعتبارسنجی کلید API** — اعتبارسنجی کلید ارائه‌دهنده (`POST /api/providers/validate`) از طریق `runWithProxyContext` مسیریابی می‌شود و تنظیمات پروکسی سراسری و به‌ازای ارائه‌دهنده را رعایت می‌کند
+- **رفع Dispatcher مربوط به undici** — dispatcherهای پروکسی به‌جای fetch داخلی Node از پیاده‌سازی fetch خود undici استفاده می‌کنند و خطاهای `invalid onRequestStart method` در Node.js 22 را حل می‌کنند
+- **شناسایی نسخهٔ Node.js** — صفحهٔ ورود به‌طور پیش‌دستانه نسخه‌های ناسازگار Node.js (24+) را شناسایی و یک بنر هشدار با دستورالعمل استفاده از Node 22 LTS نمایش می‌دهد
 
 ---
 
-## 🖼️ Media _(v2.0.3+)_
+## 📧 ماسک کردن حریم خصوصی ایمیل _(v3.5.6+)_
 
-Generate images, videos, and music from the dashboard. Supports OpenAI, xAI, Together, Hyperbolic, SD WebUI, ComfyUI, AnimateDiff, Stable Audio Open, and MusicGen.
-
----
-
-## 📝 Request Logs
-
-Real-time request logging with filtering by provider, model, account, and API key. Shows status codes, token usage, latency, and response details.
-
-![Usage Logs](screenshots/08-usage.png)
+ایمیل‌های حساب OAuth به‌طور پیش‌فرض ماسک می‌شوند (مثلاً `di*****@g****.com`) تا از افشای تصادفی هنگام به اشتراک‌گذاری screenshot یا ضبط demo جلوگیری شود. از Settings → Appearance → Account email visibility برای آشکار یا ماسک کردن کامل ایمیل‌های حساب به‌صورت سراسری در ارائه‌دهنده‌ها، کامبوها، لاگ‌ها، سهمیه و صفحه‌های playground استفاده کنید.
 
 ---
 
-## 🌐 API Endpoint
+## 👁️ toggle نمایان‌سازی مدل _(v3.5.6+)_
 
-Your unified API endpoint with capability breakdown: Chat Completions, Responses API, Embeddings, Image Generation, Reranking, Audio Transcription, Text-to-Speech, Moderations, and registered API keys. Cloudflare Quick Tunnel integration and cloud proxy support for remote access.
+فهرست مدل صفحهٔ ارائه‌دهنده اکنون شامل موارد زیر است:
 
-![Endpoint Dashboard](screenshots/09-endpoint.png)
-
----
-
-## 🔑 API Key Management
-
-Create, scope, and revoke API keys. Each key can be restricted to specific models/providers with full access or read-only permissions. Visual key management with usage tracking.
+- **نوار جستجو/فیلتر بلادرنگ** — یافتن سریع مدل‌های خاص
+- **toggle نمایان‌سازی به‌ازای مدل** (آیکن 👁) — مدل‌های پنهان خاکستری شده و از کاتالوگ `/v1/models` حذف می‌شوند
+- **نشان شمارش فعال** (`N/M active`) — نشان می‌دهد چند مدل فعال در مقابل کل است
 
 ---
 
-## 📋 Audit Log
+## 🔧 تعمیر env مربوط به OAuth _(v3.6.1+)_
 
-Administrative action tracking with filtering by action type, actor, target, IP address, and timestamp. Full security event history.
+اکشن یک‌کلیکی "Repair env" برای ارائه‌دهنده‌های OAuth که متغیرهای محیطی گمشده را بازیابی و وضعیت احراز هویت شکسته را تعمیر می‌کند. قابل دسترسی از `Dashboard → Providers → [OAuth Provider] → Repair env`. به‌طور خودکار موارد زیر را شناسایی و تعمیر می‌کند:
+
+- credentialهای گمشدهٔ OAuth client
+- ورودی‌های فایل env خراب
+- پاک‌سازی مسیر پشتیبان
 
 ---
 
-## 🖥️ Desktop Application
+## 🗑️ حذف نصب / حذف نصب کامل _(v3.6.2+)_
 
-Native Electron desktop app for Windows, macOS, and Linux. Run OmniRoute as a standalone application with system tray integration, offline support, auto-update, and one-click install.
+اسکریپت‌های حذف تمیز برای همهٔ روش‌های نصب:
 
-Key features:
+| دستور                     | اقدام                                                                                |
+| ------------------------- | ------------------------------------------------------------------------------------ |
+| `npm run uninstall`       | برنامهٔ سامانه را حذف می‌کند اما **DB و پیکربندی‌های شما را در `~/.omniroute` نگه می‌دارد**. |
+| `npm run uninstall:full`  | برنامه را حذف می‌کند و دائمی **تمام پیکربندی‌ها، کلیدها و پایگاه‌های داده را پاک می‌کند**.        |
 
-- Server readiness polling (no blank screen on cold start)
-- System tray with port management
+---
+
+## 🖼️ رسانه _(v2.0.3+)_
+
+تولید تصویر، ویدیو و موسیقی از داشبورد. پشتیبانی از OpenAI، xAI، Together، Hyperbolic، SD WebUI، ComfyUI، AnimateDiff، Stable Audio Open و MusicGen.
+
+---
+
+## 📝 لاگ‌های درخواست
+
+ثبت بلادرنگ درخواست با فیلتر بر اساس ارائه‌دهنده، مدل، حساب و کلید API. نمایش کد وضعیت، استفادهٔ توکن، latency و جزئیات پاسخ.
+
+![Usage Logs](../screenshots/08-usage.png)
+
+---
+
+## 🌐 نقطهٔ پایانی API
+
+نقطهٔ پایانی API یکپارچهٔ شما با تفکیک قابلیت‌ها: Chat Completions، Responses API، Embeddings، Image Generation، Reranking، Audio Transcription، Text-to-Speech، Moderations و کلیدهای API ثبت‌شده. Cloudflare Quick Tunnel، Tailscale Funnel، ngrok Tunnel و پشتیبانی پروکسی ابری برای دسترسی راهور در دسترس است.
+
+![Endpoint Dashboard](../screenshots/09-endpoint.png)
+
+---
+
+## 🔑 مدیریت کلید API
+
+ایجاد، scopeدهی و ابطال کلیدهای API. هر کلید می‌تواند با دسترسی کامل یا فقط‌خواندنی به مدل‌های/ارائه‌دهنده‌های خاص محدود شود. مدیریت بصری کلید با پیگیری استفاده.
+
+---
+
+## 📋 لاگ ممیزی
+
+پیگیری اقدامات مدیریتی با فیلتر بر اساس نوع اقدام، actor، target، آدرس IP و مهر زمانی. تاریخچهٔ کامل رویدادهای امنیتی.
+
+---
+
+## 🖥️ برنامهٔ دسکتاپ
+
+برنامهٔ دسکتاپ بومی Electron برای ویندوز، macOS و لینوکس. اجرای RouteChi به‌عنوان یک برنامهٔ مستقل با یکپارچه‌سازی system tray، پشتیبانی آفلاین، به‌روزرسانی خودکار و نصب یک‌کلیکی.
+
+ویژگی‌های کلیدی:
+
+- poll آمادگی سرور (بدون صفحهٔ خالی هنگام شروع سرد)
+- system tray با مدیریت پورت
 - Content Security Policy
-- Single-instance lock
-- Auto-update on restart
-- Platform-conditional UI (macOS traffic lights, Windows/Linux default titlebar)
-- Hardened Electron build packaging — symlinked `node_modules` in the standalone bundle is detected and rejected before packaging, preventing runtime dependency on the build machine (v2.5.5+)
-- **Graceful shutdown** — Electron `before-quit` shuts down Next.js cleanly, preventing SQLite WAL database locks (v3.6.2+)
+- قفل single-instance
+- به‌روزرسانی خودکار هنگام راه‌اندازی مجدد
+- رابط کاربری مشروط به پلتفرم (چراغ‌های ترافیکی macOS، نوار عنوان پیش‌فرض ویندوز/لینوکس)
+- بسته‌بندی hardened الکترون — `node_modules` symlinkشده در بستهٔ standalone شناسایی و پیش از بسته‌بندی رد می‌شود تا از وابستگی زمان اجرا به ماشین ساخت جلوگیری شود (v2.5.5+)
+- **خاموش‌کردن آرام** — `before-quit` الکترون Next.js را به‌تمیزی خاموش می‌کند و از lockهای پایگاه دادهٔ WAL SQLite جلوگیری می‌کند (v3.6.2+)
 
-📖 See [`electron/README.md`](../electron/README.md) for full documentation.
+📖 برای مستندات کامل به [`electron/README.md`](../../electron/README.md) مراجعه کنید.
 
 ---
 
-## 🌐 V1 WebSocket Bridge _(v3.6.6+)_
+## 🌐 پل WebSocket V1 _(v3.6.6+)_
 
-OmniRoute now supports **OpenAI-compatible WebSocket clients** via the `/v1/ws` upgrade endpoint. The custom `scripts/v1-ws-bridge.mjs` server wraps Next.js and upgrades WS connections to full bidirectional streaming sessions. Authentication uses the same API key or session cookie as HTTP requests.
+RouteChi اکنون از **کلاینت‌های WebSocket سازگار با OpenAI** از طریق نقطهٔ پایانی ارتقای `/v1/ws` پشتیبانی می‌کند. سرور `scripts/dev/v1-ws-bridge.mjs` سفارشی Next.js را wrap می‌کند و اتصالات WS را به نشست‌های streaming دوطرفهٔ کامل ارتقا می‌دهد. احراز هویت از همان کلید API یا cookie نشست به‌عنوان درخواست‌های HTTP استفاده می‌کند.
 
-Key behaviours:
+رفتارهای کلیدی:
 
-- WS upgrade validated by `src/lib/ws/handshake.ts` before the connection is established
-- Streams terminated cleanly on session close or upstream error
-- Works alongside the existing HTTP+SSE streaming path simultaneously
+- ارتقای WS توسط `src/lib/ws/handshake.ts` پیش از برقراری اتصال اعتبارسنجی می‌شود
+- جریان‌ها هنگام بسته شدن نشست یا خطای بالادست به‌تمیزی خاتمه می‌یابند
+- در کنار مسیر streaming موجود HTTP+SSE به‌طور هم‌زمان کار می‌کند
 
 ---
 
 ## 🔑 Sync Tokens & Config Bundle _(v3.6.6+)_
 
-Multi-device and external operator access is now possible via **scoped sync tokens**:
+دسترسی چند‌دستگاهی و اپراتور خارجی اکنون از طریق **sync tokens با scope** ممکن است:
 
-- **`POST /api/sync/tokens`** — Issue a new sync token (scoped, with optional expiry)
-- **`DELETE /api/sync/tokens/:id`** — Revoke a token
-- **`GET /api/sync/bundle`** — Download a versioned, ETag-keyed JSON snapshot of all non-sensitive settings (passwords redacted)
+- **`POST /api/sync/tokens`** — صدور یک sync token جدید (با scope، با انقضای اختیاری)
+- **`DELETE /api/sync/tokens/:id`** — ابطال یک token
+- **`GET /api/sync/bundle`** — دانلود یک snapshot JSON نسخه‌بندی‌شده و ETag-keyed از تمام تنظیمات غیرحساس (گذرواژه‌ها redact می‌شوند)
 
-The config bundle is built by `src/lib/sync/bundle.ts`. Consumers compare the `ETag` response header to detect changes without re-downloading the full payload.
+config bundle توسط `src/lib/sync/bundle.ts` ساخته می‌شود. مصرف‌کنندگان هدر پاسخ `ETag` را برای شناسایی تغییرات بدون دانلود مجدد payload کامل مقایسه می‌کنند.
 
 ---
 
-## 🧠 GLM Thinking Preset _(v3.6.6+)_
+## 🧠 Preset تفکر GLM _(v3.6.6+)_
 
-**GLM Thinking (`glmt`)** is now a registered first-class provider: 65 536 max output tokens, 24 576 thinking budget, 900 s default timeout, Claude-compatible API format, and shared usage sync with the GLM family.
+**GLM Thinking (`glmt`)** اکنون یک ارائه‌دهندهٔ first-class ثبت‌شده است: ۶۵ ۵۳۶ max output token، ۲۴ ۵۷۶ thinking budget، ۹۰۰ s timeout پیش‌فرض، قالب API سازگار با Claude و همگام‌سازی استفادهٔ مشترک با خانوادهٔ GLM.
 
-**Hybrid token counting** also lands in v3.6.6: when a Claude-compatible provider exposes `/messages/count_tokens`, OmniRoute calls it before large requests with graceful estimation fallback.
+**شمارش توکن ترکیبی** نیز در v3.6.6 وارد می‌شود: هنگامی که یک ارائه‌دهندهٔ سازگار با Claude، `/messages/count_tokens` را عرضه می‌کند، RouteChi قبل از درخواست‌های بزرگ آن را فراخوانی می‌کند با fallback تخمین آرام.
 
 ---
 
 ## 🛡️ Safe Outbound Fetch & SSRF Guard _(v3.6.6+)_
 
-All provider validation and model discovery calls now go through a two-layer outbound guard:
+تمام فراخوانی‌های اعتبارسنجی ارائه‌دهنده و کشف مدل اکنون از یک guard خروجی دو لایه‌ای عبور می‌کنند:
 
-1. **URL guard** (`src/shared/network/outboundUrlGuard.ts`) — Blocks private/loopback/link-local IP ranges before the socket is opened.
-2. **Safe fetch wrapper** (`src/shared/network/safeOutboundFetch.ts`) — Applies the URL guard, normalises timeouts, and retries transient errors with exponential backoff.
+1. **URL guard** (`src/shared/network/outboundUrlGuard.ts`) — مسدودسازی بازه‌های IP خصوصی/loopback/link-local پیش از باز شدن سوکت.
+2. **Safe fetch wrapper** (`src/shared/network/safeOutboundFetch.ts`) — اعمال URL guard، نرمال‌سازی timeoutها و تلاش مجدد خطاهای گذرا با backoff نمایی.
 
-Guard violations surface as HTTP 422 (`URL_GUARD_BLOCKED`) and are written to the compliance audit log via `providerAudit.ts`.
-
----
-
-## 🔄 Cooldown-Aware Retries _(v3.6.6+)_
-
-Chat requests now **automatically retry** when an upstream provider returns a model-scoped cooldown. Configurable via `REQUEST_RETRY` (default: 2) and `MAX_RETRY_INTERVAL_SEC` (default: 30 s). Rate-limit header learning improved across `x-ratelimit-reset-requests`, `x-ratelimit-reset-tokens`, and `Retry-After` — per-model cooldown state is visible in the Resilience dashboard.
+نقض guard به‌صورت HTTP 422 (`URL_GUARD_BLOCKED`) ظاهر می‌شود و در لاگ ممیزی انطباق از طریق `providerAudit.ts` نوشته می‌شود.
 
 ---
 
-## 📋 Compliance Audit v2 _(v3.6.6+)_
+## 🔄 Retry آگاه از Cooldown _(v3.6.6+)_
 
-The audit log has been expanded with cursor-based pagination, request context enrichment (request ID, user agent, IP), structured auth events, provider CRUD events with diff context, and SSRF-blocked validation logging. New events emitted by `src/lib/compliance/providerAudit.ts`.
+درخواست‌های چت اکنون **به‌طور خودکار retry** می‌شوند هنگامی که یک ارائه‌دهندهٔ بالادست یک cooldown با scope مدل بازمی‌گرداند. قابل پیکربندی از طریق `REQUEST_RETRY` (پیش‌فرض: ۲) و `MAX_RETRY_INTERVAL_SEC` (پیش‌فرض: ۳۰ s). یادگیری هدر rate-limit در `x-ratelimit-reset-requests`، `x-ratelimit-reset-tokens` و `Retry-After` بهبود یافته است — وضعیت cooldown به‌ازای مدل در داشبورد Resilience قابل مشاهده است.
+
+---
+
+## 📋 ممیزی انطباق v2 _(v3.6.6+)_
+
+لاگ ممیزی با صفحه‌بندی مبتنی بر cursor، غنی‌سازی context درخواست (request ID، user agent، IP)، رویدادهای احراز هویت ساختاریافته، رویدادهای CRUD ارائه‌دهنده با context diff و ثبت validation مسدودشدهٔ SSRF گسترش یافته است. رویدادهای جدید توسط `src/lib/compliance/providerAudit.ts` منتشر می‌شوند.

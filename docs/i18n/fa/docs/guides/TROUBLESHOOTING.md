@@ -1,72 +1,102 @@
-# Troubleshooting (فارسی)
+---
+title: "رفع اشکال"
+version: 3.8.40
+lastUpdated: 2026-06-28
+---
 
-🌐 **Languages:** 🇺🇸 [English](../../../../docs/TROUBLESHOOTING.md) · 🇸🇦 [ar](../../ar/docs/TROUBLESHOOTING.md) · 🇧🇬 [bg](../../bg/docs/TROUBLESHOOTING.md) · 🇧🇩 [bn](../../bn/docs/TROUBLESHOOTING.md) · 🇨🇿 [cs](../../cs/docs/TROUBLESHOOTING.md) · 🇩🇰 [da](../../da/docs/TROUBLESHOOTING.md) · 🇩🇪 [de](../../de/docs/TROUBLESHOOTING.md) · 🇪🇸 [es](../../es/docs/TROUBLESHOOTING.md) · 🇮🇷 [fa](../../fa/docs/TROUBLESHOOTING.md) · 🇫🇮 [fi](../../fi/docs/TROUBLESHOOTING.md) · 🇫🇷 [fr](../../fr/docs/TROUBLESHOOTING.md) · 🇮🇳 [gu](../../gu/docs/TROUBLESHOOTING.md) · 🇮🇱 [he](../../he/docs/TROUBLESHOOTING.md) · 🇮🇳 [hi](../../hi/docs/TROUBLESHOOTING.md) · 🇭🇺 [hu](../../hu/docs/TROUBLESHOOTING.md) · 🇮🇩 [id](../../id/docs/TROUBLESHOOTING.md) · 🇮🇹 [it](../../it/docs/TROUBLESHOOTING.md) · 🇯🇵 [ja](../../ja/docs/TROUBLESHOOTING.md) · 🇰🇷 [ko](../../ko/docs/TROUBLESHOOTING.md) · 🇮🇳 [mr](../../mr/docs/TROUBLESHOOTING.md) · 🇲🇾 [ms](../../ms/docs/TROUBLESHOOTING.md) · 🇳🇱 [nl](../../nl/docs/TROUBLESHOOTING.md) · 🇳🇴 [no](../../no/docs/TROUBLESHOOTING.md) · 🇵🇭 [phi](../../phi/docs/TROUBLESHOOTING.md) · 🇵🇱 [pl](../../pl/docs/TROUBLESHOOTING.md) · 🇵🇹 [pt](../../pt/docs/TROUBLESHOOTING.md) · 🇧🇷 [pt-BR](../../pt-BR/docs/TROUBLESHOOTING.md) · 🇷🇴 [ro](../../ro/docs/TROUBLESHOOTING.md) · 🇷🇺 [ru](../../ru/docs/TROUBLESHOOTING.md) · 🇸🇰 [sk](../../sk/docs/TROUBLESHOOTING.md) · 🇸🇪 [sv](../../sv/docs/TROUBLESHOOTING.md) · 🇰🇪 [sw](../../sw/docs/TROUBLESHOOTING.md) · 🇮🇳 [ta](../../ta/docs/TROUBLESHOOTING.md) · 🇮🇳 [te](../../te/docs/TROUBLESHOOTING.md) · 🇹🇭 [th](../../th/docs/TROUBLESHOOTING.md) · 🇹🇷 [tr](../../tr/docs/TROUBLESHOOTING.md) · 🇺🇦 [uk-UA](../../uk-UA/docs/TROUBLESHOOTING.md) · 🇵🇰 [ur](../../ur/docs/TROUBLESHOOTING.md) · 🇻🇳 [vi](../../vi/docs/TROUBLESHOOTING.md) · 🇨🇳 [zh-CN](../../zh-CN/docs/TROUBLESHOOTING.md)
+# رفع اشکال
+
+> **برای کاربران**: به دنبال راه‌حل‌های سریع هستید؟ به [مرجع سریع](#quick-reference) زیر مراجعه کنید.
+
+🌐 **Languages:** 🇺🇸 [English](./TROUBLESHOOTING.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/guides/TROUBLESHOOTING.md) | 🇪🇸 [Español](../i18n/es/docs/guides/TROUBLESHOOTING.md) | 🇫🇷 [Français](../i18n/fr/docs/guides/TROUBLESHOOTING.md) | 🇮🇹 [Italiano](../i18n/it/docs/guides/TROUBLESHOOTING.md) | 🇷🇺 [Русский](../i18n/ru/docs/guides/TROUBLESHOOTING.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/guides/TROUBLESHOOTING.md) | 🇩🇪 [Deutsch](../i18n/de/docs/guides/TROUBLESHOOTING.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/guides/TROUBLESHOOTING.md) | 🇹🇭 [ไทย](../i18n/th/docs/guides/TROUBLESHOOTING.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/guides/TROUBLESHOOTING.md) | 🇸🇦 [العربية](../i18n/ar/docs/guides/TROUBLESHOOTING.md) | 🇯🇵 [日本語](../i18n/ja/docs/guides/TROUBLESHOOTING.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/guides/TROUBLESHOOTING.md) | 🇧🇬 [Български](../i18n/bg/docs/guides/TROUBLESHOOTING.md) | 🇩🇰 [Dansk](../i18n/da/docs/guides/TROUBLESHOOTING.md) | 🇫🇮 [Suomi](../i18n/fi/docs/guides/TROUBLESHOOTING.md) | 🇮🇱 [עברית](../i18n/he/docs/guides/TROUBLESHOOTING.md) | 🇭🇺 [Magyar](../i18n/hu/docs/guides/TROUBLESHOOTING.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/guides/TROUBLESHOOTING.md) | 🇰🇷 [한국어](../i18n/ko/docs/guides/TROUBLESHOOTING.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/guides/TROUBLESHOOTING.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/guides/TROUBLESHOOTING.md) | 🇳🇴 [Norsk](../i18n/no/docs/guides/TROUBLESHOOTING.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/guides/TROUBLESHOOTING.md) | 🇷🇴 [Română](../i18n/ro/docs/guides/TROUBLESHOOTING.md) | 🇵🇱 [Polski](../i18n/pl/docs/guides/TROUBLESHOOTING.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/guides/TROUBLESHOOTING.md) | 🇸🇪 [Svenska](../i18n/sv/docs/guides/TROUBLESHOOTING.md) | 🇵🇭 [Filipino](../i18n/phi/docs/guides/TROUBLESHOOTING.md) | 🇨🇿 [Čeština](../i18n/cs/docs/guides/TROUBLESHOOTING.md)
+
+مشکلات و راه‌حل‌های رایج برای RouteChi.
 
 ---
 
-Common problems and solutions for OmniRoute.
+## مرجع سریع
+
+**با RouteChi تازه آشنا شده‌اید؟** از اینجا شروع کنید — این موارد ۹۰٪ مشکلات را حل می‌کنند:
+
+| این را می‌بینم          | معنی                                | چه کاری انجام دهید                                                                                 |
+| ----------------------- | ----------------------------------- | -------------------------------------------------------------------------------------------------- |
+| "Can't connect"         | RouteChi اجرا نمی‌شود               | `omniroute` یا `docker restart omniroute` را اجرا کنید                                              |
+| "Invalid API key"       | کلید شما اشتباه یا منقضی است         | کلید را از وب‌سایت ارائه‌دهنده دوباره کپی کنید                                                       |
+| "Rate limit exceeded"   | درخواست‌های زیادی می‌فرستید          | ۱ دقیقه صبر کنید، یا برای fallback خودکار از `model: "auto"` استفاده کنید                          |
+| "Quota exceeded"        | سهمیهٔ رایگان/پرداختی‌تان تمام شده   | ارائه‌دهنده‌های بیشتری متصل کنید، یا از ارائه‌دهنده‌های رایگان (Kiro، Pollinations) استفاده کنید |
+| "Slow responses"        | ارائه‌دهنده مشغول یا دور است         | از `model: "auto/fast"` استفاده کنید یا یک ارائه‌دهندهٔ سریع‌تر (Groq، Cerebras) متصل کنید       |
+| "Wrong provider used"   | `auto` یک ارائه‌دهندهٔ متفاوت انتخاب کرده | این طبیعی است! `auto` بهترین را انتخاب می‌کند. یک ارائه‌دهندهٔ خاص را با `model: "openai/gpt-4o"` اجبار کنید |
+| "502 Bad Gateway"       | ارائه‌دهنده از کار افتاده            | صبر و تلاش مجدد، یا برای تعویض ارائه‌دهنده از `model: "auto"` استفاده کنید                          |
+| "401 Unauthorized"      | credentialهای شما اشتباه است         | کلید API خود را بررسی یا با OAuth دوباره احراز هویت کنید                                            |
+| "429 Too Many Requests" | rate limited شده‌اید                | ۱ دقیقه صبر کنید، یا ارائه‌دهنده‌های بیشتری متصل کنید                                               |
+
+**هنوز گیر کرده‌اید؟** به [رفع اشکال تفصیلی](#detailed-troubleshooting) زیر مراجعه کنید، یا در [Discord](https://discord.gg/EkzRkpzKYt) بپرسید.
 
 ---
 
-## Quick Fixes
+## رفع اشکال تفصیلی
 
-| Problem                                             | Solution                                                                                                                                                 |
+---
+
+## راه‌حل‌های سریع
+
+| مشکل                                                 | راه‌حل                                                                                                                                                  |
 | --------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| First login not working                             | Set `INITIAL_PASSWORD` in `.env` (no hardcoded default)                                                                                                  |
-| Dashboard opens on wrong port                       | Set `PORT=20128` and `NEXT_PUBLIC_BASE_URL=http://localhost:20128`                                                                                       |
-| No logs written to disk                             | Set `APP_LOG_TO_FILE=true` and verify call log capture is enabled                                                                                        |
-| EACCES: permission denied                           | Set `DATA_DIR=/path/to/writable/dir` to override `~/.omniroute`                                                                                          |
-| Routing strategy not saving                         | Update to v1.4.11+ (Zod schema fix for settings persistence)                                                                                             |
-| Login crash / blank page                            | Check Node.js version — see [Node.js Compatibility](#nodejs-compatibility) below                                                                         |
-| `dlopen` / `slice is not valid mach-o file` (macOS) | Run `cd $(npm root -g)/omniroute/app && npm rebuild better-sqlite3 && omniroute` — see [macOS native module rebuild](#macos-native-module-rebuild) below |
-| Proxy "fetch failed"                                | Ensure proxy config is set at the correct level — see [Proxy Issues](#proxy-issues) below                                                                |
+| ورود اول کار نمی‌کند                                 | `INITIAL_PASSWORD` را در `.env` تنظیم کنید (هیچ پیش‌فرض hard-codedای وجود ندارد)                                                                          |
+| داشبورد روی پورت اشتباه باز می‌شود                   | `PORT=20128` و `NEXT_PUBLIC_BASE_URL=http://localhost:20128` را تنظیم کنید                                                                                |
+| هیچ لاگی روی دیسک نوشته نمی‌شود                      | `APP_LOG_TO_FILE=true` را تنظیم و فعال بودن ضبط call log را تأیید کنید                                                                                    |
+| EACCES: permission denied                           | `DATA_DIR=/path/to/writable/dir` را برای بازنویسی `~/.omniroute` تنظیم کنید                                                                                |
+| استراتژی مسیریابی ذخیره نمی‌شود                     | به آخرین نسخهٔ v3.x به‌روزرسانی کنید (رفع Zod schema برای ماندگاری تنظیمات در نسخه‌های قبلی منتشر شد)                                                     |
+| کرش ورود / صفحهٔ خالی                                | نسخهٔ Node.js را بررسی کنید — به [سازگاری Node.js](#nodejs-compatibility) زیر مراجعه کنید                                                                  |
+| `dlopen` / `slice is not valid mach-o file` (macOS) | `cd $(npm root -g)/omniroute/app && npm rebuild better-sqlite3 && omniroute` را اجرا کنید — به [بازسازی ماژول بومی macOS](#macos-native-module-rebuild) زیر مراجعه کنید |
+| "fetch failed" پروکسی                                | مطمئن شوید پیکربندی پروکسی در سطح صحیح تنظیم شده — به [مشکلات پروکسی](#proxy-issues) زیر مراجعه کنید                                                       |
 
 ---
 
-## Node.js Compatibility
+## سازگاری Node.js
 
 <a name="nodejs-compatibility"></a>
 
-### Login page crashes or shows "Module self-registration" error
+### صفحهٔ ورود کرش می‌کند یا خطای "Module self-registration" نشان می‌دهد
 
-**Cause:** You are running a Node.js version outside OmniRoute's approved secure runtime floor. The most common case is running an older Node 20, 22, or 24 patch level that falls below the patched security floor OmniRoute requires.
+**علت:** در حال اجرای یک نسخهٔ Node.js خارج از کف زمان‌اجرای امن تأییدشدهٔ RouteChi هستید. رایج‌ترین حالت اجرای یک patch level قدیمی‌تر Node 22 یا 24 است که زیر کف امنیتی patch‌شده‌ای که RouteChi نیاز دارد قرار می‌گیرد.
 
-**Symptoms:**
+**علامت‌ها:**
 
-- Login page shows a blank screen or a server error
-- Console shows `Error: Module did not self-register` or similar native binding errors
-- The login page shows an **orange warning banner** with your Node version if the runtime is outside the supported secure policy
+- صفحهٔ ورود صفحهٔ خالی یا خطای سرور نشان می‌دهد
+- کنسول `Error: Module did not self-register` یا خطاهای مشابه binding بومی را نشان می‌دهد
+- صفحهٔ ورود یک **بنر هشدار نارنجی** با نسخهٔ Node شما نشان می‌دهد اگر runtime خارج از خط‌مشی امن پشتیبانی‌شده باشد
 
-**Fix:**
+**راه‌حل:**
 
-1. Install a supported Node.js LTS release (recommended: Node.js 24.x):
+1. یک نسخهٔ LTS پشتیبانی‌شدهٔ Node.js را نصب کنید (پیشنهادی: Node.js 24.x):
    ```bash
    nvm install 24
    nvm use 24
    ```
-2. Verify your version: `node --version` should show `v24.0.0` or newer on the 24.x LTS line
-3. Reinstall OmniRoute: `npm install -g omniroute`
-4. Restart: `omniroute`
+2. نسخهٔ خود را تأیید کنید: `node --version` باید `v24.0.0` یا جدیدتر روی خط LTS 24.x را نشان دهد
+3. نصب مجدد RouteChi: `npm install -g omniroute`
+4. راه‌اندازی مجدد: `omniroute`
 
-> **Supported secure versions:** `>=20.20.2 <21`, `>=22.22.2 <23`, or `>=24.0.0 <25`. Node.js 24.x LTS (Krypton) is fully supported.
+> **نسخه‌های امن پشتیبانی‌شده:** `>=22.22.2 <23` یا `>=24.0.0 <27`. Node.js 24.x LTS (Krypton) و Node.js 26 کاملاً پشتیبانی می‌شوند.
 
 ### macOS: `dlopen` / "slice is not valid mach-o file"
 
 <a name="macos-native-module-rebuild"></a>
 
-**Cause:** After a global `npm install -g omniroute`, the `better-sqlite3` native binary inside the package may have been compiled for a different architecture or Node.js ABI than what is running locally. This is common on macOS (both Apple Silicon and Intel) when the pre-built binary does not match your environment.
+**علت:** پس از یک `npm install -g omniroute` سراسری، باینری بومی `better-sqlite3` درون پکیج ممکن است برای معماری یا ABI متفاوتی از Node.js نسبت به آنچه محلی اجرا می‌شود، کامپایل شده باشد. این در macOS (هم Apple Silicon و هم Intel) هنگامی که باینری از پیش ساخته‌شده با محیط شما تطابق ندارد رایج است.
 
-**Symptoms:**
+**علامت‌ها:**
 
-- Server fails immediately on startup with a `dlopen` error
-- Error contains `slice is not valid mach-o file`
-- Full example:
+- سرور بلافاصله هنگام راه‌اندازی با خطای `dlopen` شکست می‌خورد
+- خطا شامل `slice is not valid mach-o file` است
+- نمونهٔ کامل:
 
 ```
 dlopen(/Users/<user>/.nvm/versions/node/v24.14.1/lib/node_modules/omniroute/app/node_modules/better-sqlite3/build/Release/better_sqlite3.node, 0x0001): tried: '...' (slice is not valid mach-o file)
 ```
 
-**Fix — rebuild for your local environment (no Node.js downgrade required):**
+**راه‌حل — بازسازی برای محیط محلی خود (بدون نیاز به downgrade مربوط به Node.js):**
 
 ```bash
 cd $(npm root -g)/omniroute/app
@@ -74,98 +104,123 @@ npm rebuild better-sqlite3
 omniroute
 ```
 
-> **Note:** This recompiles the native binding against your local Node.js version and CPU architecture, resolving the binary mismatch. The officially supported range is **`>=20.20.2 <21`, `>=22.22.2 <23`, or `>=24.0.0 <25`** (`engines` field in `package.json`). Node.js 24.x LTS (Krypton) is fully supported with `better-sqlite3` v12.x.
+> **یادداشت:** این binding بومی را در برابر نسخهٔ Node.js و معماری CPU محلی شما دوباره کامپایل می‌کند و عدم تطابق باینری را برطرف می‌سازد. بازهٔ runtime رسمی پشتیبانی‌شده **`>=22.22.2 <23` یا `>=24.0.0 <27`** است (`SUPPORTED_NODE_RANGE` در `src/shared/utils/nodeRuntimeSupport.ts`، هم‌راستا با فیلد `engines` در `package.json`). Node.js 24.x LTS (Krypton) و Node.js 26 با `better-sqlite3` v12.x کاملاً پشتیبانی می‌شوند.
 
 ---
 
-## Proxy Issues
+## مشکلات پروکسی
 
 <a name="proxy-issues"></a>
 
-### Provider validation shows "fetch failed"
+### اعتبارسنجی ارائه‌دهنده "fetch failed" نشان می‌دهد
 
-**Cause:** The API key validation endpoint (`POST /api/providers/validate`) was previously bypassing proxy configuration, causing failures in environments that require proxy routing.
+**علت:** نقطهٔ پایانی اعتبارسنجی کلید API (`POST /api/providers/validate`) قبلاً پیکربندی پروکسی را دور می‌زد و باعث شکست در محیط‌هایی می‌شد که نیازمند مسیریابی پروکسی هستند.
 
-**Fix (v3.5.5+):** This is now fixed. Provider validation routes through `runWithProxyContext`, honoring provider-level and global proxy settings automatically.
+**راه‌حل (v3.5.5+):** اکنون اصلاح شده است. اعتبارسنجی ارائه‌دهنده از طریق `runWithProxyContext` مسیریابی می‌شود و تنظیمات پروکسی سراسری و به‌ازای ارائه‌دهنده را به‌طور خودکار رعایت می‌کند.
 
-### Token health check fails with "fetch failed"
+### بررسی سلامت توکن با "fetch failed" شکست می‌خورد
 
-**Cause:** Background OAuth token refresh was not resolving proxy configuration per connection.
+**علت:** بازنشانی OAuth توکن پس‌زمینه پیکربندی پروکسی را به‌ازای اتصال تحلیل نمی‌کرد.
 
-**Fix (v3.5.5+):** The token health check scheduler now resolves proxy config per connection before attempting refresh. Update to v3.5.5+.
+**راه‌حل (v3.5.5+):** زمان‌بند بررسی سلامت توکن اکنون پیش از تلاش برای بازنشانی، پیکربندی پروکسی را به‌ازای اتصال تحلیل می‌کند. به v3.5.5+ به‌روزرسانی کنید.
 
-### SOCKS5 proxy returns "invalid onRequestStart method"
+### پروکسی SOCKS5 "invalid onRequestStart method" بازمی‌گرداند
 
-**Cause:** On Node.js 22, the undici@8 dispatcher is incompatible with Node's built-in `fetch()` implementation.
+**علت:** در Node.js 22، dispatcher مربوط به undici@8 با پیاده‌سازی `fetch()` داخلی Node ناسازگار است.
 
-**Fix (v3.5.5+):** OmniRoute now uses undici's own `fetch()` function when a proxy dispatcher is active, ensuring consistent behavior. Update to v3.5.5+.
+**راه‌حل (v3.5.5+):** RouteChi اکنون هنگامی که یک dispatcher پروکسی فعال است، از تابع `fetch()` خود undici استفاده می‌کند و رفتار یکسان را تضمین می‌کند. به v3.5.5+ به‌روزرسانی کنید.
+
+### پروکسی MITM تحت WSL: برنامه‌های دسکتاپ روی میزبان ویندوز intercept نمی‌شوند
+
+**علت:** پروکسی MITM و گواهی CA آن در محیطی که RouteChi در آن اجرا می‌شود نصب می‌شوند. تحت WSL آن محیط guest لینوکس است، در حالی که برنامه‌های دسکتاپ AI (Kiro، Trae، Copilot، Zed، …) روی میزبان ویندوز اجرا می‌شوند. برنامه‌های میزبان به مخزن گواهی guest اعتماد نمی‌کنند و از پروکسی سامانهٔ guest عبور نمی‌کنند، بنابراین intercept دسکتاپ آنجا درگیر نمی‌شود.
+
+**توصیه:** RouteChi را به‌صورت بومی روی همان سیستم‌عامل برنامه‌های دسکتاپی که می‌خواهید intercept کنید اجرا کنید (ویندوز برای برنامه‌های ویندوز؛ به همین ترتیب macOS/لینوکس). نگه‌داشتن RouteChi درون WSL در حالی که برنامه‌های میزبان را هدف قرار می‌دهید، نیازمند اعتماد دستی به گواهی CA تولیدشده روی میزبان ویندوز و هدایت تنظیمات شبکه/پروکسی هر برنامهٔ میزبان به نقطهٔ پایانی پروکسی WSL است — یک راه‌اندازی پشتیبانی‌نشده و شکننده.
 
 ---
 
-## Provider Issues
+## مشکلات ارائه‌دهنده
 
 ### "Language model did not provide messages"
 
-**Cause:** Provider quota exhausted.
+**علت:** سهمیهٔ ارائه‌دهنده تمام شده است.
 
-**Fix:**
+**راه‌حل:**
 
-1. Check dashboard quota tracker
-2. Use a combo with fallback tiers
-3. Switch to cheaper/free tier
+1. ردیاب سهمیهٔ داشبورد را بررسی کنید
+2. از یک کامبو با tierهای fallback استفاده کنید
+3. به tier ارزان‌تر/رایگان سوئیچ کنید
 
 ### Rate Limiting
 
-**Cause:** Subscription quota exhausted.
+**علت:** سهمیهٔ اشتراک تمام شده است.
 
-**Fix:**
+**راه‌حل:**
 
-- Add fallback: `cc/claude-opus-4-6 → glm/glm-4.7 → if/kimi-k2-thinking`
-- Use GLM/MiniMax as cheap backup
+- افزودن fallback: `cc/claude-opus-4-6 → glm/glm-4.7 → if/kimi-k2-thinking`
+- استفاده از GLM/MiniMax به‌عنوان پشتیبان ارزان
 
-### OAuth Token Expired
+### انقضای توکن OAuth
 
-OmniRoute auto-refreshes tokens. If issues persist:
+RouteChi به‌طور خودکار توکن‌ها را بازنشانی می‌کند. اگر مشکلات ادامه یافتند:
 
 1. Dashboard → Provider → Reconnect
-2. Delete and re-add the provider connection
+2. حذف و افزودن مجدد اتصال ارائه‌دهنده
+
+### چند حسابی Kiro: حساب دوم حساب اول را نامعتبر می‌کند
+
+**علت:** بک‌اند Kiro یک نشست فعال به ازای هر ثبت‌نام OIDC client اعمال می‌کند.
+هنگامی که دو حساب از همان کلاینت ثبت‌شده استفاده می‌کنند (اتصالات واردشده پیش از v3.8.0)،
+بازنشانی توکن یک حساب، refresh token دیگری را باطل می‌کند.
+
+**راه‌حل (v3.8.0+):** اتصالات آسیب‌دیده را دوباره وارد کنید.
+از v3.8.0، هر اتصال جدید Kiro ایجاد‌شده از طریق **Import Token**،
+**ورود اجتماعی Google/GitHub** یا **Auto-Import** به‌طور خودکار OIDC client اختصاصی خود را
+ثبت می‌کند. بنابراین اتصال کاملاً ایزوله است و بازنشانی یک حساب روی هیچ حساب دیگری تأثیری ندارد.
+
+اتصالاتی که _پیش از_ v3.8.0 وارد شده‌اند ثبت‌نام کلاینت به‌ازای اتصال ندارند. این اتصالات
+به استفاده از نقطهٔ پایانی مشترک social-auth refresh ادامه می‌دهند. برای بهره‌گیری از
+ایزوله‌سازی، اتصال قدیمی را از Dashboard → Providers حذف و از طریق هر یک از سه جریان واردسازی
+مجدد اضافه کنید.
+
+برای جزئیات کامل و دستورالعمل گام‌به‌گام برای افزودن دو حساب Kiro کنار هم، به
+[`docs/guides/KIRO_SETUP.md`](./KIRO_SETUP.md) مراجعه کنید.
 
 ---
 
-## Cloud Issues
+## مشکلات ابری
 
-### Cloud Sync Errors
+### خطاهای Cloud Sync
 
-1. Verify `BASE_URL` points to your running instance (e.g., `http://localhost:20128`)
-2. Verify `CLOUD_URL` points to your cloud endpoint (e.g., `https://omniroute.dev`)
-3. Keep `NEXT_PUBLIC_*` values aligned with server-side values
+1. تأیید کنید `BASE_URL` به نمونهٔ در حال اجرای شما اشاره می‌کند (مثلاً `http://localhost:20128`)
+2. تأیید کنید `CLOUD_URL` به نقطهٔ پایانی ابری شما اشاره می‌کند (مثلاً `https://omniroute.dev`)
+3. مقادیر `NEXT_PUBLIC_*` را با مقادیر سمت سرور هم‌راستا نگه دارید
 
-### Cloud `stream=false` Returns 500
+### ابر `stream=false` خطای 500 بازمی‌گرداند
 
-**Symptom:** `Unexpected token 'd'...` on cloud endpoint for non-streaming calls.
+**علامت:** `Unexpected token 'd'...` در نقطهٔ پایانی ابری برای فراخوانی‌های غیر streaming.
 
-**Cause:** Upstream returns SSE payload while client expects JSON.
+**علت:** بالادست payload مربوط به SSE را بازمی‌گرداند در حالی که کلاینت JSON انتظار دارد.
 
-**Workaround:** Use `stream=true` for cloud direct calls. Local runtime includes SSE→JSON fallback.
+**راه‌حل موقت:** برای فراخوانی‌های مستقیم ابری از `stream=true` استفاده کنید. Runtime محلی شامل fallback از SSE به JSON است.
 
-### Cloud Says Connected but "Invalid API key"
+### ابر می‌گوید متصل است اما "Invalid API key"
 
-1. Create a fresh key from local dashboard (`/api/keys`)
-2. Run cloud sync: Enable Cloud → Sync Now
-3. Old/non-synced keys can still return `401` on cloud
+1. یک کلید تازه از داشبورد محلی ایجاد کنید (`/api/keys`)
+2. اجرای cloud sync: Enable Cloud → Sync Now
+3. کلیدهای قدیمی/غیر همگام‌شده همچنان می‌توانند در ابر `401` بازگردانند
 
 ---
 
-## Docker Issues
+## مشکلات Docker
 
-### CLI Tool Shows Not Installed
+### ابزار CLI نشان می‌دهد نصب نشده است
 
-1. Check runtime fields: `curl http://localhost:20128/api/cli-tools/runtime/codex | jq`
-2. For portable mode: use image target `runner-cli` (bundled CLIs)
-3. For host mount mode: set `CLI_EXTRA_PATHS` and mount host bin directory as read-only
-4. If `installed=true` and `runnable=false`: binary was found but failed healthcheck
+1. فیلدهای runtime را بررسی کنید: `curl http://localhost:20128/api/cli-tools/runtime/codex | jq`
+2. برای حالت portable: از target ایمیج `runner-cli` استفاده کنید (CLIهای همراه)
+3. برای حالت host mount: `CLI_EXTRA_PATHS` را تنظیم و شاخهٔ bin میزبان را به‌صورت فقط‌خواندنی mount کنید
+4. اگر `installed=true` و `runnable=false`: باینری یافت شد اما در healthcheck شکست خورد
 
-### Quick Runtime Validation
+### اعتبارسنجی سریع runtime
 
 ```bash
 curl -s http://localhost:20128/api/cli-tools/codex-settings | jq '{installed,runnable,commandPath,runtimeMode,reason}'
@@ -175,25 +230,27 @@ curl -s http://localhost:20128/api/cli-tools/openclaw-settings | jq '{installed,
 
 ---
 
-## Cost Issues
+## مشکلات هزینه
 
-### High Costs
+### هزینه‌های بالا
 
-1. Check usage stats in Dashboard → Usage
-2. Switch primary model to GLM/MiniMax
-3. Set cost budgets per API key: Dashboard → API Keys → Budget
+1. آمار استفاده را در Dashboard → Usage بررسی کنید
+2. مدل اصلی را به GLM/MiniMax سوئیچ کنید
+3. برای وظایف غیرحیاتی از tier رایگان (Qoder، Kiro) استفاده کنید
+4. بودجهٔ هزینه به ازای کلید API تنظیم کنید: Dashboard → API Keys → Budget
 
 ---
 
-## Debugging
+## اشکال‌زدایی
 
-### Enable Log Files
+### فعال‌سازی فایل‌های لاگ
 
-Set `APP_LOG_TO_FILE=true` in your `.env` file. Application logs are written under `logs/`.
-Request artifacts are stored under `${DATA_DIR}/call_logs/` when the call log pipeline is
-enabled in settings.
+`APP_LOG_TO_FILE=true` را در فایل `.env` خود تنظیم کنید. لاگ‌های برنامه تحت `logs/` نوشته می‌شوند.
+مصنوعات درخواست هنگام فعال بودن خط لولهٔ call log در تنظیمات تحت `${DATA_DIR}/call_logs/` ذخیره می‌شوند.
+هنگام فعال بودن ضبط خط لوله، `CALL_LOG_PIPELINE_CAPTURE_STREAM_CHUNKS=false` را تنظیم کنید تا
+payloadهای chunk جریان حذف شوند، یا `CALL_LOG_PIPELINE_MAX_SIZE_KB` را برای تغییر سقف مصنوعات بر حسب KB تنظیم کنید.
 
-### Check Provider Health
+### بررسی سلامت ارائه‌دهنده
 
 ```bash
 # Health dashboard
@@ -203,138 +260,264 @@ http://localhost:20128/dashboard/health
 curl http://localhost:20128/api/monitoring/health
 ```
 
-### Runtime Storage
+### ذخیره‌سازی runtime
 
-- Main state: `${DATA_DIR}/storage.sqlite` (providers, combos, aliases, keys, settings)
-- Usage: SQLite tables in `storage.sqlite` (`usage_history`, `call_logs`, `proxy_logs`) + optional `${DATA_DIR}/call_logs/`
-- Application logs: `<repo>/logs/...` (when `APP_LOG_TO_FILE=true`)
-- Call log artifacts: `${DATA_DIR}/call_logs/YYYY-MM-DD/...` when the call log pipeline is enabled
+- وضعیت اصلی: `${DATA_DIR}/storage.sqlite` (ارائه‌دهنده‌ها، کامبوها، نام‌های مستعار، کلیدها، تنظیمات)
+- استفاده: جداول SQLite در `storage.sqlite` (`usage_history`، `call_logs`، `proxy_logs`) + اختیاری `${DATA_DIR}/call_logs/`
+- لاگ‌های برنامه: `<repo>/logs/...` (هنگامی که `APP_LOG_TO_FILE=true`)
+- مصنوعات call log: `${DATA_DIR}/call_logs/YYYY-MM-DD/...` هنگامی که خط لولهٔ call log فعال باشد
 
----
-
-## Circuit Breaker Issues
-
-### Provider stuck in OPEN state
-
-When a provider's circuit breaker is OPEN, requests are blocked until the cooldown expires.
-
-**Fix:**
-
-1. Go to **Dashboard → Settings → Resilience**
-2. Check the circuit breaker card for the affected provider
-3. Click **Reset All** to clear all breakers, or wait for the cooldown to expire
-4. Verify the provider is actually available before resetting
-
-### Provider keeps tripping the circuit breaker
-
-If a provider repeatedly enters OPEN state:
-
-1. Check **Dashboard → Health → Provider Health** for the failure pattern
-2. Go to **Settings → Resilience → Provider Profiles** and increase the failure threshold
-3. Check if the provider has changed API limits or requires re-authentication
-4. Review latency telemetry — high latency may cause timeout-based failures
+اکشن **Clean history** در صفحهٔ Request Logs، `call_logs`، `request_detail_logs` قدیمی و شاخهٔ
+مصنوعات محلی `${DATA_DIR}/call_logs/` را پاک می‌کند.
 
 ---
 
-## Audio Transcription Issues
+## مشکلات Circuit Breaker
 
-### "Unsupported model" error
+### ارائه‌دهنده در حالت OPEN گیر کرده است
 
-- Ensure you're using the correct prefix: `deepgram/nova-3` or `assemblyai/best`
-- Verify the provider is connected in **Dashboard → Providers**
+هنگامی که circuit breaker یک ارائه‌دهنده OPEN است، درخواست‌ها تا انقضای cooldown مسدود می‌شوند.
 
-### Transcription returns empty or fails
+**راه‌حل:**
 
-- Check supported audio formats: `mp3`, `wav`, `m4a`, `flac`, `ogg`, `webm`
-- Verify file size is within provider limits (typically < 25MB)
-- Check provider API key validity in the provider card
+1. به **Dashboard → Settings → Resilience** بروید
+2. کارت circuit breaker را برای ارائه‌دهندهٔ آسیب‌دیده بررسی کنید
+3. روی **Reset All** کلیک کنید تا همه breakerها پاک شوند، یا صبر کنید تا cooldown منقضی شود
+4. پیش از بازنشانی تأیید کنید که ارائه‌دهنده واقعاً در دسترس است
 
----
+### ارائه‌دهنده مدام circuit breaker را فعال می‌کند
 
-## Translator Debugging
+اگر یک ارائه‌دهنده به‌طور مکرر وارد حالت OPEN می‌شود:
 
-Use **Dashboard → Translator** to debug format translation issues:
-
-| Mode             | When to Use                                                                                  |
-| ---------------- | -------------------------------------------------------------------------------------------- |
-| **Playground**   | Compare input/output formats side by side — paste a failing request to see how it translates |
-| **Chat Tester**  | Send live messages and inspect the full request/response payload including headers           |
-| **Test Bench**   | Run batch tests across format combinations to find which translations are broken             |
-| **Live Monitor** | Watch real-time request flow to catch intermittent translation issues                        |
-
-### Common format issues
-
-- **Thinking tags not appearing** — Check if the target provider supports thinking and the thinking budget setting
-- **Tool calls dropping** — Some format translations may strip unsupported fields; verify in Playground mode
-- **System prompt missing** — Claude and Gemini handle system prompts differently; check translation output
-- **SDK returns raw string instead of object** — Fixed in v1.1.0: response sanitizer now strips non-standard fields (`x_groq`, `usage_breakdown`, etc.) that cause OpenAI SDK Pydantic validation failures
-- **GLM/ERNIE rejects `system` role** — Fixed in v1.1.0: role normalizer automatically merges system messages into user messages for incompatible models
-- **`developer` role not recognized** — Fixed in v1.1.0: automatically converted to `system` for non-OpenAI providers
-- **`json_schema` not working with Gemini** — Fixed in v1.1.0: `response_format` is now converted to Gemini's `responseMimeType` + `responseSchema`
+1. **Dashboard → Health → Provider Health** را برای الگوی شکست بررسی کنید
+2. به **Settings → Resilience → Provider Profiles** بروید و آستانهٔ شکست را افزایش دهید
+3. بررسی کنید که آیا ارائه‌دهنده محدودیت‌های API را تغییر داده یا نیازمند احراز هویت مجدد است
+4. تله‌متری latency را بازبینی کنید — latency بالا ممکن است باعث شکست‌های مبتنی بر timeout شود
 
 ---
 
-## Resilience Settings
+## مشکلات Audio Transcription
 
-### Auto rate-limit not triggering
+### خطای "Unsupported model"
 
-- Auto rate-limit only applies to API key providers (not OAuth/subscription)
-- Verify **Settings → Resilience → Provider Profiles** has auto-rate-limit enabled
-- Check if the provider returns `429` status codes or `Retry-After` headers
+- مطمئن شوید از پیشوند صحیح استفاده می‌کنید: `deepgram/nova-3` یا `assemblyai/best`
+- تأیید کنید که ارائه‌دهنده در **Dashboard → Providers** متصل است
 
-### Tuning exponential backoff
+### transcription خالی بازمی‌گرداند یا شکست می‌خورد
 
-Provider profiles support these settings:
-
-- **Base delay** — Initial wait time after first failure (default: 1s)
-- **Max delay** — Maximum wait time cap (default: 30s)
-- **Multiplier** — How much to increase delay per consecutive failure (default: 2x)
-
-### Anti-thundering herd
-
-When many concurrent requests hit a rate-limited provider, OmniRoute uses mutex + auto rate-limiting to serialize requests and prevent cascading failures. This is automatic for API key providers.
+- قالب‌های صوتی پشتیبانی‌شده را بررسی کنید: `mp3`، `wav`، `m4a`، `flac`، `ogg`، `webm`
+- تأیید کنید اندازهٔ فایل در محدودیت‌های ارائه‌دهنده است (معمولاً < 25MB)
+- اعتبار کلید API ارائه‌دهنده را در کارت ارائه‌دهنده بررسی کنید
 
 ---
 
-## Optional RAG / LLM failure taxonomy (16 problems)
+## اشکال‌زدایی Translator
 
-Some OmniRoute users place the gateway in front of RAG or agent stacks. In those setups it is common to see a strange pattern: OmniRoute looks healthy (providers up, routing profiles ok, no rate limit alerts) but the final answer is still wrong.
+برای اشکال‌زدایی مسائل ترجمهٔ قالب از **Dashboard → Translator** استفاده کنید:
 
-In practice these incidents usually come from the downstream RAG pipeline, not from the gateway itself.
+| حالت             | چه زمان استفاده کنید                                                                                  |
+| ---------------- | ---------------------------------------------------------------------------------------------------- |
+| **Playground**   | مقایسهٔ قالب‌های ورودی/خروجی کنار هم — یک درخواست شکست‌خورده را جای‌گذاری کنید تا نحوهٔ ترجمه را ببینید |
+| **Chat Tester**  | ارسال پیام‌های زنده و بررسی payload کامل درخواست/پاسخ شامل هدرها                                       |
+| **Test Bench**   | اجرای آزمون‌های دسته‌ای در میان ترکیب‌های قالب برای یافتن ترجمه‌های شکست‌خورده                          |
+| **Live Monitor** | تماشای جریان بلادرنگ درخواست برای گرفتن مسائل ترجمهٔ متناوب                                            |
 
-If you want a shared vocabulary to describe those failures you can use the WFGY ProblemMap, an external MIT license text resource that defines sixteen recurring RAG / LLM failure patterns. At a high level it covers:
+### مسائل قالب رایج
 
-- retrieval drift and broken context boundaries
-- empty or stale indexes and vector stores
-- embedding versus semantic mismatch
-- prompt assembly and context window issues
-- logic collapse and overconfident answers
-- long chain and agent coordination failures
-- multi agent memory and role drift
-- deployment and bootstrap ordering problems
+- **ظاهر نشدن thinking tagها** — بررسی کنید که آیا ارائه‌دهندهٔ هدف از thinking پشتیبانی می‌کند و تنظیم thinking budget
+- **افت tool callها** — برخی ترجمه‌های قالب ممکن است فیلدهای پشتیبانی‌نشده را حذف کنند؛ در حالت Playground تأیید کنید
+- **گم شدن system prompt** — Claude و Gemini system promptها را متفاوت مدیریت می‌کنند؛ خروجی ترجمه را بررسی کنید
+- **SDK رشتهٔ خام به‌جای object بازمی‌گرداند** — در v1.x حل شده؛ پاک‌کنندهٔ پاسخ فیلدهای غیراستاندارد (`x_groq`، `usage_breakdown` و...) را که باعث شکست اعتبارسنجی Pydantic SDK مربوط به OpenAI می‌شوند حذف می‌کند. اگر هنوز روی v3.x+ این را می‌بینید، لطفاً یک issue ثبت کنید.
+- **GLM/ERNIE نقش `system` را رد می‌کند** — در v1.x حل شده؛ نرمالایزر نقش به‌طور خودکار پیام‌های سیستمی را برای مدل‌های ناسازگار در پیام‌های کاربر ادغام می‌کند. اگر هنوز روی v3.x+ این را می‌بینید، لطفاً یک issue ثبت کنید.
+- **نقش `developer` شناخته نمی‌شود** — در v1.x حل شده؛ به‌طور خودکار به `system` برای ارائه‌دهنده‌های غیر OpenAI تبدیل می‌شود. اگر هنوز روی v3.x+ این را می‌بینید، لطفاً یک issue ثبت کنید.
+- **`json_schema` با Gemini کار نمی‌کند** — در v1.x حل شده؛ `response_format` اکنون به `responseMimeType` + `responseSchema` مربوط به Gemini تبدیل می‌شود. اگر هنوز روی v3.x+ این را می‌بینید، لطفاً یک issue ثبت کنید.
 
-The idea is simple:
+---
 
-1. When you investigate a bad response, capture:
-   - user task and request
-   - route or provider combo in OmniRoute
-   - any RAG context used downstream (retrieved documents, tool calls, etc)
-2. Map the incident to one or two WFGY ProblemMap numbers (`No.1` … `No.16`).
-3. Store the number in your own dashboard, runbook, or incident tracker next to the OmniRoute logs.
-4. Use the corresponding WFGY page to decide whether you need to change your RAG stack, retriever, or routing strategy.
+## تنظیمات تاب‌آوری
 
-Full text and concrete recipes live here (MIT license, text only):
+### rate-limit خودکار راه‌اندازی نمی‌شود
+
+- rate-limit خودکار تنها به ارائه‌دهنده‌های کلید API اعمال می‌شود (نه OAuth/اشتراک)
+- تأیید کنید **Settings → Resilience → Provider Profiles** دارای auto-rate-limit فعال است
+- بررسی کنید که آیا ارائه‌دهنده کد وضعیت `429` یا هدر `Retry-After` بازمی‌گرداند
+
+### تنظیم backoff نمایی
+
+پروفایل‌های ارائه‌دهنده از این تنظیمات پشتیبانی می‌کنند:
+
+- **تأخیر پایه** — زمان انتظار اولیه پس از اولین شکست (پیش‌فرض: 1s)
+- **حداکثر تأخیر** — سقف زمان انتظار (پیش‌فرض: 30s)
+- **ضریب** — میزان افزایش تأخیر به ازای هر شکست متوالی (پیش‌فرض: 2x)
+
+### ضد thundering herd
+
+هنگامی که بسیاری از درخواست‌های هم‌زمان به یک ارائه‌دهندهٔ rate-limited می‌رسند، RouteChi
+از mutex + rate-limiting خودکار برای serialize کردن درخواست‌ها و جلوگیری از شکست‌های
+آبشاری استفاده می‌کند. این برای ارائه‌دهنده‌های کلید API خودکار است.
+
+---
+
+## Taxonomy اختیاری شکست RAG / LLM (۱۶ مشکل)
+
+برخی کاربران RouteChi gateway را در جلوی پشته‌های RAG یا agent قرار می‌دهند. در این راه‌اندازی‌ها
+مشاهدهٔ یک الگوی عجیب رایج است: RouteChi سالم به نظر می‌رسد (ارائه‌دهنده‌ها فعال، پروفایل‌های
+مسیریابی ok، هیچ هشدار rate limit) اما پاسخ نهایی همچنان اشتباه است.
+
+در عمل این حوادث معمولاً از خط لولهٔ RAG پایین‌دست می‌آیند، نه از خود gateway.
+
+اگر یک واژگان مشترک برای توصیف این شکست‌ها می‌خواهید، می‌توانید از WFGY ProblemMap استفاده
+کنید، یک منبع متنی با مجوز MIT خارجی که شانزده الگوی شکست تکرارشوندهٔ RAG / LLM را تعریف می‌کند.
+در سطح بالا پوشش می‌دهد:
+
+- drift بازیابی و مرزهای context شکسته
+- ایندکس‌ها و vector storeهای خالی یا قدیمی
+- عدم تطابق embedding در برابر معنایی
+- مسائل مونتاژ prompt و پنجرهٔ context
+- فروپاشی منطق و پاسخ‌های بیش‌اعتماد
+- شکست‌های هماهنگی chain طولانی و agent
+- drift نقش و حافظهٔ multi agent
+- مسائل ترتیب استقرار و bootstrap
+
+ایده ساده است:
+
+1. هنگام بررسی یک پاسخ بد، ضبط کنید:
+   - وظیفه و درخواست کاربر
+   - combo مسیر یا ارائه‌دهنده در RouteChi
+   - هر context مربوط به RAG استفاده‌شده در پایین‌دست (اسناد بازیابی‌شده، tool callها و...)
+2. حادثه را به یک یا دو شمارهٔ WFGY ProblemMap نگاشت کنید (`No.1` … `No.16`).
+3. شماره را در داشبورد، runbook یا ردیاب حادثهٔ خود کنار لاگ‌های RouteChi ذخیره کنید.
+4. از صفحهٔ WFGY مربوطه استفاده کنید تا تصمیم کنید آیا نیاز به تغییر پشتهٔ RAG، retriever یا
+   استراتژی مسیریابی دارید.
+
+متن کامل و دستورالعمل‌های مشخص در اینجا قرار دارد (مجوز MIT، فقط متن):
 
 [WFGY ProblemMap README](https://github.com/onestardao/WFGY/blob/main/ProblemMap/README.md)
 
-You can ignore this section if you do not run RAG or agent pipelines behind OmniRoute.
+اگر RAG یا خطوط لولهٔ agent را پشت RouteChi اجرا نمی‌کنید، می‌توانید این بخش را نادیده بگیرید.
 
 ---
 
-## Still Stuck?
+## مسائل شناخته‌شدهٔ v3.8.0
+
+مسائل خاص نسخهٔ v3.8.0 و راه‌حل‌های موقت فعلی آنها. اگر راه‌حلی در patch بعدی منتشر شود،
+ورودی به‌روزرسانی یا حذف خواهد شد.
+
+### جریان OAuth Windsurf با 401 شکست می‌خورد
+
+**علامت‌ها:**
+
+- "401 unauthorized" هنگام تکمیل جریان OAuth Windsurf از داشبورد
+- کارت ارائه‌دهندهٔ Windsurf پس از callback در وضعیت "needs reconnection" باقی می‌ماند
+
+**علت‌ها:**
+
+- متغیر env `WINDSURF_FIREBASE_API_KEY` گمشده یا خالی
+- `WINDSURF_API_KEY` به‌درستی پیکربندی نشده یا به یک توکن قدیمی اشاره می‌کند
+- فایروال/پروکسی محلی callback مربوط به OAuth را مسدود می‌کند
+
+**راه‌حل:**
+
+1. تأیید کنید که هم `WINDSURF_FIREBASE_API_KEY` و هم `WINDSURF_API_KEY` در `.env` تنظیم شده‌اند
+2. RouteChi را راه‌اندازی مجدد کنید تا مقادیر env جدید گرفته شوند
+3. جریان OAuth را از **Dashboard → Providers → Windsurf → Reconnect** دوباره اجرا کنید
+
+### شکست احراز هویت Devin CLI
+
+**علامت‌ها:**
+
+- "Devin CLI not found" یا "auth failed" هنگام فراخوانی ابزارهای پشتیبان Devin
+- بررسی runtime CLI گزارش می‌دهد `installed=false`
+
+**علت‌ها:**
+
+- `CLI_DEVIN_BIN` به مسیری اشاره می‌کند که وجود ندارد
+- Devin CLI روی میزبان نصب نیست
+
+**راه‌حل:**
+
+1. Devin CLI را برای پلتفرم خود نصب کنید
+2. `CLI_DEVIN_BIN=/usr/local/bin/devin` (یا مسیر واقعی) را در `.env` تنظیم کنید
+3. RouteChi را راه‌اندازی مجدد و از **Dashboard → CLI Tools** دوباره آزمایش کنید
+
+### cooldown مدل گیر کرده (بازنشانی دستی)
+
+**علامت‌ها:**
+
+- یک مدل حتی پس از گذشت زمان انقضا در cooldown فهرست شده باقی می‌ماند
+- درخواست‌ها همچنان مدل را در مسیریابی کامبو نادیده می‌گیرند با وجود اینکه مهر زمانی در گذشته است
+
+**بازنشانی دستی:**
+
+- **داشبورد:** **Settings → Model Cooldowns** → روی کارت آسیب‌دیده **Re-enable** کلیک کنید
+- **API:** `DELETE /api/resilience/model-cooldowns` با هدرهای احراز هویت مدیریتی
+
+### اتصال ارائه‌دهندهٔ Command Code با 403 شکست می‌خورد
+
+**علامت‌ها:**
+
+- 403 هنگام آزمایش اتصال ارائه‌دهندهٔ Command Code
+- کارت ارائه‌دهنده پس از افزودن تازه "unauthorized" نشان می‌دهد
+
+**علت:** جریان OAuth تکمیل نشده (callback دریافت یا توکن ماندگار نشده است).
+
+**راه‌حل:**
+
+- `omniroute providers` را از CLI اجرا کنید تا جریان OAuth دوباره راه‌اندازی شود، یا
+- OAuth را از **Dashboard → Providers → Command Code → Reconnect** دوباره اجرا کنید
+
+### ModelScope cooldownهای تهاجمی 429 بازمی‌گرداند
+
+**علامت‌ها:**
+
+- cooldownهای بسیار کوتاه یا فوری روی ModelScope پس از یک burst کوچک درخواست
+- مسیریابی کامبو زودتر از انتظار ModelScope را نادیده می‌گیرد
+
+**علت:** ModelScope هدرهای `Retry-After` خاص ارائه‌دهنده منتشر می‌کند. v3.8.0 مدیریت اختصاصی
+برای این هدرها ارائه می‌کند، بنابراین نسخه‌های قدیمی‌تر آنها را به‌عنوان hintهای rate-limit
+عمومی misinterpret می‌کردند.
+
+**راه‌حل:**
+
+- مطمئن شوید روی v3.8.0 یا جدیدتر هستید
+- تأیید کنید toggle `useUpstream429BreakerHints` تحت **Settings → Resilience** فعال است
+
+### OMNIROUTE_WS_BRIDGE_SECRET گمشده در محیط تولیدی
+
+**علامت‌ها:**
+
+- 401 در هر درخواست پل WebSocket مربوط به Codex/Responses هنگام اجرا روی یک میزبان تولیدی راهور
+- handshake پل WebSocket بلافاصله پس از اتصال بسته می‌شود
+
+**علت:** متغیر env `OMNIROUTE_WS_BRIDGE_SECRET` از محیط تولیدی گمشده است.
+
+**راه‌حل:**
+
+1. تولید یک راز تصادفی: `openssl rand -hex 32`
+2. `OMNIROUTE_WS_BRIDGE_SECRET=<random-secret>` را در env سرور تولیدی (و هر کلاینتی که با پل صحبت می‌کند) تنظیم کنید
+3. راه‌اندازی مجدد RouteChi
+
+### Responses API: حالت پس‌زمینه به هم‌زمان تنزل یافت
+
+**علامت‌ها:**
+
+- هشدار ثبت شده: `background mode degraded to synchronous`
+- یک درخواست `background: true` به‌جای handle وظیفهٔ پس‌زمینه، یک پاسخ هم‌زمان عادی بازمی‌گرداند
+
+**علت:** v3.8.0 به‌طور عمدی `background: true` در Responses API را با انتشار یک هشدار به اجرای
+هم‌زمان تنزل می‌دهد. اجرای کامل پس‌زمینهٔ async یک deliverable آتی است.
+
+**راه‌حل:**
+
+- کلاینت را تنظیم کنید که بدون `background` فراخوانی کند، یا
+- صبر کنید تا نسخهٔ بعدی که اجرای کامل حالت پس‌زمینهٔ async را ارائه می‌کند (changelog را پیگیری کنید)
+
+---
+
+## هنوز گیر کرده‌اید؟
 
 - **GitHub Issues**: [github.com/diegosouzapw/OmniRoute/issues](https://github.com/diegosouzapw/OmniRoute/issues)
-- **Architecture**: See [`docs/architecture/ARCHITECTURE.md`](ARCHITECTURE.md) for internal details
-- **API Reference**: See [`docs/reference/API_REFERENCE.md`](API_REFERENCE.md) for all endpoints
-- **Health Dashboard**: Check **Dashboard → Health** for real-time system status
-- **Translator**: Use **Dashboard → Translator** to debug format issues
+- **معماری**: برای جزئیات داخلی به [`docs/architecture/ARCHITECTURE.md`](../architecture/ARCHITECTURE.md) مراجعه کنید
+- **مرجع API**: برای تمام نقاط پایانی به [`docs/reference/API_REFERENCE.md`](../reference/API_REFERENCE.md) مراجعه کنید
+- **داشبورد سلامت**: برای وضعیت بلادرنگ سامانه **Dashboard → Health** را بررسی کنید
+- **Translator**: برای اشکال‌زدایی مسائل قالب از **Dashboard → Translator** استفاده کنید

@@ -1,38 +1,55 @@
-# OmniRoute A2A Server Documentation (فارسی)
-
-🌐 **Languages:** 🇺🇸 [English](../../../../docs/A2A-SERVER.md) · 🇸🇦 [ar](../../ar/docs/A2A-SERVER.md) · 🇧🇬 [bg](../../bg/docs/A2A-SERVER.md) · 🇧🇩 [bn](../../bn/docs/A2A-SERVER.md) · 🇨🇿 [cs](../../cs/docs/A2A-SERVER.md) · 🇩🇰 [da](../../da/docs/A2A-SERVER.md) · 🇩🇪 [de](../../de/docs/A2A-SERVER.md) · 🇪🇸 [es](../../es/docs/A2A-SERVER.md) · 🇮🇷 [fa](../../fa/docs/A2A-SERVER.md) · 🇫🇮 [fi](../../fi/docs/A2A-SERVER.md) · 🇫🇷 [fr](../../fr/docs/A2A-SERVER.md) · 🇮🇳 [gu](../../gu/docs/A2A-SERVER.md) · 🇮🇱 [he](../../he/docs/A2A-SERVER.md) · 🇮🇳 [hi](../../hi/docs/A2A-SERVER.md) · 🇭🇺 [hu](../../hu/docs/A2A-SERVER.md) · 🇮🇩 [id](../../id/docs/A2A-SERVER.md) · 🇮🇹 [it](../../it/docs/A2A-SERVER.md) · 🇯🇵 [ja](../../ja/docs/A2A-SERVER.md) · 🇰🇷 [ko](../../ko/docs/A2A-SERVER.md) · 🇮🇳 [mr](../../mr/docs/A2A-SERVER.md) · 🇲🇾 [ms](../../ms/docs/A2A-SERVER.md) · 🇳🇱 [nl](../../nl/docs/A2A-SERVER.md) · 🇳🇴 [no](../../no/docs/A2A-SERVER.md) · 🇵🇭 [phi](../../phi/docs/A2A-SERVER.md) · 🇵🇱 [pl](../../pl/docs/A2A-SERVER.md) · 🇵🇹 [pt](../../pt/docs/A2A-SERVER.md) · 🇧🇷 [pt-BR](../../pt-BR/docs/A2A-SERVER.md) · 🇷🇴 [ro](../../ro/docs/A2A-SERVER.md) · 🇷🇺 [ru](../../ru/docs/A2A-SERVER.md) · 🇸🇰 [sk](../../sk/docs/A2A-SERVER.md) · 🇸🇪 [sv](../../sv/docs/A2A-SERVER.md) · 🇰🇪 [sw](../../sw/docs/A2A-SERVER.md) · 🇮🇳 [ta](../../ta/docs/A2A-SERVER.md) · 🇮🇳 [te](../../te/docs/A2A-SERVER.md) · 🇹🇭 [th](../../th/docs/A2A-SERVER.md) · 🇹🇷 [tr](../../tr/docs/A2A-SERVER.md) · 🇺🇦 [uk-UA](../../uk-UA/docs/A2A-SERVER.md) · 🇵🇰 [ur](../../ur/docs/A2A-SERVER.md) · 🇻🇳 [vi](../../vi/docs/A2A-SERVER.md) · 🇨🇳 [zh-CN](../../zh-CN/docs/A2A-SERVER.md)
-
+---
+title: "مستندات سرور A2A ی RouteChi"
+version: 3.8.40
+lastUpdated: 2026-06-28
 ---
 
-> Agent-to-Agent Protocol v0.3 — OmniRoute as an intelligent routing agent
+# مستندات سرور A2A ی RouteChi
 
-## Agent Discovery
+> پروتکل Agent-to-Agent نسخه‌ی v0.3 — RouteChi به‌عنوان یک عامل مسیریابی هوشمند
+
+سطح A2A دو چهره دارد:
+
+- **JSON-RPC 2.0** در `POST /a2a` (نقطه‌ی ورود کانونیکال، تعریف‌شده در `src/app/a2a/route.ts`).
+- **REST** تحت `/api/a2a/*` برای داشبوردها و ابزارها (وضعیت، فهرست وظایف، لغو).
+
+وظایف توسط `A2ATaskManager` (`src/lib/a2a/taskManager.ts`، TTL پیش‌فرض ۵ دقیقه) ردیابی می‌شوند. مهارت‌ها از طریق `A2A_SKILL_HANDLERS` در `src/lib/a2a/taskExecution.ts` اعزام می‌شوند.
+
+## کشف عامل
 
 ```bash
 curl http://localhost:20128/.well-known/agent.json
 ```
 
-Returns the Agent Card describing OmniRoute's capabilities, skills, and authentication requirements.
+Agent Card را برمی‌گرداند که قابلیت‌ها، مهارت‌ها و الزامات احراز هویت RouteChi را توصیف می‌کند.
+
+فیلد `version` ی Agent Card از `process.env.npm_package_version` تامین می‌شود (به `src/app/.well-known/agent.json/route.ts:13` مراجعه کنید)، بنابراین در هر انتشار با `package.json` به‌صورت خودکار همگام می‌ماند.
 
 ---
 
-## Authentication
+## احراز هویت
 
-All `/a2a` requests require an API key via the `Authorization` header:
+همه‌ی درخواست‌های `/a2a` نیازمند یک کلید API از طریق هدر `Authorization` هستند:
 
 ```
 Authorization: Bearer YOUR_OMNIROUTE_API_KEY
 ```
 
-If no API key is configured on the server, authentication is bypassed.
+اگر هیچ کلید API روی سرور پیکربندی نشده باشد، احراز هویت دور زده می‌شود.
+
+## فعال‌سازی
+
+A2A توسط کلید **Endpoints → A2A** کنترل می‌شود و به‌صورت پیش‌فرض غیرفعال است. هنگام غیرفعال بودن،
+`GET /api/a2a/status` مقدار `status: "disabled"` و `online: false` گزارش می‌دهد؛ فراخوانی‌های JSON-RPC به
+`POST /a2a` با کد خطای JSON-RPC ی `-32000` HTTP 503 برمی‌گردانند.
 
 ---
 
-## JSON-RPC 2.0 Methods
+## متدهای JSON-RPC 2.0
 
-### `message/send` — Synchronous Execution
+### `message/send` — اجرای همگام
 
-Sends a message to a skill and waits for the complete response.
+یک پیام به یک مهارت ارسال می‌کند و منتظر پاسخ کامل می‌ماند.
 
 ```bash
 curl -X POST http://localhost:20128/a2a \
@@ -50,7 +67,7 @@ curl -X POST http://localhost:20128/a2a \
   }'
 ```
 
-**Response:**
+**پاسخ:**
 
 ```json
 {
@@ -71,9 +88,9 @@ curl -X POST http://localhost:20128/a2a \
 }
 ```
 
-### `message/stream` — SSE Streaming
+### `message/stream` — استریم SSE
 
-Same as `message/send` but returns Server-Sent Events for real-time streaming.
+مانند `message/send` اما Server-Sent Events را برای استریم در زمان واقعی برمی‌گرداند.
 
 ```bash
 curl -N -X POST http://localhost:20128/a2a \
@@ -90,7 +107,7 @@ curl -N -X POST http://localhost:20128/a2a \
   }'
 ```
 
-**SSE Events:**
+**رویدادهای SSE:**
 
 ```
 data: {"jsonrpc":"2.0","method":"message/stream","params":{"task":{"id":"...","state":"working"},"chunk":{"type":"text","content":"..."}}}
@@ -100,7 +117,7 @@ data: {"jsonrpc":"2.0","method":"message/stream","params":{"task":{"id":"...","s
 data: {"jsonrpc":"2.0","method":"message/stream","params":{"task":{"id":"...","state":"completed"},"metadata":{...}}}
 ```
 
-### `tasks/get` — Query Task Status
+### `tasks/get` — جستجوی وضعیت وظیفه
 
 ```bash
 curl -X POST http://localhost:20128/a2a \
@@ -109,7 +126,7 @@ curl -X POST http://localhost:20128/a2a \
   -d '{"jsonrpc":"2.0","id":"2","method":"tasks/get","params":{"taskId":"TASK_UUID"}}'
 ```
 
-### `tasks/cancel` — Cancel a Task
+### `tasks/cancel` — لغو یک وظیفه
 
 ```bash
 curl -X POST http://localhost:20128/a2a \
@@ -120,16 +137,93 @@ curl -X POST http://localhost:20128/a2a \
 
 ---
 
-## Available Skills
+## مهارت‌های موجود
 
-| Skill              | Description                                                                                                                     |
-| :----------------- | :------------------------------------------------------------------------------------------------------------------------------ |
-| `smart-routing`    | Routes prompts through OmniRoute's intelligent pipeline. Returns response with routing explanation, cost, and resilience trace. |
-| `quota-management` | Answers natural-language queries about provider quotas, suggests free combos, and provides quota rankings.                      |
+RouteChi ۶ مهارت A2A افشا می‌کند که در `src/lib/a2a/taskExecution.ts::A2A_SKILL_HANDLERS` متصل شده‌اند. هر ماژول مهارت در `src/lib/a2a/skills/` قرار دارد.
+
+| Skill              | ID                   | Description                                                                                                     | Tags                       | Examples                               |
+| :----------------- | :------------------- | :-------------------------------------------------------------------------------------------------------------- | :------------------------- | :------------------------------------- |
+| Smart Routing      | `smart-routing`      | Routes a prompt through the optimal provider/combo using RouteChi's combo engine + scoring                     | routing, providers         | "Route this prompt via the best model" |
+| Quota Management   | `quota-management`   | Reports per-provider quota state, helps callers decide when to throttle/switch                                  | quota, providers           | "Check quota for anthropic"            |
+| Provider Discovery | `provider-discovery` | Lists installed providers with capabilities, free-tier flags, OAuth status                                      | providers, discovery       | "What providers are available?"        |
+| Cost Analysis      | `cost-analysis`      | Estimates cost of a request/conversation given the catalog + recent usage                                       | cost, usage                | "Estimate cost for this conversation"  |
+| Health Report      | `health-report`      | Aggregates circuit breaker, cooldown, lockout state per provider                                                | health, resilience         | "Show health status of all providers"  |
+| List Capabilities  | `list-capabilities`  | Returns the full 42-entry Agent Skills catalog as a markdown table with raw SKILL.md URLs for context injection | catalog, discovery, skills | "List all RouteChi capabilities"      |
+
+> نکته: توصیف Agent Card در حال حاضر «36+ providers» را تبلیغ می‌کند (`src/app/.well-known/agent.json/route.ts:26` و `:55`). فهرست واقعی به ۱۸۰+ پروایدر رشد کرده است — این رشته باید در یک تغییر پیگیری‌شده به‌روزرسانی شود (به‌عنوان یک TODO جداگانه‌ی مستند/کد پیگیری شده؛ در اینجا تغییر نکرده است).
+
+### جزئیات مهارت `list-capabilities`
+
+مهارت `list-capabilities` به‌ویژه برای عامل‌های خارجی که نیاز دارند پیش از ارسال فراخوانی‌های API بدانند RouteChi چه چیزی افشا می‌کند، مفید است. یک آرتیفکت جدول markdown ساختاریافته برمی‌گرداند:
+
+```
+| ID | Name | Category | Area | Endpoints/Commands | Raw URL |
+| --- | --- | --- | --- | --- | --- |
+| omni-auth | Auth & Sessions | api | auth | POST /api/auth/login, ... | https://raw.githubusercontent.com/... |
+...
+```
+
+هر ردیف شامل ستون `rawUrl` است تا عامل‌ها بتوانند بلافاصله SKILL.md کامل را دریافت کنند. فیلد `metadata.totalSkills` همواره `42` است. پیاده‌سازی: `src/lib/a2a/skills/listCapabilities.ts`. همچنین به [AGENT-SKILLS.md](./AGENT-SKILLS.md) مراجعه کنید.
 
 ---
 
-## Task Lifecycle
+## REST API (کمکی)
+
+نقطه‌ی پایانی JSON-RPC ی `/a2a` نقطه‌ی ورود کانونیکال A2A است. نقاط پایانی REST زیر دسترسی کمکی برای داشبوردها و ابزارهای خارجی فراهم می‌کنند:
+
+| Endpoint                     | Method | Description                      | Auth                   |
+| :--------------------------- | :----- | :------------------------------- | :--------------------- |
+| `/api/a2a/status`            | GET    | Server status, registered skills | (public)               |
+| `/api/a2a/tasks`             | GET    | List tasks with filters          | management             |
+| `/api/a2a/tasks/[id]`        | GET    | Get task by ID                   | management             |
+| `/api/a2a/tasks/[id]/cancel` | POST   | Cancel running task              | management             |
+| `/.well-known/agent.json`    | GET    | Agent Card (A2A discovery)       | (public, cached 3600s) |
+
+---
+
+## افزودن یک مهارت جدید
+
+1. **ایجاد فایل مهارت:** `src/lib/a2a/skills/<your-skill>.ts`
+
+   یک تابع async `(task: A2ATask) => Promise<{ artifacts, metadata }>` صادر کنید. از شکل مهارت‌های موجود مانند `smartRouting.ts` پیروی کنید.
+
+2. **ثبت هندلر:** در `src/lib/a2a/taskExecution.ts`، یک ورودی به `A2A_SKILL_HANDLERS` اضافه کنید:
+
+   ```typescript
+   export const A2A_SKILL_HANDLERS = {
+     // ...existing skills
+     "your-skill": async (task) => {
+       const skillModule = await import("./skills/yourSkill");
+       return skillModule.executeYourSkill(task);
+     },
+   };
+   ```
+
+3. **افشا در Agent Card:** در `src/app/.well-known/agent.json/route.ts`، به آرایه‌ی `skills` اضافه کنید:
+
+   ```json
+   {
+     "id": "your-skill",
+     "name": "Your Skill",
+     "description": "Brief, intent-focused description",
+     "tags": ["routing", "quota"],
+     "examples": ["Sample natural-language invocation"]
+   }
+   ```
+
+4. **نوشتن تست‌ها:** `tests/unit/a2a-<your-skill>.test.ts`. مسیر خوش‌‌آتیه + مسیر خطا را پوشش دهید.
+
+5. **مستندسازی** مهارت جدید در جدول `Available Skills` این فایل.
+
+---
+
+## TTL ی وظیفه
+
+وظایف پس از `ttlMinutes` (پیش‌فرض ۵ دقیقه) منقضی می‌شوند — در سازنده‌ی `A2ATaskManager` در `src/lib/a2a/taskManager.ts:82` پیکربندی شده است. برای سفارشی‌سازی، instantiation ی `A2ATaskManager` را fork کنید و یک مقدار متفاوت ارسال کنید (مثلاً `new A2ATaskManager(15)` برای TTL ی ۱۵ دقیقه‌ای). یک بازه‌ی پس‌زمینه وظایف منقضی‌شده را هر ۶۰ ثانیه پاک می‌کند.
+
+---
+
+## چرخه‌ی حیات وظیفه
 
 ```
 submitted → working → completed
@@ -137,13 +231,13 @@ submitted → working → completed
                     → cancelled
 ```
 
-- Tasks expire after 5 minutes (configurable)
-- Terminal states: `completed`, `failed`, `cancelled`
-- Event log tracks every state transition
+- وظایف پس از ۵ دقیقه به‌صورت پیش‌فرض منقضی می‌شوند (به [Task TTL](#task-ttl) مراجعه کنید)
+- وضعیت‌های پایانی: `completed`، `failed`، `cancelled`
+- log ی رویداد هر انتقال وضعیت را ردیابی می‌کند
 
 ---
 
-## Error Codes
+## کدهای خطا
 
 | Code   | Meaning                        |
 | :----- | :----------------------------- |
@@ -152,10 +246,11 @@ submitted → working → completed
 | -32601 | Method or skill not found      |
 | -32602 | Invalid params                 |
 | -32603 | Internal error                 |
+| -32000 | A2A endpoint is disabled       |
 
 ---
 
-## Integration Examples
+## نمونه‌های یکپارچه‌سازی
 
 ### Python (requests)
 

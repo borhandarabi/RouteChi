@@ -1,46 +1,50 @@
-# OmniRoute — Uninstall Guide (فارسی)
+---
+title: "RouteChi — راهنمای حذف نصب"
+version: 3.8.40
+lastUpdated: 2026-06-28
+---
 
-🌐 **Languages:** 🇺🇸 [English](../../../../docs/UNINSTALL.md) · 🇸🇦 [ar](../../ar/docs/UNINSTALL.md) · 🇧🇬 [bg](../../bg/docs/UNINSTALL.md) · 🇧🇩 [bn](../../bn/docs/UNINSTALL.md) · 🇨🇿 [cs](../../cs/docs/UNINSTALL.md) · 🇩🇰 [da](../../da/docs/UNINSTALL.md) · 🇩🇪 [de](../../de/docs/UNINSTALL.md) · 🇪🇸 [es](../../es/docs/UNINSTALL.md) · 🇮🇷 [fa](../../fa/docs/UNINSTALL.md) · 🇫🇮 [fi](../../fi/docs/UNINSTALL.md) · 🇫🇷 [fr](../../fr/docs/UNINSTALL.md) · 🇮🇳 [gu](../../gu/docs/UNINSTALL.md) · 🇮🇱 [he](../../he/docs/UNINSTALL.md) · 🇮🇳 [hi](../../hi/docs/UNINSTALL.md) · 🇭🇺 [hu](../../hu/docs/UNINSTALL.md) · 🇮🇩 [id](../../id/docs/UNINSTALL.md) · 🇮🇹 [it](../../it/docs/UNINSTALL.md) · 🇯🇵 [ja](../../ja/docs/UNINSTALL.md) · 🇰🇷 [ko](../../ko/docs/UNINSTALL.md) · 🇮🇳 [mr](../../mr/docs/UNINSTALL.md) · 🇲🇾 [ms](../../ms/docs/UNINSTALL.md) · 🇳🇱 [nl](../../nl/docs/UNINSTALL.md) · 🇳🇴 [no](../../no/docs/UNINSTALL.md) · 🇵🇭 [phi](../../phi/docs/UNINSTALL.md) · 🇵🇱 [pl](../../pl/docs/UNINSTALL.md) · 🇵🇹 [pt](../../pt/docs/UNINSTALL.md) · 🇧🇷 [pt-BR](../../pt-BR/docs/UNINSTALL.md) · 🇷🇴 [ro](../../ro/docs/UNINSTALL.md) · 🇷🇺 [ru](../../ru/docs/UNINSTALL.md) · 🇸🇰 [sk](../../sk/docs/UNINSTALL.md) · 🇸🇪 [sv](../../sv/docs/UNINSTALL.md) · 🇰🇪 [sw](../../sw/docs/UNINSTALL.md) · 🇮🇳 [ta](../../ta/docs/UNINSTALL.md) · 🇮🇳 [te](../../te/docs/UNINSTALL.md) · 🇹🇭 [th](../../th/docs/UNINSTALL.md) · 🇹🇷 [tr](../../tr/docs/UNINSTALL.md) · 🇺🇦 [uk-UA](../../uk-UA/docs/UNINSTALL.md) · 🇵🇰 [ur](../../ur/docs/UNINSTALL.md) · 🇻🇳 [vi](../../vi/docs/UNINSTALL.md) · 🇨🇳 [zh-CN](../../zh-CN/docs/UNINSTALL.md)
+# RouteChi — راهنمای حذف نصب
+
+🌐 **Languages:** 🇺🇸 [English](./UNINSTALL.md) | 🇧🇷 [Português (Brasil)](../i18n/pt-BR/docs/guides/UNINSTALL.md) | 🇪🇸 [Español](../i18n/es/docs/guides/UNINSTALL.md) | 🇫🇷 [Français](../i18n/fr/docs/guides/UNINSTALL.md) | 🇮🇹 [Italiano](../i18n/it/docs/guides/UNINSTALL.md) | 🇷🇺 [Русский](../i18n/ru/docs/guides/UNINSTALL.md) | 🇨🇳 [中文 (简体)](../i18n/zh-CN/docs/guides/UNINSTALL.md) | 🇩🇪 [Deutsch](../i18n/de/docs/guides/UNINSTALL.md) | 🇮🇳 [हिन्दी](../i18n/in/docs/guides/UNINSTALL.md) | 🇹🇭 [ไทย](../i18n/th/docs/guides/UNINSTALL.md) | 🇺🇦 [Українська](../i18n/uk-UA/docs/guides/UNINSTALL.md) | 🇸🇦 [العربية](../i18n/ar/docs/guides/UNINSTALL.md) | 🇯🇵 [日本語](../i18n/ja/docs/guides/UNINSTALL.md) | 🇻🇳 [Tiếng Việt](../i18n/vi/docs/guides/UNINSTALL.md) | 🇧🇬 [Български](../i18n/bg/docs/guides/UNINSTALL.md) | 🇩🇰 [Dansk](../i18n/da/docs/guides/UNINSTALL.md) | 🇫🇮 [Suomi](../i18n/fi/docs/guides/UNINSTALL.md) | 🇮🇱 [עברית](../i18n/he/docs/guides/UNINSTALL.md) | 🇭🇺 [Magyar](../i18n/hu/docs/guides/UNINSTALL.md) | 🇮🇩 [Bahasa Indonesia](../i18n/id/docs/guides/UNINSTALL.md) | 🇰🇷 [한국어](../i18n/ko/docs/guides/UNINSTALL.md) | 🇲🇾 [Bahasa Melayu](../i18n/ms/docs/guides/UNINSTALL.md) | 🇳🇱 [Nederlands](../i18n/nl/docs/guides/UNINSTALL.md) | 🇳🇴 [Norsk](../i18n/no/docs/guides/UNINSTALL.md) | 🇵🇹 [Português (Portugal)](../i18n/pt/docs/guides/UNINSTALL.md) | 🇷🇴 [Română](../i18n/ro/docs/guides/UNINSTALL.md) | 🇵🇱 [Polski](../i18n/pl/docs/guides/UNINSTALL.md) | 🇸🇰 [Slovenčina](../i18n/sk/docs/guides/UNINSTALL.md) | 🇸🇪 [Svenska](../i18n/sv/docs/guides/UNINSTALL.md) | 🇵🇭 [Filipino](../i18n/phi/docs/guides/UNINSTALL.md) | 🇨🇿 [Čeština](../i18n/cs/docs/guides/UNINSTALL.md)
+
+این راهنما نحوهٔ حذف کامل RouteChi از سامانه شما را پوشش می‌دهد.
 
 ---
 
-This guide covers how to cleanly remove OmniRoute from your system.
+## حذف نصب سریع (v3.6.2 به بعد)
 
----
+RouteChi دو اسکریپت داخلی برای حذف تمیز ارائه می‌دهد:
 
-## Quick Uninstall (v3.6.2+)
-
-OmniRoute provides two built-in scripts for clean removal:
-
-### Keep Your Data
+### نگه‌داشتن داده‌های شما
 
 ```bash
 npm run uninstall
 ```
 
-This removes the OmniRoute application but **preserves** your database, configurations, API keys, and provider settings in `~/.omniroute/`. Use this if you plan to reinstall later and want to keep your setup.
+این دستور برنامهٔ RouteChi را حذف می‌کند اما پایگاه داده، پیکربندی‌ها، کلیدهای API و تنظیمات ارائه‌دهنده را در `~/.omniroute/` **حفظ می‌کند**. اگر قصد دارید بعداً دوباره نصب کنید و می‌خواهید راه‌اندازی فعلی را نگه دارید، از این گزینه استفاده کنید.
 
-### Full Removal
+### حذف کامل
 
 ```bash
 npm run uninstall:full
 ```
 
-This removes the application **and permanently erases** all data:
+این دستور برنامه را **به‌طور دائمی پاک می‌کند** و تمام داده‌ها را محو می‌سازد:
 
-- Database (`storage.sqlite`)
-- Provider configurations and API keys
-- Backup files
-- Log files
-- All files in the `~/.omniroute/` directory
+- پایگاه داده (`storage.sqlite`)
+- پیکربندی‌های ارائه‌دهنده و کلیدهای API
+- فایل‌های پشتیبان
+- فایل‌های گزارش
+- تمام فایل‌های موجود در شاخهٔ `~/.omniroute/`
 
-> ⚠️ **Warning:** `npm run uninstall:full` is irreversible. All your provider connections, combos, API keys, and usage history will be permanently deleted.
+> ⚠️ **هشدار:** `npm run uninstall:full` قابل بازگشت نیست. تمام اتصالات ارائه‌دهنده، کامبوها، کلیدهای API و تاریخچهٔ استفاده به‌طور دائمی حذف خواهند شد.
 
 ---
 
-## Manual Uninstall
+## حذف نصب دستی
 
-### NPM Global Install
+### نصب سراسری NPM
 
 ```bash
 # Remove the global package
@@ -50,7 +54,7 @@ npm uninstall -g omniroute
 rm -rf ~/.omniroute
 ```
 
-### pnpm Global Install
+### نصب سراسری pnpm
 
 ```bash
 pnpm uninstall -g omniroute
@@ -81,24 +85,24 @@ docker compose down
 docker compose down -v
 ```
 
-### Electron Desktop App
+### برنامهٔ دسکتاپ Electron
 
-**Windows:**
+**ویندوز:**
 
-- Open `Settings → Apps → OmniRoute → Uninstall`
-- Or run the NSIS uninstaller from the install directory
+- باز کنید `Settings → Apps → OmniRoute → Uninstall`
+- یا اجرای حذف‌نصب‌کنندهٔ NSIS از شاخهٔ نصب
 
 **macOS:**
 
-- Drag `OmniRoute.app` from `/Applications` to Trash
-- Remove data: `rm -rf ~/Library/Application Support/omniroute`
+- `OmniRoute.app` را از `/Applications` به سطل زباله بکشید
+- حذف داده‌ها: `rm -rf ~/Library/Application Support/omniroute`
 
-**Linux:**
+**لینوکس:**
 
-- Remove the AppImage file
-- Remove data: `rm -rf ~/.omniroute`
+- حذف فایل AppImage
+- حذف داده‌ها: `rm -rf ~/.omniroute`
 
-### Source Install (git clone)
+### نصب از روی سورس (git clone)
 
 ```bash
 # Remove the cloned directory
@@ -110,34 +114,34 @@ rm -rf ~/.omniroute
 
 ---
 
-## Data Directories
+## شاخه‌های داده
 
-OmniRoute stores data in the following locations by default:
+RouteChi به‌طور پیش‌فرض داده‌ها را در مسیرهای زیر ذخیره می‌کند:
 
-| Platform      | Default Path                  | Override                  |
+| پلتفرم       | مسیر پیش‌فرض                  | متغیر بازنویسی            |
 | ------------- | ----------------------------- | ------------------------- |
-| Linux         | `~/.omniroute/`               | `DATA_DIR` env var        |
-| macOS         | `~/.omniroute/`               | `DATA_DIR` env var        |
-| Windows       | `%APPDATA%/omniroute/`        | `DATA_DIR` env var        |
-| Docker        | `/app/data/` (mounted volume) | `DATA_DIR` env var        |
-| XDG-compliant | `$XDG_CONFIG_HOME/omniroute/` | `XDG_CONFIG_HOME` env var |
+| Linux         | `~/.omniroute/`               | متغیر محیطی `DATA_DIR`   |
+| macOS         | `~/.omniroute/`               | متغیر محیطی `DATA_DIR`   |
+| Windows       | `%APPDATA%/omniroute/`        | متغیر محیطی `DATA_DIR`   |
+| Docker        | `/app/data/` (volume متصل شده) | متغیر محیطی `DATA_DIR`   |
+| سازگار با XDG | `$XDG_CONFIG_HOME/omniroute/` | متغیر محیطی `XDG_CONFIG_HOME` |
 
-### Files in the data directory
+### فایل‌های موجود در شاخهٔ داده
 
-| File/Directory       | Description                                       |
+| فایل/شاخه            | توضیح                                             |
 | -------------------- | ------------------------------------------------- |
-| `storage.sqlite`     | Main database (providers, combos, settings, keys) |
-| `storage.sqlite-wal` | SQLite write-ahead log (temporary)                |
-| `storage.sqlite-shm` | SQLite shared memory (temporary)                  |
-| `call_logs/`         | Request payload archives                          |
-| `backups/`           | Automatic database backups                        |
-| `log.txt`            | Legacy request log (optional)                     |
+| `storage.sqlite`     | پایگاه دادهٔ اصلی (ارائه‌دهنده‌ها، کامبوها، تنظیمات، کلیدها) |
+| `storage.sqlite-wal` | گزارش write-ahead مربوط به SQLite (موقت)          |
+| `storage.sqlite-shm` | حافظهٔ اشتراکی SQLite (موقت)                       |
+| `call_logs/`         | آرشیو payload درخواست‌ها                          |
+| `backups/`           | پشتیبان‌گیری خودکار پایگاه داده                   |
+| `log.txt`            | گزارش قدیمی درخواست (اختیاری)                    |
 
 ---
 
-## Verify Complete Removal
+## بررسی حذف کامل
 
-After uninstalling, verify there are no remaining files:
+پس از حذف نصب، بررسی کنید که هیچ فایل باقی‌مانده‌ای وجود ندارد:
 
 ```bash
 # Check for global npm package
@@ -150,7 +154,7 @@ ls -la ~/.omniroute/ 2>/dev/null
 pgrep -f omniroute
 ```
 
-If any process is still running, stop it:
+اگر هنوز فرایندی در حال اجراست، آن را متوقف کنید:
 
 ```bash
 pkill -f omniroute
