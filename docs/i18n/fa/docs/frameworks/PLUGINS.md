@@ -12,18 +12,18 @@ CLI ی `omniroute` را بدون تغییر هسته‌ی آن گسترش دهی
 
 ```bash
 # Install a plugin from npm
-omniroute plugin install stripe
+routechi plugin install stripe
 
 # Install a local plugin in development
-omniroute plugin install ./my-plugin
+routechi plugin install ./my-plugin
 
 # List installed plugins
-omniroute plugin list
+routechi plugin list
 
 # Scaffold a new plugin
-omniroute plugin scaffold myplugin
+routechi plugin scaffold myplugin
 cd omniroute-cmd-myplugin
-omniroute plugin install .
+routechi plugin install .
 ```
 
 ## ساختار افزونه
@@ -101,13 +101,13 @@ export function register(program, ctx) {
 
 ## امنیت
 
-افزونه‌ها با همان امتیازات فرآیند Node.js به‌عنوان `omniroute` اجرا می‌شوند. تنها از منابعی که به آن‌ها اعتماد دارید افزونه نصب کنید. `omniroute plugin install` یک هشدار صریح نمایش می‌دهد و نیازمند `--yes` یا تأیید تعاملی است.
+افزونه‌ها با همان امتیازات فرآیند Node.js به‌عنوان `omniroute` اجرا می‌شوند. تنها از منابعی که به آن‌ها اعتماد دارید افزونه نصب کنید. `routechi plugin install` یک هشدار صریح نمایش می‌دهد و نیازمند `--yes` یا تأیید تعاملی است.
 
 ## انتشار
 
 1. مطمئن شوید `package.json` شامل `"keywords": ["omniroute-plugin"]` است
 2. `npm publish` را به‌صورت معمول اجرا کنید
-3. کاربران از طریق `omniroute plugin search <query>` (در رجیستری npm جستجو می‌کند) افزونه را کشف می‌کنند
+3. کاربران از طریق `routechi plugin search <query>` (در رجیستری npm جستجو می‌کند) افزونه را کشف می‌کنند
 
 ## افزونه‌ی نمونه
 

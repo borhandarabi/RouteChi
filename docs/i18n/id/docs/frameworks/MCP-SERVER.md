@@ -11,14 +11,14 @@
 OmniRoute MCP sudah tersedia secara bawaan. Jalankan dengan:
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 Atau melalui transport open-sse:
 
 ```bash
 # HTTP streamable transport (port 20130)
-omniroute --dev  # MCP auto-starts on /mcp endpoint
+routechi --dev  # MCP auto-starts on /mcp endpoint
 ```
 
 ## Konfigurasi IDE

@@ -11,14 +11,14 @@
 OmniRoute MCP is built-in. Start it with:
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 Or via the open-sse transport:
 
 ```bash
 # HTTP streamable transport (port 20130)
-omniroute --dev  # MCP auto-starts on /mcp endpoint
+routechi --dev  # MCP auto-starts on /mcp endpoint
 ```
 
 ## IDE Configuration

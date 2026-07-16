@@ -328,7 +328,7 @@ Model: cc/claude-opus-4-7
 ### 全局 npm 安装（推荐）
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 
 # Create config directory
 mkdir -p ~/.omniroute
@@ -339,7 +339,7 @@ cp .env.example ~/.omniroute/.env
 # Start server
 omniroute
 # Or with custom port:
-omniroute --port 3000
+routechi --port 3000
 ```
 
 CLI 自动从 `~/.omniroute/.env` 或 `./.env` 加载环境变量。
@@ -358,7 +358,7 @@ CLI 自动从 `~/.omniroute/.env` 或 `./.env` 加载环境变量。
 ### VPS 部署
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute && npm install && npm run build
 
 export JWT_SECRET="your-secure-secret-change-this"
@@ -440,8 +440,8 @@ depends="openssl"
 short_desc="Universal AI gateway with smart routing for multiple LLM providers"
 maintainer="zenobit <zenobit@disroot.org>"
 license="MIT"
-homepage="https://github.com/diegosouzapw/OmniRoute"
-distfiles="https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz"
+homepage="https://github.com/borhandarabi/routechi"
+distfiles="https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz"
 checksum=009400afee90a9f32599d8fe734145cfd84098140b7287990183dde45ae2245b
 system_accounts="_omniroute"
 omniroute_homedir="/var/lib/omniroute"
@@ -605,7 +605,7 @@ post_install() {
 
 **其他兼容服务商**（精选）: `cohere`, `databricks`, `snowflake`, `together`, `vertex`, `alibaba`, `alibaba-cn`, `bedrock` (via `aws-bedrock`), `azure-ai`, `openrouter`（透传目录）, `siliconflow`, `hyperbolic`, `huggingface`, `featherless-ai`, `cloudflare-ai`, `scaleway`, `deepinfra`, `vercel-ai-gateway`, `bazaarlink`, `friendliai`, `nous-research`, `reka`, `volcengine`, `ai21`, `gigachat`。每个服务商在 `providerRegistry.ts` 中维护各自的模型列表，当服务商暴露 `/models` 端点时可自动同步。
 
-**模型 ID 说明：** OmniRoute 使用服务商原生的 ID（`claude-opus-4-8`、`gpt-5.5`、`glm-5.1`、`MiniMax-M2.7`、`kimi-k2.5`、`grok-4.20-0309-reasoning`）。部分 ID 带有带点版本号，这是因为上游 API 要求如此。如果某模型未在上方列出，运行 `omniroute models --search <term>` 或调用 `GET /api/models/catalog` 确认可用性。
+**模型 ID 说明：** OmniRoute 使用服务商原生的 ID（`claude-opus-4-8`、`gpt-5.5`、`glm-5.1`、`MiniMax-M2.7`、`kimi-k2.5`、`grok-4.20-0309-reasoning`）。部分 ID 带有带点版本号，这是因为上游 API 要求如此。如果某模型未在上方列出，运行 `routechi models --search <term>` 或调用 `GET /api/models/catalog` 确认可用性。
 
 </details>
 
@@ -1020,7 +1020,7 @@ OmniRoute 同时是一个 **MCP 服务端**（Model Context Protocol）和一个
 
 - **SSE**: `http://localhost:20128/api/mcp/sse`
 - **Streamable HTTP**: `http://localhost:20128/api/mcp/stream`
-- **stdio**: `omniroute --mcp`（适用于偏好 stdio 的 IDE 插件）
+- **stdio**: `routechi --mcp`（适用于偏好 stdio 的 IDE 插件）
 
 ### 连接 Claude Desktop
 
@@ -1132,32 +1132,32 @@ curl -X POST http://localhost:20128/api/keys -H "Authorization: Bearer $OMNIROUT
 
 ## 💻 内置 CLI
 
-OmniRoute 内置了 CLI 工具（`omniroute …`），用于设置、诊断和运行时控制。这与 Dashboard 中的「CLI Tools」页面是**分开的**，后者用于配置第三方 CLI（Claude Code、Cursor、Codex、Cline 等）使之能够对接 OmniRoute。
+OmniRoute 内置了 CLI 工具（`routechi …`），用于设置、诊断和运行时控制。这与 Dashboard 中的「CLI Tools」页面是**分开的**，后者用于配置第三方 CLI（Claude Code、Cursor、Codex、Cline 等）使之能够对接 OmniRoute。
 
 ```bash
-omniroute setup                    # 交互式向导（密码、服务商、Combo）
-omniroute setup --non-interactive  # 适合 CI 环境
-omniroute doctor                   # 健康诊断（数据目录、数据库、服务商、端口）
-omniroute providers available      # 列出支持的服务商
-omniroute providers list           # 列出已配置的连接
-omniroute providers test <id>      # 实时测试服务商连接
-omniroute combos list              # 列出 Combo
-omniroute combos switch <name>     # 设置默认 Combo
-omniroute models                   # 列出可用模型（--json、--search）
-omniroute keys add | list | remove # 从终端管理 API Key
-omniroute backup                   # 快照配置 + 数据库
-omniroute restore [<timestamp>]    # 从快照恢复
-omniroute health                   # 详细健康信息（熔断器、缓存、内存）
-omniroute quota                    # 服务商配额用量
-omniroute mcp status               # MCP 服务端状态
-omniroute a2a status               # A2A 服务端状态
-omniroute tunnel list|create|stop  # Cloudflare/Tailscale/ngrok 隧道
-omniroute reset-password           # 重置管理员密码
-omniroute --mcp                    # 通过 stdio 启动 MCP 服务端
-omniroute --port 3000              # 在自定义端口启动服务端
+routechi setup                    # 交互式向导（密码、服务商、Combo）
+routechi setup --non-interactive  # 适合 CI 环境
+routechi doctor                   # 健康诊断（数据目录、数据库、服务商、端口）
+routechi providers available      # 列出支持的服务商
+routechi providers list           # 列出已配置的连接
+routechi providers test <id>      # 实时测试服务商连接
+routechi combos list              # 列出 Combo
+routechi combos switch <name>     # 设置默认 Combo
+routechi models                   # 列出可用模型（--json、--search）
+routechi keys add | list | remove # 从终端管理 API Key
+routechi backup                   # 快照配置 + 数据库
+routechi restore [<timestamp>]    # 从快照恢复
+routechi health                   # 详细健康信息（熔断器、缓存、内存）
+routechi quota                    # 服务商配额用量
+routechi mcp status               # MCP 服务端状态
+routechi a2a status               # A2A 服务端状态
+routechi tunnel list|create|stop  # Cloudflare/Tailscale/ngrok 隧道
+routechi reset-password           # 重置管理员密码
+routechi --mcp                    # 通过 stdio 启动 MCP 服务端
+routechi --port 3000              # 在自定义端口启动服务端
 ```
 
-提示：将 `omniroute doctor --json` 与你的监控工具结合，用于对不健康的服务商连接发出告警。
+提示：将 `routechi doctor --json` 与你的监控工具结合，用于对不健康的服务商连接发出告警。
 
 ---
 

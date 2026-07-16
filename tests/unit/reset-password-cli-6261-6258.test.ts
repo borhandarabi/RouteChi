@@ -73,10 +73,10 @@ function mkDataDir(): string {
   return fs.mkdtempSync(path.join(os.tmpdir(), "omniroute-reset-data-"));
 }
 
-// #6261: `omniroute reset-password` must be a real subcommand (not "unknown
+// #6261: `routechi reset-password` must be a real subcommand (not "unknown
 // command"), routing into bin/reset-password.mjs — and #6258: under piped
 // (non-TTY) stdin it must actually apply the reset and print the success line.
-test("omniroute reset-password subcommand applies the reset over piped stdin (#6261, #6258)", async () => {
+test("routechi reset-password subcommand applies the reset over piped stdin (#6261, #6258)", async () => {
   const dataDir = mkDataDir();
   const home = mkHome();
   try {

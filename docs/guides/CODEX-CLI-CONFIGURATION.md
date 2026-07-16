@@ -220,25 +220,25 @@ codex -p chat     # cx/gpt-5.5, no effort set (server default)
 
 ---
 
-## Generating profiles automatically with `omniroute setup-codex`
+## Generating profiles automatically with `routechi setup-codex`
 
 If you run OmniRoute on a VPS, you can auto-generate profile files from the live model catalog:
 
 ```bash
 # From a VPS (uses local OmniRoute on port 20128)
-omniroute setup-codex
+routechi setup-codex
 
 # From any machine — point at your VPS
-omniroute setup-codex --remote http://100.x.x.x:20128 --api-key sk-xxx
+routechi setup-codex --remote http://100.x.x.x:20128 --api-key sk-xxx
 
 # Preview without writing files
-omniroute setup-codex --remote http://100.x.x.x:20128 --dry-run
+routechi setup-codex --remote http://100.x.x.x:20128 --dry-run
 
 # Only generate GLM and Kimi profiles
-omniroute setup-codex --only glm,kimi
+routechi setup-codex --only glm,kimi
 
 # Write to a custom directory
-omniroute setup-codex --codex-home /path/to/.codex
+routechi setup-codex --codex-home /path/to/.codex
 ```
 
 The command fetches `/v1/models`, uses tuned profiles for known models, falls back to catalog metadata for other compatible text models, and writes `~/.codex/<name>.config.toml` for each. Idempotent — safe to re-run.
@@ -247,22 +247,22 @@ OmniRoute can also **auto-sync** these same profile files after a successful pro
 
 ---
 
-## Launching Codex with `omniroute launch-codex`
+## Launching Codex with `routechi launch-codex`
 
 Health-checks your OmniRoute instance before launching Codex:
 
 ```bash
 # Launch against local OmniRoute (default port 20128)
-omniroute launch-codex
+routechi launch-codex
 
 # Launch with a specific profile
-omniroute launch-codex --profile kimi-k27
+routechi launch-codex --profile kimi-k27
 
 # Launch against a remote VPS
-omniroute launch-codex --remote http://100.x.x.x:20128/v1 --api-key sk-xxx
+routechi launch-codex --remote http://100.x.x.x:20128/v1 --api-key sk-xxx
 
 # Pass extra args to codex
-omniroute launch-codex --profile glm52 -- --yolo "fix this bug"
+routechi launch-codex --profile glm52 -- --yolo "fix this bug"
 ```
 
 ---
@@ -395,7 +395,7 @@ Inside an interactive session:
 Remove `wire_api = "chat"` from your config. Set `wire_api = "responses"` or omit the field (defaults to `"responses"` since v0.138).
 
 **`Error: model not found`**
-Verify the model exists in OmniRoute with the correct prefix. Use `omniroute models list` or open `/dashboard/providers/<provider>`.
+Verify the model exists in OmniRoute with the correct prefix. Use `routechi models list` or open `/dashboard/providers/<provider>`.
 
 **`Authentication error`**
 Confirm `OMNIROUTE_API_KEY` is exported: `echo $OMNIROUTE_API_KEY`.

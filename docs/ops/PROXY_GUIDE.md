@@ -263,7 +263,7 @@ This happens once on first startup after upgrade. Use `migrateLegacyProxyConfigT
 
 ## 1proxy Free Proxy Marketplace
 
-> 🆕 **Contributed by [@oyi77](https://github.com/oyi77)** — PR [#1847](https://github.com/diegosouzapw/OmniRoute/pull/1847) (Issue [#1788](https://github.com/diegosouzapw/OmniRoute/issues/1788))
+> 🆕 **Contributed by [@oyi77](https://github.com/oyi77)** — PR [#1847](https://github.com/borhandarabi/routechi/pull/1847) (Issue [#1788](https://github.com/borhandarabi/routechi/issues/1788))
 
 OmniRoute integrates with the **[1proxy](https://1proxy-api.aitradepulse.com)** community platform to provide access to **hundreds of free, validated proxies** from around the world. This is perfect for users who don't have their own proxy infrastructure.
 
@@ -637,7 +637,7 @@ Without this, a dead proxy would block every request for the full `PROXY_TIMEOUT
 ### Inspecting Proxy Health
 
 ```ts
-import { getAllProxyHealthStatuses, invalidateProxyHealth } from "omniroute/proxyHealth";
+import { getAllProxyHealthStatuses, invalidateProxyHealth } from "routechi/proxyHealth";
 
 const statuses = getAllProxyHealthStatuses();
 for (const s of statuses) {
@@ -775,7 +775,7 @@ evenly)
 ### Configuring Rotation Strategy
 
 ```ts
-import { rotateOneproxyProxy } from "omniroute/oneproxyRotator";
+import { rotateOneproxyProxy } from "routechi/oneproxyRotator";
 
 // In a one-off script
 const proxy = await rotateOneproxyProxy({ strategy: "quality" });
@@ -789,7 +789,7 @@ if (proxy) {
 When using `sequential` strategy, the internal index accumulates. To reset:
 
 ```ts
-import { resetSequentialIndex } from "omniroute/oneproxyRotator";
+import { resetSequentialIndex } from "routechi/oneproxyRotator";
 
 resetSequentialIndex();
 ```
@@ -805,7 +805,7 @@ Useful when:
 When a proxy consistently fails, mark it manually so the rotator will skip it:
 
 ```ts
-import { failOneproxyProxy } from "omniroute/oneproxyRotator";
+import { failOneproxyProxy } from "routechi/oneproxyRotator";
 
 const removed = await failOneproxyProxy("1.2.3.4", 8080);
 if (removed) {

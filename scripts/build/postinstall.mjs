@@ -16,10 +16,10 @@
  *   - better-sqlite3 (SQLite bindings)
  *   - wreq-js (TLS client for OAuth providers)
  *
- * Fixes: https://github.com/diegosouzapw/OmniRoute/issues/129
- * Fixes: https://github.com/diegosouzapw/OmniRoute/issues/321
- * Fixes: https://github.com/diegosouzapw/OmniRoute/issues/426
- * Fixes: https://github.com/diegosouzapw/OmniRoute/issues/1634
+ * Fixes: https://github.com/borhandarabi/routechi/issues/129
+ * Fixes: https://github.com/borhandarabi/routechi/issues/321
+ * Fixes: https://github.com/borhandarabi/routechi/issues/426
+ * Fixes: https://github.com/borhandarabi/routechi/issues/1634
  */
 
 import { copyFileSync, cpSync, existsSync, mkdirSync, readdirSync } from "node:fs";
@@ -194,7 +194,7 @@ async function fixBetterSqliteBinary() {
  * The standalone build may only contain Linux binaries from the CI.
  * This copies the correct platform binary from the root install.
  *
- * Fixes: https://github.com/diegosouzapw/OmniRoute/issues/1634
+ * Fixes: https://github.com/borhandarabi/routechi/issues/1634
  */
 async function fixWreqJsBinary() {
   // wreq-js native module is not loadable in Termux (libgcc path mismatch).

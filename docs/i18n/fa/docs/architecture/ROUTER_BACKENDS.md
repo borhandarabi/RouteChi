@@ -6,9 +6,9 @@ lastUpdated: 2026-07-02
 
 # Backend‌های مسیریاب و سرویس‌های تعبیه‌شده — قرارداد معماری (ADR)
 
-> **وضعیت:** پذیرفته‌شده · **زمینه:** [#5670](https://github.com/diegosouzapw/OmniRoute/issues/5670)،
-> [#5603](https://github.com/diegosouzapw/OmniRoute/issues/5603) · **قرارداد:** `domain/routing/routerBackends.ts`
-> (رجیستری تایپ‌شده — کد با [#5868](https://github.com/diegosouzapw/OmniRoute/pull/5868) ادغام می‌شود)
+> **وضعیت:** پذیرفته‌شده · **زمینه:** [#5670](https://github.com/borhandarabi/routechi/issues/5670)،
+> [#5603](https://github.com/borhandarabi/routechi/issues/5603) · **قرارداد:** `domain/routing/routerBackends.ts`
+> (رجیستری تایپ‌شده — کد با [#5868](https://github.com/borhandarabi/routechi/pull/5868) ادغام می‌شود)
 
 این ADR مشخص می‌کند که `ts` (بومی)، `bifrost`، `cliproxy`، `9router` و موتورهای سازگار با VibeProxy چگونه به هم مربوط می‌شوند، تا مشارکت‌کنندگان از ترکیب دو چیز معماری‌ا متمایز دست بردارند. این سند رجیستری تایپ‌شده را که توسط کار router-backend-registry معرفی شده است، به‌عنوان منبع واحد حقیقت برای آن مدل مستند می‌کند.
 
@@ -29,7 +29,7 @@ lastUpdated: 2026-07-02
 
 ## رجیستری — منبع واحد حقیقت
 
-قرارداد `domain/routing/routerBackends.ts` (کد با [#5868](https://github.com/diegosouzapw/OmniRoute/pull/5868) ادغام می‌شود) هر موتور را یک‌بار با چرخه حیات، قابلیت‌ها، هویت سرویس، پورت پیش‌فرض، پیکربندی سلامت و پشتیبانی تلمتری اعلان می‌کند. مصرف‌کنندگان موتورها را از طریق `getRouterBackend(id)`، `listRouterBackends()` و `listRouterBackendsByCapability(cap)` جستجو می‌کنند به جای case-by-case هر sidecar.
+قرارداد `domain/routing/routerBackends.ts` (کد با [#5868](https://github.com/borhandarabi/routechi/pull/5868) ادغام می‌شود) هر موتور را یک‌بار با چرخه حیات، قابلیت‌ها، هویت سرویس، پورت پیش‌فرض، پیکربندی سلامت و پشتیبانی تلمتری اعلان می‌کند. مصرف‌کنندگان موتورها را از طریق `getRouterBackend(id)`، `listRouterBackends()` و `listRouterBackendsByCapability(cap)` جستجو می‌کنند به جای case-by-case هر sidecar.
 
 | Backend     | چرخه حیات    | سرویس (محور A) | Backend relay (محور B) | سلامت         | پورت پیش‌فرض |
 | ----------- | ------------ | -------------- | ---------------------- | ------------- | ------------ |
@@ -40,7 +40,7 @@ lastUpdated: 2026-07-02
 | `vibeproxy` | `external`   | —              | — (آداپتور provider)   | `/v1/models`  | —            |
 
 ¹ ارتقای Bifrost به یک سرویس تعبیه‌شده `supervised` (قابل‌نصب/راه‌اندازی از `/api/services/bifrost/`) در
-[#5817](https://github.com/diegosouzapw/OmniRoute/pull/5817) پیگیری می‌شود؛ تا زمان ادغام،
+[#5817](https://github.com/borhandarabi/routechi/pull/5817) پیگیری می‌شود؛ تا زمان ادغام،
 Bifrost فقط `external` است (فقط از طریق `BIFROST_BASE_URL` قابل دسترس).
 
 `capabilities` (`chat`, `responses`, `streaming`, `tools`, `vision`,
@@ -98,8 +98,8 @@ Bifrost فقط `external` است (فقط از طریق `BIFROST_BASE_URL` قاب
 - **Cooldown:** cooldown شکست به‌ازای-`baseUrl` در `bifrostCooldown.ts`.
 
 انتخاب **امروز در سطح relay all-or-nothing است** — هیچ تعویض موتور به‌ازای-provider یا به‌ازای-درخواست روی `release/v3.8.43` وجود ندارد. دروازه به‌ازای-درخواست توسط کار sidecar-manifest در حال افزودن است
-([#5869](https://github.com/diegosouzapw/OmniRoute/pull/5869) manifest +
-[#5870](https://github.com/diegosouzapw/OmniRoute/pull/5870) `shouldTryBifrostForRequest`)،
+([#5869](https://github.com/borhandarabi/routechi/pull/5869) manifest +
+[#5870](https://github.com/borhandarabi/routechi/pull/5870) `shouldTryBifrostForRequest`)،
 که به `auto` اجازه می‌دهد فقط provider‌های manifest-eligible را از طریق Bifrost مسیریابی کند.
 
 ## ادغام داشبورد

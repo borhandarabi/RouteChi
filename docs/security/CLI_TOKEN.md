@@ -10,7 +10,7 @@ OmniRoute CLI commands authenticate against the local management API using a
 `HMAC-SHA256(machine-id, salt)` token sent via the `x-omniroute-cli-token`
 request header.
 
-This allows CLI subcommands (`omniroute status`, `omniroute providers`, etc.)
+This allows CLI subcommands (`routechi status`, `routechi providers`, etc.)
 to call management endpoints without requiring the user to supply a JWT or
 password on every invocation.
 
@@ -48,7 +48,7 @@ previous derived value.
 export OMNIROUTE_CLI_SALT="my-secret-salt-2026"
 
 # Verify new token is in use
-omniroute status
+routechi status
 ```
 
 Default salt: `omniroute-cli-auth-v1`

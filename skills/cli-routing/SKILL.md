@@ -11,8 +11,8 @@ Create, list, update, and delete routing combos from the CLI. Test routing strat
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -31,7 +31,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute suggest
+routechi suggest
 ```
 
 ### `combo combo`
@@ -39,7 +39,7 @@ omniroute suggest
 **Example:**
 
 ```bash
-omniroute combo combo
+routechi combo combo
 ```
 
 ### `combo list`
@@ -53,7 +53,7 @@ List configured routing combos
 **Example:**
 
 ```bash
-omniroute combo list
+routechi combo list
 ```
 
 ### `combo switch <name>`
@@ -63,7 +63,7 @@ Activate a routing combo
 **Example:**
 
 ```bash
-omniroute combo switch <name>
+routechi combo switch <name>
 ```
 
 ### `combo create <name>`
@@ -73,7 +73,7 @@ Create a new routing combo
 **Example:**
 
 ```bash
-omniroute combo create <name>
+routechi combo create <name>
 ```
 
 ### `combo delete <name>`
@@ -87,5 +87,5 @@ Delete a routing combo
 **Example:**
 
 ```bash
-omniroute combo delete <name>
+routechi combo delete <name>
 ```

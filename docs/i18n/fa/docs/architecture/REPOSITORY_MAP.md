@@ -305,7 +305,7 @@ open-sse/
 
 | فایل                                                                                                        | هدف                                                                                                                    |
 | ----------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `omniroute.mjs`                                                                                             | ورودی اصلی CLI — `omniroute serve`, `omniroute setup`, `omniroute doctor`, `omniroute providers`, `omniroute combos`, و غیره. |
+| `omniroute.mjs`                                                                                             | ورودی اصلی CLI — `routechi serve`, `routechi setup`, `routechi doctor`, `routechi providers`, `routechi combos`, و غیره. |
 | `reset-password.mjs`                                                                                        | CLI مستقل بازنشانی رمز عبور                                                                                              |
 | `cli/commands/setup.mjs`                                                                                    | wizard تعاملی + غیرتعاملی راه‌اندازی                                                                                 |
 | `cli/commands/doctor.mjs`                                                                                   | تشخیص سلامت سیستم (۸+ بررسی)                                                                                      |

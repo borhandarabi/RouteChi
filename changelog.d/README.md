@@ -25,7 +25,7 @@ CI re-run after every sibling merge) are structurally impossible.
 `changelog.d/fixes/6496-cloudflare-relay-worker-syntax.md`:
 
 ```markdown
-- **fix(providers):** Cloudflare relay Worker deploys use Service Worker syntax with `body_part` metadata ([#6496](https://github.com/diegosouzapw/OmniRoute/pull/6496)) — thanks @SeaXen
+- **fix(providers):** Cloudflare relay Worker deploys use Service Worker syntax with `body_part` metadata ([#6496](https://github.com/borhandarabi/routechi/pull/6496)) — thanks @SeaXen
 ```
 
 ## Aggregation

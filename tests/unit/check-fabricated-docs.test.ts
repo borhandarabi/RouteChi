@@ -322,10 +322,10 @@ test("cli-cmd: an arg-bearing `.command('connect <host>')` registration is NOT f
       "bin/cli/commands/connect.mjs":
         'export function registerConnect(p) {\n  p.command("connect <host>").action(() => {});\n}\n',
     },
-    docs: { "guides/remote.md": "You log in once with `omniroute connect <host>`.\n" },
+    docs: { "guides/remote.md": "You log in once with `routechi connect <host>`.\n" },
   });
   assert.ok(
-    !found.has("cli-cmd::omniroute connect"),
+    !found.has("cli-cmd::routechi connect"),
     "a registered arg-bearing subcommand must be recognized and not flagged"
   );
 });

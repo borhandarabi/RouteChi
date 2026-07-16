@@ -11,8 +11,8 @@ Step-by-step agent workflow to configure the OpenAI Codex CLI on any machine (Li
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands

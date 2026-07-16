@@ -34,13 +34,13 @@ OmniRoute را retry کنید.
 آخرین پکیج منتشرشده را مستقیماً اجرا کنید:
 
 ```bash
-npx -y omniroute@latest
+npx -y routechi@latest
 ```
 
 همچنین می‌توانید آن را به‌صورت سراسری نصب کنید:
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 omniroute
 ```
 
@@ -55,7 +55,7 @@ omniroute
 یا:
 
 ```bash
-npx omniroute
+npx routechi
 ```
 
 داشبورد روی این نشانی گوش می‌دهد:
@@ -152,7 +152,7 @@ pkg install nodejs python build-essential
 سپس دوباره اجرا کنید:
 
 ```bash
-npx -y omniroute@latest
+npx -y routechi@latest
 ```
 
 ### پورت از قبل در حال استفاده

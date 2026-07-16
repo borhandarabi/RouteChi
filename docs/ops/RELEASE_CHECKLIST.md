@@ -268,12 +268,12 @@ Before shipping any release that includes embedded services changes, verify:
 
 Before shipping any v3.8.x release, verify these additional items:
 
-- [ ] `omniroute --tray` boots on macOS (systray2 installed into `~/.omniroute/runtime/`)
-- [ ] `omniroute --tray` boots on Linux (requires DISPLAY; graceful error if not set)
-- [ ] `omniroute --tray` boots on Windows (PowerShell NotifyIcon, no extra binaries)
-- [ ] `omniroute config tray enable` creates autostart entry; disable removes it
-- [ ] `npm install -g omniroute@<this-version>` runs postinstall without fatal exit
-- [ ] Update path keeps optional deps: `omniroute update --apply` and the auto-updater
+- [ ] `routechi --tray` boots on macOS (systray2 installed into `~/.omniroute/runtime/`)
+- [ ] `routechi --tray` boots on Linux (requires DISPLAY; graceful error if not set)
+- [ ] `routechi --tray` boots on Windows (PowerShell NotifyIcon, no extra binaries)
+- [ ] `routechi config tray enable` creates autostart entry; disable removes it
+- [ ] `npm install -g routechi@<this-version>` runs postinstall without fatal exit
+- [ ] Update path keeps optional deps: `routechi update --apply` and the auto-updater
       run `npm install -g … --include=optional` so `optionalDependencies` (better-sqlite3,
       keytar, tls-client, and the llmlingua SLM stack: `@atjsh/llmlingua-2`,
       `@huggingface/transformers@3.5.2`, `@tensorflow/tfjs`, `js-tiktoken`) survive an update.
@@ -285,7 +285,7 @@ Before shipping any v3.8.x release, verify these additional items:
       optional instance — the standalone trace bundles only transformers, not the dynamically-imported
       optionals, so without this the worker would load llmlingua-2 against the root's transformers
       and the SLM tier would silently fail-open.
-- [ ] `omniroute status` works with no `.env` (CLI token path, loopback only)
+- [ ] `routechi status` works with no `.env` (CLI token path, loopback only)
 - [ ] `curl http://localhost:20128/api/shutdown` returns 401 (always-protected route)
 - [ ] `curl -H "host: evil.com" http://localhost:20128/api/mcp/sse` returns 401 (loopback guard)
 - [ ] SQLite runtime resolves to `bundled` on first run (bundled binary valid for platform)

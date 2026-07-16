@@ -335,7 +335,7 @@ Model: cc/claude-opus-4-7
 ### Global npm install (Recommended)
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 
 # Create config directory
 mkdir -p ~/.omniroute
@@ -346,7 +346,7 @@ cp .env.example ~/.omniroute/.env
 # Start server
 omniroute
 # Or with custom port:
-omniroute --port 3000
+routechi --port 3000
 ```
 
 The CLI automatically loads `.env` from `~/.omniroute/.env` or `./.env`.
@@ -365,7 +365,7 @@ When you no longer need OmniRoute, we provide two quick scripts for a clean remo
 ### VPS Deployment
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute && npm install && npm run build
 
 export JWT_SECRET="your-secure-secret-change-this"
@@ -447,8 +447,8 @@ depends="openssl"
 short_desc="Universal AI gateway with smart routing for multiple LLM providers"
 maintainer="zenobit <zenobit@disroot.org>"
 license="MIT"
-homepage="https://github.com/diegosouzapw/OmniRoute"
-distfiles="https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz"
+homepage="https://github.com/borhandarabi/routechi"
+distfiles="https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz"
 checksum=009400afee90a9f32599d8fe734145cfd84098140b7287990183dde45ae2245b
 system_accounts="_omniroute"
 omniroute_homedir="/var/lib/omniroute"
@@ -612,7 +612,7 @@ For the full environment variable reference, see the [README](../README.md).
 
 **Other compatible providers** (selected): `cohere`, `databricks`, `snowflake`, `together`, `vertex`, `alibaba`, `alibaba-cn`, `bedrock` (via `aws-bedrock`), `azure-ai`, `openrouter` (passthrough catalog), `siliconflow`, `hyperbolic`, `huggingface`, `featherless-ai`, `cloudflare-ai`, `scaleway`, `deepinfra`, `vercel-ai-gateway`, `bazaarlink`, `friendliai`, `nous-research`, `reka`, `volcengine`, `ai21`, `gigachat`. Each maintains its own model list in `providerRegistry.ts` and can be auto-synced when the provider exposes a `/models` endpoint.
 
-**Note on model IDs:** OmniRoute uses provider-native IDs (`claude-opus-4-8`, `gpt-5.5`, `glm-5.1`, `MiniMax-M2.7`, `kimi-k2.5`, `grok-4.20-0309-reasoning`). Some IDs include dotted versions because that is how the upstream API expects them. If a model is not listed above, run `omniroute models --search <term>` or hit `GET /api/models/catalog` to confirm availability.
+**Note on model IDs:** OmniRoute uses provider-native IDs (`claude-opus-4-8`, `gpt-5.5`, `glm-5.1`, `MiniMax-M2.7`, `kimi-k2.5`, `grok-4.20-0309-reasoning`). Some IDs include dotted versions because that is how the upstream API expects them. If a model is not listed above, run `routechi models --search <term>` or hit `GET /api/models/catalog` to confirm availability.
 
 </details>
 
@@ -1040,7 +1040,7 @@ OmniRoute is both an **MCP server** (Model Context Protocol) and an **A2A server
 
 - **SSE**: `http://localhost:20128/api/mcp/sse`
 - **Streamable HTTP**: `http://localhost:20128/api/mcp/stream`
-- **stdio**: `omniroute --mcp` (for IDE plugins that prefer stdio)
+- **stdio**: `routechi --mcp` (for IDE plugins that prefer stdio)
 
 ### Connect Claude Desktop
 
@@ -1152,32 +1152,32 @@ See [API_REFERENCE.md](../reference/API_REFERENCE.md) for the full endpoint cata
 
 ## 💻 Internal CLI
 
-OmniRoute ships an internal CLI (`omniroute …`) for setup, diagnostics, and runtime control. This is **separate from the "CLI Tools" page in the dashboard**, which configures third-party CLIs (Claude Code, Cursor, Codex, Cline, …) so they can talk to OmniRoute.
+OmniRoute ships an internal CLI (`routechi …`) for setup, diagnostics, and runtime control. This is **separate from the "CLI Tools" page in the dashboard**, which configures third-party CLIs (Claude Code, Cursor, Codex, Cline, …) so they can talk to OmniRoute.
 
 ```bash
-omniroute setup                    # Interactive wizard (password, providers, combos)
-omniroute setup --non-interactive  # CI-friendly
-omniroute doctor                   # Health diagnostics (data dir, DB, providers, ports)
-omniroute providers available      # List supported providers
-omniroute providers list           # List configured connections
-omniroute providers test <id>      # Live test a provider connection
-omniroute combos list              # List combos
-omniroute combos switch <name>     # Set default combo
-omniroute models                   # List available models (--json, --search)
-omniroute keys add | list | remove # Manage API keys from the terminal
-omniroute backup                   # Snapshot config + DB
-omniroute restore [<timestamp>]    # Restore from a snapshot
-omniroute health                   # Detailed health (breakers, cache, memory)
-omniroute quota                    # Provider quota usage
-omniroute mcp status               # MCP server status
-omniroute a2a status               # A2A server status
-omniroute tunnel list|create|stop  # Cloudflare/Tailscale/ngrok tunnels
-omniroute reset-password           # Reset the admin password
-omniroute --mcp                    # Start MCP server over stdio
-omniroute --port 3000              # Start the server on a custom port
+routechi setup                    # Interactive wizard (password, providers, combos)
+routechi setup --non-interactive  # CI-friendly
+routechi doctor                   # Health diagnostics (data dir, DB, providers, ports)
+routechi providers available      # List supported providers
+routechi providers list           # List configured connections
+routechi providers test <id>      # Live test a provider connection
+routechi combos list              # List combos
+routechi combos switch <name>     # Set default combo
+routechi models                   # List available models (--json, --search)
+routechi keys add | list | remove # Manage API keys from the terminal
+routechi backup                   # Snapshot config + DB
+routechi restore [<timestamp>]    # Restore from a snapshot
+routechi health                   # Detailed health (breakers, cache, memory)
+routechi quota                    # Provider quota usage
+routechi mcp status               # MCP server status
+routechi a2a status               # A2A server status
+routechi tunnel list|create|stop  # Cloudflare/Tailscale/ngrok tunnels
+routechi reset-password           # Reset the admin password
+routechi --mcp                    # Start MCP server over stdio
+routechi --port 3000              # Start the server on a custom port
 ```
 
-Tip: pair `omniroute doctor --json` with your monitoring tool to alert on unhealthy provider connections.
+Tip: pair `routechi doctor --json` with your monitoring tool to alert on unhealthy provider connections.
 
 ---
 

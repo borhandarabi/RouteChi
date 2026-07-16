@@ -15,29 +15,29 @@ _Proxy API universal Anda — satu endpoint, 100+ penyedia, tanpa downtime. Kini
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/omniroute?color=cb3837&logo=npm)](https://www.npmjs.com/package/omniroute)
-[![Docker Hub](https://img.shields.io/docker/v/diegosouzapw/omniroute?label=Docker%20Hub&logo=docker&color=2496ED)](https://hub.docker.com/r/diegosouzapw/omniroute)
+[![Docker Hub](https://img.shields.io/docker/v/borhandarabi/routechi?label=Docker%20Hub&logo=docker&color=2496ED)](https://hub.docker.com/r/borhandarabi/routechi)
 
 ![NPM Downloads](https://img.shields.io/npm/dw/omniroute?label=npm%20down%20week&color=red)
 ![NPM Downloads](https://img.shields.io/npm/dm/omniroute?label=npm%20down%20month&color=red)
 
 ![NPM Downloads](https://img.shields.io/npm/d18m/omniroute?label=npm%20down%20year&color=red)
-![Docker Pulls](https://img.shields.io/docker/pulls/diegosouzapw/omniroute)
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/diegosouzapw/omniroute/total?style=flat&label=eletron%20donwloads&color=blue)
+![Docker Pulls](https://img.shields.io/docker/pulls/borhandarabi/routechi)
+![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/borhandarabi/routechi/total?style=flat&label=eletron%20donwloads&color=blue)
 
-[![stars](https://custom-icon-badges.demolab.com/github/stars/diegosouzapw/OmniRoute?logo=star&style=flat)](https://github.com/diegosouzapw/OmniRoute/stargazers)
-[![open issues](https://custom-icon-badges.demolab.com/github/issues-raw/diegosouzapw/OmniRoute?logo=issue)](https://github.com/diegosouzapw/OmniRoute/issues)
-[![license](https://custom-icon-badges.demolab.com/github/license/diegosouzapw/OmniRoute?logo=law)](https://github.com/diegosouzapw/OmniRoute/blob/main/LICENSE)
-[![last commit](https://custom-icon-badges.demolab.com/github/last-commit/diegosouzapw/OmniRoute?logo=history&logoColor=white)](https://github.com/diegosouzapw/OmniRoute/commits/main)
+[![stars](https://custom-icon-badges.demolab.com/github/stars/borhandarabi/routechi?logo=star&style=flat)](https://github.com/borhandarabi/routechi/stargazers)
+[![open issues](https://custom-icon-badges.demolab.com/github/issues-raw/borhandarabi/routechi?logo=issue)](https://github.com/borhandarabi/routechi/issues)
+[![license](https://custom-icon-badges.demolab.com/github/license/borhandarabi/routechi?logo=law)](https://github.com/borhandarabi/routechi/blob/main/LICENSE)
+[![last commit](https://custom-icon-badges.demolab.com/github/last-commit/borhandarabi/routechi?logo=history&logoColor=white)](https://github.com/borhandarabi/routechi/commits/main)
 [![total contributions](https://custom-icon-badges.demolab.com/badge/dynamic/json?logo=graph&logoColor=fff&color=blue&label=total%20contributions&query=%24.totalContributions&url=https%3A%2F%2Fstreak-stats.demolab.com%2F%3Fuser%3Ddiegosouzapw%26type%3Djson)](https://github.com/diegosouzapw)
-[![code size](https://custom-icon-badges.demolab.com/github/languages/code-size/diegosouzapw/OmniRoute?logo=file-code&logoColor=white)](https://github.com/diegosouzapw/OmniRoute)
-[![pr closed](https://custom-icon-badges.demolab.com/github/issues-pr-closed/diegosouzapw/OmniRoute?color=purple&logo=git-pull-request&logoColor=white)](https://github.com/diegosouzapw/OmniRoute/pulls?q=is%3Apr+is%3Aclosed)
-[![tag](https://custom-icon-badges.demolab.com/github/v/tag/diegosouzapw/OmniRoute?logo=tag&logoColor=white)](https://github.com/diegosouzapw/OmniRoute/tags)
+[![code size](https://custom-icon-badges.demolab.com/github/languages/code-size/borhandarabi/routechi?logo=file-code&logoColor=white)](https://github.com/borhandarabi/routechi)
+[![pr closed](https://custom-icon-badges.demolab.com/github/issues-pr-closed/borhandarabi/routechi?color=purple&logo=git-pull-request&logoColor=white)](https://github.com/borhandarabi/routechi/pulls?q=is%3Apr+is%3Aclosed)
+[![tag](https://custom-icon-badges.demolab.com/github/v/tag/borhandarabi/routechi?logo=tag&logoColor=white)](https://github.com/borhandarabi/routechi/tags)
 [![github streak](https://custom-icon-badges.demolab.com/badge/dynamic/json?logo=fire&logoColor=fff&color=orange&label=github%20streak&query=%24.currentStreak.length&suffix=%20days&url=https%3A%2F%2Fstreak-stats.demolab.com%2F%3Fuser%3Ddiegosouzapw%26type%3Djson)](https://github.com/diegosouzapw)
 [![followers](https://custom-icon-badges.demolab.com/github/followers/diegosouzapw?logo=person-add)](https://github.com/diegosouzapw?tab=followers)
-[![fork](https://custom-icon-badges.demolab.com/github/forks/diegosouzapw/OmniRoute?logo=fork)](https://github.com/diegosouzapw/OmniRoute/network/members)
-[![watch](https://custom-icon-badges.demolab.com/github/watchers/diegosouzapw/OmniRoute?logo=eye)](https://github.com/diegosouzapw/OmniRoute/watchers)
+[![fork](https://custom-icon-badges.demolab.com/github/forks/borhandarabi/routechi?logo=fork)](https://github.com/borhandarabi/routechi/network/members)
+[![watch](https://custom-icon-badges.demolab.com/github/watchers/borhandarabi/routechi?logo=eye)](https://github.com/borhandarabi/routechi/watchers)
 
-[![License](https://img.shields.io/github/license/diegosouzapw/OmniRoute)](https://github.com/diegosouzapw/OmniRoute/blob/main/LICENSE)
+[![License](https://img.shields.io/github/license/borhandarabi/routechi)](https://github.com/borhandarabi/routechi/blob/main/LICENSE)
 [![Website](https://img.shields.io/badge/Website-omniroute.online-blue?logo=google-chrome&logoColor=white)](https://omniroute.online)
 [![WhatsApp](https://img.shields.io/badge/WhatsApp-Community-25D366?logo=whatsapp&logoColor=white)](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t)
 
@@ -178,8 +178,8 @@ _Hubungkan IDE atau alat CLI berbasis AI apa pun melalui OmniRoute — gateway A
 > 💬 **Bergabunglah dengan komunitas kami!** [Grup WhatsApp](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t) — Dapatkan bantuan, berbagi tips, dan tetap terupdate.
 
 - **Website**: [omniroute.online](https://omniroute.online)
-- **GitHub**: [github.com/diegosouzapw/OmniRoute](https://github.com/diegosouzapw/OmniRoute)
-- **Issues**: [github.com/diegosouzapw/OmniRoute/issues](https://github.com/diegosouzapw/OmniRoute/issues)
+- **GitHub**: [github.com/borhandarabi/routechi](https://github.com/borhandarabi/routechi)
+- **Issues**: [github.com/borhandarabi/routechi/issues](https://github.com/borhandarabi/routechi/issues)
 - **WhatsApp**: [Grup Komunitas](https://chat.whatsapp.com/JI7cDQ1GyaiDHhVBpLxf8b?mode=gi_t)
 - **Berkontribusi**: Lihat [CONTRIBUTING.md](CONTRIBUTING.md), buka PR, atau pilih `good first issue`
 
@@ -392,7 +392,7 @@ Menginstal, mengonfigurasi, dan memelihara proksi AI di berbagai lingkungan (lok
 
 **Bagaimana OmniRoute menyelesaikannya:**
 
-- **instal global npm** — `npm install -g omniroute && omniroute` — selesai
+- **instal global npm** — `npm install -g routechi && omniroute` — selesai
 - **Docker Multi-Platform** — asli AMD64 + ARM64 (Apple Silicon, AWS Graviton, Raspberry Pi)
 - **Docker Compose Profiles** — `base` (tanpa alat CLI) dan `cli` (dengan Claude Code, Codex, OpenClaw)
 - **Aplikasi Desktop Electron** — Aplikasi asli untuk Windows/macOS/Linux dengan baki sistem, mulai otomatis, mode offline
@@ -493,7 +493,7 @@ Many AI gateways expose MCP only as a hidden implementation detail. Teams need a
 
 - MCP muncul di navigasi dasbor dan tab protokol titik akhir
 - Halaman manajemen MCP khusus dengan proses, alat, cakupan, dan audit
-- Mulai cepat bawaan untuk `omniroute --mcp` dan orientasi klien
+- Mulai cepat bawaan untuk `routechi --mcp` dan orientasi klien
 
 </details>
 
@@ -720,7 +720,7 @@ Outcome: deep fallback depth for deadline-critical workloads
 **Playbook D: Operasi agen dengan MCP + A2A**
 
 ```txt
-1) Start MCP transport (`omniroute --mcp`) for tool-driven operations
+1) Start MCP transport (`routechi --mcp`) for tool-driven operations
 2) Run A2A tasks via `message/send` and `message/stream`
 3) Observe via /dashboard/endpoint (MCP and A2A tabs)
 4) Toggle services via inline status controls
@@ -748,7 +748,7 @@ Outcome: deep fallback depth for deadline-critical workloads
 ### 1) Instal dan jalankan
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 omniroute
 ```
 
@@ -773,10 +773,10 @@ systemctl --user enable --now omniroute.service
 | Command                 | Description                                                     |
 | ----------------------- | --------------------------------------------------------------- |
 | `omniroute`             | Mulai server (`PORT=20128`, API dan dasbor pada port yang sama) |
-| `omniroute --port 3000` | Set canonical/API port to 3000                                  |
-| `omniroute --mcp`       | Mulai server MCP (stdio transport)                              |
-| `omniroute --no-open`   | Don't auto-open browser                                         |
-| `omniroute --help`      | Show help                                                       |
+| `routechi --port 3000` | Set canonical/API port to 3000                                  |
+| `routechi --mcp`       | Mulai server MCP (stdio transport)                              |
+| `routechi --no-open`   | Don't auto-open browser                                         |
+| `routechi --help`      | Show help                                                       |
 
 Optional split-port mode:
 
@@ -855,7 +855,7 @@ Model:    if/kimi-k2-thinking (or any provider/model prefix)
 **MCP (untuk operasi yang digerakkan oleh alat):**
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 Kemudian sambungkan klien MCP Anda melalui `stdio` dan uji alat seperti:
@@ -906,8 +906,8 @@ depends="openssl"
 short_desc="Universal AI gateway with smart routing for multiple LLM providers"
 maintainer="zenobit <zenobit@disroot.org>"
 license="MIT"
-homepage="https://github.com/diegosouzapw/OmniRoute"
-distfiles="https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz"
+homepage="https://github.com/borhandarabi/routechi"
+distfiles="https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz"
 checksum=009400afee90a9f32599d8fe734145cfd84098140b7287990183dde45ae2245b
 system_accounts="_omniroute"
 omniroute_homedir="/var/lib/omniroute"
@@ -1002,7 +1002,7 @@ post_install() {
 
 ## 🐳 Docker
 
-OmniRoute tersedia sebagai image Docker publik di [Docker Hub](https://hub.docker.com/r/diegosouzapw/omniroute).
+OmniRoute tersedia sebagai image Docker publik di [Docker Hub](https://hub.docker.com/r/borhandarabi/routechi).
 
 **Quick run:**
 
@@ -1013,7 +1013,7 @@ docker run -d \
   --stop-timeout 40 \
   -p 20128:20128 \
   -v omniroute-data:/app/data \
-  diegosouzapw/omniroute:latest
+  borhandarabi/routechi:latest
 ```
 
 **Dengan file lingkungan:**
@@ -1029,7 +1029,7 @@ docker run -d \
   --env-file .env \
   -p 20128:20128 \
   -v omniroute-data:/app/data \
-  diegosouzapw/omniroute:latest
+  borhandarabi/routechi:latest
 ```
 
 **Menggunakan Docker Tulis:**
@@ -1062,7 +1062,7 @@ OmniRoute dapat diekspos dengan aman menggunakan penyediaan SSL otomatis Caddy. 
 ```yaml
 services:
   omniroute:
-    image: diegosouzapw/omniroute:latest
+    image: borhandarabi/routechi:latest
     container_name: omniroute
     restart: unless-stopped
     volumes:
@@ -1086,8 +1086,8 @@ volumes:
 
 | Image                    | Tag      | Size   | Description           |
 | ------------------------ | -------- | ------ | --------------------- |
-| `diegosouzapw/omniroute` | `latest` | ~250MB | Latest stable release |
-| `diegosouzapw/omniroute` | `3.6.2`  | ~250MB | Current version       |
+| `borhandarabi/routechi` | `latest` | ~250MB | Latest stable release |
+| `borhandarabi/routechi` | `3.6.2`  | ~250MB | Current version       |
 
 ---
 
@@ -1561,7 +1561,7 @@ OmniRoute menyertakan kerangka evaluasi bawaan untuk menguji kualitas respons LL
 Start MCP transport in stdio mode:
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 Recommended validation flow:
@@ -2111,7 +2111,7 @@ Jika Anda tidak ingin menyiapkan kredensial Anda sendiri saat ini, Anda masih da
 - **CI/CD**: Tindakan GitHub (publikasi npm otomatis + Docker Hub saat dirilis)
 - **Situs Web**: [omniroute.online](https://omniroute.online)
 - **Paket**: [npmjs.com/package/omniroute](https://www.npmjs.com/package/omniroute)
-- **Pekerja Pelabuhan**: [hub.docker.com/r/diegosouzapw/omniroute](https://hub.docker.com/r/diegosouzapw/omniroute)
+- **Pekerja Pelabuhan**: [hub.docker.com/r/borhandarabi/routechi](https://hub.docker.com/r/borhandarabi/routechi)
 - **Ketahanan**: Pemutus arus, backoff eksponensial, kawanan anti-thundering, spoofing TLS, penyembuhan diri kombo otomatis
 
 </details>
@@ -2169,7 +2169,7 @@ OmniRoute memiliki **218+ fitur yang direncanakan** di berbagai fase pengembanga
 
 ## 👥 Kontributor
 
-[![Contributors](https://contrib.rocks/image?repo=diegosouzapw/OmniRoute&max=100&columns=20&anon=1)](https://github.com/diegosouzapw/OmniRoute/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=borhandarabi/routechi&max=100&columns=20&anon=1)](https://github.com/borhandarabi/routechi/graphs/contributors)
 
 ### Cara Berkontribusi
 
@@ -2194,19 +2194,19 @@ gh release create v2.0.0 --title "v2.0.0" --generate-notes
 
 <a href="https://www.star-history.com/?repos=diegosouzapw%2Fomniroute&type=date&legend=top-left">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/omniroute&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=diegosouzapw/omniroute&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=diegosouzapw/omniroute&type=date&legend=top-left" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=borhandarabi/routechi&type=date&theme=dark&legend=top-left" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=borhandarabi/routechi&type=date&legend=top-left" />
+   <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=borhandarabi/routechi&type=date&legend=top-left" />
  </picture>
 </a>
 
 ## 🌍 StarMapper
 
-<a href="https://starmapper.bruniaux.com/diegosouzapw/omniroute">
+<a href="https://starmapper.bruniaux.com/borhandarabi/routechi">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute?theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute?theme=light" />
-    <img alt="StarMapper" src="https://starmapper.bruniaux.com/api/map-image/diegosouzapw/omniroute" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://starmapper.bruniaux.com/api/map-image/borhandarabi/routechi?theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://starmapper.bruniaux.com/api/map-image/borhandarabi/routechi?theme=light" />
+    <img alt="StarMapper" src="https://starmapper.bruniaux.com/api/map-image/borhandarabi/routechi" />
   </picture>
 </a>
 

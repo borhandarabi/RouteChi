@@ -72,7 +72,7 @@ docker rm omniroute
 docker volume rm omniroute-data
 
 # （可选）移除镜像
-docker rmi diegosouzapw/omniroute:latest
+docker rmi borhandarabi/routechi:latest
 ```
 
 ### Docker Compose

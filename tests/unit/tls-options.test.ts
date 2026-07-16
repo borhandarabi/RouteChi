@@ -1,5 +1,5 @@
 /**
- * #5242 (Bug 1C) — opt-in native HTTPS/TLS serving for `omniroute serve`.
+ * #5242 (Bug 1C) — opt-in native HTTPS/TLS serving for `routechi serve`.
  *
  * `resolveTlsOptions` + `createServerListener` (scripts/dev/tls-options.mjs) are
  * the pure decision helpers the CLI (serve.mjs) and the standalone server

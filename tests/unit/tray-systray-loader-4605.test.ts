@@ -1,4 +1,4 @@
-// Regression coverage for #4605 — `omniroute server --tray` showed no tray on
+// Regression coverage for #4605 — `routechi server --tray` showed no tray on
 // macOS/Linux with no error printed.
 //
 // Root cause (regressed in v3.8.34): the wired Unix tray path

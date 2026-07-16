@@ -27,13 +27,13 @@ If native package compilation fails, rerun the `pkg install` command above and t
 Run the latest published package directly:
 
 ```bash
-npx -y omniroute@latest
+npx -y routechi@latest
 ```
 
 You can also install it globally:
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 omniroute
 ```
 
@@ -48,7 +48,7 @@ omniroute
 or:
 
 ```bash
-npx omniroute
+npx routechi
 ```
 
 The dashboard listens on:
@@ -140,7 +140,7 @@ pkg install nodejs python build-essential
 Then rerun:
 
 ```bash
-npx -y omniroute@latest
+npx -y routechi@latest
 ```
 
 ### Port Already In Use

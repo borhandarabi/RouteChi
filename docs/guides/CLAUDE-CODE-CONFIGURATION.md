@@ -15,14 +15,14 @@ with per-model profiles, mirroring the Codex setup.
 
 ```bash
 # Launch Claude Code against a local OmniRoute (auto-detects the active context)
-omniroute launch
+routechi launch
 
-# Against a remote OmniRoute (after `omniroute connect <host>`, this is automatic)
-omniroute launch --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+# Against a remote OmniRoute (after `routechi connect <host>`, this is automatic)
+routechi launch --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 
 # Generate per-model profiles, then launch one
-omniroute setup-claude            # writes ~/.claude/profiles/<name>/settings.json
-omniroute launch --profile glm52  # Claude Code using glm/glm-5.2 via OmniRoute
+routechi setup-claude            # writes ~/.claude/profiles/<name>/settings.json
+routechi launch --profile glm52  # Claude Code using glm/glm-5.2 via OmniRoute
 ```
 
 ---
@@ -44,8 +44,8 @@ endpoint with environment variables (it has no `--base-url` flag):
 
 > Env vars are read **once at startup** — restart Claude Code after changing them.
 
-`omniroute launch` sets all of these for you: it resolves the base URL + token
-from the active context (so `omniroute connect <vps>` then `omniroute launch`
+`routechi launch` sets all of these for you: it resolves the base URL + token
+from the active context (so `routechi connect <vps>` then `routechi launch`
 just works), health-checks the server, and execs `claude`.
 
 ---
@@ -56,7 +56,7 @@ Claude Code has **no native profile files** (unlike Codex's `~/.codex/<name>.con
 The idiomatic mechanism is `CLAUDE_CONFIG_DIR` — a separate config directory per
 profile, each with its own `settings.json`, credentials, history and cache.
 
-`omniroute setup-claude` fetches the live `/v1/models` catalog and writes one
+`routechi setup-claude` fetches the live `/v1/models` catalog and writes one
 profile per model at `~/.claude/profiles/<name>/settings.json`, reusing the
 **same names as `setup-codex`** (`glm52`, `kimi-k27`, `deepseek-pro`, …):
 
@@ -76,7 +76,7 @@ profile per model at `~/.claude/profiles/<name>/settings.json`, reusing the
 ```
 
 > **The auth token is never written to the profile.** Launch with
-> `omniroute launch --profile <name>` (it injects `ANTHROPIC_AUTH_TOKEN` from the
+> `routechi launch --profile <name>` (it injects `ANTHROPIC_AUTH_TOKEN` from the
 > active context), or export `ANTHROPIC_AUTH_TOKEN` yourself and run
 > `CLAUDE_CONFIG_DIR=~/.claude/profiles/<name> claude`.
 
@@ -92,19 +92,19 @@ changes your active/default Claude config, auth, or the `~/.claude/settings.json
 
 ```bash
 # Local OmniRoute
-omniroute setup-claude
+routechi setup-claude
 
 # Remote VPS (bakes the VPS URL into every profile)
-omniroute setup-claude --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi setup-claude --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 
 # Only some providers
-omniroute setup-claude --only glm,kimi
+routechi setup-claude --only glm,kimi
 
 # Preview without writing
-omniroute setup-claude --dry-run
+routechi setup-claude --dry-run
 
 # Launch a profile
-omniroute launch --profile kimi-k27
+routechi launch --profile kimi-k27
 ```
 
 ---
@@ -126,8 +126,8 @@ Otherwise a single `ANTHROPIC_MODEL` (what profiles set) is used for everything.
 
 ## Remote mode
 
-Once you've run `omniroute connect <host>` (see
-[Remote Mode](./REMOTE-MODE.md)), `omniroute launch` and `omniroute setup-claude`
+Once you've run `routechi connect <host>` (see
+[Remote Mode](./REMOTE-MODE.md)), `routechi launch` and `routechi setup-claude`
 automatically target that remote server and use its scoped access token — no
 extra flags needed. Override per-invocation with `--remote` / `--api-key`.
 
@@ -136,7 +136,7 @@ extra flags needed. Override per-invocation with `--remote` / `--api-key`.
 ## Troubleshooting
 
 **Claude Code ignores the gateway** — confirm `ANTHROPIC_BASE_URL` has **no
-`/v1`** and restart `claude` (env is read once at startup). `omniroute launch`
+`/v1`** and restart `claude` (env is read once at startup). `routechi launch`
 handles this for you.
 
 **`/model` picker is empty / missing gateway models** — needs Claude Code
@@ -144,7 +144,7 @@ v2.1.129+ and `CLAUDE_CODE_ENABLE_GATEWAY_MODEL_DISCOVERY=1`. Only `claude*` /
 `anthropic*` model IDs appear in the picker; force any other model with
 `ANTHROPIC_MODEL=<id>` (this is what profiles do).
 
-**Auth errors** — the profile holds no token. Use `omniroute launch --profile`
+**Auth errors** — the profile holds no token. Use `routechi launch --profile`
 (injects it) or export `ANTHROPIC_AUTH_TOKEN`.
 
 **Profiles don't isolate** — each profile is a distinct `CLAUDE_CONFIG_DIR`;

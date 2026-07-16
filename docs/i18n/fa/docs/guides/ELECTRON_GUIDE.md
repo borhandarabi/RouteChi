@@ -182,7 +182,7 @@ spawn(process.execPath, [serverScript], {
 
 ## به‌روزرسانی خودکار
 
-از `electron-updater` با provider مربوط به GitHub (`diegosouzapw/OmniRoute`) استفاده می‌کند.
+از `electron-updater` با provider مربوط به GitHub (`borhandarabi/routechi`) استفاده می‌کند.
 
 - `autoDownload = false`، `autoInstallOnAppQuit = true`
 - رویدادها از طریق IPC `update-status` به renderer forward می‌شوند:
@@ -267,7 +267,7 @@ npm run electron:build:win
 - `OmniRoute-X.Y.Z-mac.dmg`، `OmniRoute-X.Y.Z-arm64-mac.dmg` (macOS)
 - `OmniRoute-X.Y.Z.AppImage`، `omniroute-desktop_X.Y.Z_amd64.deb` (لینوکس)
 
-انتشارات در GitHub Releases (`diegosouzapw/OmniRoute`) منتشر می‌شوند، که همان جایی است
+انتشارات در GitHub Releases (`borhandarabi/routechi`) منتشر می‌شوند، که همان جایی است
 که `electron-updater` نسخه‌های جدید را بررسی می‌کند.
 
 ## رفع اشکال

@@ -14,8 +14,8 @@ OmniRoute (local or remote) and writes the tool's own config file on **your**
 machine. The API key is referenced by env var wherever the tool supports it, so the
 secret is never written to disk (the exceptions are noted below).
 
-There are also two launchers — `omniroute launch` (Claude Code) and
-`omniroute launch-codex` (Codex) — that spawn the CLI with the right env injected,
+There are also two launchers — `routechi launch` (Claude Code) and
+`routechi launch-codex` (Codex) — that spawn the CLI with the right env injected,
 without writing any config at all.
 
 For the one-time, hand-written base setup of the two richest integrations, see the
@@ -29,7 +29,7 @@ per-tool deep dives:
 
 ## Master table
 
-Every command honours the **active context** (set with `omniroute connect`, see
+Every command honours the **active context** (set with `routechi connect`, see
 [Remote Mode](./REMOTE-MODE.md)) or explicit `--remote <url> --api-key <key>` flags.
 "Local vs remote" below means: with no flags it targets `http://localhost:20128`;
 with `--remote` (or an active remote context) it fetches the catalog from that
@@ -37,20 +37,20 @@ server and writes the config locally.
 
 | Command | Tool | What it writes | Key flags | Local vs remote |
 |---------|------|----------------|-----------|-----------------|
-| `omniroute setup-codex` | OpenAI Codex CLI | `~/.codex/<name>.config.toml` — one profile per compatible text model (`codex --profile <name>`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--codex-home` | Both |
-| `omniroute setup-claude` | Claude Code | `~/.claude/profiles/<name>/settings.json` — one profile per matched model (`CLAUDE_CONFIG_DIR`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--claude-home` | Both |
-| `omniroute setup-opencode` | OpenCode (openai-compatible) | `~/.config/opencode/opencode.json` — `omniroute` provider with every catalog model (`opencode -m omniroute/<model>`) | `--remote` `--api-key` `--only` `--model` `--dry-run` `--port` | Both |
-| `omniroute setup-cline` | Cline | `~/.cline/data/{globalState,secrets}.json` (CLI mode) + prints VS Code extension settings | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--cline-dir` | Both |
-| `omniroute setup-kilo` | Kilo Code | `~/.local/share/kilo/auth.json` (CLI) + merges `kilocode.*` into VS Code `settings.json` if present | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--auth-path` `--vscode-settings` | Both |
-| `omniroute setup-continue` | Continue / `cn` CLI | `~/.continue/config.yaml` — `provider: openai` models, key via `${{ secrets.OMNIROUTE_API_KEY }}` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | Both |
-| `omniroute setup-cursor` | Cursor | Nothing — prints the in-app steps (Cursor config is opaque SQLite) | `--remote` `--api-key` `--only` `--port` | Both |
-| `omniroute setup-roo` | Roo Code | `~/.omniroute/roo-settings.json` (import doc) + sets `roo-cline.autoImportSettingsPath` if a VS Code `settings.json` exists | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--import-path` `--vscode-settings` | Both |
-| `omniroute setup-crush` | Crush | `~/.config/crush/crush.json` — `openai-compat` provider, key via `$OMNIROUTE_API_KEY` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | Both |
-| `omniroute setup-goose` | Goose | `~/.config/goose/config.yaml` (`GOOSE_PROVIDER`/`OPENAI_HOST`/`GOOSE_MODEL`) + prints env recipe | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
-| `omniroute setup-qwen` | Qwen Code | `~/.qwen/settings.json` — openai `modelProvider`, key via `envKey` (`OMNIROUTE_API_KEY`) | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
-| `omniroute setup-aider` | Aider | `~/.aider.conf.yml` (`openai-api-base` + `model: openai/<id>`) + prints env recipe | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
-| `omniroute launch` | Claude Code | Nothing — spawns `claude` with `ANTHROPIC_BASE_URL`/`ANTHROPIC_AUTH_TOKEN` injected | `--remote` `--api-key` `--token` `--profile` `--port` | Both |
-| `omniroute launch-codex` | OpenAI Codex CLI | Nothing — spawns `codex` with the `omniroute` provider injected via `-c` flags | `--remote` `--api-key` `--profile` (`-p`) `--port` | Both |
+| `routechi setup-codex` | OpenAI Codex CLI | `~/.codex/<name>.config.toml` — one profile per compatible text model (`codex --profile <name>`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--codex-home` | Both |
+| `routechi setup-claude` | Claude Code | `~/.claude/profiles/<name>/settings.json` — one profile per matched model (`CLAUDE_CONFIG_DIR`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--claude-home` | Both |
+| `routechi setup-opencode` | OpenCode (openai-compatible) | `~/.config/opencode/opencode.json` — `omniroute` provider with every catalog model (`opencode -m omniroute/<model>`) | `--remote` `--api-key` `--only` `--model` `--dry-run` `--port` | Both |
+| `routechi setup-cline` | Cline | `~/.cline/data/{globalState,secrets}.json` (CLI mode) + prints VS Code extension settings | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--cline-dir` | Both |
+| `routechi setup-kilo` | Kilo Code | `~/.local/share/kilo/auth.json` (CLI) + merges `kilocode.*` into VS Code `settings.json` if present | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--auth-path` `--vscode-settings` | Both |
+| `routechi setup-continue` | Continue / `cn` CLI | `~/.continue/config.yaml` — `provider: openai` models, key via `${{ secrets.OMNIROUTE_API_KEY }}` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | Both |
+| `routechi setup-cursor` | Cursor | Nothing — prints the in-app steps (Cursor config is opaque SQLite) | `--remote` `--api-key` `--only` `--port` | Both |
+| `routechi setup-roo` | Roo Code | `~/.omniroute/roo-settings.json` (import doc) + sets `roo-cline.autoImportSettingsPath` if a VS Code `settings.json` exists | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--import-path` `--vscode-settings` | Both |
+| `routechi setup-crush` | Crush | `~/.config/crush/crush.json` — `openai-compat` provider, key via `$OMNIROUTE_API_KEY` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | Both |
+| `routechi setup-goose` | Goose | `~/.config/goose/config.yaml` (`GOOSE_PROVIDER`/`OPENAI_HOST`/`GOOSE_MODEL`) + prints env recipe | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
+| `routechi setup-qwen` | Qwen Code | `~/.qwen/settings.json` — openai `modelProvider`, key via `envKey` (`OMNIROUTE_API_KEY`) | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
+| `routechi setup-aider` | Aider | `~/.aider.conf.yml` (`openai-api-base` + `model: openai/<id>`) + prints env recipe | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | Both |
+| `routechi launch` | Claude Code | Nothing — spawns `claude` with `ANTHROPIC_BASE_URL`/`ANTHROPIC_AUTH_TOKEN` injected | `--remote` `--api-key` `--token` `--profile` `--port` | Both |
+| `routechi launch-codex` | OpenAI Codex CLI | Nothing — spawns `codex` with the `omniroute` provider injected via `-c` flags | `--remote` `--api-key` `--profile` (`-p`) `--port` | Both |
 
 Notes on flags (verified in the command source):
 
@@ -74,7 +74,7 @@ Notes on flags (verified in the command source):
   the underlying `claude` / `codex` binary.
 
 > `setup-opencode` is the **lightweight openai-compatible** OpenCode integration.
-> There is also a richer plugin integration — `omniroute setup opencode` — which
+> There is also a richer plugin integration — `routechi setup opencode` — which
 > installs `@omniroute/opencode-plugin`. They are different commands; the table
 > above documents `setup-opencode`.
 
@@ -87,32 +87,32 @@ tool. The catalog is fetched from the local server.
 
 ```bash
 # Codex: write a profile per matched model into ~/.codex/
-omniroute setup-codex
+routechi setup-codex
 codex --profile glm52            # use a generated profile
 
 # Claude Code: write per-model profiles, then launch one
-omniroute setup-claude
-omniroute launch --profile glm52
+routechi setup-claude
+routechi launch --profile glm52
 
 # OpenCode: write the openai-compatible provider with all catalog models
-omniroute setup-opencode
+routechi setup-opencode
 export OMNIROUTE_API_KEY=sk-...  # referenced via {env:OMNIROUTE_API_KEY}, never on disk
 opencode -m omniroute/glm/glm-5.2 "..."
 
 # Tools without auto-discovery need an explicit model:
-omniroute setup-aider --model glm/glm-5.2
-omniroute setup-qwen  --model kmc/kimi-k2.7
+routechi setup-aider --model glm/glm-5.2
+routechi setup-qwen  --model kmc/kimi-k2.7
 
 # Preview without writing anything:
-omniroute setup-continue --dry-run
+routechi setup-continue --dry-run
 ```
 
 Launch without writing any config at all (env-injection only):
 
 ```bash
-omniroute launch                 # Claude Code → local OmniRoute
-omniroute launch-codex           # Codex CLI → local OmniRoute
-omniroute launch-codex --profile glm52
+routechi launch                 # Claude Code → local OmniRoute
+routechi launch-codex           # Codex CLI → local OmniRoute
+routechi launch-codex --profile glm52
 ```
 
 ---
@@ -124,26 +124,26 @@ catalog is fetched from the remote; the config is written on your local machine.
 
 ```bash
 # OpenCode against a remote VPS, keep only glm/kimi models
-omniroute setup-opencode --remote http://192.168.0.15:20128 --api-key oma_live_xxx \
+routechi setup-opencode --remote http://192.168.0.15:20128 --api-key oma_live_xxx \
   --only glm,kimi
 opencode -m omniroute/glm/glm-5.2 "..."   # export OMNIROUTE_API_KEY first
 
 # Codex profiles from a remote catalog
-omniroute setup-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi setup-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 
 # Launch a CLI straight against the remote
-omniroute launch       --remote http://192.168.0.15:20128 --api-key oma_live_xxx
-omniroute launch-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi launch       --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi launch-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 ```
 
 Instead of passing `--remote`/`--api-key` every time, log in once and let the
 **active context** supply them automatically:
 
 ```bash
-omniroute connect 192.168.0.15        # mints a scoped token, stores the context
-omniroute setup-codex                 # ← now uses the remote catalog
-omniroute setup-opencode              # ← same
-omniroute launch                      # ← Claude Code against the remote
+routechi connect 192.168.0.15        # mints a scoped token, stores the context
+routechi setup-codex                 # ← now uses the remote catalog
+routechi setup-opencode              # ← same
+routechi launch                      # ← Claude Code against the remote
 ```
 
 See [Remote Mode](./REMOTE-MODE.md) for contexts, scopes, and token management.
@@ -169,25 +169,25 @@ tool expects (verified in the command source):
 
 ## Keeping native deps on update: `--include=optional`
 
-When you update with `omniroute update` (after confirming, or with `--apply`),
+When you update with `routechi update` (after confirming, or with `--apply`),
 OmniRoute runs the install with `--include=optional` baked in:
 
 ```bash
-npm install -g omniroute@latest --include=optional
+npm install -g routechi@latest --include=optional
 ```
 
-This is **not** a flag you pass to `omniroute update` — it is always applied by the
+This is **not** a flag you pass to `routechi update` — it is always applied by the
 updater. It guarantees the `optionalDependencies` (`better-sqlite3`, `keytar`,
 `tls-client`, the LLMLingua SLM stack) survive the update even if your npm config
 has `omit=optional` set, which would otherwise silently drop the native SQLite
 driver and OS-keyring binding. To preview the exact command without applying:
 
 ```bash
-omniroute update --dry-run
-# [DRY RUN] Would run: npm install -g omniroute@latest --include=optional
+routechi update --dry-run
+# [DRY RUN] Would run: npm install -g routechi@latest --include=optional
 ```
 
-Other `omniroute update` flags (verified in source): `--check` (exit 1 if
+Other `routechi update` flags (verified in source): `--check` (exit 1 if
 outdated), `--apply` (install without prompting), `--changelog`, `--no-backup`,
 `--yes`.
 

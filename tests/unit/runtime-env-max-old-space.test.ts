@@ -6,7 +6,7 @@
  * SQLite DBs.
  *
  * `resolveMaxOldSpaceMb` is the shared heap-ceiling resolver the launcher now
- * uses (mirroring `omniroute serve`): OMNIROUTE_MEMORY_MB clamped to [64, 16384],
+ * uses (mirroring `routechi serve`): OMNIROUTE_MEMORY_MB clamped to [64, 16384],
  * default 512.
  */
 import test from "node:test";

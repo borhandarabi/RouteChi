@@ -19,14 +19,14 @@ lastUpdated: 2026-06-28
 OmniRoute MCP 内置。启动方式：
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 或通过 open-sse 传输：
 
 ```bash
 # HTTP streamable 传输（端口 20130）
-omniroute --dev  # MCP 自动在 /mcp 端点启动
+routechi --dev  # MCP 自动在 /mcp 端点启动
 ```
 
 ## 传输

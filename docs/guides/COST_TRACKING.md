@@ -17,7 +17,7 @@ See also: [User Guide](./USER_GUIDE.md) · [Features Gallery](./FEATURES.md)
 
 OmniRoute attributes a per-request USD cost to every completion by multiplying token
 counts by a model's pricing rates. These numbers power the **Costs** dashboard, the
-`omniroute cost` / `omniroute usage` CLI, CSV/JSON exports, and per-API-key budgets.
+`routechi cost` / `routechi usage` CLI, CSV/JSON exports, and per-API-key budgets.
 
 > **The dashboard "cost" is a savings tracker, not a bill.** OmniRoute never charges you
 > — it routes your requests to providers you have already connected (your own
@@ -197,47 +197,47 @@ noted.
 OmniRoute's CLI exposes cost, usage, and pricing commands (registered in
 [`bin/cli/commands/registry.mjs`](../../bin/cli/commands/registry.mjs)).
 
-### `omniroute cost`
+### `routechi cost`
 
 A cost report aggregated from `/api/usage/analytics`.
 
 ```bash
-omniroute cost                          # last 30d, grouped by provider
-omniroute cost --period 7d              # last 7 days
-omniroute cost --group-by model         # group by provider | model | combo | api-key | day
-omniroute cost --since 2026-06-01 --until 2026-06-13
-omniroute cost --api-key <key> --limit 50
+routechi cost                          # last 30d, grouped by provider
+routechi cost --period 7d              # last 7 days
+routechi cost --group-by model         # group by provider | model | combo | api-key | day
+routechi cost --since 2026-06-01 --until 2026-06-13
+routechi cost --api-key <key> --limit 50
 ```
 
 Columns: group, requests, tokens in/out, cost (USD), and % of total. A grand total line
 is printed at the end (suppressed with `--quiet` or `--output json`).
 
-### `omniroute usage`
+### `routechi usage`
 
 ```bash
-omniroute usage analytics --period 30d [--provider <id>]   # per-provider cost summary
-omniroute usage logs [--limit 100] [--follow] [--api-key <k>] [--search <q>]
-omniroute usage quota [--provider <id>] [--check]
-omniroute usage utilization [--api-key <k>]
-omniroute usage history [--limit 100]
-omniroute usage proxy-logs [--limit 100]
+routechi usage analytics --period 30d [--provider <id>]   # per-provider cost summary
+routechi usage logs [--limit 100] [--follow] [--api-key <k>] [--search <q>]
+routechi usage quota [--provider <id>] [--check]
+routechi usage utilization [--api-key <k>]
+routechi usage history [--limit 100]
+routechi usage proxy-logs [--limit 100]
 
 # Budgets
-omniroute usage budget list
-omniroute usage budget get [scope]
-omniroute usage budget set <amount> [--scope global] [--period monthly]
-omniroute usage budget reset [scope]
+routechi usage budget list
+routechi usage budget get [scope]
+routechi usage budget set <amount> [--scope global] [--period monthly]
+routechi usage budget reset [scope]
 ```
 
-### `omniroute pricing`
+### `routechi pricing`
 
 ```bash
-omniroute pricing list [--provider <p>] [--model <m>] [--limit 200]
-omniroute pricing get <model>
-omniroute pricing sync [--provider <p>] [--force]   # POST /api/pricing/sync
-omniroute pricing diff [--model <m>]
-omniroute pricing defaults show
-omniroute pricing defaults set [--input <p>] [--output <p>] [--cache-read <p>] [--cache-write <p>]
+routechi pricing list [--provider <p>] [--model <m>] [--limit 200]
+routechi pricing get <model>
+routechi pricing sync [--provider <p>] [--force]   # POST /api/pricing/sync
+routechi pricing diff [--model <m>]
+routechi pricing defaults show
+routechi pricing defaults set [--input <p>] [--output <p>] [--cache-read <p>] [--cache-write <p>]
 ```
 
 > `pricing defaults show` reads `GET /api/pricing/defaults`. To edit individual model
@@ -248,7 +248,7 @@ omniroute pricing defaults set [--input <p>] [--output <p>] [--cache-read <p>] [
 ## Troubleshooting
 
 - **All costs show $0 / "Legacy / Free".** The models in use have no pricing entry.
-  Enable external sync (`PRICING_SYNC_ENABLED=true`) and run `omniroute pricing sync`, or
+  Enable external sync (`PRICING_SYNC_ENABLED=true`) and run `routechi pricing sync`, or
   set prices manually via the Pricing page / `PATCH /api/pricing`.
 - **A historical model is mispriced.** Fix the price (override or re-sync) — cost is
   recomputed from token counts on every analytics read, so estimates update retroactively.

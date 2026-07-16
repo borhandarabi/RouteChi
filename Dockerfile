@@ -108,7 +108,7 @@ FROM base AS runner-base
 LABEL org.opencontainers.image.title="routechi" \
   org.opencontainers.image.description="Unified AI proxy — route any LLM through one endpoint" \
   org.opencontainers.image.url="https://omniroute.online" \
-  org.opencontainers.image.source="https://github.com/hooshidev3/OmniRoute" \
+  org.opencontainers.image.source="https://github.com/borhandarabi/routechi" \
   org.opencontainers.image.licenses="MIT"
 
 ENV NODE_ENV=production

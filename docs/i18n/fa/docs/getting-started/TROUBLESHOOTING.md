@@ -71,7 +71,7 @@ lastUpdated: 2026-06-28
    nvm use 24
    ```
 2. نسخه خود را بررسی کنید: `node --version` باید `v24.0.0` یا جدیدتر در خط LTS 24.x را نشان دهد
-3. OmniRoute را دوباره نصب کنید: `npm install -g omniroute`
+3. OmniRoute را دوباره نصب کنید: `npm install -g routechi`
 4. راه‌اندازی مجدد: `omniroute`
 
 > **نسخه‌های امن پشتیبانی‌شده:** `>=22.22.2 <23` یا `>=24.0.0 <27`. Node.js 24.x LTS (Krypton) و Node.js 26 به‌طور کامل پشتیبانی می‌شوند.
@@ -80,7 +80,7 @@ lastUpdated: 2026-06-28
 
 <a name="macos-native-module-rebuild"></a>
 
-**علت:** پس از `npm install -g omniroute` سراسری، ممکن است باینری بومی `better-sqlite3` داخل پکیج برای معماری یا ABI متفاوتی از Node.js نسبت به آنچه در محلی اجرا می‌شود، کامپایل شده باشد. این در macOS (هم Apple Silicon و هم Intel) وقتی باینری از پیش ساخته‌شده با محیط شما مطابقت ندارد، رایج است.
+**علت:** پس از `npm install -g routechi` سراسری، ممکن است باینری بومی `better-sqlite3` داخل پکیج برای معماری یا ABI متفاوتی از Node.js نسبت به آنچه در محلی اجرا می‌شود، کامپایل شده باشد. این در macOS (هم Apple Silicon و هم Intel) وقتی باینری از پیش ساخته‌شده با محیط شما مطابقت ندارد، رایج است.
 
 **علائم:**
 
@@ -433,7 +433,7 @@ curl http://localhost:20128/api/monitoring/health
 
 **راه‌حل:**
 
-- `omniroute providers` را از CLI اجرا کنید تا جریان OAuth دوباره راه‌اندازی شود، یا
+- `routechi providers` را از CLI اجرا کنید تا جریان OAuth دوباره راه‌اندازی شود، یا
 - OAuth را از **Dashboard → Providers → Command Code → Reconnect** دوباره اجرا کنید
 
 ### ModelScope cooldownهای تهاجمی ۴۲۹ برمی‌گرداند
@@ -483,7 +483,7 @@ curl http://localhost:20128/api/monitoring/health
 
 ## هنوز گیر کرده‌اید؟
 
-- **GitHub Issues**: [github.com/diegosouzapw/OmniRoute/issues](https://github.com/diegosouzapw/OmniRoute/issues)
+- **GitHub Issues**: [github.com/borhandarabi/routechi/issues](https://github.com/borhandarabi/routechi/issues)
 - **معماری**: برای جزئیات داخلی به [`docs/architecture/ARCHITECTURE.md`](../architecture/ARCHITECTURE.md) مراجعه کنید
 - **مرجع API**: برای همه نشانی‌های پایانی به [`docs/reference/API_REFERENCE.md`](../reference/API_REFERENCE.md) مراجعه کنید
 - **داشبورد سلامت**: برای وضعیت سیستم در زمان واقعی **Dashboard → Health** را بررسی کنید

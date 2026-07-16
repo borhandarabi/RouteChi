@@ -11,19 +11,19 @@ Choose your preferred method:
 ### Option A: npm (Recommended)
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 ```
 
 ### Option B: Docker
 
 ```bash
-docker run -d --name omniroute -p 20128:20128 diegosouzapw/omniroute:latest
+docker run -d --name omniroute -p 20128:20128 borhandarabi/routechi:latest
 ```
 
 ### Option C: From Source
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute
 npm install
 npm run dev
@@ -132,4 +132,4 @@ OmniRoute automatically skips failed providers and tries the next one. You don't
 
 - **[Troubleshooting](./TROUBLESHOOTING.md)** — Common issues and fixes
 - **[Discord](https://discord.gg/EkzRkpzKYt)** — Community support
-- **[GitHub Issues](https://github.com/diegosouzapw/OmniRoute/issues)** — Report bugs
+- **[GitHub Issues](https://github.com/borhandarabi/routechi/issues)** — Report bugs

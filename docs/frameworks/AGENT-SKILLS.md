@@ -20,7 +20,7 @@ The catalog contains **42 canonical Agent Skills** (22 REST API + 20 CLI). Each 
 - A **canonical ID** (`omni-auth`, `cli-serve`, etc.)
 - A **SKILL.md** file in `skills/{id}/SKILL.md` with YAML frontmatter (`name`, `description`) + rich markdown body
 - **REST endpoints** (API skills) or **CLI subcommands** (CLI skills) derived from the OpenAPI spec and CLI registry
-- A **GitHub raw URL** for live fetch: `https://raw.githubusercontent.com/diegosouzapw/OmniRoute/refs/heads/main/skills/{id}/SKILL.md`
+- A **GitHub raw URL** for live fetch: `https://raw.githubusercontent.com/borhandarabi/routechi/refs/heads/main/skills/{id}/SKILL.md`
 
 ---
 
@@ -179,26 +179,26 @@ See [A2A-SERVER.md](./A2A-SERVER.md) for protocol details.
 
 | ID                   | Area               | CLI Command Root        |
 | :------------------- | :----------------- | :---------------------- |
-| `cli-serve`          | cli-serve          | `omniroute serve`       |
-| `cli-health`         | cli-health         | `omniroute health`      |
-| `cli-providers`      | cli-providers      | `omniroute providers`   |
-| `cli-keys`           | cli-keys           | `omniroute keys`        |
-| `cli-models`         | cli-models         | `omniroute models`      |
-| `cli-chat`           | cli-chat           | `omniroute chat`        |
-| `cli-routing`        | cli-routing        | `omniroute routing`     |
-| `cli-resilience`     | cli-resilience     | `omniroute resilience`  |
-| `cli-compression`    | cli-compression    | `omniroute compression` |
-| `cli-contexts`       | cli-contexts       | `omniroute contexts`    |
-| `cli-cost-usage`     | cli-cost-usage     | `omniroute cost`        |
-| `cli-mcp`            | cli-mcp            | `omniroute mcp`         |
-| `cli-a2a`            | cli-a2a            | `omniroute a2a`         |
-| `cli-tunnel`         | cli-tunnel         | `omniroute tunnel`      |
-| `cli-backup-sync`    | cli-backup-sync    | `omniroute backup`      |
-| `cli-policy-audit`   | cli-policy-audit   | `omniroute policy`      |
-| `cli-batches`        | cli-batches        | `omniroute batch`       |
-| `cli-eval`           | cli-eval           | `omniroute eval`        |
-| `cli-plugins-skills` | cli-plugins-skills | `omniroute plugins`     |
-| `cli-setup`          | cli-setup          | `omniroute setup`       |
+| `cli-serve`          | cli-serve          | `routechi serve`       |
+| `cli-health`         | cli-health         | `routechi health`      |
+| `cli-providers`      | cli-providers      | `routechi providers`   |
+| `cli-keys`           | cli-keys           | `routechi keys`        |
+| `cli-models`         | cli-models         | `routechi models`      |
+| `cli-chat`           | cli-chat           | `routechi chat`        |
+| `cli-routing`        | cli-routing        | `routechi routing`     |
+| `cli-resilience`     | cli-resilience     | `routechi resilience`  |
+| `cli-compression`    | cli-compression    | `routechi compression` |
+| `cli-contexts`       | cli-contexts       | `routechi contexts`    |
+| `cli-cost-usage`     | cli-cost-usage     | `routechi cost`        |
+| `cli-mcp`            | cli-mcp            | `routechi mcp`         |
+| `cli-a2a`            | cli-a2a            | `routechi a2a`         |
+| `cli-tunnel`         | cli-tunnel         | `routechi tunnel`      |
+| `cli-backup-sync`    | cli-backup-sync    | `routechi backup`      |
+| `cli-policy-audit`   | cli-policy-audit   | `routechi policy`      |
+| `cli-batches`        | cli-batches        | `routechi batch`       |
+| `cli-eval`           | cli-eval           | `routechi eval`        |
+| `cli-plugins-skills` | cli-plugins-skills | `routechi plugins`     |
+| `cli-setup`          | cli-setup          | `routechi setup`       |
 
 ---
 
@@ -239,7 +239,7 @@ table = resp.json()["result"]["artifacts"][0]["content"]
 ### 4. Direct GitHub raw fetch (no server required)
 
 ```bash
-BASE="https://raw.githubusercontent.com/diegosouzapw/OmniRoute/refs/heads/main/skills"
+BASE="https://raw.githubusercontent.com/borhandarabi/routechi/refs/heads/main/skills"
 curl "${BASE}/omni-providers/SKILL.md"
 ```
 

@@ -89,7 +89,7 @@ flyctl version
 ### 4.1 獲取代碼並進入目錄
 
 ```powershell
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute
 ```
 
@@ -254,7 +254,7 @@ Fly 會自動滾動更新機器。
 
 ### 9.1 跟蹤原倉庫更新並保留 fork 的 `fly.toml`
 
-如果當前倉庫是 fork，並且你要同步上遊 `https://github.com/diegosouzapw/OmniRoute` 的更新，推薦按下面流程執行。
+如果當前倉庫是 fork，並且你要同步上遊 `https://github.com/borhandarabi/routechi` 的更新，推薦按下面流程執行。
 
 先確認遠程：
 
@@ -270,7 +270,7 @@ git remote -v
 如果沒有 `upstream`，先添加：
 
 ```powershell
-git remote add upstream https://github.com/diegosouzapw/OmniRoute.git
+git remote add upstream https://github.com/borhandarabi/routechi.git
 ```
 
 同步上遊前，先抓取最新提交和標籤：

@@ -11,8 +11,8 @@ Start, stop, and restart the OmniRoute server from the CLI. Manage daemon mode, 
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -28,7 +28,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute dashboard
+routechi dashboard
 ```
 
 ### `restart`
@@ -40,7 +40,7 @@ omniroute dashboard
 **Example:**
 
 ```bash
-omniroute restart
+routechi restart
 ```
 
 ### `serve`
@@ -61,7 +61,7 @@ omniroute restart
 **Example:**
 
 ```bash
-omniroute serve
+routechi serve
 ```
 
 ### `stop`
@@ -69,7 +69,7 @@ omniroute serve
 **Example:**
 
 ```bash
-omniroute stop
+routechi stop
 ```
 
 <!-- skill:custom-start -->
@@ -82,7 +82,7 @@ The `omniroute` binary ships with the OmniRoute server. It is both the server la
 ### Install
 
 ```bash
-npm install -g omniroute          # npm registry
+npm install -g routechi          # npm registry
 # or: use the binary bundled with the desktop app
 ```
 
@@ -91,8 +91,8 @@ Requires Node.js ≥22.22.2 or ≥24.
 Verify:
 
 ```bash
-omniroute --version   # prints installed version
-omniroute --help      # full command tree
+routechi --version   # prints installed version
+routechi --help      # full command tree
 ```
 
 ### Connection
@@ -136,10 +136,10 @@ export OMNIROUTE_BASE_URL="https://your-server.com"
 All listing commands support `--output`:
 
 ```bash
-omniroute combo list                      # human-readable table
-omniroute combo list --output json        # JSON array
-omniroute combo list --output jsonl       # one JSON object per line
-omniroute combo list --output csv         # CSV with header row
+routechi combo list                      # human-readable table
+routechi combo list --output json        # JSON array
+routechi combo list --output jsonl       # one JSON object per line
+routechi combo list --output csv         # CSV with header row
 ```
 
 ### Quick start: one-shot server + provider setup
@@ -149,47 +149,47 @@ omniroute combo list --output csv         # CSV with header row
 omniroute
 
 # 2. (First run) interactive setup wizard
-omniroute setup
+routechi setup
 
 # 3. Verify everything is healthy
-omniroute doctor
+routechi doctor
 ```
 
 ### CLI capability skills
 
 | Capability                           | Skill                                                                                                 |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------- |
-| Server admin + backup                | https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli-admin/SKILL.md     |
-| Provider & key management            | https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli-providers/SKILL.md |
-| Cloud agents (Codex / Devin / Jules) | https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli-cloud/SKILL.md     |
-| Evals & benchmarking                 | https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli-eval/SKILL.md      |
+| Server admin + backup                | https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli-admin/SKILL.md     |
+| Provider & key management            | https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli-providers/SKILL.md |
+| Cloud agents (Codex / Devin / Jules) | https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli-cloud/SKILL.md     |
+| Evals & benchmarking                 | https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli-eval/SKILL.md      |
 
 ### Errors
 
-- `Connection refused` → server not running; run `omniroute` or `omniroute serve`
+- `Connection refused` → server not running; run `omniroute` or `routechi serve`
 - `401 Unauthorized` → wrong or missing API key
 - `command not found: omniroute` → not in PATH; check `npm root -g` or re-install
 - `doctor` reports SQLite incompatible → `npm rebuild better-sqlite3` in the app directory
 
 ## Admin lifecycle
 
-Requires the `omniroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli/SKILL.md) for install + global flags.
+Requires the `omniroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli/SKILL.md) for install + global flags.
 
 ### Server lifecycle
 
 ```bash
-omniroute                              # Start server (default port 20128)
-omniroute serve                        # Explicit alias
-omniroute --port 3000                  # Override port
-omniroute --no-open                    # Don't auto-open browser
-omniroute --mcp                        # Start as MCP server (stdio transport)
+routechi                              # Start server (default port 20128)
+routechi serve                        # Explicit alias
+routechi --port 3000                  # Override port
+routechi --no-open                    # Don't auto-open browser
+routechi --mcp                        # Start as MCP server (stdio transport)
 
-omniroute stop                         # Stop the running server
-omniroute restart                      # Restart the server
+routechi stop                         # Stop the running server
+routechi restart                      # Restart the server
 
-omniroute dashboard                    # Open dashboard in browser
-omniroute open                         # Alias for dashboard
-omniroute status                       # Runtime status (uptime, requests, providers)
+routechi dashboard                    # Open dashboard in browser
+routechi open                         # Alias for dashboard
+routechi status                       # Runtime status (uptime, requests, providers)
 ```
 
 ### Setup & provisioning
@@ -197,13 +197,13 @@ omniroute status                       # Runtime status (uptime, requests, provi
 #### Interactive wizard
 
 ```bash
-omniroute setup                        # Step-by-step interactive setup
+routechi setup                        # Step-by-step interactive setup
 ```
 
 #### Non-interactive (CI / Docker)
 
 ```bash
-omniroute setup --non-interactive \
+routechi setup --non-interactive \
   --password 'admin-password' \
   --add-provider \
   --provider openai \
@@ -226,11 +226,11 @@ Environment variables for non-interactive setup:
 ### Diagnostics
 
 ```bash
-omniroute doctor                       # Full health check
-omniroute doctor --json                # Machine-readable JSON
-omniroute doctor --no-liveness         # Skip HTTP health probe
-omniroute doctor --host 0.0.0.0        # Override liveness host
-omniroute doctor --liveness-url <url>  # Full URL override
+routechi doctor                       # Full health check
+routechi doctor --json                # Machine-readable JSON
+routechi doctor --no-liveness         # Skip HTTP health probe
+routechi doctor --host 0.0.0.0        # Override liveness host
+routechi doctor --liveness-url <url>  # Full URL override
 ```
 
 Checks performed: Config, Database, Storage/encryption, Port, Node runtime, Native binary (better-sqlite3), Memory, Server liveness.
@@ -238,22 +238,22 @@ Checks performed: Config, Database, Storage/encryption, Port, Node runtime, Nati
 Exit code is non-zero if any check fails — useful in CI:
 
 ```bash
-omniroute doctor --json | jq '.checks[] | select(.status=="fail")'
+routechi doctor --json | jq '.checks[] | select(.status=="fail")'
 ```
 
 ### Backup & restore
 
 ```bash
-omniroute backup                       # Snapshot config + SQLite DB to ~/.omniroute/backups/
-omniroute restore                      # Restore from a previous snapshot (interactive picker)
+routechi backup                       # Snapshot config + SQLite DB to ~/.omniroute/backups/
+routechi restore                      # Restore from a previous snapshot (interactive picker)
 ```
 
 ### Autostart (system tray / startup)
 
 ```bash
-omniroute autostart enable             # Register OmniRoute as a system startup item
-omniroute autostart disable            # Remove startup registration
-omniroute autostart status             # Show current autostart state
+routechi autostart enable             # Register OmniRoute as a system startup item
+routechi autostart disable            # Remove startup registration
+routechi autostart status             # Show current autostart state
 ```
 
 On Linux: creates a **systemd user service** (`~/.config/systemd/user/omniroute.service`) and enables **linger** so the service can start after reboot without a graphical login; on desktop sessions it also adds an XDG autostart entry with `--tray`. On macOS: LaunchAgent plist. On Windows: registry startup entry.
@@ -263,11 +263,11 @@ On Linux: creates a **systemd user service** (`~/.config/systemd/user/omniroute.
 Expose a local OmniRoute instance via a secure tunnel:
 
 ```bash
-omniroute tunnel list                  # List active tunnels
-omniroute tunnel create cloudflare     # Start a Cloudflare Tunnel (free)
-omniroute tunnel create tailscale      # Start a Tailscale funnel
-omniroute tunnel create ngrok          # Start an ngrok tunnel
-omniroute tunnel stop <id>             # Stop a running tunnel
+routechi tunnel list                  # List active tunnels
+routechi tunnel create cloudflare     # Start a Cloudflare Tunnel (free)
+routechi tunnel create tailscale      # Start a Tailscale funnel
+routechi tunnel create ngrok          # Start an ngrok tunnel
+routechi tunnel stop <id>             # Stop a running tunnel
 ```
 
 The tunnel URL is printed and can be used as `OMNIROUTE_BASE_URL` from remote machines.
@@ -275,18 +275,18 @@ The tunnel URL is printed and can be used as `OMNIROUTE_BASE_URL` from remote ma
 ### Config & environment
 
 ```bash
-omniroute config show                  # Display current effective configuration
-omniroute env show                     # List all OmniRoute environment variables
-omniroute env get <KEY>                # Get a single env var value
-omniroute env set <KEY> <value>        # Set an env var (temporary — until restart)
+routechi config show                  # Display current effective configuration
+routechi env show                     # List all OmniRoute environment variables
+routechi env get <KEY>                # Get a single env var value
+routechi env set <KEY> <value>        # Set an env var (temporary — until restart)
 ```
 
 ### Recovery
 
 ```bash
-omniroute reset-password               # Reset the admin password interactively
-omniroute reset-encrypted-columns      # Dry-run: show encrypted credential columns
-omniroute reset-encrypted-columns --force  # Null out encrypted credentials in SQLite
+routechi reset-password               # Reset the admin password interactively
+routechi reset-encrypted-columns      # Dry-run: show encrypted credential columns
+routechi reset-encrypted-columns --force  # Null out encrypted credentials in SQLite
 ```
 
 Use `reset-encrypted-columns --force` only if `STORAGE_ENCRYPTION_KEY` was lost and you need to re-enter all provider API keys.
@@ -294,16 +294,16 @@ Use `reset-encrypted-columns --force` only if `STORAGE_ENCRYPTION_KEY` was lost 
 ### Logs
 
 ```bash
-omniroute logs                         # Stream live request logs
-omniroute logs --json                  # JSON log entries
-omniroute logs --search <term>         # Filter by term
-omniroute logs --follow                # Tail mode (keep streaming)
+routechi logs                         # Stream live request logs
+routechi logs --json                  # JSON log entries
+routechi logs --search <term>         # Filter by term
+routechi logs --follow                # Tail mode (keep streaming)
 ```
 
 ### Update
 
 ```bash
-omniroute update                       # Check for a newer version and prompt to update
+routechi update                       # Check for a newer version and prompt to update
 ```
 
 ### Errors

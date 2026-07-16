@@ -483,7 +483,7 @@ Sistem logging menulis ke stdout dan file log yang dirotasi. Semua konfigurasi d
 
 | Variable                   | Default                         | Deskripsi                                                                                              |
 | -------------------------- | ------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `OMNIROUTE_MEMORY_MB`      | `512`                           | Batas heap V8 saat runtime. Docker standalone dan `omniroute serve` menggunakannya untuk mengatur `--max-old-space-size`. |
+| `OMNIROUTE_MEMORY_MB`      | `512`                           | Batas heap V8 saat runtime. Docker standalone dan `routechi serve` menggunakannya untuk mengatur `--max-old-space-size`. |
 | `PROMPT_CACHE_MAX_SIZE`    | `50`                            | Maksimum entri prompt sistem yang dicache.                                                             |
 | `PROMPT_CACHE_MAX_BYTES`   | `2097152` (2 MB)                | Ukuran total cache prompt maksimum.                                                                    |
 | `PROMPT_CACHE_TTL_MS`      | `300000` (5 menit)              | TTL entri cache prompt.                                                                                |

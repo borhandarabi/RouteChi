@@ -1,5 +1,5 @@
 /**
- * Issue #5238 (Defect C) — `omniroute serve` silently DISCARDED a user-set
+ * Issue #5238 (Defect C) — `routechi serve` silently DISCARDED a user-set
  * `NODE_OPTIONS=--max-old-space-size=…`. The serve command spread `process.env`
  * then UNCONDITIONALLY overwrote NODE_OPTIONS with the calibrated default, so a
  * user who exported `NODE_OPTIONS=--max-old-space-size=8192` still ran at the

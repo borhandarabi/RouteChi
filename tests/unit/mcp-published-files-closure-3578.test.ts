@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 
-// #3578 — `omniroute --mcp` crashed on npm installs with ERR_MODULE_NOT_FOUND for
+// #3578 — `routechi --mcp` crashed on npm installs with ERR_MODULE_NOT_FOUND for
 // src/lib/combos/steps.ts: the MCP server runs from raw TypeScript source and imports
 // across src/ + open-sse/, but the published `files` allowlist only shipped a few
 // cherry-picked paths. This gate computes the MCP server's transitive import closure

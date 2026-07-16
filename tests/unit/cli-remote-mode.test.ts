@@ -8,7 +8,7 @@ import { tmpdir } from "node:os";
 // context (canonical `contexts`/`currentContext` schema, with legacy
 // `profiles`/`activeProfile` fallback). Before this work, getBaseUrl read only
 // the legacy `profiles` schema and buildHeaders never read the context's
-// credential at all — so `omniroute contexts use <remote>` silently failed to
+// credential at all — so `routechi contexts use <remote>` silently failed to
 // route auth to the remote server.
 
 let tmpDir: string;
@@ -148,7 +148,7 @@ test("buildHeaders: active-context token wins over an opts.apiKey echoing the am
   // Regression: users keep OMNIROUTE_API_KEY (their inference key) in the shell.
   // The global --api-key option is bound to that env var, so commands that spread
   // optsWithGlobals() into apiFetch carry opts.apiKey === the env value. After
-  // `omniroute connect <remote>` the active context holds the scoped token; an
+  // `routechi connect <remote>` the active context holds the scoped token; an
   // opts.apiKey that merely mirrors the ambient env must NOT outrank it, or every
   // remote management command sends the local inference key ("Invalid management
   // token"). This reproduces the exact failing shape: opts.apiKey === env value.
@@ -247,8 +247,8 @@ test("commands/contexts.mjs registers a `current` subcommand", async () => {
 
 test("createProgram wires the remote-mode commands into the real CLI program", async () => {
   // Regression: contexts.mjs existed and was unit-tested in isolation, but its
-  // registerContexts() was never called by registry.mjs — so `omniroute contexts`
-  // fell through to `serve`, and `connect`'s own advice ("omniroute contexts use
+  // registerContexts() was never called by registry.mjs — so `routechi contexts`
+  // fell through to `serve`, and `connect`'s own advice ("routechi contexts use
   // default") was a dead command. Build the REAL program and assert the wiring.
   const { createProgram } = await import("../../bin/cli/program.mjs");
   const program = createProgram();

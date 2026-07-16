@@ -25,7 +25,7 @@ lastUpdated: 2026-06-28
 ### npm (recommended)
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 omniroute
 ```
 
@@ -82,8 +82,8 @@ Releases of the desktop installers are attached to GitHub Releases. For the full
 For unattended setups (Docker, Kubernetes, CI), use:
 
 ```bash
-omniroute setup --non-interactive
-omniroute providers test-batch
+routechi setup --non-interactive
+routechi providers test-batch
 ```
 
 Combined with env vars (`INITIAL_PASSWORD`, `OMNIROUTE_WS_BRIDGE_SECRET`, etc.), this lets you spin up an OmniRoute instance fully scriptable.
@@ -93,45 +93,45 @@ Combined with env vars (`INITIAL_PASSWORD`, `OMNIROUTE_WS_BRIDGE_SECRET`, etc.),
 | Command                 | Description                                                    |
 | ----------------------- | -------------------------------------------------------------- |
 | `omniroute`             | Start server (`PORT=20128`, API and dashboard on same port)    |
-| `omniroute setup`       | Guided CLI onboarding for password and first provider          |
-| `omniroute doctor`      | Run local health checks without starting the server            |
-| `omniroute providers`   | Discover, list, validate, and test providers from CLI          |
-| `omniroute config`      | CLI tool configuration — list, get, set, validate configs      |
-| `omniroute status`      | Offline status dashboard — version, DB, tools, config          |
-| `omniroute logs`        | Stream usage logs from the API (supports `--follow`)           |
-| `omniroute update`      | Check for or apply OmniRoute updates                           |
-| `omniroute provider`    | Manage provider connections — add, list, remove, test, default |
-| `omniroute --port 3000` | Set canonical/API port to 3000                                 |
-| `omniroute --mcp`       | Start MCP server (stdio transport)                             |
-| `omniroute --no-open`   | Don't auto-open browser                                        |
-| `omniroute --help`      | Show help                                                      |
+| `routechi setup`       | Guided CLI onboarding for password and first provider          |
+| `routechi doctor`      | Run local health checks without starting the server            |
+| `routechi providers`   | Discover, list, validate, and test providers from CLI          |
+| `routechi config`      | CLI tool configuration — list, get, set, validate configs      |
+| `routechi status`      | Offline status dashboard — version, DB, tools, config          |
+| `routechi logs`        | Stream usage logs from the API (supports `--follow`)           |
+| `routechi update`      | Check for or apply OmniRoute updates                           |
+| `routechi provider`    | Manage provider connections — add, list, remove, test, default |
+| `routechi --port 3000` | Set canonical/API port to 3000                                 |
+| `routechi --mcp`       | Start MCP server (stdio transport)                             |
+| `routechi --no-open`   | Don't auto-open browser                                        |
+| `routechi --help`      | Show help                                                      |
 
 Headless setup can be scripted with flags or environment variables:
 
 ```bash
-omniroute setup --non-interactive --password "$OMNIROUTE_PASSWORD"
-omniroute setup --non-interactive --add-provider --provider openai --api-key "$OPENAI_API_KEY"
-omniroute setup --non-interactive --add-provider --provider openai --api-key "$OPENAI_API_KEY" --test-provider
+routechi setup --non-interactive --password "$OMNIROUTE_PASSWORD"
+routechi setup --non-interactive --add-provider --provider openai --api-key "$OPENAI_API_KEY"
+routechi setup --non-interactive --add-provider --provider openai --api-key "$OPENAI_API_KEY" --test-provider
 ```
 
 Run local diagnostics without opening the dashboard:
 
 ```bash
-omniroute doctor
-omniroute doctor --json
-omniroute doctor --no-liveness
+routechi doctor
+routechi doctor --json
+routechi doctor --no-liveness
 ```
 
 Manage providers from SSH or scripts without opening the dashboard:
 
 ```bash
-omniroute providers available
-omniroute providers available --search openai
-omniroute providers available --category api-key
-omniroute providers list
-omniroute providers test <id-or-name>
-omniroute providers test-all
-omniroute providers validate
+routechi providers available
+routechi providers available --search openai
+routechi providers available --category api-key
+routechi providers list
+routechi providers test <id-or-name>
+routechi providers test-all
+routechi providers validate
 ```
 
 ---
@@ -169,23 +169,23 @@ Instead of pasting the base URL and key by hand, let OmniRoute write each tool's
 own config from the live model catalog. One command per tool:
 
 ```bash
-omniroute setup-codex        # ~/.codex/<name>.config.toml profiles
-omniroute setup-claude       # ~/.claude/profiles/<name>/settings.json
-omniroute setup-opencode     # ~/.config/opencode/opencode.json (openai-compatible)
-omniroute setup-cline        # Cline CLI + VS Code extension settings
-omniroute setup-kilo         # Kilo Code
-omniroute setup-continue     # ~/.continue/config.yaml (Continue / cn)
-omniroute setup-cursor       # prints Cursor's in-app steps
-omniroute setup-roo          # Roo Code import + autoImport pointer
-omniroute setup-crush        # ~/.config/crush/crush.json
-omniroute setup-goose        # ~/.config/goose/config.yaml
-omniroute setup-qwen         # ~/.qwen/settings.json
-omniroute setup-aider        # ~/.aider.conf.yml
+routechi setup-codex        # ~/.codex/<name>.config.toml profiles
+routechi setup-claude       # ~/.claude/profiles/<name>/settings.json
+routechi setup-opencode     # ~/.config/opencode/opencode.json (openai-compatible)
+routechi setup-cline        # Cline CLI + VS Code extension settings
+routechi setup-kilo         # Kilo Code
+routechi setup-continue     # ~/.continue/config.yaml (Continue / cn)
+routechi setup-cursor       # prints Cursor's in-app steps
+routechi setup-roo          # Roo Code import + autoImport pointer
+routechi setup-crush        # ~/.config/crush/crush.json
+routechi setup-goose        # ~/.config/goose/config.yaml
+routechi setup-qwen         # ~/.qwen/settings.json
+routechi setup-aider        # ~/.aider.conf.yml
 ```
 
 Each accepts `--remote <url> --api-key <key>` to configure a local tool against a
 **remote** OmniRoute, plus `--dry-run` to preview. The launchers
-`omniroute launch` (Claude Code) and `omniroute launch-codex` (Codex) spawn the CLI
+`routechi launch` (Claude Code) and `routechi launch-codex` (Codex) spawn the CLI
 with the right env injected, writing no config at all.
 
 For the full table (what each command writes, every flag, local vs remote, base-URL
@@ -202,14 +202,14 @@ For detailed per-tool configuration (Claude Code, Codex CLI, Cursor, Cline, Open
 Start MCP transport in stdio mode:
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 Recommended validation flow:
 
 ```bash
 # 1. Start MCP server
-omniroute --mcp
+routechi --mcp
 
 # 2. From your MCP client, call:
 omniroute_get_health        # Should return system health
@@ -334,10 +334,10 @@ depends="openssl"
 short_desc="Universal AI gateway with smart routing for multiple LLM providers"
 maintainer="zenobit <zenobit@disroot.org>"
 license="MIT"
-homepage="https://github.com/diegosouzapw/OmniRoute"
-distfiles="https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz"
+homepage="https://github.com/borhandarabi/routechi"
+distfiles="https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz"
 # Regenerate the checksum for each release with:
-#   curl -L -o /tmp/omniroute.tar.gz "https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz" && sha256sum /tmp/omniroute.tar.gz
+#   curl -L -o /tmp/omniroute.tar.gz "https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz" && sha256sum /tmp/omniroute.tar.gz
 checksum=PLACEHOLDER_REGENERATE_PER_RELEASE
 system_accounts="_omniroute"
 omniroute_homedir="/var/lib/omniroute"

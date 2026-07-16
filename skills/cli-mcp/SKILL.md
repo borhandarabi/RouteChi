@@ -11,8 +11,8 @@ Inspect the MCP server status, list registered tools and scopes, run tool invoca
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute mcp
+routechi mcp
 ```
 
 ### `mcp status`
@@ -36,7 +36,7 @@ Show MCP server status
 **Example:**
 
 ```bash
-omniroute mcp status
+routechi mcp status
 ```
 
 ### `mcp restart`
@@ -46,7 +46,7 @@ Restart the MCP server
 **Example:**
 
 ```bash
-omniroute mcp restart
+routechi mcp restart
 ```
 
 ### `mcp call <tool> [argsJson]`
@@ -61,7 +61,7 @@ omniroute mcp restart
 **Example:**
 
 ```bash
-omniroute mcp call <tool> [argsJson]
+routechi mcp call <tool> [argsJson]
 ```
 
 ### `mcp scopes`
@@ -73,7 +73,7 @@ omniroute mcp call <tool> [argsJson]
 **Example:**
 
 ```bash
-omniroute mcp scopes
+routechi mcp scopes
 ```
 
 ### `mcp tools`
@@ -81,7 +81,7 @@ omniroute mcp scopes
 **Example:**
 
 ```bash
-omniroute mcp tools
+routechi mcp tools
 ```
 
 ### `mcp list`
@@ -93,7 +93,7 @@ omniroute mcp tools
 **Example:**
 
 ```bash
-omniroute mcp list
+routechi mcp list
 ```
 
 ### `mcp info <name>`
@@ -101,7 +101,7 @@ omniroute mcp list
 **Example:**
 
 ```bash
-omniroute mcp info <name>
+routechi mcp info <name>
 ```
 
 ### `mcp schema <name>`
@@ -113,7 +113,7 @@ omniroute mcp info <name>
 **Example:**
 
 ```bash
-omniroute mcp schema <name>
+routechi mcp schema <name>
 ```
 
 ### `mcp audit`
@@ -121,7 +121,7 @@ omniroute mcp schema <name>
 **Example:**
 
 ```bash
-omniroute mcp audit
+routechi mcp audit
 ```
 
 ### `mcp tail`
@@ -134,7 +134,7 @@ omniroute mcp audit
 **Example:**
 
 ```bash
-omniroute mcp tail
+routechi mcp tail
 ```
 
 ### `mcp stats`
@@ -146,5 +146,5 @@ omniroute mcp tail
 **Example:**
 
 ```bash
-omniroute mcp stats
+routechi mcp stats
 ```

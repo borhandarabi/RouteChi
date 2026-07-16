@@ -42,7 +42,7 @@ lastUpdated: 2026-06-28
 - 🚦 **تفکیب 429 به ازای ارائه‌دهنده** + toggle `useUpstream429BreakerHints` — رفتار breaker دقیق‌تر با استفاده از hintهای rate-limit بالادست
 - 🩺 **داشبورد cooldown مدل‌ها** — مشاهدهٔ lockoutهای به‌ازای مدل و فعال‌سازی دستی مجدد از رابط کاربری
 - 🔒 **شناسایی پویای گواهی MITM لینوکس** — در Debian/Ubuntu، Fedora/RHEL، Arch و سایر توزیع‌ها کار می‌کند
-- 💻 **مجموعهٔ بهبود CLI** — ۲۰+ دستور شامل `omniroute providers`، `omniroute combos`، `omniroute doctor`، `omniroute setup`
+- 💻 **مجموعهٔ بهبود CLI** — ۲۰+ دستور شامل `routechi providers`، `routechi combos`، `routechi doctor`، `routechi setup`
 - 🔍 **کشف مدل embedding مربوط به Qdrant** — probe خودکار مدل vector-store
 - 🔑 **کلیدهای API / Bearer keys با scope `manage`** — انجام عملیات مدیریتی به‌صورت برنامه‌نویسی از طریق API
 - 🏥 **تحلیل سلامت target کامبو** + **سازندهٔ کامبو ساختاریافته** — سلامت به‌ازای target و سازندهٔ رابط کاربری برای مونتاژ گام‌های `(provider, model, connection)`

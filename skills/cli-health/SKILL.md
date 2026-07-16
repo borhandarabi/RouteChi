@@ -11,8 +11,8 @@ Check server health, component status, and live metrics from the CLI. Run `healt
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -28,7 +28,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute doctor
+routechi doctor
 ```
 
 ### `health`
@@ -42,7 +42,7 @@ omniroute doctor
 **Example:**
 
 ```bash
-omniroute health
+routechi health
 ```
 
 ### `health components`
@@ -56,7 +56,7 @@ List health components and their status
 **Example:**
 
 ```bash
-omniroute health components
+routechi health components
 ```
 
 ### `health watch`
@@ -70,7 +70,7 @@ Live dashboard — refresh every N seconds
 **Example:**
 
 ```bash
-omniroute health watch
+routechi health watch
 ```
 
 ### `status`
@@ -84,5 +84,5 @@ Show OmniRoute status dashboard
 **Example:**
 
 ```bash
-omniroute status
+routechi status
 ```

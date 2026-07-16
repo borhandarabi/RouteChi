@@ -11,8 +11,8 @@ Send chat completions, stream responses, and start an interactive REPL session f
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -38,7 +38,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute chat [prompt]
+routechi chat [prompt]
 ```
 
 ### `repl`
@@ -53,7 +53,7 @@ omniroute chat [prompt]
 **Example:**
 
 ```bash
-omniroute repl
+routechi repl
 ```
 
 ### `stream [prompt]`
@@ -74,5 +74,5 @@ omniroute repl
 **Example:**
 
 ```bash
-omniroute stream [prompt]
+routechi stream [prompt]
 ```

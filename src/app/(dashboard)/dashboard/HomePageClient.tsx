@@ -135,27 +135,27 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
     if (platform === "darwin") {
       return {
         label: "Download DMG (macOS)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.dmg`,
+        url: `https://github.com/borhandarabi/routechi/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.dmg`,
         desc: `A new version of the OmniRoute desktop app is available. Please download and install the macOS DMG installer to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     if (platform === "win32") {
       return {
         label: "Download EXE (Windows)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute.Setup.${cleanLatest}.exe`,
+        url: `https://github.com/borhandarabi/routechi/releases/download/v${cleanLatest}/OmniRoute.Setup.${cleanLatest}.exe`,
         desc: `A new version of the OmniRoute desktop app is available. Please download and install the Windows EXE installer to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     if (platform === "linux") {
       return {
         label: "Download AppImage (Linux)",
-        url: `https://github.com/diegosouzapw/OmniRoute/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.AppImage`,
+        url: `https://github.com/borhandarabi/routechi/releases/download/v${cleanLatest}/OmniRoute-${cleanLatest}.AppImage`,
         desc: `A new version of the OmniRoute desktop app is available. Please download the Linux AppImage package to update (current: v${versionInfo?.current || ""}).`,
       };
     }
     return {
       label: "Download Update",
-      url: `https://github.com/diegosouzapw/OmniRoute/releases/tag/v${cleanLatest}`,
+      url: `https://github.com/borhandarabi/routechi/releases/tag/v${cleanLatest}`,
       desc: `A new version of the OmniRoute desktop app is available. Please download the respective app format for your system to update (current: v${versionInfo?.current || ""}).`,
     };
   }, [platform, versionInfo?.latest, versionInfo?.current]);
@@ -1003,7 +1003,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                       variant="secondary"
                       onClick={() =>
                         openExternal(
-                          `https://github.com/diegosouzapw/OmniRoute/releases/tag/v${versionInfo.latest}`
+                          `https://github.com/borhandarabi/routechi/releases/tag/v${versionInfo.latest}`
                         )
                       }
                       className="font-semibold text-xs py-1"

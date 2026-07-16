@@ -11,8 +11,8 @@ Create and run evaluation suites, watch live benchmark progress, view scorecards
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute eval
+routechi eval
 ```
 
 ### `eval suites`
@@ -30,7 +30,7 @@ omniroute eval
 **Example:**
 
 ```bash
-omniroute eval suites
+routechi eval suites
 ```
 
 ### `eval list`
@@ -38,7 +38,7 @@ omniroute eval suites
 **Example:**
 
 ```bash
-omniroute eval list
+routechi eval list
 ```
 
 ### `eval get <suiteId>`
@@ -46,7 +46,7 @@ omniroute eval list
 **Example:**
 
 ```bash
-omniroute eval get <suiteId>
+routechi eval get <suiteId>
 ```
 
 ### `eval create`
@@ -58,7 +58,7 @@ omniroute eval get <suiteId>
 **Example:**
 
 ```bash
-omniroute eval create
+routechi eval create
 ```
 
 ### `eval run <suiteId>`
@@ -74,7 +74,7 @@ omniroute eval create
 **Example:**
 
 ```bash
-omniroute eval run <suiteId>
+routechi eval run <suiteId>
 ```
 
 ### `eval list`
@@ -89,7 +89,7 @@ omniroute eval run <suiteId>
 **Example:**
 
 ```bash
-omniroute eval list
+routechi eval list
 ```
 
 ### `eval get <runId>`
@@ -97,7 +97,7 @@ omniroute eval list
 **Example:**
 
 ```bash
-omniroute eval get <runId>
+routechi eval get <runId>
 ```
 
 ### `eval results <runId>`
@@ -109,7 +109,7 @@ omniroute eval get <runId>
 **Example:**
 
 ```bash
-omniroute eval results <runId>
+routechi eval results <runId>
 ```
 
 ### `eval cancel <runId>`
@@ -121,7 +121,7 @@ omniroute eval results <runId>
 **Example:**
 
 ```bash
-omniroute eval cancel <runId>
+routechi eval cancel <runId>
 ```
 
 ### `eval scorecard <runId>`
@@ -129,7 +129,7 @@ omniroute eval cancel <runId>
 **Example:**
 
 ```bash
-omniroute eval scorecard <runId>
+routechi eval scorecard <runId>
 ```
 
 ### `simulate [prompt]`
@@ -146,7 +146,7 @@ omniroute eval scorecard <runId>
 **Example:**
 
 ```bash
-omniroute simulate [prompt]
+routechi simulate [prompt]
 ```
 
 <!-- skill:custom-start -->
@@ -154,7 +154,7 @@ omniroute simulate [prompt]
 
 # OmniRoute — CLI Evals
 
-Requires the `omniroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/diegosouzapw/OmniRoute/main/skills/omniroute-cli/SKILL.md) for install + global flags.
+Requires the `omniroute` CLI. See [CLI entry-point skill](https://raw.githubusercontent.com/borhandarabi/routechi/main/skills/omniroute-cli/SKILL.md) for install + global flags.
 
 ## What are evals?
 
@@ -163,16 +163,16 @@ Evals are automated test suites that score LLM outputs against expected answers 
 ## Eval suites
 
 ```bash
-omniroute eval suites list                       # List all eval suites
-omniroute eval suites list --json                # JSON output
+routechi eval suites list                       # List all eval suites
+routechi eval suites list --json                # JSON output
 
-omniroute eval suites get <suiteId>              # Full suite definition
+routechi eval suites get <suiteId>              # Full suite definition
 ```
 
 ### Create a suite
 
 ```bash
-omniroute eval suites create \
+routechi eval suites create \
   --name "code-quality" \
   --rubric "exact-match" \
   --samples-file ./samples.jsonl                 # JSONL: {input, expected_output}
@@ -190,10 +190,10 @@ Rubric options: `exact-match`, `contains`, `llm-judge`, `regex`.
 ## Run an eval
 
 ```bash
-omniroute eval suites run <suiteId> \
+routechi eval suites run <suiteId> \
   --model claude-sonnet-4-6                      # Run suite against a specific model
 
-omniroute eval suites run <suiteId> \
+routechi eval suites run <suiteId> \
   --model gpt-4o \
   --watch                                        # Live TUI progress (EvalWatch)
 ```
@@ -202,25 +202,25 @@ The run is asynchronous. Use `--watch` for a live terminal dashboard or poll man
 
 ```bash
 RUN_ID=$(omniroute eval suites run <suiteId> --model claude-sonnet-4-6 --output json | jq -r '.id')
-omniroute eval get $RUN_ID
+routechi eval get $RUN_ID
 ```
 
 ## Manage runs
 
 ```bash
-omniroute eval list                              # List all eval runs
-omniroute eval list --json
+routechi eval list                              # List all eval runs
+routechi eval list --json
 
-omniroute eval get <runId>                       # Run details (status, model, score)
-omniroute eval results <runId>                   # Per-sample results
-omniroute eval scorecard <runId>                 # Full scorecard with pass/fail per sample
-omniroute eval cancel <runId>                    # Cancel a running eval
+routechi eval get <runId>                       # Run details (status, model, score)
+routechi eval results <runId>                   # Per-sample results
+routechi eval scorecard <runId>                 # Full scorecard with pass/fail per sample
+routechi eval cancel <runId>                    # Cancel a running eval
 ```
 
 ## Scorecard output
 
 ```bash
-omniroute eval scorecard <runId> --output json
+routechi eval scorecard <runId> --output json
 ```
 
 Response fields per sample:
@@ -242,7 +242,7 @@ Run the same suite against multiple models and compare:
 
 ```bash
 for MODEL in claude-sonnet-4-6 gpt-4o gemini-2.0-flash; do
-  omniroute eval suites run $SUITE_ID --model $MODEL --output json | jq '{model: .model, score: .score}'
+  routechi eval suites run $SUITE_ID --model $MODEL --output json | jq '{model: .model, score: .score}'
 done
 ```
 
@@ -257,7 +257,7 @@ python3 -c "import sys; score=float('$SCORE'); sys.exit(0 if score >= 0.90 else 
 ## Errors
 
 - `suites create` fails with `invalid rubric` → use one of: `exact-match`, `contains`, `llm-judge`, `regex`
-- `suites run` returns `model not found` → verify model ID with `omniroute models --search <name>`
-- `eval get` shows `status: failed` → check `omniroute logs --search eval` for error details
-- `scorecard` returns empty results → the run may still be `running`; poll `omniroute eval get <runId>` until `status` is `completed`
+- `suites run` returns `model not found` → verify model ID with `routechi models --search <name>`
+- `eval get` shows `status: failed` → check `routechi logs --search eval` for error details
+- `scorecard` returns empty results → the run may still be `running`; poll `routechi eval get <runId>` until `status` is `completed`
 <!-- skill:custom-end -->

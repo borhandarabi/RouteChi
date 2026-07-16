@@ -52,17 +52,17 @@ command per supported CLI that reads the **live** model catalog from a running
 OmniRoute (local or remote) and writes the tool's own config on your machine:
 
 ```bash
-omniroute setup-codex        omniroute setup-claude       omniroute setup-opencode
-omniroute setup-cline        omniroute setup-kilo         omniroute setup-continue
-omniroute setup-cursor       omniroute setup-roo          omniroute setup-crush
-omniroute setup-goose        omniroute setup-qwen         omniroute setup-aider
+routechi setup-codex        routechi setup-claude       routechi setup-opencode
+routechi setup-cline        routechi setup-kilo         routechi setup-continue
+routechi setup-cursor       routechi setup-roo          routechi setup-crush
+routechi setup-goose        routechi setup-qwen         routechi setup-aider
 ```
 
 Each accepts `--remote <url> --api-key <key>` (configure a local tool against a
 remote OmniRoute), `--dry-run` (preview without writing), and `--port`. Tools
 without model auto-discovery (Cline, Kilo, Roo, Goose, Qwen, Aider, Gemini) take
 `--model <id>` (and `--yes` for non-interactive runs). The launchers
-`omniroute launch` (Claude Code) and `omniroute launch-codex` (Codex) spawn the CLI
+`routechi launch` (Claude Code) and `routechi launch-codex` (Codex) spawn the CLI
 with the right env injected and write no config at all.
 
 > **Full reference:** the master table — what each command writes, every flag,
@@ -577,25 +577,25 @@ qwen
 The `omniroute` binary provides commands for server lifecycle, setup, diagnostics, and provider management. Entry point: `bin/omniroute.mjs`.
 
 ```bash
-omniroute                              # Start server (default port 20128)
-omniroute setup                        # Interactive setup wizard
-omniroute doctor                       # Check config, DB, ports, runtime
-omniroute providers list               # Configured provider connections
-omniroute providers test-all           # Test every active connection
-omniroute reset-password               # Reset the admin password
-omniroute logs                         # Stream request logs
-omniroute health                       # Detailed health (breakers, cache, memory)
-omniroute --version                    # Print version
-omniroute --help                       # Show all commands
+routechi                              # Start server (default port 20128)
+routechi setup                        # Interactive setup wizard
+routechi doctor                       # Check config, DB, ports, runtime
+routechi providers list               # Configured provider connections
+routechi providers test-all           # Test every active connection
+routechi reset-password               # Reset the admin password
+routechi logs                         # Stream request logs
+routechi health                       # Detailed health (breakers, cache, memory)
+routechi --version                    # Print version
+routechi --help                       # Show all commands
 ```
 
 ### Setup & Initialization
 
 ```bash
-omniroute setup                        # Interactive setup wizard
-omniroute setup --non-interactive      # CI/automation mode (reads env vars + flags)
-omniroute setup --password '<value>'   # Set admin password directly
-omniroute setup --add-provider \
+routechi setup                        # Interactive setup wizard
+routechi setup --non-interactive      # CI/automation mode (reads env vars + flags)
+routechi setup --password '<value>'   # Set admin password directly
+routechi setup --add-provider \
   --provider openai \
   --api-key '<value>' \
   --test-provider                      # Add and test a provider in one shot
@@ -610,16 +610,16 @@ Recognized environment variables for non-interactive setup:
 
 All other non-interactive inputs are passed as flags, not environment variables:
 `--password`, `--provider`, `--provider-name`, `--provider-base-url`, `--default-model`
-(see the `omniroute setup` options above).
+(see the `routechi setup` options above).
 
 ### Diagnostics
 
 ```bash
-omniroute doctor                       # Check config, DB, ports, runtime, memory, liveness
-omniroute doctor --json                # Machine-readable JSON
-omniroute doctor --no-liveness         # Skip the HTTP health probe
-omniroute doctor --host 0.0.0.0        # Override liveness host
-omniroute doctor --liveness-url <url>  # Full health endpoint URL override
+routechi doctor                       # Check config, DB, ports, runtime, memory, liveness
+routechi doctor --json                # Machine-readable JSON
+routechi doctor --no-liveness         # Skip the HTTP health probe
+routechi doctor --host 0.0.0.0        # Override liveness host
+routechi doctor --liveness-url <url>  # Full health endpoint URL override
 ```
 
 The doctor runs these checks: `Config`, `Database`, `Storage/encryption`,
@@ -629,17 +629,17 @@ The doctor runs these checks: `Config`, `Database`, `Storage/encryption`,
 ### Provider Management
 
 ```bash
-omniroute providers available                       # OmniRoute provider catalog
-omniroute providers available --search openai       # Filter catalog by id/name/alias/category
-omniroute providers available --category api-key    # Filter by category (api-key, oauth, free, ...)
-omniroute providers available --json                # Machine-readable JSON
+routechi providers available                       # OmniRoute provider catalog
+routechi providers available --search openai       # Filter catalog by id/name/alias/category
+routechi providers available --category api-key    # Filter by category (api-key, oauth, free, ...)
+routechi providers available --json                # Machine-readable JSON
 
-omniroute providers list                            # Configured provider connections
-omniroute providers list --json
+routechi providers list                            # Configured provider connections
+routechi providers list --json
 
-omniroute providers test <id|name>                  # Test one configured connection
-omniroute providers test-all                        # Test every active connection
-omniroute providers validate                        # Local-only structural validation
+routechi providers test <id|name>                  # Test one configured connection
+routechi providers test-all                        # Test every active connection
+routechi providers validate                        # Local-only structural validation
 ```
 
 > `providers available` reads the OmniRoute catalog; `providers list/test/test-all/validate`
@@ -648,9 +648,9 @@ omniroute providers validate                        # Local-only structural vali
 ### Recovery & Reset
 
 ```bash
-omniroute reset-password                # Reset the admin password (also: omniroute-reset-password)
-omniroute reset-encrypted-columns       # Show warning + dry-run for encrypted credential reset
-omniroute reset-encrypted-columns --force  # Actually null out encrypted credentials in SQLite
+routechi reset-password                # Reset the admin password (also: omniroute-reset-password)
+routechi reset-encrypted-columns       # Show warning + dry-run for encrypted credential reset
+routechi reset-encrypted-columns --force  # Actually null out encrypted credentials in SQLite
 ```
 
 ### Other subcommands
@@ -658,33 +658,33 @@ omniroute reset-encrypted-columns --force  # Actually null out encrypted credent
 These assume a running OmniRoute server, unless noted otherwise:
 
 ```bash
-omniroute status                       # Comprehensive runtime status
-omniroute logs                         # Stream request logs (--json, --search, --follow)
-omniroute config show                  # Display current configuration
+routechi status                       # Comprehensive runtime status
+routechi logs                         # Stream request logs (--json, --search, --follow)
+routechi config show                  # Display current configuration
 
-omniroute provider list                # List available providers (alias of providers list)
-omniroute provider add                 # Register OmniRoute as a provider on a tool
-omniroute keys add | list | remove     # Manage API keys
-omniroute models [provider]            # List models (--json, --search)
-omniroute combo list | switch | create | delete
+routechi provider list                # List available providers (alias of providers list)
+routechi provider add                 # Register OmniRoute as a provider on a tool
+routechi keys add | list | remove     # Manage API keys
+routechi models [provider]            # List models (--json, --search)
+routechi combo list | switch | create | delete
 
-omniroute backup                       # Snapshot config + DB
-omniroute restore                      # Restore from a previous snapshot
+routechi backup                       # Snapshot config + DB
+routechi restore                      # Restore from a previous snapshot
 
-omniroute health                       # Detailed health (breakers, cache, memory)
-omniroute quota                        # Provider quota usage
-omniroute cache                        # Cache status
-omniroute cache clear                  # Clear semantic + signature caches
+routechi health                       # Detailed health (breakers, cache, memory)
+routechi quota                        # Provider quota usage
+routechi cache                        # Cache status
+routechi cache clear                  # Clear semantic + signature caches
 
-omniroute mcp status | restart         # MCP server status / restart
-omniroute a2a status | card            # A2A server status / agent card
+routechi mcp status | restart         # MCP server status / restart
+routechi a2a status | card            # A2A server status / agent card
 
-omniroute tunnel list | create | stop  # Manage tunnels (cloudflare/tailscale/ngrok)
-omniroute env show | get <k> | set <k> <v>  # Inspect / set env vars (temporary)
+routechi tunnel list | create | stop  # Manage tunnels (cloudflare/tailscale/ngrok)
+routechi env show | get <k> | set <k> <v>  # Inspect / set env vars (temporary)
 
-omniroute test                         # Provider connectivity smoke test
-omniroute update                       # Check for updates
-omniroute completion                   # Generate shell completion
+routechi test                         # Provider connectivity smoke test
+routechi update                       # Check for updates
+routechi completion                   # Generate shell completion
 ```
 
 ### Common flags
@@ -732,7 +732,7 @@ Ollama chat: http://localhost:20128/api/v1/vscode/sk-a3ab3c080beaee3a-69f4a4-070
 
 | Error                                        | Cause                   | Fix                                              |
 | -------------------------------------------- | ----------------------- | ------------------------------------------------ |
-| `Connection refused`                         | OmniRoute not running   | `omniroute serve`                                |
+| `Connection refused`                         | OmniRoute not running   | `routechi serve`                                |
 | `401 Unauthorized`                           | Wrong API key           | Check in `/dashboard/api-manager`                |
 | `No combo configured`                        | No active routing combo | Set up in `/dashboard/combos`                    |
 | CLI shows "not installed"                    | Binary not in PATH      | Check `which <command>`                          |

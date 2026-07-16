@@ -23,7 +23,7 @@ Recommended for end users. Ships with OmniRoute. Writes `opencode.json` in place
 
 ```bash
 # After installing OmniRoute (npm i -g @omniroute/cli or local clone)
-omniroute config opencode \
+routechi config opencode \
   --baseUrl http://localhost:20128 \
   --apiKey "$OMNIROUTE_API_KEY"
 ```

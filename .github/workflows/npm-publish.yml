@@ -190,7 +190,7 @@ jobs:
           set -euo pipefail
           echo "Configuring for GitHub Packages..."
           echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" > .npmrc
-          npm pkg set name="@diegosouzapw/omniroute"
+          npm pkg set name="@borhandarabi/routechi"
           npm publish --registry=https://npm.pkg.github.com --tag "$TAG" \
             || echo "⚠️ omniroute@${VERSION} might already be published on GitHub Packages."
           echo "✅ Action finished for GitHub Packages"

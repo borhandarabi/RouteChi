@@ -12,18 +12,18 @@ Extend the `omniroute` CLI without modifying its core. Plugins follow the `omnir
 
 ```bash
 # Install a plugin from npm
-omniroute plugin install stripe
+routechi plugin install stripe
 
 # Install a local plugin in development
-omniroute plugin install ./my-plugin
+routechi plugin install ./my-plugin
 
 # List installed plugins
-omniroute plugin list
+routechi plugin list
 
 # Scaffold a new plugin
-omniroute plugin scaffold myplugin
+routechi plugin scaffold myplugin
 cd omniroute-cmd-myplugin
-omniroute plugin install .
+routechi plugin install .
 ```
 
 ## Plugin anatomy
@@ -101,13 +101,13 @@ Loading errors are caught and printed as warnings — a broken plugin never cras
 
 ## Security
 
-Plugins run with the same Node.js process privileges as `omniroute`. Only install plugins from sources you trust. `omniroute plugin install` shows an explicit warning and requires `--yes` or interactive confirmation.
+Plugins run with the same Node.js process privileges as `omniroute`. Only install plugins from sources you trust. `routechi plugin install` shows an explicit warning and requires `--yes` or interactive confirmation.
 
 ## Publishing
 
 1. Ensure `package.json` has `"keywords": ["omniroute-plugin"]`
 2. `npm publish` as normal
-3. Users discover via `omniroute plugin search <query>` (searches npm registry)
+3. Users discover via `routechi plugin search <query>` (searches npm registry)
 
 ## Example plugin
 

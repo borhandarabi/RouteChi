@@ -11,8 +11,8 @@ Backup and restore OmniRoute data from the CLI. Trigger incremental snapshots, s
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute backup
+routechi backup
 ```
 
 ### `backup create`
@@ -39,7 +39,7 @@ omniroute backup
 **Example:**
 
 ```bash
-omniroute backup create
+routechi backup create
 ```
 
 ### `backup auto`
@@ -47,7 +47,7 @@ omniroute backup create
 **Example:**
 
 ```bash
-omniroute backup auto
+routechi backup auto
 ```
 
 ### `backup enable`
@@ -62,7 +62,7 @@ omniroute backup auto
 **Example:**
 
 ```bash
-omniroute backup enable
+routechi backup enable
 ```
 
 ### `backup disable`
@@ -70,7 +70,7 @@ omniroute backup enable
 **Example:**
 
 ```bash
-omniroute backup disable
+routechi backup disable
 ```
 
 ### `backup status`
@@ -87,7 +87,7 @@ omniroute backup disable
 **Example:**
 
 ```bash
-omniroute backup status
+routechi backup status
 ```
 
 ### `backup restore [backupId]`
@@ -100,7 +100,7 @@ omniroute backup status
 **Example:**
 
 ```bash
-omniroute backup restore [backupId]
+routechi backup restore [backupId]
 ```
 
 ### `task`
@@ -108,7 +108,7 @@ omniroute backup restore [backupId]
 **Example:**
 
 ```bash
-omniroute task
+routechi task
 ```
 
 ### `cloud create`
@@ -125,7 +125,7 @@ omniroute task
 **Example:**
 
 ```bash
-omniroute cloud create
+routechi cloud create
 ```
 
 ### `cloud list`
@@ -138,7 +138,7 @@ omniroute cloud create
 **Example:**
 
 ```bash
-omniroute cloud list
+routechi cloud list
 ```
 
 ### `cloud get <taskId>`
@@ -146,7 +146,7 @@ omniroute cloud list
 **Example:**
 
 ```bash
-omniroute cloud get <taskId>
+routechi cloud get <taskId>
 ```
 
 ### `cloud status <taskId>`
@@ -154,7 +154,7 @@ omniroute cloud get <taskId>
 **Example:**
 
 ```bash
-omniroute cloud status <taskId>
+routechi cloud status <taskId>
 ```
 
 ### `cloud cancel <taskId>`
@@ -166,7 +166,7 @@ omniroute cloud status <taskId>
 **Example:**
 
 ```bash
-omniroute cloud cancel <taskId>
+routechi cloud cancel <taskId>
 ```
 
 ### `cloud approve <taskId>`
@@ -174,7 +174,7 @@ omniroute cloud cancel <taskId>
 **Example:**
 
 ```bash
-omniroute cloud approve <taskId>
+routechi cloud approve <taskId>
 ```
 
 ### `cloud message <taskId> <message>`
@@ -182,7 +182,7 @@ omniroute cloud approve <taskId>
 **Example:**
 
 ```bash
-omniroute cloud message <taskId> <message>
+routechi cloud message <taskId> <message>
 ```
 
 ### `cloud sources <taskId>`
@@ -190,7 +190,7 @@ omniroute cloud message <taskId> <message>
 **Example:**
 
 ```bash
-omniroute cloud sources <taskId>
+routechi cloud sources <taskId>
 ```
 
 ### `cloud cloud`
@@ -198,7 +198,7 @@ omniroute cloud sources <taskId>
 **Example:**
 
 ```bash
-omniroute cloud cloud
+routechi cloud cloud
 ```
 
 ### `cloud agents`
@@ -206,7 +206,7 @@ omniroute cloud cloud
 **Example:**
 
 ```bash
-omniroute cloud agents
+routechi cloud agents
 ```
 
 ### `cloud auth`
@@ -219,7 +219,7 @@ omniroute cloud agents
 **Example:**
 
 ```bash
-omniroute cloud auth
+routechi cloud auth
 ```
 
 ### `sync`
@@ -227,7 +227,7 @@ omniroute cloud auth
 **Example:**
 
 ```bash
-omniroute sync
+routechi sync
 ```
 
 ### `sync push`
@@ -241,7 +241,7 @@ omniroute sync
 **Example:**
 
 ```bash
-omniroute sync push
+routechi sync push
 ```
 
 ### `sync pull`
@@ -256,7 +256,7 @@ omniroute sync push
 **Example:**
 
 ```bash
-omniroute sync pull
+routechi sync pull
 ```
 
 ### `sync diff`
@@ -269,7 +269,7 @@ omniroute sync pull
 **Example:**
 
 ```bash
-omniroute sync diff
+routechi sync diff
 ```
 
 ### `sync bundle <outPath>`
@@ -281,7 +281,7 @@ omniroute sync diff
 **Example:**
 
 ```bash
-omniroute sync bundle <outPath>
+routechi sync bundle <outPath>
 ```
 
 ### `sync import <bundlePath>`
@@ -293,7 +293,7 @@ omniroute sync bundle <outPath>
 **Example:**
 
 ```bash
-omniroute sync import <bundlePath>
+routechi sync import <bundlePath>
 ```
 
 ### `sync initialize`
@@ -305,7 +305,7 @@ omniroute sync import <bundlePath>
 **Example:**
 
 ```bash
-omniroute sync initialize
+routechi sync initialize
 ```
 
 ### `sync tokens`
@@ -313,7 +313,7 @@ omniroute sync initialize
 **Example:**
 
 ```bash
-omniroute sync tokens
+routechi sync tokens
 ```
 
 ### `sync list`
@@ -321,7 +321,7 @@ omniroute sync tokens
 **Example:**
 
 ```bash
-omniroute sync list
+routechi sync list
 ```
 
 ### `sync create`
@@ -335,7 +335,7 @@ omniroute sync list
 **Example:**
 
 ```bash
-omniroute sync create
+routechi sync create
 ```
 
 ### `sync revoke <id>`
@@ -347,7 +347,7 @@ omniroute sync create
 **Example:**
 
 ```bash
-omniroute sync revoke <id>
+routechi sync revoke <id>
 ```
 
 ### `sync status`
@@ -355,7 +355,7 @@ omniroute sync revoke <id>
 **Example:**
 
 ```bash
-omniroute sync status
+routechi sync status
 ```
 
 ### `sync resolve`
@@ -363,5 +363,5 @@ omniroute sync status
 **Example:**
 
 ```bash
-omniroute sync resolve
+routechi sync resolve
 ```

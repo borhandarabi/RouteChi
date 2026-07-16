@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 
-// #6321: `omniroute serve` printed the banner + "⏳ Starting server..." then hung
+// #6321: `routechi serve` printed the banner + "⏳ Starting server..." then hung
 // forever with ZERO further output whenever waitForServer() timed out (resolved
 // `false`) — `runWithSupervisor`'s `.then((up) => { if (up) {...} })` had no `else`
 // branch, so a boot that never became ready was indistinguishable from a genuine

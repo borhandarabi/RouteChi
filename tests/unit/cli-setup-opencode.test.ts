@@ -1,7 +1,7 @@
 /**
  * tests/unit/cli-setup-opencode.test.ts
  *
- * `omniroute setup opencode` wires the bundled @omniroute/opencode-plugin into a
+ * `routechi setup opencode` wires the bundled @omniroute/opencode-plugin into a
  * local OpenCode install: copies the built plugin into `<config>/plugins/omniroute/`
  * and registers a tuple entry in `opencode.json` (idempotent, replacing the legacy
  * `opencode-omniroute-auth` entry from issue #3711).
@@ -49,7 +49,7 @@ function readConfig() {
 // (same pattern as tests/unit/cli/setup-claude.test.ts, #6019/#6021).
 const _console = { log: console.log, info: console.info, warn: console.warn };
 
-describe("omniroute setup opencode", () => {
+describe("routechi setup opencode", () => {
   before(() => {
     console.log = () => {};
     console.info = () => {};

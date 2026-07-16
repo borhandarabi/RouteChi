@@ -144,7 +144,7 @@ Located at `src/shared/components/PwaRegister.tsx`, this client component:
 
 When running OmniRoute on Android via Termux, the PWA works seamlessly:
 
-1. Start OmniRoute in Termux: `npx omniroute`
+1. Start OmniRoute in Termux: `npx routechi`
 2. Open Chrome on the same phone: `http://localhost:20128`
 3. Install the PWA via "Add to Home Screen"
 4. The PWA connects to the local Termux server — everything runs on-device

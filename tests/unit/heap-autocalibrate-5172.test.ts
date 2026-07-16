@@ -1,7 +1,7 @@
 /**
  * Issue #5172 / #5160 / #5152 — server OOM ("Ineffective mark-compacts near heap
  * limit ... ~500MB") on machines with plenty of RAM. Root cause: the server was
- * spawned with a FIXED 512MB heap default (`omniroute serve`) or with no
+ * spawned with a FIXED 512MB heap default (`routechi serve`) or with no
  * `--max-old-space-size` at all (Electron), so a 16GB box with 65 providers /
  * 2600 models still crashed at ~512MB.
  *

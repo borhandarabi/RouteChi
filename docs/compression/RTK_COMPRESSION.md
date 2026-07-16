@@ -408,7 +408,7 @@ updateEngineConfig("rtk", { intensity: "aggressive" });
 Use the **Verify Gate** (see below) to confirm your filter is safe at your chosen intensity:
 
 ```ts
-import { runRtkFilterTests } from "omniroute/compression/engines/rtk/verify";
+import { runRtkFilterTests } from "routechi/compression/engines/rtk/verify";
 
 const result = runRtkFilterTests({ intensity: "aggressive" });
 if (!result.passed) {
@@ -614,7 +614,7 @@ RTK compress (with rawOutput.enabled=true)
 ### Recovering the Original
 
 ```ts
-import { readRtkRawOutput } from "omniroute/compression/engines/rtk/rawOutput";
+import { readRtkRawOutput } from "routechi/compression/engines/rtk/rawOutput";
 
 const raw = readRtkRawOutput(pointerId); // pointerId from compression stats
 if (raw) {

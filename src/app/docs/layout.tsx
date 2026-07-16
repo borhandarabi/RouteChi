@@ -40,7 +40,7 @@ const docsLayoutOptions: BaseLayoutProps = {
       secondary: true,
     },
   ],
-  githubUrl: "https://github.com/diegosouzapw/OmniRoute",
+  githubUrl: "https://github.com/borhandarabi/routechi",
 };
 
 export default function Layout({ children }: { children: ReactNode }) {

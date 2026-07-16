@@ -11,8 +11,8 @@ Create, list, rotate, and revoke OmniRoute API keys from the CLI. Manage OAuth f
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute keys
+routechi keys
 ```
 
 ### `keys add <provider> [apiKey]`
@@ -34,7 +34,7 @@ omniroute keys
 **Example:**
 
 ```bash
-omniroute keys add <provider> [apiKey]
+routechi keys add <provider> [apiKey]
 ```
 
 ### `keys list`
@@ -46,7 +46,7 @@ omniroute keys add <provider> [apiKey]
 **Example:**
 
 ```bash
-omniroute keys list
+routechi keys list
 ```
 
 ### `keys remove <provider>`
@@ -58,7 +58,7 @@ omniroute keys list
 **Example:**
 
 ```bash
-omniroute keys remove <provider>
+routechi keys remove <provider>
 ```
 
 ### `keys regenerate <id>`
@@ -70,7 +70,7 @@ omniroute keys remove <provider>
 **Example:**
 
 ```bash
-omniroute keys regenerate <id>
+routechi keys regenerate <id>
 ```
 
 ### `keys revoke <id>`
@@ -82,7 +82,7 @@ omniroute keys regenerate <id>
 **Example:**
 
 ```bash
-omniroute keys revoke <id>
+routechi keys revoke <id>
 ```
 
 ### `keys reveal <id>`
@@ -90,7 +90,7 @@ omniroute keys revoke <id>
 **Example:**
 
 ```bash
-omniroute keys reveal <id>
+routechi keys reveal <id>
 ```
 
 ### `keys usage <id>`
@@ -102,7 +102,7 @@ omniroute keys reveal <id>
 **Example:**
 
 ```bash
-omniroute keys usage <id>
+routechi keys usage <id>
 ```
 
 ### `keys policy`
@@ -110,7 +110,7 @@ omniroute keys usage <id>
 **Example:**
 
 ```bash
-omniroute keys policy
+routechi keys policy
 ```
 
 ### `keys show <id>`
@@ -118,7 +118,7 @@ omniroute keys policy
 **Example:**
 
 ```bash
-omniroute keys show <id>
+routechi keys show <id>
 ```
 
 ### `keys set <id>`
@@ -132,7 +132,7 @@ omniroute keys show <id>
 **Example:**
 
 ```bash
-omniroute keys set <id>
+routechi keys set <id>
 ```
 
 ### `keys expiration`
@@ -140,7 +140,7 @@ omniroute keys set <id>
 **Example:**
 
 ```bash
-omniroute keys expiration
+routechi keys expiration
 ```
 
 ### `keys list`
@@ -153,7 +153,7 @@ omniroute keys expiration
 **Example:**
 
 ```bash
-omniroute keys list
+routechi keys list
 ```
 
 ### `keys rotate <id>`
@@ -166,7 +166,7 @@ omniroute keys list
 **Example:**
 
 ```bash
-omniroute keys rotate <id>
+routechi keys rotate <id>
 ```
 
 ### `oauth`
@@ -174,7 +174,7 @@ omniroute keys rotate <id>
 **Example:**
 
 ```bash
-omniroute oauth
+routechi oauth
 ```
 
 ### `oauth providers`
@@ -182,7 +182,7 @@ omniroute oauth
 **Example:**
 
 ```bash
-omniroute oauth providers
+routechi oauth providers
 ```
 
 ### `oauth start`
@@ -197,7 +197,7 @@ omniroute oauth providers
 **Example:**
 
 ```bash
-omniroute oauth start
+routechi oauth start
 ```
 
 ### `oauth status`
@@ -209,7 +209,7 @@ omniroute oauth start
 **Example:**
 
 ```bash
-omniroute oauth status
+routechi oauth status
 ```
 
 ### `oauth revoke`
@@ -222,5 +222,5 @@ omniroute oauth status
 **Example:**
 
 ```bash
-omniroute oauth revoke
+routechi oauth revoke
 ```

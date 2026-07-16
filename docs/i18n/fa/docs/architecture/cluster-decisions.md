@@ -8,7 +8,7 @@ lastUpdated: 2026-06-28
 
 **وضعیت:** پیشنهاد (در انتظار بازبینی @diegosouzapw)
 **تاریخ:** 2026-06-20
-**مراجع:** [#3932](https://github.com/diegosouzapw/OmniRoute/issues/3932)، PR #4381
+**مراجع:** [#3932](https://github.com/borhandarabi/routechi/issues/3932)، PR #4381
 
 ## خلاصه
 

@@ -2,7 +2,7 @@
  * omniroute setup opencode — Wire the bundled @omniroute/opencode-plugin
  * into a local OpenCode install.
  *
- * Closes the gap where `npm install -g omniroute` ships the plugin
+ * Closes the gap where `npm install -g routechi` ships the plugin
  * inside the omniroute package (`@omniroute/opencode-plugin/dist/`) but
  * OpenCode discovers plugins via `~/.config/opencode/plugins/` or
  * via entries in `opencode.json`. Without this command, the user has
@@ -96,7 +96,7 @@ function resolveBundledPlugin() {
     throw new Error(
       `Bundled @omniroute/opencode-plugin not found at ${BUNDLED_PLUGIN_DIR}.\n` +
         `This usually means omniroute was installed from a source tree that does not ` +
-        `include the workspace package. Try reinstalling omniroute (npm install -g omniroute) ` +
+        `include the workspace package. Try reinstalling routechi (npm install -g routechi) ` +
         `or run \`cd @omniroute/opencode-plugin && npm install && npm run build\` from the source repo.`
     );
   }

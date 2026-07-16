@@ -19,14 +19,14 @@ lastUpdated: 2026-06-28
 MCP OmniRoute به‌صورت داخلی ارائه می‌شود. آن را با این دستور راه‌اندازی کنید:
 
 ```bash
-omniroute --mcp
+routechi --mcp
 ```
 
 یا از طریق ترنسپورت open-sse:
 
 ```bash
 # HTTP streamable transport (port 20130)
-omniroute --dev  # MCP auto-starts on /mcp endpoint
+routechi --dev  # MCP auto-starts on /mcp endpoint
 ```
 
 ## ترنسپورت‌ها

@@ -220,25 +220,25 @@ codex -p chat     # cx/gpt-5.5, بدون effort (پیش‌فرض سرور)
 
 ---
 
-## تولید خودکار پروفایل‌ها با `omniroute setup-codex`
+## تولید خودکار پروفایل‌ها با `routechi setup-codex`
 
 اگر OmniRoute را روی یک VPS اجرا می‌کنید، می‌توانید فایل‌های پروفایل را از کاتالوگ مدل زنده تولید کنید:
 
 ```bash
 # از یک VPS (از OmniRoute محلی روی پورت 20128 استفاده می‌کند)
-omniroute setup-codex
+routechi setup-codex
 
 # از هر ماشین — به VPS خود اشاره کنید
-omniroute setup-codex --remote http://100.x.x.x:20128 --api-key sk-xxx
+routechi setup-codex --remote http://100.x.x.x:20128 --api-key sk-xxx
 
 # پیش‌نمایش بدون نوشتن فایل
-omniroute setup-codex --remote http://100.x.x.x:20128 --dry-run
+routechi setup-codex --remote http://100.x.x.x:20128 --dry-run
 
 # تنها پروفایل‌های GLM و Kimi تولید شود
-omniroute setup-codex --only glm,kimi
+routechi setup-codex --only glm,kimi
 
 # نوشتن در یک مسیر سفارشی
-omniroute setup-codex --codex-home /path/to/.codex
+routechi setup-codex --codex-home /path/to/.codex
 ```
 
 این دستور `/v1/models` را واکشی می‌کند، از پروفایل‌های تنظیم‌شده برای مدل‌های شناخته‌شده استفاده می‌کند، برای سایر مدل‌های متنی سازگار به فرادادهٔ کاتالوگ بازمی‌گردد، و `~/.codex/<name>.config.toml` را به ازای هر کدام می‌نویسد. Idempotent است — اجرای مجدد بی‌خطر است.
@@ -247,22 +247,22 @@ OmniRoute همچنین می‌تواند پس از یک کشف/وارد کردن
 
 ---
 
-## راه‌اندازی Codex با `omniroute launch-codex`
+## راه‌اندازی Codex با `routechi launch-codex`
 
 پیش از راه‌اندازی Codex، یک health-check روی نمونهٔ OmniRoute شما انجام می‌دهد:
 
 ```bash
 # راه‌اندازی در برابر OmniRoute محلی (پورت پیش‌فرض 20128)
-omniroute launch-codex
+routechi launch-codex
 
 # راه‌اندازی با پروفایل مشخص
-omniroute launch-codex --profile kimi-k27
+routechi launch-codex --profile kimi-k27
 
 # راه‌اندازی در برابر یک VPS دور
-omniroute launch-codex --remote http://100.x.x.x:20128/v1 --api-key sk-xxx
+routechi launch-codex --remote http://100.x.x.x:20128/v1 --api-key sk-xxx
 
 # ارسال آرگومان‌های اضافی به codex
-omniroute launch-codex --profile glm52 -- --yolo "fix this bug"
+routechi launch-codex --profile glm52 -- --yolo "fix this bug"
 ```
 
 ---
@@ -395,7 +395,7 @@ codex debug models --bundled       # فهرست کاتالوگ مدل bundled ب
 `wire_api = "chat"` را از پیکربندی خود حذف کنید. `wire_api = "responses"` را تنظیم یا فیلد را حذف کنید (از v0.138 به `"responses"` پیش‌فرض است).
 
 **`Error: model not found`**
-راستی‌آزمایی کنید که مدل با پیشوند درست در OmniRoute موجود است. از `omniroute models list` استفاده کنید یا `/dashboard/providers/<provider>` را باز کنید.
+راستی‌آزمایی کنید که مدل با پیشوند درست در OmniRoute موجود است. از `routechi models list` استفاده کنید یا `/dashboard/providers/<provider>` را باز کنید.
 
 **`Authentication error`**
 تأیید کنید `OMNIROUTE_API_KEY` export شده: `echo $OMNIROUTE_API_KEY`.

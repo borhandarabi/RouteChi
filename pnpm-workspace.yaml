@@ -24,7 +24,7 @@ onlyBuiltDependencies:
   - "koffi"
   - "libxmljs2"
   - "onnxruntime-node"
-  - "omniroute"
+  - "routechi"
   - "protobufjs"
   - "sharp"
   - "tls-client-node"

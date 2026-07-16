@@ -50,13 +50,13 @@ ACP Agents（反向启动流程）：
 无需手动编写每个工具的配置。OmniRoute 为每个支持的 CLI 提供对应的 `setup-*` 命令，该命令从运行中的 OmniRoute（本地或远程）读取**实时**模型目录并将工具的配置写入你的机器：
 
 ```bash
-omniroute setup-codex        omniroute setup-claude       omniroute setup-opencode
-omniroute setup-cline        omniroute setup-kilo         omniroute setup-continue
-omniroute setup-cursor       omniroute setup-roo          omniroute setup-crush
-omniroute setup-goose        omniroute setup-qwen         omniroute setup-aider
+routechi setup-codex        routechi setup-claude       routechi setup-opencode
+routechi setup-cline        routechi setup-kilo         routechi setup-continue
+routechi setup-cursor       routechi setup-roo          routechi setup-crush
+routechi setup-goose        routechi setup-qwen         routechi setup-aider
 ```
 
-每个命令接受 `--remote <url> --api-key <key>`（针对远程 OmniRoute 配置本地工具）、`--dry-run`（预览不写入）和 `--port`。不支持模型自动发现的工具（Cline、Kilo、Roo、Goose、Qwen、Aider、Gemini）接受 `--model <id>`（以及用于非交互式运行的 `--yes`）。启动器 `omniroute launch`（Claude Code）和 `omniroute launch-codex`（Codex）在注入正确的环境变量后启动 CLI，不写入任何配置。
+每个命令接受 `--remote <url> --api-key <key>`（针对远程 OmniRoute 配置本地工具）、`--dry-run`（预览不写入）和 `--port`。不支持模型自动发现的工具（Cline、Kilo、Roo、Goose、Qwen、Aider、Gemini）接受 `--model <id>`（以及用于非交互式运行的 `--yes`）。启动器 `routechi launch`（Claude Code）和 `routechi launch-codex`（Codex）在注入正确的环境变量后启动 CLI，不写入任何配置。
 
 > **完整参考：** 主表 — 每个命令写入的内容、所有标志、本地 vs 远程，以及哪些工具需要 `/v1` 后缀 — 在 **[CLI Integrations](../guides/CLI-INTEGRATIONS.md)** 中。
 
@@ -564,25 +564,25 @@ qwen
 `omniroute` 二进制文件提供服务端生命周期、设置、诊断和服务商管理的命令。入口点：`bin/omniroute.mjs`。
 
 ```bash
-omniroute                              # 启动服务器（默认端口 20128）
-omniroute setup                        # 交互式设置向导
-omniroute doctor                       # 检查配置、数据库、端口、运行时
-omniroute providers list               # 已配置的服务商连接
-omniroute providers test-all           # 测试所有活跃连接
-omniroute reset-password               # 重置管理员密码
-omniroute logs                         # 流式输出请求日志
-omniroute health                       # 详细健康状态（熔断器、缓存、内存）
-omniroute --version                    # 输出版本号
-omniroute --help                       # 显示所有命令
+routechi                              # 启动服务器（默认端口 20128）
+routechi setup                        # 交互式设置向导
+routechi doctor                       # 检查配置、数据库、端口、运行时
+routechi providers list               # 已配置的服务商连接
+routechi providers test-all           # 测试所有活跃连接
+routechi reset-password               # 重置管理员密码
+routechi logs                         # 流式输出请求日志
+routechi health                       # 详细健康状态（熔断器、缓存、内存）
+routechi --version                    # 输出版本号
+routechi --help                       # 显示所有命令
 ```
 
 ### 设置与初始化
 
 ```bash
-omniroute setup                        # 交互式设置向导
-omniroute setup --non-interactive      # CI/自动化模式（读取环境变量 + 标志）
-omniroute setup --password '<value>'   # 直接设置管理员密码
-omniroute setup --add-provider \
+routechi setup                        # 交互式设置向导
+routechi setup --non-interactive      # CI/自动化模式（读取环境变量 + 标志）
+routechi setup --password '<value>'   # 直接设置管理员密码
+routechi setup --add-provider \
   --provider openai \
   --api-key '<value>' \
   --test-provider                      # 一步添加并测试服务商
@@ -597,16 +597,16 @@ omniroute setup --add-provider \
 
 其他所有非交互式输入通过标志传入，而非环境变量：
 `--password`、`--provider`、`--provider-name`、`--provider-base-url`、`--default-model`
-（参见上述 `omniroute setup` 选项）。
+（参见上述 `routechi setup` 选项）。
 
 ### 诊断
 
 ```bash
-omniroute doctor                       # 检查配置、数据库、端口、运行时、内存、存活状态
-omniroute doctor --json                # 机器可读的 JSON
-omniroute doctor --no-liveness         # 跳过 HTTP 健康探测
-omniroute doctor --host 0.0.0.0        # 覆盖存活探测的主机
-omniroute doctor --liveness-url <url>  # 完全覆盖健康端点 URL
+routechi doctor                       # 检查配置、数据库、端口、运行时、内存、存活状态
+routechi doctor --json                # 机器可读的 JSON
+routechi doctor --no-liveness         # 跳过 HTTP 健康探测
+routechi doctor --host 0.0.0.0        # 覆盖存活探测的主机
+routechi doctor --liveness-url <url>  # 完全覆盖健康端点 URL
 ```
 
 doctor 运行以下检查：`Config`、`Database`、`Storage/encryption`、`Port availability`、`Node runtime`、`Native binary`（better-sqlite3）、`Memory` 和 `Server liveness`。任何检查为 `fail` 时以非零退出码退出。
@@ -614,17 +614,17 @@ doctor 运行以下检查：`Config`、`Database`、`Storage/encryption`、`Port
 ### 服务商管理
 
 ```bash
-omniroute providers available                       # OmniRoute 服务商目录
-omniroute providers available --search openai       # 按 id/name/alias/category 过滤目录
-omniroute providers available --category api-key    # 按分类过滤（api-key、oauth、free 等）
-omniroute providers available --json                # 机器可读的 JSON
+routechi providers available                       # OmniRoute 服务商目录
+routechi providers available --search openai       # 按 id/name/alias/category 过滤目录
+routechi providers available --category api-key    # 按分类过滤（api-key、oauth、free 等）
+routechi providers available --json                # 机器可读的 JSON
 
-omniroute providers list                            # 已配置的服务商连接
-omniroute providers list --json
+routechi providers list                            # 已配置的服务商连接
+routechi providers list --json
 
-omniroute providers test <id|name>                  # 测试一个已配置的连接
-omniroute providers test-all                        # 测试所有活跃连接
-omniroute providers validate                        # 仅本地结构校验
+routechi providers test <id|name>                  # 测试一个已配置的连接
+routechi providers test-all                        # 测试所有活跃连接
+routechi providers validate                        # 仅本地结构校验
 ```
 
 > `providers available` 读取 OmniRoute 目录；`providers list/test/test-all/validate`
@@ -633,9 +633,9 @@ omniroute providers validate                        # 仅本地结构校验
 ### 恢复与重置
 
 ```bash
-omniroute reset-password                # 重置管理员密码（旧别名仍然可用）
-omniroute reset-encrypted-columns       # 显示加密凭证重置的警告 + 干运行
-omniroute reset-encrypted-columns --force  # 实际在 SQLite 中将加密凭证设为 null
+routechi reset-password                # 重置管理员密码（旧别名仍然可用）
+routechi reset-encrypted-columns       # 显示加密凭证重置的警告 + 干运行
+routechi reset-encrypted-columns --force  # 实际在 SQLite 中将加密凭证设为 null
 ```
 
 ### 其他子命令
@@ -643,33 +643,33 @@ omniroute reset-encrypted-columns --force  # 实际在 SQLite 中将加密凭证
 以下命令假定 OmniRoute 服务器正在运行（另有说明除外）：
 
 ```bash
-omniroute status                       # 全面的运行时状态
-omniroute logs                         # 流式输出请求日志（--json、--search、--follow）
-omniroute config show                  # 显示当前配置
+routechi status                       # 全面的运行时状态
+routechi logs                         # 流式输出请求日志（--json、--search、--follow）
+routechi config show                  # 显示当前配置
 
-omniroute provider list                # 列出可用服务商（providers list 的别名）
-omniroute provider add                 # 将 OmniRoute 注册为某个工具的服务商
-omniroute keys add | list | remove     # 管理 API Key
-omniroute models [provider]            # 列出模型（--json、--search）
-omniroute combo list | switch | create | delete
+routechi provider list                # 列出可用服务商（providers list 的别名）
+routechi provider add                 # 将 OmniRoute 注册为某个工具的服务商
+routechi keys add | list | remove     # 管理 API Key
+routechi models [provider]            # 列出模型（--json、--search）
+routechi combo list | switch | create | delete
 
-omniroute backup                       # 快照配置 + 数据库
-omniroute restore                      # 从之前的快照恢复
+routechi backup                       # 快照配置 + 数据库
+routechi restore                      # 从之前的快照恢复
 
-omniroute health                       # 详细健康状态（熔断器、缓存、内存）
-omniroute quota                        # 服务商配额用量
-omniroute cache                        # 缓存状态
-omniroute cache clear                  # 清除语义 + 签名缓存
+routechi health                       # 详细健康状态（熔断器、缓存、内存）
+routechi quota                        # 服务商配额用量
+routechi cache                        # 缓存状态
+routechi cache clear                  # 清除语义 + 签名缓存
 
-omniroute mcp status | restart         # MCP 服务器状态 / 重启
-omniroute a2a status | card            # A2A 服务器状态 / agent card
+routechi mcp status | restart         # MCP 服务器状态 / 重启
+routechi a2a status | card            # A2A 服务器状态 / agent card
 
-omniroute tunnel list | create | stop  # 管理隧道（cloudflare/tailscale/ngrok）
-omniroute env show | get <k> | set <k> <v>  # 检查 / 设置环境变量（临时）
+routechi tunnel list | create | stop  # 管理隧道（cloudflare/tailscale/ngrok）
+routechi env show | get <k> | set <k> <v>  # 检查 / 设置环境变量（临时）
 
-omniroute test                         # 服务商连通性冒烟测试
-omniroute update                       # 检查更新
-omniroute completion                   # 生成 shell 补全
+routechi test                         # 服务商连通性冒烟测试
+routechi update                       # 检查更新
+routechi completion                   # 生成 shell 补全
 ```
 
 ### 通用标志
@@ -717,7 +717,7 @@ Ollama 聊天：http://localhost:20128/api/v1/vscode/sk-a3ab3c080beaee3a-69f4a4-
 
 | 错误                                          | 原因                     | 修复方法                                          |
 | --------------------------------------------- | ------------------------ | ------------------------------------------------- |
-| `Connection refused`                          | OmniRoute 未运行          | `omniroute serve`                                 |
+| `Connection refused`                          | OmniRoute 未运行          | `routechi serve`                                 |
 | `401 Unauthorized`                            | API Key 错误             | 在 `/dashboard/api-manager` 中检查                 |
 | `No combo configured`                         | 无活跃的路由 Combo        | 在 `/dashboard/combos` 中设置                      |
 | CLI 显示 "not installed"                      | 二进制文件不在 PATH 中    | 检查 `which <command>`                            |

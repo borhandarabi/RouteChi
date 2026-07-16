@@ -11,8 +11,8 @@ Interact with the OmniRoute A2A server from the CLI. Send tasks, inspect skill e
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -24,7 +24,7 @@ Agent-to-Agent (A2A) server
 **Example:**
 
 ```bash
-omniroute a2a
+routechi a2a
 ```
 
 ### `a2a status`
@@ -38,7 +38,7 @@ Show A2A server status
 **Example:**
 
 ```bash
-omniroute a2a status
+routechi a2a status
 ```
 
 ### `a2a card`
@@ -48,7 +48,7 @@ Print the Agent Card JSON
 **Example:**
 
 ```bash
-omniroute a2a card
+routechi a2a card
 ```
 
 ### `a2a skills`
@@ -56,7 +56,7 @@ omniroute a2a card
 **Example:**
 
 ```bash
-omniroute a2a skills
+routechi a2a skills
 ```
 
 ### `a2a invoke <skill>`
@@ -71,7 +71,7 @@ omniroute a2a skills
 **Example:**
 
 ```bash
-omniroute a2a invoke <skill>
+routechi a2a invoke <skill>
 ```
 
 ### `a2a tasks`
@@ -79,7 +79,7 @@ omniroute a2a invoke <skill>
 **Example:**
 
 ```bash
-omniroute a2a tasks
+routechi a2a tasks
 ```
 
 ### `a2a list`
@@ -94,7 +94,7 @@ omniroute a2a tasks
 **Example:**
 
 ```bash
-omniroute a2a list
+routechi a2a list
 ```
 
 ### `a2a get <id>`
@@ -102,7 +102,7 @@ omniroute a2a list
 **Example:**
 
 ```bash
-omniroute a2a get <id>
+routechi a2a get <id>
 ```
 
 ### `a2a cancel <id>`
@@ -114,7 +114,7 @@ omniroute a2a get <id>
 **Example:**
 
 ```bash
-omniroute a2a cancel <id>
+routechi a2a cancel <id>
 ```
 
 ### `a2a watch <id>`
@@ -122,7 +122,7 @@ omniroute a2a cancel <id>
 **Example:**
 
 ```bash
-omniroute a2a watch <id>
+routechi a2a watch <id>
 ```
 
 ### `a2a stream <id>`
@@ -130,7 +130,7 @@ omniroute a2a watch <id>
 **Example:**
 
 ```bash
-omniroute a2a stream <id>
+routechi a2a stream <id>
 ```
 
 ### `a2a logs <id>`
@@ -138,5 +138,5 @@ omniroute a2a stream <id>
 **Example:**
 
 ```bash
-omniroute a2a logs <id>
+routechi a2a logs <id>
 ```

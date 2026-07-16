@@ -23,7 +23,7 @@ lastUpdated: 2026-06-28
 
 ```bash
 # پس از نصب OmniRoute (npm i -g @omniroute/cli یا clone محلی)
-omniroute config opencode \
+routechi config opencode \
   --baseUrl http://localhost:20128 \
   --apiKey "$OMNIROUTE_API_KEY"
 ```

@@ -343,7 +343,7 @@ Cache is invalidated on every write to the corresponding table.
 
 ```bash
 # Use the CLI to create a local backup
-omniroute backup create --name pre-migration
+routechi backup create --name pre-migration
 
 # Or via the API
 curl -X PUT http://localhost:20128/api/db-backups \
@@ -363,7 +363,7 @@ The backup file includes:
 
 ```bash
 # Via CLI
-omniroute restore pre-migration
+routechi restore pre-migration
 
 # Via API
 curl -X POST http://localhost:20128/api/db-backups/restore \
@@ -378,7 +378,7 @@ curl -X POST http://localhost:20128/api/db-backups/restore \
 
 ```bash
 # Enable automated daily backups via CLI
-omniroute backup auto enable --cron "0 2 * * *" --retention 7
+routechi backup auto enable --cron "0 2 * * *" --retention 7
 ```
 
 ### SQLite Hot Backup
@@ -502,7 +502,7 @@ mv recovered.db ~/.omniroute/storage.sqlite
 Restore from backup:
 
 ```bash
-omniroute sync pull --merge   # or: omniroute backup restore <backup-id>
+routechi sync pull --merge   # or: omniroute backup restore <backup-id>
 ```
 
 ### Scenario 3: Encryption Key Lost
@@ -542,7 +542,7 @@ EOF
 
 ```bash
 # Stop OmniRoute first
-omniroute stop
+routechi stop
 
 # Delete the DB file
 rm ~/.omniroute/storage.sqlite*

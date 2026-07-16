@@ -309,7 +309,7 @@ Model: cc/claude-opus-4-7
 ### Global npm install (Recommended)
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 
 # Create config directory
 mkdir -p ~/.omniroute
@@ -320,7 +320,7 @@ cp .env.example ~/.omniroute/.env
 # Start server
 omniroute
 # Or with custom port:
-omniroute --port 3000
+routechi --port 3000
 ```
 
 The CLI automatically loads `.env` from `~/.omniroute/.env` or `./.env`.
@@ -339,7 +339,7 @@ When you no longer need OmniRoute, we provide two quick scripts for a clean remo
 ### VPS Deployment
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute && npm install && npm run build
 
 export JWT_SECRET="your-secure-secret-change-this"
@@ -421,8 +421,8 @@ depends="openssl"
 short_desc="Universal AI gateway with smart routing for multiple LLM providers"
 maintainer="zenobit <zenobit@disroot.org>"
 license="MIT"
-homepage="https://github.com/diegosouzapw/OmniRoute"
-distfiles="https://github.com/diegosouzapw/OmniRoute/archive/refs/tags/v${version}.tar.gz"
+homepage="https://github.com/borhandarabi/routechi"
+distfiles="https://github.com/borhandarabi/routechi/archive/refs/tags/v${version}.tar.gz"
 checksum=009400afee90a9f32599d8fe734145cfd84098140b7287990183dde45ae2245b
 system_accounts="_omniroute"
 omniroute_homedir="/var/lib/omniroute"

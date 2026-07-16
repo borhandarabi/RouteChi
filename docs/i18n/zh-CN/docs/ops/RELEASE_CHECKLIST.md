@@ -268,12 +268,12 @@ npm run build:release
 
 发布任何 v3.8.x 版本前，验证以下附加项：
 
-- [ ] `omniroute --tray` 在 macOS 上启动（systray2 安装到 `~/.omniroute/runtime/`）
-- [ ] `omniroute --tray` 在 Linux 上启动（需要 DISPLAY；未设置时优雅报错）
-- [ ] `omniroute --tray` 在 Windows 上启动（PowerShell NotifyIcon，无额外二进制文件）
-- [ ] `omniroute config tray enable` 创建自启动条目；disable 则移除
-- [ ] `npm install -g omniroute@<this-version>` 运行 postinstall 无致命退出
-- [ ] 更新路径保留可选依赖：`omniroute update --apply` 以及自动更新器
+- [ ] `routechi --tray` 在 macOS 上启动（systray2 安装到 `~/.omniroute/runtime/`）
+- [ ] `routechi --tray` 在 Linux 上启动（需要 DISPLAY；未设置时优雅报错）
+- [ ] `routechi --tray` 在 Windows 上启动（PowerShell NotifyIcon，无额外二进制文件）
+- [ ] `routechi config tray enable` 创建自启动条目；disable 则移除
+- [ ] `npm install -g routechi@<this-version>` 运行 postinstall 无致命退出
+- [ ] 更新路径保留可选依赖：`routechi update --apply` 以及自动更新器
       运行 `npm install -g … --include=optional` 以确保 `optionalDependencies`（better-sqlite3、
       keytar、tls-client 以及 llmlingua SLM 栈：`@atjsh/llmlingua-2`、
       `@huggingface/transformers@3.5.2`、`@tensorflow/tfjs`、`js-tiktoken`）在更新后仍然存在。
@@ -285,7 +285,7 @@ npm run build:release
       可选实例 — standalone trace 仅打包 transformers，不包含动态导入的
       可选依赖，否则 Worker 会基于根目录的 transformers 加载 llmlingua-2，
       SLM 层将静默失效。
-- [ ] `omniroute status` 在无 `.env` 的情况下正常工作（CLI Token 路径，仅 loopback）
+- [ ] `routechi status` 在无 `.env` 的情况下正常工作（CLI Token 路径，仅 loopback）
 - [ ] `curl http://localhost:20128/api/shutdown` 返回 401（始终受保护的路由）
 - [ ] `curl -H "host: evil.com" http://localhost:20128/api/mcp/sse` 返回 401（loopback 防护）
 - [ ] SQLite 运行时首次运行时解析为 `bundled`（内嵌二进制文件对当前平台有效）

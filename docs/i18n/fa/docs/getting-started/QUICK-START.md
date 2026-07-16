@@ -11,19 +11,19 @@
 ### گزینه A: npm (پیشنهادی)
 
 ```bash
-npm install -g omniroute
+npm install -g routechi
 ```
 
 ### گزینه B: Docker
 
 ```bash
-docker run -d --name omniroute -p 20128:20128 diegosouzapw/omniroute:latest
+docker run -d --name omniroute -p 20128:20128 borhandarabi/routechi:latest
 ```
 
 ### گزینه C: از روی سورس
 
 ```bash
-git clone https://github.com/diegosouzapw/OmniRoute.git
+git clone https://github.com/borhandarabi/routechi.git
 cd OmniRoute
 npm install
 npm run dev
@@ -132,4 +132,4 @@ OmniRoute به‌صورت خودکار ارائه‌دهندگان ناموفق 
 
 - **[رفع اشکال](./TROUBLESHOOTING.md)** — مشکلات رایج و راه‌حل‌ها
 - **[Discord](https://discord.gg/EkzRkpzKYt)** — پشتیبانی جامعه
-- **[GitHub Issues](https://github.com/diegosouzapw/OmniRoute/issues)** — گزارش باگ
+- **[GitHub Issues](https://github.com/borhandarabi/routechi/issues)** — گزارش باگ

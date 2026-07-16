@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-# bin/rollback.sh — roll OmniRoute back to a previous release to mitigate a bad
+# bin/rollback.sh — roll RouteChi back to a previous release to mitigate a bad
 # deploy. Part of the deploy-rollback incident-recovery flow.
 #
 # Methods (auto-detected; override with --method):
-#   • npm    — `npm install -g omniroute@<version>` and, if PM2 manages it,
-#              `pm2 restart omniroute`. This is how the VPS deploy runs.
-#   • docker — re-tag the local image omniroute:<version> to omniroute:prod and
+#   • npm    — `npm install -g routechi@<version>` and, if PM2 manages it,
+#              `pm2 restart routechi`. This is how the VPS deploy runs.
+#   • docker — re-tag the local image routechi:<version> to routechi:prod and
 #              recreate the prod service from docker-compose.prod.yml. (That
 #              compose builds the `prod` tag locally rather than pulling a
 #              registry tag, so the versioned image must already exist locally.)
@@ -20,7 +20,7 @@ usage() {
   cat <<'EOF'
 Usage: bin/rollback.sh [<version>] [--method npm|docker] [--yes|-y] [-h|--help]
 
-Rolls OmniRoute back to <version> (e.g. 3.8.35 or v3.8.35). With no version,
+Rolls RouteChi back to <version> (e.g. 3.8.35 or v3.8.35). With no version,
 picks the highest published release below the current package.json version.
 Auto-detects npm vs docker deployment; override with --method.
 EOF
@@ -55,7 +55,7 @@ if [ -z "$VERSION" ]; then
   ops_require_cmd node
   current="$(node -p "require('$REPO_ROOT/package.json').version" 2>/dev/null || true)"
   [ -n "$current" ] || ops_die "cannot read current version from package.json — pass <version>"
-  VERSION="$(npm view omniroute versions --json 2>/dev/null | node -e '
+  VERSION="$(npm view routechi versions --json 2>/dev/null | node -e '
     let s = "";
     process.stdin.on("data", (d) => (s += d)).on("end", () => {
       let vs;
@@ -74,28 +74,28 @@ if [ -z "$VERSION" ]; then
   [ -n "$VERSION" ] || ops_die "could not resolve the previous published version — pass <version> explicitly"
 fi
 
-ops_log "target: omniroute@$VERSION via $METHOD"
-ops_confirm "Roll OmniRoute back to $VERSION via $METHOD?" || ops_die "aborted"
+ops_log "target: routechi@$VERSION via $METHOD"
+ops_confirm "Roll RouteChi back to $VERSION via $METHOD?" || ops_die "aborted"
 
 case "$METHOD" in
   npm)
     ops_require_cmd npm
-    npm install -g "omniroute@$VERSION"
-    if command -v pm2 >/dev/null 2>&1 && pm2 jlist 2>/dev/null | grep -q '"name":"omniroute"'; then
-      pm2 restart omniroute --update-env
-      ops_log "pm2 restarted omniroute"
+    npm install -g "routechi@$VERSION"
+    if command -v pm2.*"name":"routechi"'; then
+      pm2 restart routechi --update-env
+      ops_log "pm2 restarted routechi"
     else
-      ops_log "installed omniroute@$VERSION — restart the service to apply (no PM2 'omniroute' process found)"
+      ops_log "installed routechi@$VERSION — restart the service to apply (no PM2 .routechi. process found)"
     fi
     ;;
   docker)
     ops_require_cmd docker
-    if ! docker image inspect "omniroute:$VERSION" >/dev/null 2>&1; then
-      ops_die "local image omniroute:$VERSION not found — build it from the $VERSION checkout first (this compose builds the 'prod' tag, it does not pull a registry tag)"
+    if ! docker image inspect "routechi:$VERSION" >/dev/null 2>&1; then
+      ops_die "local image routechi:$VERSION not found — build it from the $VERSION checkout first (this compose builds the 'prod' tag, it does not pull a registry tag)"
     fi
-    docker tag "omniroute:$VERSION" omniroute:prod
+    docker tag "routechi:$VERSION" routechi:prod
     docker compose -f "$REPO_ROOT/docker-compose.prod.yml" up -d --no-build
-    ops_log "recreated prod service from omniroute:$VERSION"
+    ops_log "recreated prod service from routechi:$VERSION"
     ;;
   *) ops_die "unknown method: $METHOD (use npm or docker)" ;;
 esac

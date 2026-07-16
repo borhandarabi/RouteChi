@@ -566,7 +566,7 @@ For any non-trivial change, read the matching deep-dive first:
 
 ## Fork / Upstream Workflow
 
-This repository is a fork of `diegosouzapw/OmniRoute`. Keep fork-only operational
+This repository is a fork of `borhandarabi/routechi`. Keep fork-only operational
 changes (for example GHCR image publishing, personal deployment workflows, or local
 automation) out of upstream contribution PRs.
 

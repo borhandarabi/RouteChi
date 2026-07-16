@@ -119,6 +119,6 @@ test("t() usa pt-BR quando disponível", async () => {
   resetForTests();
   setLocale("pt-BR");
   const result = t("health.noServer");
-  assert.ok(result.includes("omniroute serve"), `Esperava mensagem pt-BR, obteve: ${result}`);
+  assert.ok(result.includes("routechi serve"), `Esperava mensagem pt-BR, obteve: ${result}`);
   resetForTests();
 });

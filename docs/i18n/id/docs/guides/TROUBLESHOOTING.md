@@ -45,7 +45,7 @@ Masalah umum dan solusinya untuk OmniRoute.
    nvm use 24
    ```
 2. Verifikasi versi Anda: `node --version` seharusnya menampilkan `v24.0.0` atau lebih baru pada lini LTS 24.x
-3. Instal ulang OmniRoute: `npm install -g omniroute`
+3. Instal ulang OmniRoute: `npm install -g routechi`
 4. Mulai ulang: `omniroute`
 
 > **Versi aman yang didukung:** `>=20.20.2 <21`, `>=22.22.2 <23`, atau `>=24.0.0 <25`. Node.js 24.x LTS (Krypton) sepenuhnya didukung.
@@ -54,7 +54,7 @@ Masalah umum dan solusinya untuk OmniRoute.
 
 <a name="macos-native-module-rebuild"></a>
 
-**Penyebab:** Setelah `npm install -g omniroute` secara global, biner native `better-sqlite3` di dalam paket mungkin telah dikompilasi untuk arsitektur atau ABI Node.js yang berbeda dari yang berjalan secara lokal. Hal ini umum terjadi di macOS (baik Apple Silicon maupun Intel) ketika biner yang sudah dibangun tidak cocok dengan lingkungan Anda.
+**Penyebab:** Setelah `npm install -g routechi` secara global, biner native `better-sqlite3` di dalam paket mungkin telah dikompilasi untuk arsitektur atau ABI Node.js yang berbeda dari yang berjalan secara lokal. Hal ini umum terjadi di macOS (baik Apple Silicon maupun Intel) ketika biner yang sudah dibangun tidak cocok dengan lingkungan Anda.
 
 **Gejala:**
 
@@ -333,7 +333,7 @@ Anda dapat mengabaikan bagian ini jika Anda tidak menjalankan pipeline RAG atau 
 
 ## Masih Terjebak?
 
-- **GitHub Issues**: [github.com/diegosouzapw/OmniRoute/issues](https://github.com/diegosouzapw/OmniRoute/issues)
+- **GitHub Issues**: [github.com/borhandarabi/routechi/issues](https://github.com/borhandarabi/routechi/issues)
 - **Arsitektur**: Lihat [`docs/architecture/ARCHITECTURE.md`](ARCHITECTURE.md) untuk detail internal
 - **Referensi API**: Lihat [`docs/reference/API_REFERENCE.md`](API_REFERENCE.md) untuk semua endpoint
 - **Health Dashboard**: Periksa **Dashboard → Health** untuk status sistem secara real-time

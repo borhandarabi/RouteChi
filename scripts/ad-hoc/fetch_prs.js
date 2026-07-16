@@ -2,7 +2,7 @@ import { execSync } from "child_process";
 import fs from "fs";
 import path from "path";
 
-const REPO = "diegosouzapw/OmniRoute";
+const REPO = "borhandarabi/routechi";
 const artifactsDir =
   process.env.ARTIFACTS_DIR ||
   path.join(process.cwd(), "artifacts");

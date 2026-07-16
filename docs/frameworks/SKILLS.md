@@ -358,7 +358,7 @@ enum SkillStatus {
 ### Inspecting Executions
 
 ```ts
-import { skillExecutor } from "omniroute/skills/executor";
+import { skillExecutor } from "routechi/skills/executor";
 
 // Get a specific execution by ID
 const exec = skillExecutor.getExecution("exec-uuid-123");

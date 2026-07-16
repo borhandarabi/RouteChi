@@ -4,7 +4,7 @@
 
 import type { AgentSkill, SkillArea, SkillCategory } from "@/lib/agentSkills/types";
 
-const REPO = "diegosouzapw/OmniRoute";
+const REPO = "borhandarabi/routechi";
 const BRANCH = "main";
 const SKILL_PATH = "skills";
 

@@ -11,8 +11,8 @@ Manage context engineering configurations, RTK filter sets, and conversation ses
 ## Quick install
 
 ```bash
-npm install -g omniroute   # or: npx omniroute
-omniroute --version
+npm install -g routechi   # or: npx routechi
+routechi --version
 ```
 
 ## Subcommands
@@ -22,7 +22,7 @@ omniroute --version
 **Example:**
 
 ```bash
-omniroute context-eng
+routechi context-eng
 ```
 
 ### `context-eng analytics`
@@ -34,7 +34,7 @@ omniroute context-eng
 **Example:**
 
 ```bash
-omniroute context-eng analytics
+routechi context-eng analytics
 ```
 
 ### `context-eng caveman`
@@ -42,7 +42,7 @@ omniroute context-eng analytics
 **Example:**
 
 ```bash
-omniroute context-eng caveman
+routechi context-eng caveman
 ```
 
 ### `context-eng config`
@@ -50,7 +50,7 @@ omniroute context-eng caveman
 **Example:**
 
 ```bash
-omniroute context-eng config
+routechi context-eng config
 ```
 
 ### `context-eng show`
@@ -58,7 +58,7 @@ omniroute context-eng config
 **Example:**
 
 ```bash
-omniroute context-eng show
+routechi context-eng show
 ```
 
 ### `context-eng set`
@@ -72,7 +72,7 @@ omniroute context-eng show
 **Example:**
 
 ```bash
-omniroute context-eng set
+routechi context-eng set
 ```
 
 ### `context-eng rtk`
@@ -80,7 +80,7 @@ omniroute context-eng set
 **Example:**
 
 ```bash
-omniroute context-eng rtk
+routechi context-eng rtk
 ```
 
 ### `context-eng config`
@@ -88,7 +88,7 @@ omniroute context-eng rtk
 **Example:**
 
 ```bash
-omniroute context-eng config
+routechi context-eng config
 ```
 
 ### `context-eng show`
@@ -96,7 +96,7 @@ omniroute context-eng config
 **Example:**
 
 ```bash
-omniroute context-eng show
+routechi context-eng show
 ```
 
 ### `context-eng set`
@@ -109,7 +109,7 @@ omniroute context-eng show
 **Example:**
 
 ```bash
-omniroute context-eng set
+routechi context-eng set
 ```
 
 ### `context-eng filters`
@@ -117,7 +117,7 @@ omniroute context-eng set
 **Example:**
 
 ```bash
-omniroute context-eng filters
+routechi context-eng filters
 ```
 
 ### `context-eng list`
@@ -125,7 +125,7 @@ omniroute context-eng filters
 **Example:**
 
 ```bash
-omniroute context-eng list
+routechi context-eng list
 ```
 
 ### `context-eng add`
@@ -138,7 +138,7 @@ omniroute context-eng list
 **Example:**
 
 ```bash
-omniroute context-eng add
+routechi context-eng add
 ```
 
 ### `context-eng remove <id>`
@@ -150,7 +150,7 @@ omniroute context-eng add
 **Example:**
 
 ```bash
-omniroute context-eng remove <id>
+routechi context-eng remove <id>
 ```
 
 ### `context-eng test`
@@ -158,7 +158,7 @@ omniroute context-eng remove <id>
 **Example:**
 
 ```bash
-omniroute context-eng test
+routechi context-eng test
 ```
 
 ### `context-eng raw-output <id>`
@@ -166,7 +166,7 @@ omniroute context-eng test
 **Example:**
 
 ```bash
-omniroute context-eng raw-output <id>
+routechi context-eng raw-output <id>
 ```
 
 ### `context-eng combos`
@@ -174,7 +174,7 @@ omniroute context-eng raw-output <id>
 **Example:**
 
 ```bash
-omniroute context-eng combos
+routechi context-eng combos
 ```
 
 ### `context-eng list`
@@ -182,7 +182,7 @@ omniroute context-eng combos
 **Example:**
 
 ```bash
-omniroute context-eng list
+routechi context-eng list
 ```
 
 ### `context-eng get <id>`
@@ -190,7 +190,7 @@ omniroute context-eng list
 **Example:**
 
 ```bash
-omniroute context-eng get <id>
+routechi context-eng get <id>
 ```
 
 ### `context-eng assignments <id>`
@@ -198,7 +198,7 @@ omniroute context-eng get <id>
 **Example:**
 
 ```bash
-omniroute context-eng assignments <id>
+routechi context-eng assignments <id>
 ```
 
 ### `contexts`
@@ -206,7 +206,7 @@ omniroute context-eng assignments <id>
 **Example:**
 
 ```bash
-omniroute contexts
+routechi contexts
 ```
 
 ### `contexts list`
@@ -216,7 +216,7 @@ List all contexts
 **Example:**
 
 ```bash
-omniroute contexts list
+routechi contexts list
 ```
 
 ### `contexts add <name>`
@@ -235,7 +235,7 @@ Add a new context
 **Example:**
 
 ```bash
-omniroute contexts add <name>
+routechi contexts add <name>
 ```
 
 ### `contexts use <name>`
@@ -245,7 +245,7 @@ Switch active context
 **Example:**
 
 ```bash
-omniroute contexts use <name>
+routechi contexts use <name>
 ```
 
 ### `contexts current`
@@ -259,7 +259,7 @@ Show the active context (server, auth, scope)
 **Example:**
 
 ```bash
-omniroute contexts current
+routechi contexts current
 ```
 
 ### `contexts show <name>`
@@ -269,7 +269,7 @@ Show context details
 **Example:**
 
 ```bash
-omniroute contexts show <name>
+routechi contexts show <name>
 ```
 
 ### `contexts remove <name>`
@@ -283,7 +283,7 @@ Remove a context
 **Example:**
 
 ```bash
-omniroute contexts remove <name>
+routechi contexts remove <name>
 ```
 
 ### `contexts rename <old> <new>`
@@ -293,7 +293,7 @@ Rename a context
 **Example:**
 
 ```bash
-omniroute contexts rename <old> <new>
+routechi contexts rename <old> <new>
 ```
 
 ### `contexts export`
@@ -308,7 +308,7 @@ Export contexts to JSON
 **Example:**
 
 ```bash
-omniroute contexts export
+routechi contexts export
 ```
 
 ### `contexts import <file>`
@@ -322,7 +322,7 @@ Import contexts from a JSON file
 **Example:**
 
 ```bash
-omniroute contexts import <file>
+routechi contexts import <file>
 ```
 
 ### `sessions`
@@ -330,7 +330,7 @@ omniroute contexts import <file>
 **Example:**
 
 ```bash
-omniroute sessions
+routechi sessions
 ```
 
 ### `sessions list`
@@ -345,7 +345,7 @@ omniroute sessions
 **Example:**
 
 ```bash
-omniroute sessions list
+routechi sessions list
 ```
 
 ### `sessions show <sessionId>`
@@ -353,7 +353,7 @@ omniroute sessions list
 **Example:**
 
 ```bash
-omniroute sessions show <sessionId>
+routechi sessions show <sessionId>
 ```
 
 ### `sessions expire <sessionId>`
@@ -365,7 +365,7 @@ omniroute sessions show <sessionId>
 **Example:**
 
 ```bash
-omniroute sessions expire <sessionId>
+routechi sessions expire <sessionId>
 ```
 
 ### `sessions expire-all`
@@ -377,7 +377,7 @@ omniroute sessions expire <sessionId>
 **Example:**
 
 ```bash
-omniroute sessions expire-all
+routechi sessions expire-all
 ```
 
 ### `sessions current`
@@ -385,5 +385,5 @@ omniroute sessions expire-all
 **Example:**
 
 ```bash
-omniroute sessions current
+routechi sessions current
 ```

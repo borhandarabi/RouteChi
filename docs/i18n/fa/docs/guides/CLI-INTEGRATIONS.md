@@ -15,8 +15,8 @@ backend خود استفاده کند — در نتیجه ابزار با **یک*
 کند از طریق env var ارجاع داده می‌شود، بنابراین راز هرگز روی دیسک نوشته نمی‌شود
 (استثناها در ادامه ذکر شده‌اند).
 
-دو لانچر نیز وجود دارد — `omniroute launch` (Claude Code) و
-`omniroute launch-codex` (Codex) — که CLI را با env درست تزریق‌شده اجرا می‌کنند،
+دو لانچر نیز وجود دارد — `routechi launch` (Claude Code) و
+`routechi launch-codex` (Codex) — که CLI را با env درست تزریق‌شده اجرا می‌کنند،
 بدون اینکه هیچ پیکربندی‌ای بنویسند.
 
 برای راه‌اندازی پایهٔ یک‌باره و دست‌نویسِ دو یکپارچه‌سازی غنی‌تر، به شرح‌های عمیق
@@ -30,7 +30,7 @@ backend خود استفاده کند — در نتیجه ابزار با **یک*
 
 ## جدول اصلی
 
-هر دستور از **context فعال** (تنظیم‌شده با `omniroute connect`، به
+هر دستور از **context فعال** (تنظیم‌شده با `routechi connect`، به
 [حالت راهور](./REMOTE-MODE.md) مراجعه کنید) یا پرچم‌های صریح `--remote <url> --api-key <key>`
 پیروی می‌کند. «محلی در برابر راهور» در ادامه به این معناست: بدون پرچم، `http://localhost:20128`
 را هدف می‌گیرد؛ با `--remote` (یا یک context راهور فعال) کاتالوگ را از آن سرور
@@ -38,20 +38,20 @@ backend خود استفاده کند — در نتیجه ابزار با **یک*
 
 | دستور | ابزار | آنچه می‌نویسد | پرچم‌های کلیدی | محلی در برابر راهور |
 |---------|------|----------------|-----------|-----------------|
-| `omniroute setup-codex` | OpenAI Codex CLI | `~/.codex/<name>.config.toml` — یک پروفایل به ازای هر مدل متنی سازگار (`codex --profile <name>`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--codex-home` | هر دو |
-| `omniroute setup-claude` | Claude Code | `~/.claude/profiles/<name>/settings.json` — یک پروفایل به ازای هر مدل تطبیق‌خورده (`CLAUDE_CONFIG_DIR`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--claude-home` | هر دو |
-| `omniroute setup-opencode` | OpenCode (سازگار با openai) | `~/.config/opencode/opencode.json` — ارائه‌دهندهٔ `omniroute` با هر مدل کاتالوگ (`opencode -m omniroute/<model>`) | `--remote` `--api-key` `--only` `--model` `--dry-run` `--port` | هر دو |
-| `omniroute setup-cline` | Cline | `~/.cline/data/{globalState,secrets}.json` (حالت CLI) + تنظیمات افزونهٔ VS Code را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--cline-dir` | هر دو |
-| `omniroute setup-kilo` | Kilo Code | `~/.local/share/kilo/auth.json` (CLI) + `kilocode.*` را با `settings.json` ادغام می‌کند در صورت وجود VS Code | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--auth-path` `--vscode-settings` | هر دو |
-| `omniroute setup-continue` | Continue / `cn` CLI | `~/.continue/config.yaml` — مدل‌های `provider: openai`، کلید از طریق `${{ secrets.OMNIROUTE_API_KEY }}` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | هر دو |
-| `omniroute setup-cursor` | Cursor | چیزی نه — مراحل درون‌اپلیکیشنی را چاپ می‌کند (پیکربندی Cursor یک SQLite مات است) | `--remote` `--api-key` `--only` `--port` | هر دو |
-| `omniroute setup-roo` | Roo Code | `~/.omniroute/roo-settings.json` (سند import) + `roo-cline.autoImportSettingsPath` را در صورت وجود یک `settings.json` در VS Code تنظیم می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--import-path` `--vscode-settings` | هر دو |
-| `omniroute setup-crush` | Crush | `~/.config/crush/crush.json` — ارائه‌دهندهٔ `openai-compat`، کلید از طریق `$OMNIROUTE_API_KEY` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | هر دو |
-| `omniroute setup-goose` | Goose | `~/.config/goose/config.yaml` (`GOOSE_PROVIDER`/`OPENAI_HOST`/`GOOSE_MODEL`) + دستور العمل env را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
-| `omniroute setup-qwen` | Qwen Code | `~/.qwen/settings.json` — `modelProvider` از نوع openai، کلید از طریق `envKey` (`OMNIROUTE_API_KEY`) | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
-| `omniroute setup-aider` | Aider | `~/.aider.conf.yml` (`openai-api-base` + `model: openai/<id>`) + دستور العمل env را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
-| `omniroute launch` | Claude Code | چیزی نه — `claude` را با `ANTHROPIC_BASE_URL`/`ANTHROPIC_AUTH_TOKEN` تزریق‌شده اجرا می‌کند | `--remote` `--api-key` `--token` `--profile` `--port` | هر دو |
-| `omniroute launch-codex` | OpenAI Codex CLI | چیزی نه — `codex` را با ارائه‌دهندهٔ `omniroute` تزریق‌شده از طریق پرچم‌های `-c` اجرا می‌کند | `--remote` `--api-key` `--profile` (`-p`) `--port` | هر دو |
+| `routechi setup-codex` | OpenAI Codex CLI | `~/.codex/<name>.config.toml` — یک پروفایل به ازای هر مدل متنی سازگار (`codex --profile <name>`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--codex-home` | هر دو |
+| `routechi setup-claude` | Claude Code | `~/.claude/profiles/<name>/settings.json` — یک پروفایل به ازای هر مدل تطبیق‌خورده (`CLAUDE_CONFIG_DIR`) | `--remote` `--api-key` `--only` `--dry-run` `--port` `--claude-home` | هر دو |
+| `routechi setup-opencode` | OpenCode (سازگار با openai) | `~/.config/opencode/opencode.json` — ارائه‌دهندهٔ `omniroute` با هر مدل کاتالوگ (`opencode -m omniroute/<model>`) | `--remote` `--api-key` `--only` `--model` `--dry-run` `--port` | هر دو |
+| `routechi setup-cline` | Cline | `~/.cline/data/{globalState,secrets}.json` (حالت CLI) + تنظیمات افزونهٔ VS Code را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--cline-dir` | هر دو |
+| `routechi setup-kilo` | Kilo Code | `~/.local/share/kilo/auth.json` (CLI) + `kilocode.*` را با `settings.json` ادغام می‌کند در صورت وجود VS Code | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--auth-path` `--vscode-settings` | هر دو |
+| `routechi setup-continue` | Continue / `cn` CLI | `~/.continue/config.yaml` — مدل‌های `provider: openai`، کلید از طریق `${{ secrets.OMNIROUTE_API_KEY }}` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | هر دو |
+| `routechi setup-cursor` | Cursor | چیزی نه — مراحل درون‌اپلیکیشنی را چاپ می‌کند (پیکربندی Cursor یک SQLite مات است) | `--remote` `--api-key` `--only` `--port` | هر دو |
+| `routechi setup-roo` | Roo Code | `~/.omniroute/roo-settings.json` (سند import) + `roo-cline.autoImportSettingsPath` را در صورت وجود یک `settings.json` در VS Code تنظیم می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--import-path` `--vscode-settings` | هر دو |
+| `routechi setup-crush` | Crush | `~/.config/crush/crush.json` — ارائه‌دهندهٔ `openai-compat`، کلید از طریق `$OMNIROUTE_API_KEY` | `--remote` `--api-key` `--only` `--dry-run` `--port` `--config-path` | هر دو |
+| `routechi setup-goose` | Goose | `~/.config/goose/config.yaml` (`GOOSE_PROVIDER`/`OPENAI_HOST`/`GOOSE_MODEL`) + دستور العمل env را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
+| `routechi setup-qwen` | Qwen Code | `~/.qwen/settings.json` — `modelProvider` از نوع openai، کلید از طریق `envKey` (`OMNIROUTE_API_KEY`) | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
+| `routechi setup-aider` | Aider | `~/.aider.conf.yml` (`openai-api-base` + `model: openai/<id>`) + دستور العمل env را چاپ می‌کند | `--remote` `--api-key` `--model` `--yes` `--dry-run` `--port` `--config-path` | هر دو |
+| `routechi launch` | Claude Code | چیزی نه — `claude` را با `ANTHROPIC_BASE_URL`/`ANTHROPIC_AUTH_TOKEN` تزریق‌شده اجرا می‌کند | `--remote` `--api-key` `--token` `--profile` `--port` | هر دو |
+| `routechi launch-codex` | OpenAI Codex CLI | چیزی نه — `codex` را با ارائه‌دهندهٔ `omniroute` تزریق‌شده از طریق پرچم‌های `-c` اجرا می‌کند | `--remote` `--api-key` `--profile` (`-p`) `--port` | هر دو |
 
 یادداشت‌هایی دربارهٔ پرچم‌ها (تأییدشده در منبع دستور):
 
@@ -74,7 +74,7 @@ backend خود استفاده کند — در نتیجه ابزار با **یک*
   argهای pass-through برای باینری `claude` / `codex` زیرین.
 
 > `setup-opencode` یکپارچه‌سازی **سبک و سازگار با openai** برای OpenCode است.
-> همچنین یک یکپارچه‌سازی افزونه‌ای غنی‌تر نیز وجود دارد — `omniroute setup opencode` — که
+> همچنین یک یکپارچه‌سازی افزونه‌ای غنی‌تر نیز وجود دارد — `routechi setup opencode` — که
 > `@omniroute/opencode-plugin` را نصب می‌کند. این‌ها دستورات متفاوتی هستند؛ جدول
 > بالا `setup-opencode` را مستند می‌کند.
 
@@ -87,32 +87,32 @@ backend خود استفاده کند — در نتیجه ابزار با **یک*
 
 ```bash
 # Codex: write a profile per matched model into ~/.codex/
-omniroute setup-codex
+routechi setup-codex
 codex --profile glm52            # use a generated profile
 
 # Claude Code: write per-model profiles, then launch one
-omniroute setup-claude
-omniroute launch --profile glm52
+routechi setup-claude
+routechi launch --profile glm52
 
 # OpenCode: write the openai-compatible provider with all catalog models
-omniroute setup-opencode
+routechi setup-opencode
 export OMNIROUTE_API_KEY=sk-...  # referenced via {env:OMNIROUTE_API_KEY}, never on disk
 opencode -m omniroute/glm/glm-5.2 "..."
 
 # Tools without auto-discovery need an explicit model:
-omniroute setup-aider --model glm/glm-5.2
-omniroute setup-qwen  --model kmc/kimi-k2.7
+routechi setup-aider --model glm/glm-5.2
+routechi setup-qwen  --model kmc/kimi-k2.7
 
 # Preview without writing anything:
-omniroute setup-continue --dry-run
+routechi setup-continue --dry-run
 ```
 
 اجرای بدون نوشتن هیچ پیکربندی (فقط تزریق env):
 
 ```bash
-omniroute launch                 # Claude Code → local OmniRoute
-omniroute launch-codex           # Codex CLI → local OmniRoute
-omniroute launch-codex --profile glm52
+routechi launch                 # Claude Code → local OmniRoute
+routechi launch-codex           # Codex CLI → local OmniRoute
+routechi launch-codex --profile glm52
 ```
 
 ---
@@ -124,26 +124,26 @@ omniroute launch-codex --profile glm52
 
 ```bash
 # OpenCode against a remote VPS, keep only glm/kimi models
-omniroute setup-opencode --remote http://192.168.0.15:20128 --api-key oma_live_xxx \
+routechi setup-opencode --remote http://192.168.0.15:20128 --api-key oma_live_xxx \
   --only glm,kimi
 opencode -m omniroute/glm/glm-5.2 "..."   # export OMNIROUTE_API_KEY first
 
 # Codex profiles from a remote catalog
-omniroute setup-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi setup-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 
 # Launch a CLI straight against the remote
-omniroute launch       --remote http://192.168.0.15:20128 --api-key oma_live_xxx
-omniroute launch-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi launch       --remote http://192.168.0.15:20128 --api-key oma_live_xxx
+routechi launch-codex --remote http://192.168.0.15:20128 --api-key oma_live_xxx
 ```
 
 به‌جای پاس‌کردن `--remote`/`--api-key` در هر بار، یک‌بار وارد شوید و اجازه دهید
 **context فعال** آن‌ها را به‌طور خودکار تأمین کند:
 
 ```bash
-omniroute connect 192.168.0.15        # mints a scoped token, stores the context
-omniroute setup-codex                 # ← now uses the remote catalog
-omniroute setup-opencode              # ← same
-omniroute launch                      # ← Claude Code against the remote
+routechi connect 192.168.0.15        # mints a scoped token, stores the context
+routechi setup-codex                 # ← now uses the remote catalog
+routechi setup-opencode              # ← same
+routechi launch                      # ← Claude Code against the remote
 ```
 
 برای contextها، scopeها و مدیریت توکن به [حالت راهور](./REMOTE-MODE.md) مراجعه کنید.
@@ -169,14 +169,14 @@ OmniRoute رابط OpenAI را در `/v1`، رابط Anthropic را در root، 
 
 ## نگه‌داشتن وابستگی‌های بومی هنگام به‌روزرسانی: `--include=optional`
 
-وقتی با `omniroute update` به‌روزرسانی می‌کنید (پس از تأیید، یا با `--apply`)،
+وقتی با `routechi update` به‌روزرسانی می‌کنید (پس از تأیید، یا با `--apply`)،
 OmniRoute نصب را با `--include=optional` پخته‌شده درون آن اجرا می‌کند:
 
 ```bash
-npm install -g omniroute@latest --include=optional
+npm install -g routechi@latest --include=optional
 ```
 
-این پرچمی نیست که شما به `omniroute update` بدهید — همیشه توسط
+این پرچمی نیست که شما به `routechi update` بدهید — همیشه توسط
 updater اعمال می‌شود. این تضمین می‌کند که `optionalDependencies`ها
 (`better-sqlite3`، `keytar`، `tls-client`، استک SLM مربوط به LLMLingua) از
 به‌روزرسانی جان سالم به‌در ببرند، حتی اگر پیکربندی npm شما
@@ -185,11 +185,11 @@ updater اعمال می‌شود. این تضمین می‌کند که `optional
 بدون اعمال:
 
 ```bash
-omniroute update --dry-run
-# [DRY RUN] Would run: npm install -g omniroute@latest --include=optional
+routechi update --dry-run
+# [DRY RUN] Would run: npm install -g routechi@latest --include=optional
 ```
 
-سایر پرچم‌های `omniroute update` (تأییدشده در منبع): `--check` (در صورت
+سایر پرچم‌های `routechi update` (تأییدشده در منبع): `--check` (در صورت
 قدیمی‌بودن با exit 1 خارج می‌شود)، `--apply` (نصب بدون پرسش)، `--changelog`،
 `--no-backup`، `--yes`.
 

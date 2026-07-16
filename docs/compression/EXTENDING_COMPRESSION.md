@@ -85,8 +85,8 @@ interface CompressionEngine {
 The simplest possible engine — strip extra whitespace from messages.
 
 ````ts
-import type { CompressionEngine } from "omniroute/compression/engines/types";
-import { registerCompressionEngine } from "omniroute/compression/engines/registry";
+import type { CompressionEngine } from "routechi/compression/engines/types";
+import { registerCompressionEngine } from "routechi/compression/engines/registry";
 
 function preserveCodeBlocks(text: string): string {
   // Split by code block markers and preserve whitespace inside them
@@ -329,7 +329,7 @@ exercise the compression path) and watch the logs.
 ### Loading a Custom Language Pack
 
 ```ts
-import { loadRulePack } from "omniroute/compression/ruleLoader";
+import { loadRulePack } from "routechi/compression/ruleLoader";
 
 await loadRulePack("./my-custom-rules/hi/filler.json");
 ```

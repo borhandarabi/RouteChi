@@ -4,8 +4,8 @@
   "description": "Unified AI router with 160+ providers, RTK+Caveman compression, auto fallback, MCP/A2A, desktop, PWA, and OpenAI-compatible APIs.",
   "type": "module",
   "bin": {
-    "omniroute": "bin/omniroute.mjs",
-    "omniroute-reset-password": "bin/reset-password.mjs"
+    "routechi": "bin/omniroute.mjs",
+    "routechi-reset-password": "bin/reset-password.mjs"
   },
   "files": [
     "bin/",
@@ -70,7 +70,7 @@
   "author": "diegosouzapw",
   "repository": {
     "type": "git",
-    "url": "https://github.com/diegosouzapw/OmniRoute"
+    "url": "https://github.com/borhandarabi/routechi"
   },
   "homepage": "https://omniroute.online",
   "scripts": {
@@ -367,7 +367,7 @@
       "@swc/core",
       "better-sqlite3",
       "esbuild",
-      "omniroute",
+      "routechi",
       "sharp"
     ]
   },

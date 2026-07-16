@@ -22,7 +22,7 @@ OmniRoute resolves its SQLite driver at startup through a 5-step fallback chain:
 
 ## Why this complexity?
 
-- **Windows EBUSY**: `npm install -g omniroute@latest` can fail if the previous
+- **Windows EBUSY**: `npm install -g routechi@latest` can fail if the previous
   version's `better_sqlite3.node` is locked by a running process. The runtime
   install in `~/.omniroute/runtime/` sidesteps the global npm cache.
 - **No build tools**: Some environments (corporate Windows without VS Build
@@ -61,14 +61,14 @@ const info = getDriverInfo();
 
 ```bash
 # Skip postinstall warm-up (for fast CI installs)
-OMNIROUTE_SKIP_POSTINSTALL=1 npm install -g omniroute
+OMNIROUTE_SKIP_POSTINSTALL=1 npm install -g routechi
 
 # Force-reinstall runtime better-sqlite3
 rm -rf ~/.omniroute/runtime
-omniroute  # will reinstall on next start
+routechi  # will reinstall on next start
 
 # Check what driver is active
-omniroute config db-info  # (if CLI command exists)
+routechi config db-info  # (if CLI command exists)
 ```
 
 ## Reference

@@ -1,6 +1,6 @@
 /**
  * Regression test for #3331 — autostart could only be toggled from the tray
- * (`serve --tray`) or the Electron Appearance tab; a plain `omniroute serve`
+ * (`serve --tray`) or the Electron Appearance tab; a plain `routechi serve`
  * user had no way to enable it. The `autostart` command now exposes the
  * shorthand the reporter asked for (`omniroute autostart on` / `... true`) via
  * aliases on the enable/disable subcommands, plus a `toggle` subcommand and a
