@@ -169,6 +169,7 @@ const MANAGED_PROVIDER_CONNECTION_CATEGORIES = new Set<StaticProviderCatalogCate
   "search",
   "audio",
   "cloud-agent",
+  "no-auth", // #kilo-free: allow no-auth providers to create connection rows for per-account proxy management
 ]);
 
 export function getStaticProviderCatalogGroup(

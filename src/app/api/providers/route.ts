@@ -31,6 +31,7 @@ import {
 } from "@/lib/providers/requestDefaults";
 import { requireManagementAuth } from "@/lib/api/requireManagementAuth";
 import { isManagedProviderConnectionId } from "@/lib/providers/catalog";
+import { isNoAuthProviderKey } from "@/shared/utils/noAuthProviders";
 import { isApiKeyRevealEnabled, maskStoredApiKey } from "@/lib/apiKeyExposure";
 import {
   buildModelSyncInternalHeaders,
@@ -160,7 +161,7 @@ export async function POST(request: Request) {
 
     const newConnection = await createProviderConnection({
       provider,
-      authType: "apikey",
+      authType: isNoAuthProviderKey(provider) ? "none" : "apikey",
       name,
       apiKey,
       priority: priority || 1,
