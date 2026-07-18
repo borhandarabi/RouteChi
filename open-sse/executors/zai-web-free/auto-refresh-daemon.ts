@@ -49,6 +49,13 @@ export function notifyRequest(): void {
   if (_suspended) {
     _suspended = false;
     log.info?.("daemon.resumed_after_idle");
+    // Restart the interval — it was cleared when the daemon suspended.
+    const settings = getSettings();
+    if (settings.autoRefreshEnabled) {
+      _interval = setInterval(() => {
+        void checkAndRefresh();
+      }, settings.autoRefreshIntervalMs);
+    }
     // Run an immediate check — the pool may be stale/empty after idle.
     void checkAndRefresh();
   }

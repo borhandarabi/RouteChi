@@ -567,6 +567,11 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
     const poolSize = getPoolSize();
     let captchaParam = "";
 
+    // Notify the daemon that a request is active — wakes it from idle-suspend
+    // BEFORE we try to consume tokens (not after). This ensures the pool is
+    // replenished if it was stale after a long idle period.
+    notifyDaemonRequest();
+
     // Helper: run Method A (server-side crypto with device tokens from pool)
     const runMethodA = async (label: string): Promise<string> => {
       if (getPoolSize() === 0) {
@@ -586,8 +591,6 @@ export class ZaiWebFreeExecutor extends BaseExecutor {
           result = await captchaPromise;
         }
         dynLog?.debug?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `captcha via ${label} (pool: ${poolSize} → ${getPoolSize()})`);
-        // Notify the daemon that a request is active — wakes it from idle-suspend.
-        notifyDaemonRequest();
         return result;
       } catch (err) {
         dynLog?.warn?.((hasUserToken ? "ZAI-WEB-TOKEN" : "ZAI-WEB-FREE"), `${label} failed: ${err instanceof Error ? err.message : String(err)}`);
