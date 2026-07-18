@@ -1,0 +1,17 @@
+{
+  "name": "routechi-cloud-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for RouteChi Cloud Sync — relays OpenAI-compatible requests to upstream providers using synced credentials.",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "tail": "wrangler tail"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240620.0",
+    "typescript": "^5.5.0",
+    "wrangler": "^3.60.0"
+  }
+}

@@ -83,7 +83,7 @@ export async function fetchWithTimeout(url, options = {}, timeoutMs = CLOUD_SYNC
 /**
  * Sync data to Cloud (shared utility)
  * @param {string} machineId
- * @param {string|null} createdKey - Key created during enable
+ * @param {string|null} createdKey - Key created during enable (also used as Bearer token for auth)
  */
 export async function syncToCloud(machineId, createdKey = null) {
   if (!CLOUD_URL) {
@@ -95,12 +95,31 @@ export async function syncToCloud(machineId, createdKey = null) {
   const { version, bundle } = await buildConfigSyncEnvelope();
   const legacyPayload = toLegacyCloudSyncPayload(bundle);
 
+  // Build headers — include Bearer auth if we have an API key.
+  // The worker uses this to authenticate subsequent sync requests
+  // (the first sync is accepted without auth as a bootstrap).
+  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  if (createdKey) {
+    headers["Authorization"] = `Bearer ${createdKey}`;
+  } else {
+    // Try to find an existing API key for auth
+    try {
+      const { pickApiKeyForInternalUse } = await import("@/lib/localDb");
+      const apiKey = await pickApiKeyForInternalUse("cloud-sync");
+      if (apiKey) {
+        headers["Authorization"] = `Bearer ${apiKey}`;
+      }
+    } catch {
+      // best-effort — sync without auth (worker will accept on first sync)
+    }
+  }
+
   let response;
   try {
     // Send to Cloud
     response = await fetchWithTimeout(`${CLOUD_URL}/sync/${machineId}`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers,
       body: JSON.stringify({
         ...legacyPayload,
         version,

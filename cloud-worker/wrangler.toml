@@ -1,0 +1,21 @@
+name = "routechi-cloud"
+main = "src/worker.ts"
+compatibility_date = "2024-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+# KV namespace for storing sync bundles.
+# Create with: wrangler kv namespace create BUNDLES
+# Then paste the id below.
+[[kv_namespaces]]
+binding = "BUNDLES"
+id = "your-kv-namespace-id-here"
+
+# Shared HMAC secret for response signing.
+# Must match OMNIROUTE_CLOUD_SYNC_SECRET on the local RouteChi instance.
+# Generate with: openssl rand -hex 32
+[vars]
+CLOUD_SYNC_SECRET = ""
+
+# Optional: restrict allowed upstream provider hosts.
+# Empty = allow all. Comma-separated list to restrict.
+# ALLOWED_UPSTREAM_HOSTS = "api.openai.com,api.anthropic.com,generativelanguage.googleapis.com"
