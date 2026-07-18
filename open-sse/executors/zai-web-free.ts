@@ -89,6 +89,7 @@ interface ZaiSSEChunk {
   data?: {
     phase?: string;
     edit_content?: string;
+    edit_index?: number;
     delta_content?: string;
     content?: string;
     error?: { detail?: string; message?: string; code?: unknown };

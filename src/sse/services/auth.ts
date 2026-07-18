@@ -725,13 +725,16 @@ type AnonymousFallbackProviderDefinition = {
   noAuth?: boolean;
 };
 
-function buildSyntheticNoAuthCredentials(providerSpecificData: JsonRecord = {}): {
+function buildSyntheticNoAuthCredentials(
+  providerSpecificData: JsonRecord = {},
+  defaultModel: string | null = null
+): {
   apiKey: null;
   accessToken: null;
   refreshToken: null;
   expiresAt: null;
   projectId: null;
-  defaultModel: null;
+  defaultModel: string | null;
   copilotToken: null;
   providerSpecificData: JsonRecord;
   connectionId: typeof SYNTHETIC_NOAUTH_CONNECTION_ID;
@@ -753,7 +756,7 @@ function buildSyntheticNoAuthCredentials(providerSpecificData: JsonRecord = {}):
     refreshToken: null,
     expiresAt: null,
     projectId: null,
-    defaultModel: null,
+    defaultModel,
     copilotToken: null,
     providerSpecificData,
     connectionId: SYNTHETIC_NOAUTH_CONNECTION_ID,
@@ -773,13 +776,16 @@ function buildSyntheticNoAuthCredentials(providerSpecificData: JsonRecord = {}):
  * and resolve by-id Proxy Pool references to live records (./noAuthProxyResolution)
  * so the executor gets a resolved inline `proxy`. Best-effort: failures → empty.
  */
-async function loadNoAuthProviderSpecificData(providerId: string): Promise<JsonRecord> {
+async function loadNoAuthProviderSpecificData(
+  providerId: string
+): Promise<{ providerSpecificData: JsonRecord; defaultModel: string | null }> {
   try {
     const connectionsRaw = await getProviderConnections({ provider: providerId });
     const connections = (Array.isArray(connectionsRaw) ? connectionsRaw : []).map(
       toProviderConnection
     );
     const hydrated: JsonRecord = {};
+    let userDefaultModel: string | null = null;
     for (const conn of connections) {
       const psd = conn.providerSpecificData;
       if (!psd || typeof psd !== "object") continue;
@@ -789,13 +795,34 @@ async function loadNoAuthProviderSpecificData(providerId: string): Promise<JsonR
       if (Array.isArray(psd.accountProxies) && !Array.isArray(hydrated.accountProxies)) {
         hydrated.accountProxies = psd.accountProxies;
       }
+      // #kilo-free: pick up user-configured default model from the first
+      // connection that has one. Stored in provider_connections.defaultModel
+      // via the dashboard "Default Model" picker (NoAuthProviderControls).
+      if (!userDefaultModel && typeof conn.defaultModel === "string" && conn.defaultModel.trim()) {
+        userDefaultModel = conn.defaultModel.trim();
+      }
     }
     if (Array.isArray(hydrated.accountProxies)) {
       hydrated.accountProxies = await resolveAccountProxiesFromRegistry(hydrated.accountProxies);
     }
-    return hydrated;
+    // #kilo-free: also check the key_value settings table for the user's
+    // chosen default model. This is the primary storage for no-auth providers
+    // (which have no DB connection row). Takes precedence over the connection
+    // column above (but both are checked for completeness).
+    if (!userDefaultModel && providerId === "kilo-free") {
+      try {
+        const settings = await getSettings();
+        const settingsModel = settings?.kiloFreeDefaultModel;
+        if (typeof settingsModel === "string" && settingsModel.trim()) {
+          userDefaultModel = settingsModel.trim();
+        }
+      } catch {
+        // best-effort — settings not available
+      }
+    }
+    return { providerSpecificData: hydrated, defaultModel: userDefaultModel };
   } catch {
-    return {};
+    return { providerSpecificData: {}, defaultModel: null };
   }
 }
 
@@ -823,8 +850,25 @@ async function maybeSyntheticNoAuthFallback(
   if (excludedConnectionIds.has(SYNTHETIC_NOAUTH_CONNECTION_ID)) return null;
   // #4954: hydrate per-account proxy/rotation config off the connection row so
   // no-auth executors (opencode, mimocode) actually honor configured proxies.
-  const providerSpecificData = await loadNoAuthProviderSpecificData(providerId);
-  return buildSyntheticNoAuthCredentials(providerSpecificData);
+  // #kilo-free: also pick up user-configured defaultModel (if any) so the
+  // executor can substitute it when the client omits `model`. If the user
+  // hasn't set one, fall back to the registry entry's `defaultModel` field
+  // (e.g. kilo-free ships with `kilo-auto/free` as the curated default).
+  const { providerSpecificData, defaultModel: userModel } =
+    await loadNoAuthProviderSpecificData(providerId);
+  let defaultModel = userModel;
+  if (!defaultModel) {
+    try {
+      const { getRegistryEntry } = await import("@omniroute/open-sse/config/providerRegistry.ts");
+      const entry = getRegistryEntry(providerId);
+      if (entry?.defaultModel) {
+        defaultModel = entry.defaultModel;
+      }
+    } catch {
+      // best-effort — registry not available in this context
+    }
+  }
+  return buildSyntheticNoAuthCredentials(providerSpecificData, defaultModel);
 }
 
 function normalizeExcludedConnectionIds(

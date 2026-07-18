@@ -107,6 +107,10 @@ export const updateSettingsSchema = z.object({
   baseUrl: z.string().max(500).optional(),
   setupComplete: z.boolean().optional(),
   blockedProviders: z.array(z.string().max(100)).optional(),
+  // #kilo-free: user-configured default model for the kilo-free no-auth provider.
+  // When set, overrides the registry default (kilo-auto/free). Stored in the
+  // key_value settings table and loaded by loadNoAuthProviderSpecificData.
+  kiloFreeDefaultModel: z.string().max(200).optional(),
   hideHealthCheckLogs: z.boolean().optional(),
   hideEndpointCloudflaredTunnel: z.boolean().optional(),
   hideEndpointTailscaleFunnel: z.boolean().optional(),

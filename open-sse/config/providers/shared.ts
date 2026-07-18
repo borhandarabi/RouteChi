@@ -130,6 +130,11 @@ export interface RegistryEntry {
   clientVersion?: string;
   timeoutMs?: number;
   passthroughModels?: boolean;
+  /** Default model ID used when the client omits `model` from the request body.
+   *  For no-auth providers with multiple models (e.g. kilo-free), this is the
+   *  curated default (like `kilo-auto/free`). Users can override per-connection
+   *  via the dashboard "Default Model" picker (stored in provider_connections.defaultModel). */
+  defaultModel?: string;
   /** Default context window for all models in this provider (can be overridden per-model) */
   defaultContextLength?: number;
   /** Optional session pool config for rate limit management */

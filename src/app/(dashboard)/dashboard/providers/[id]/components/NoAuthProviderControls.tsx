@@ -12,6 +12,9 @@ import dynamic from "next/dynamic";
 // other no-auth providers (mimocode, opencode, auggie, etc).
 const ZaiDeviceTokenPanel = dynamic(() => import("./ZaiDeviceTokenPanel"), { ssr: false });
 
+// Lazy-load KiloFreeDefaultModelPanel only on the kilo-free provider page.
+const KiloFreeDefaultModelPanel = dynamic(() => import("./KiloFreeDefaultModelPanel"), { ssr: false });
+
 const ACCOUNT_PROVIDER_NAMES: Record<string, string> = {
   mimocode: "MiMoCode",
   opencode: "OpenCode",
@@ -112,6 +115,9 @@ export default function NoAuthProviderControls({
       {/* zai-web-free gets an additional Device Token Pool + Aliyun Captcha Keys
           panel below the standard enable/disable card. */}
       {providerId === "zai-web-free" && <ZaiDeviceTokenPanel />}
+      {/* kilo-free gets a Default Model picker panel so users can override
+          the curated default (kilo-auto/free) with any free model. */}
+      {providerId === "kilo-free" && <KiloFreeDefaultModelPanel />}
     </>
   );
 }

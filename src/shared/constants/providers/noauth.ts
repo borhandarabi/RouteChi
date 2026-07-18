@@ -139,4 +139,24 @@ export const NOAUTH_PROVIDERS = {
       text: "Z.AI Free Web uses chat.z.ai's consumer web endpoint with Aliyun CaptchaV3 verification. Device tokens are collected via Playwright and consumed FIFO. Rate limits may apply.",
     },
   },
+  "kilo-free": {
+    id: "kilo-free",
+    alias: "kilofree",
+    name: "Kilo Free",
+    icon: "auto_awesome",
+    color: "#10B981",
+    textIcon: "KF",
+    website: "https://kilo.ai",
+    noAuth: true,
+    hasFree: true,
+    serviceKinds: ["llm"],
+    supportsDefaultModel: true,
+    authHint:
+      "No API key required — uses Kilo's public OpenRouter endpoint with 10+ free models including auto-routing.",
+    freeNote:
+      "Free Kilo OpenRouter endpoint (api.kilo.ai/api/openrouter) with 10+ free models. Default model is kilo-auto/free (auto-routing). No signup or captcha needed.",
+    notice: {
+      text: "Kilo Free uses api.kilo.ai/api/openrouter — a public no-auth endpoint with 10+ free models (:free suffix). Default model kilo-auto/free auto-routes to the best available free backend. Multi-turn works via standard messages array (upstream is stateless).",
+    },
+  },
 };
