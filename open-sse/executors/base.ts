@@ -21,6 +21,7 @@ import type { PoolConfig } from "../services/sessionPool/types.ts";
 import type { Session } from "../services/sessionPool/session.ts";
 import { SessionPool } from "../services/sessionPool/sessionPool.ts";
 import { PoolRegistry } from "../services/sessionPool/poolRegistry.ts";
+import { parseRetryAfter } from "@/shared/utils/classify429";
 import {
   getRotatingApiKey,
   getValidApiKey,
@@ -465,7 +466,10 @@ export class BaseExecutor {
     return status === HTTP_STATUS.RATE_LIMITED && urlIndex + 1 < this.getFallbackCount();
   }
 
-  // Intra-URL retry config: retry same URL before falling back to next node
+  // Intra-URL retry config: retry same URL before falling back to next node.
+  // delayMs is the fallback when no Retry-After header is present.
+  // When Retry-After IS present (or the body suggests a longer cooldown),
+  // the actual delay is max(delayMs, parsedRetryAfterSeconds * 1000).
   static readonly RETRY_CONFIG = { maxAttempts: 2, delayMs: 2000 };
   // Timeout for receiving the initial upstream response headers. Once the response
   // starts streaming, STREAM_IDLE_TIMEOUT_MS / Undici bodyTimeout handle stalls.
@@ -1306,7 +1310,9 @@ export class BaseExecutor {
           }
         }
 
-        // Intra-URL retry: if 429 and we haven't exhausted per-URL retries, wait and retry the same URL
+        // Intra-URL retry: if 429 and we haven't exhausted per-URL retries, wait and retry the same URL.
+        // Honor Retry-After header if present (parsed via classify429's parseRetryAfter).
+        // Also apply exponential backoff on subsequent retries: 2s → 4s → 8s.
         if (
           !skipUpstreamRetry &&
           response.status === HTTP_STATUS.RATE_LIMITED &&
@@ -1314,11 +1320,31 @@ export class BaseExecutor {
         ) {
           retryAttemptsByUrl[urlIndex] = (retryAttemptsByUrl[urlIndex] ?? 0) + 1;
           const attempt = retryAttemptsByUrl[urlIndex];
+          // Exponential backoff: 2s, 4s, 8s, ... capped at 30s
+          const backoffMs = Math.min(
+            BaseExecutor.RETRY_CONFIG.delayMs * Math.pow(2, attempt - 1),
+            30000
+          );
+          // Check Retry-After header (case-insensitive)
+          let retryAfterMs = backoffMs;
+          try {
+            const retryAfterHeader =
+              response.headers?.get?.("retry-after") ||
+              response.headers?.get?.("Retry-After");
+            if (retryAfterHeader) {
+              const parsedSec = parseRetryAfter(retryAfterHeader);
+              if (parsedSec !== null && parsedSec > 0) {
+                retryAfterMs = Math.max(retryAfterMs, parsedSec * 1000);
+              }
+            }
+          } catch {
+            // best-effort — fall back to exponential backoff
+          }
           log?.debug?.(
             "RETRY",
-            `429 intra-retry ${attempt}/${BaseExecutor.RETRY_CONFIG.maxAttempts} on ${url} — waiting ${BaseExecutor.RETRY_CONFIG.delayMs}ms`
+            `429 intra-retry ${attempt}/${BaseExecutor.RETRY_CONFIG.maxAttempts} on ${url} — waiting ${retryAfterMs}ms${retryAfterMs !== backoffMs ? " (Retry-After honored)" : ""}`
           );
-          await new Promise((resolve) => setTimeout(resolve, BaseExecutor.RETRY_CONFIG.delayMs));
+          await new Promise((resolve) => setTimeout(resolve, retryAfterMs));
           urlIndex--; // re-run this urlIndex on the next loop iteration
           continue;
         }

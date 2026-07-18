@@ -61,6 +61,19 @@ const QUOTA_PATTERNS: ReadonlyArray<RegExp> = [
   // the 429 is misclassified as transient rate_limit and retried every
   // ~60s against a budget that only resets at UTC midnight.
   /daily free allocation/i,
+
+  // ── Kilo Free / OpenRouter Chinese-language rate-limit messages ──
+  // Kilo's free tier (api.kilo.ai/api/openrouter) sometimes returns 429
+  // with a Chinese body: "您的请求频率过高，请稍后再试。" ("Your request
+  // frequency is too high, please try again later.") — this is a transient
+  // rate-limit, NOT a quota exhaustion. But other Chinese messages like
+  // "每日限额已用完" ("daily limit exhausted") ARE quota-exhausted.
+  // Pattern below catches the quota-exhausted variant so the system applies
+  // a long cooldown instead of retrying every 2s.
+  /每日限额/i,        // "daily limit exhausted"
+  /每日配额/i,        // "daily quota exhausted"
+  /额度已用完/i,      // "credits exhausted"
+  /额度不足/i,        // "insufficient credits"
 ];
 
 /**
