@@ -4892,6 +4892,17 @@
     "overrideBaseUrlHint": "پیشرفته: این ارائه‌دهنده داخلی را به یک نقطه پایانی سفارشی هدایت کنید. برای استفاده از پیش‌فرض خالی بگذارید.",
     "bulkAddFormatHintCloudflare": "یک کلید در هر خط. فرمت: name|accountId|apiKey (شناسه حساب Cloudflare + توکن API).",
     "lmarenaWebCookieHint": "arena.ai را باز کنید، وارد شوید، سپس هدر Cookie کامل را از یک درخواست Network کپی کنید. arena-auth-prod-v1.0 و arena-auth-prod-v1.1 (و بخش‌های بعدی در صورت وجود) را با ترجیحاً cf_clearance شامل کنید. فقط کوکی خالی arena-auth-prod-v1 را جایگذاری نکنید. اختیاری: providerSpecificData.recaptchaV3Token اگر create-evaluation همچنان ۴۰۳ برگرداند."
+    "filterAll": "همه",
+    "filterActive": "فعال",
+    "filterError": "خطا",
+    "filterBanned": "مسدود",
+    "filterCreditsExhausted": "اعتبار تمام‌شده",
+    "contextWindowOverrideLabel": "بازنویسی پنجره زمینه",
+    "contextWindowOverridePlaceholder": "مثلاً ۱۳۱۰۷۲",
+    "contextWindowOverrideHint": "پنجره زمینه واقعی این مدل (توکن) را به‌صورت دستی تنظیم کنید وقتی ارائه‌دهنده آن را اشتباه گزارش می‌دهد. بر مقادیر کشف‌شده/کاتالوگ ارجحیت دارد و از حذف مدل توسط مسیریابی کامبو جلوگیری می‌کند.",
+    "contextWindowOverrideInvalid": "بازنویسی پنجره زمینه باید یک عدد صحیح مثبت توکن باشد",
+    "visionCapableLabel": "قابلیت بینایی",
+    "visionCapableHint": "این مدل را به‌صورت دستی به‌عنوان دارای قابلیت بینایی علامت بزنید وقتی فراداده کشف ارائه‌دهنده روش ورودی تصویر را گزارش نمی‌کند (معمولی برای backهای خود‌میزبان/محلی).",
   },
   "settings": {
     "title": "تنظیمات",
