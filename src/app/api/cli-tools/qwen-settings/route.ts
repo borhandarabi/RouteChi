@@ -153,7 +153,7 @@ export async function POST(request: Request) {
       }
     }
 
-    const resolvedApiKey = apiKey || "sk_routechi";
+    const resolvedApiKey = apiKey || "sk-YOUR-API-KEY";
     const resolvedModel = model || "coder-model";
     const normalizedBaseUrl = String(baseUrl || "")
       .trim()

@@ -138,7 +138,7 @@ export default function CloudAgentsPage() {
 
   useEffect(() => {
     try {
-      const stored = localStorage.getItem("omniroute-cloud-agents-settings");
+      const stored = localStorage.getItem("routechi-cloud-agents-settings");
       if (stored) setSettings(JSON.parse(stored));
     } catch {
       // ignore
@@ -149,7 +149,7 @@ export default function CloudAgentsPage() {
     const next = { ...settings, [key]: value };
     setSettings(next);
     try {
-      localStorage.setItem("omniroute-cloud-agents-settings", JSON.stringify(next));
+      localStorage.setItem("routechi-cloud-agents-settings", JSON.stringify(next));
     } catch {
       // ignore
     }

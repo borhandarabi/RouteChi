@@ -146,7 +146,7 @@ export default function RedisLauncherPanel() {
       <p className="mt-3 text-xs text-text-muted">
         {t(
           "redisLauncherHint",
-          "Equivalent to running `omniroute redis up`. The container is named `omniroute-redis` and listens on 127.0.0.1:6379."
+          "Equivalent to running `omniroute redis up`. The container is named `routechi-redis` and listens on 127.0.0.1:6379."
         )}
       </p>
     </div>

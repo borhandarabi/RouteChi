@@ -21,7 +21,7 @@ test("buildKiloAuth merges (preserves other providers/keys)", () => {
 
 test("buildKiloAuth falls back to a placeholder key", () => {
   const auth = buildKiloAuth({}, { apiKey: "", baseUrl: "http://x/v1", model: "m" });
-  assert.equal(auth["openai-compatible"].apiKey, "sk_routechi");
+  assert.equal(auth["openai-compatible"].apiKey, "sk-YOUR-API-KEY");
 });
 
 test("buildKiloVscodeSettings sets kilocode.customProvider + defaultModel, preserving others", () => {

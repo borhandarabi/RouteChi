@@ -140,12 +140,12 @@ export default function CodexToolCard({
     setApplying(true);
     setMessage(null);
     try {
-      // Use sk_routechi for localhost if no key, otherwise use selected key
+      // Use sk-YOUR-API-KEY for localhost if no key, otherwise use selected key
       const keyToUse =
         selectedApiKey && selectedApiKey.trim()
           ? selectedApiKey
           : !cloudEnabled
-            ? "sk_routechi"
+            ? "sk-YOUR-API-KEY"
             : selectedApiKey;
 
       // Send both apiKey (as fallback) and keyId to look up the unmasked string natively
@@ -342,7 +342,7 @@ export default function CodexToolCard({
   };
 
   const getManualConfigs = () => {
-    const keyToUse = !cloudEnabled ? "sk_routechi" : "<YOUR_OMNIROUTE_API_KEY>";
+    const keyToUse = !cloudEnabled ? "sk-YOUR-API-KEY" : "<YOUR_ROUTECHI_API_KEY>";
 
     let configContent = `# RouteChi Configuration for Codex CLI
 model = "${selectedModel || CODEX_DEFAULT_MODELS[0]}"`;

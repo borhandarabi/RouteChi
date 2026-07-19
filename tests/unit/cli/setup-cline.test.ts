@@ -32,7 +32,7 @@ test("buildClineSecrets stores the key (separate secrets file), preserving other
 });
 
 test("buildClineSecrets falls back to a placeholder when no key", () => {
-  assert.equal(buildClineSecrets({}, { apiKey: "" }).openAiApiKey, "sk_routechi");
+  assert.equal(buildClineSecrets({}, { apiKey: "" }).openAiApiKey, "sk-YOUR-API-KEY");
 });
 
 test("resolveClineTarget strips /v1 from --remote (Cline wants the ROOT url)", () => {

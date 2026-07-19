@@ -46,8 +46,8 @@ test.afterEach(async () => {
 test("getOrCreateApiKey() creates DB-backed key when no keyId provided", async () => {
   const apiKey = await getOrCreateApiKey(null);
 
-  // Key should NOT be the placeholder "sk_routechi"
-  assert.notEqual(apiKey, "sk_routechi", "Should not return placeholder");
+  // Key should NOT be the placeholder "sk-YOUR-API-KEY"
+  assert.notEqual(apiKey, "sk-YOUR-API-KEY", "Should not return placeholder");
   assert.ok(apiKey.startsWith("sk-"), "Key should start with sk- prefix");
 
   // Key should be valid in DB
@@ -101,7 +101,7 @@ test("Qwen guide-settings POST creates valid DB-backed key (no keyId)", async ()
   assert.equal(content.model?.name, "qwen3-coder-flash", "Should have model name");
 
   const apiKey = content.security.auth.apiKey;
-  assert.notEqual(apiKey, "sk_routechi", "Should not use placeholder");
+  assert.notEqual(apiKey, "sk-YOUR-API-KEY", "Should not use placeholder");
   assert.ok(apiKey.startsWith("sk-"), "Key should start with sk- prefix");
 
   // Verify the key is valid in DB

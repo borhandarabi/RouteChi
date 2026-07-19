@@ -69,7 +69,7 @@ export const buildOpenCodeProviderConfig = ({
     name: "RouteChi",
     options: {
       baseURL: normalizedBaseUrl,
-      apiKey: apiKey || "sk_routechi",
+      apiKey: apiKey || "sk-YOUR-API-KEY",
     },
     models: modelsRecord,
   };

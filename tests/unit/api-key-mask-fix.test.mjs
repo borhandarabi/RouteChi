@@ -40,7 +40,7 @@ async function resolveApiKey(apiKeyId, apiKey) {
       /* fall through */
     }
   }
-  return apiKey || "sk_routechi";
+  return apiKey || "sk-YOUR-API-KEY";
 }
 
 // ─── Server-side masking function (matches /api/keys endpoint) ─────────
@@ -94,25 +94,25 @@ describe("resolveApiKey", () => {
           /* fall through */
         }
       }
-      return apiKey || "sk_routechi";
+      return apiKey || "sk-YOUR-API-KEY";
     }
 
     const result = await resolveApiKeyWithThrowingDb("key-001", "sk-fallback-key");
     assert.equal(result, "sk-fallback-key");
   });
 
-  it("falls back to sk_routechi when both are null", async () => {
+  it("falls back to sk-YOUR-API-KEY when both are null", async () => {
     mockKeyStore.clear();
 
     const result = await resolveApiKey(null, null);
-    assert.equal(result, "sk_routechi");
+    assert.equal(result, "sk-YOUR-API-KEY");
   });
 
-  it("falls back to sk_routechi when both are undefined", async () => {
+  it("falls back to sk-YOUR-API-KEY when both are undefined", async () => {
     mockKeyStore.clear();
 
     const result = await resolveApiKey(undefined, undefined);
-    assert.equal(result, "sk_routechi");
+    assert.equal(result, "sk-YOUR-API-KEY");
   });
 
   it("prefers resolved key from apiKeyId over masked apiKey", async () => {

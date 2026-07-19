@@ -115,7 +115,7 @@ async function saveContinueConfig({ baseUrl, apiKey, model }) {
     title: model,
     model: model,
     provider: "openai",
-    apiKey: apiKey || "sk_routechi",
+    apiKey: apiKey || "sk-YOUR-API-KEY",
     omnirouteManaged: true,
   };
 
@@ -141,7 +141,7 @@ async function saveContinueConfig({ baseUrl, apiKey, model }) {
         // eslint-disable-next-line no-restricted-syntax -- teknik string kontrolü, kullanıcı metni araması değil
         String(m.apiKey || "")
           .toLowerCase()
-          .includes("sk_routechi"))
+          .includes("sk-YOUR-API-KEY"))
   );
 
   if (existingIdx >= 0) {
@@ -221,7 +221,7 @@ async function saveQwenConfig({ baseUrl, apiKey, model }) {
   const normalizedBaseUrl = String(baseUrl || "")
     .trim()
     .replace(/\/+$/, "");
-  const resolvedApiKey = apiKey || "sk_routechi";
+  const resolvedApiKey = apiKey || "sk-YOUR-API-KEY";
   const resolvedModel = model || "qwen/qwen3-coder-plus";
 
   // Read existing config to preserve other settings (permissions, mcpServers, etc.)

@@ -168,7 +168,7 @@ export default function ClineToolCard({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           baseUrl: normalizedBaseUrl,
-          apiKey: !cloudEnabled ? "sk_routechi" : null,
+          apiKey: !cloudEnabled ? "sk-YOUR-API-KEY" : null,
           keyId: selectedKeyId,
           model: selectedModel,
         }),

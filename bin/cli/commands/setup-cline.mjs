@@ -62,7 +62,7 @@ export function buildClineGlobalState(existing, { baseUrl, model }) {
 
 /** Merge the API key into Cline's secrets (Cline has no env-var reference). */
 export function buildClineSecrets(existing, { apiKey }) {
-  return { ...(existing || {}), openAiApiKey: apiKey || "sk_routechi" };
+  return { ...(existing || {}), openAiApiKey: apiKey || "sk-YOUR-API-KEY" };
 }
 
 function readJson(path) {
@@ -123,7 +123,7 @@ export async function runSetupClineCommand(opts = {}) {
   if (dryRun) {
     console.log(`\n── [dry-run] ${gsPath} ──`);
     console.log(JSON.stringify({ actModeApiProvider: globalState.actModeApiProvider, planModeApiProvider: globalState.planModeApiProvider, openAiBaseUrl: globalState.openAiBaseUrl, openAiModelId: globalState.openAiModelId }, null, 2));
-    console.log(`\n── [dry-run] ${secPath} ── (openAiApiKey: ${apiKey ? "set" : "sk_routechi"})`);
+    console.log(`\n── [dry-run] ${secPath} ── (openAiApiKey: ${apiKey ? "set" : "sk-YOUR-API-KEY"})`);
   } else {
     if (!existsSync(clineDir)) mkdirSync(clineDir, { recursive: true });
     writeFileSync(gsPath, JSON.stringify(globalState, null, 2) + "\n", "utf8");

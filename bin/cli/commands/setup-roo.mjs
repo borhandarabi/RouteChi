@@ -56,7 +56,7 @@ export function buildRooImport({ baseUrl, apiKey, model }) {
         RouteChi: {
           apiProvider: "openai",
           openAiBaseUrl: baseUrl,
-          openAiApiKey: apiKey || "sk_routechi",
+          openAiApiKey: apiKey || "sk-YOUR-API-KEY",
           openAiModelId: model,
           openAiCustomModelInfo: { supportsImages: false, supportsPromptCache: false },
         },
@@ -130,7 +130,7 @@ export async function runSetupRooCommand(opts = {}) {
 
   if (dryRun) {
     console.log(`\n── [dry-run] ${importPath} ──`);
-    console.log(JSON.stringify({ ...importDoc, providerProfiles: { ...importDoc.providerProfiles, apiConfigs: { RouteChi: { ...importDoc.providerProfiles.apiConfigs.RouteChi, openAiApiKey: apiKey ? "set" : "sk_routechi" } } } }, null, 2));
+    console.log(JSON.stringify({ ...importDoc, providerProfiles: { ...importDoc.providerProfiles, apiConfigs: { RouteChi: { ...importDoc.providerProfiles.apiConfigs.RouteChi, openAiApiKey: apiKey ? "set" : "sk-YOUR-API-KEY" } } } }, null, 2));
     console.log(`\n── [dry-run] ${vscodePath} ── ${vscodeExists ? "(would set roo-cline.autoImportSettingsPath)" : "(skipped — file absent)"}`);
   } else {
     mkdirSync(join(importPath, ".."), { recursive: true });

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-export const RISK_ACKNOWLEDGED_STORAGE_KEY = "omniroute-risk-acknowledged";
+export const RISK_ACKNOWLEDGED_STORAGE_KEY = "routechi-risk-acknowledged";
 
 export type RiskAcknowledgedMap = Record<string, true>;
 

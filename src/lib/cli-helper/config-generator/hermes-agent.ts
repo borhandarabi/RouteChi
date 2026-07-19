@@ -92,7 +92,7 @@ export async function generateHermesAgentConfig(
   }
 
   // Resolve the actual key to use (in real impl we would look up keyId)
-  const resolvedKey = apiKey || "YOUR_OMNIROUTE_API_KEY_HERE";
+  const resolvedKey = apiKey || "YOUR_ROUTECHI_API_KEY_HERE";
 
   // Read existing config if present (non-destructive merge)
   let existing: any = {};

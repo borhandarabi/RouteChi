@@ -111,7 +111,7 @@ export async function POST(request: Request) {
     const { baseUrl, apiKey } = validation.data;
 
     const normalizedBaseUrl = baseUrl.endsWith("/v1") ? baseUrl : `${baseUrl}/v1`;
-    const keyRef = apiKey || "sk_routechi";
+    const keyRef = apiKey || "sk-YOUR-API-KEY";
 
     await fs.mkdir(getOmpDir(), { recursive: true });
 

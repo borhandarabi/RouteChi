@@ -2,7 +2,7 @@
  * CLI Log Stream API — GET /api/cli-tools/logs
  *
  * Reads the application log file and returns matching entries.
- * Called by the CLI `omniroute logs` command via
+ * Called by the CLI `routechi logs` command via
  * `src/lib/cli-helper/log-streamer.ts`.
  *
  * Query params:

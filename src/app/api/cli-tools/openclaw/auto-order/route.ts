@@ -65,7 +65,7 @@ export async function GET(request: Request) {
         allow_fallbacks: true,
       },
       generated_at: new Date().toISOString(),
-      source: "omniroute-auto-combo",
+      source: "routechi-auto-combo",
     });
   } catch {
     return NextResponse.json({
@@ -74,7 +74,7 @@ export async function GET(request: Request) {
         allow_fallbacks: true,
       },
       generated_at: new Date().toISOString(),
-      source: "omniroute-fallback",
+      source: "routechi-fallback",
     });
   }
 }

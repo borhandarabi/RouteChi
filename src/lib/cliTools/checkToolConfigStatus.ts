@@ -86,7 +86,7 @@ export async function checkToolConfigStatus(
         const configStr = JSON.stringify(config).toLowerCase();
         if (
           configStr.includes("omniroute") ||
-          configStr.includes("sk_routechi") ||
+          configStr.includes("sk-YOUR-API-KEY") ||
           configStr.includes(`localhost:${apiPort}`) ||
           configStr.includes(`127.0.0.1:${apiPort}`)
         ) {

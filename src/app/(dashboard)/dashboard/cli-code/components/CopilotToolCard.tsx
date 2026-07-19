@@ -30,7 +30,7 @@ export default function CopilotToolCard({
   const [selectedModels, setSelectedModels] = useState<Set<string>>(() => {
     if (typeof window === "undefined") return new Set<string>();
     try {
-      const saved = localStorage.getItem("omniroute-copilot-selected-models");
+      const saved = localStorage.getItem("routechi-copilot-selected-models");
       return saved ? new Set<string>(JSON.parse(saved)) : new Set<string>();
     } catch {
       return new Set<string>();
@@ -38,7 +38,7 @@ export default function CopilotToolCard({
   });
   const [selectedApiKeyId, setSelectedApiKeyId] = useState(() => {
     if (typeof window !== "undefined") {
-      const savedKey = localStorage.getItem("omniroute-cli-key-copilot");
+      const savedKey = localStorage.getItem("routechi-cli-key-copilot");
       if (savedKey && apiKeys?.some((k: any) => k.id === savedKey)) return savedKey;
     }
     return apiKeys?.length > 0 ? apiKeys[0].id : "";
@@ -86,7 +86,7 @@ export default function CopilotToolCard({
   useEffect(() => {
     if (selectedModels.size > 0) {
       localStorage.setItem(
-        "omniroute-copilot-selected-models",
+        "routechi-copilot-selected-models",
         JSON.stringify([...selectedModels])
       );
     }
@@ -166,7 +166,7 @@ export default function CopilotToolCard({
 
   const handleApiKeyChange = (value: string) => {
     setSelectedApiKeyId(value);
-    if (value) localStorage.setItem("omniroute-cli-key-copilot", value);
+    if (value) localStorage.setItem("routechi-cli-key-copilot", value);
   };
 
   return (

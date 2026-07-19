@@ -164,7 +164,7 @@ export async function POST(request) {
     // Add/update RouteChi as openai-compatible provider
     auth["openai-compatible"] = {
       type: "api-key",
-      apiKey: apiKey || "sk_routechi",
+      apiKey: apiKey || "sk-YOUR-API-KEY",
       baseUrl: normalizedBaseUrl,
       model: model,
     };
@@ -192,7 +192,7 @@ export async function POST(request) {
       vscodeSettings["kilocode.customProvider"] = {
         name: "RouteChi",
         baseURL: normalizedBaseUrl,
-        apiKey: apiKey || "sk_routechi",
+        apiKey: apiKey || "sk-YOUR-API-KEY",
       };
       vscodeSettings["kilocode.defaultModel"] = model;
 

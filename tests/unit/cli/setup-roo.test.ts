@@ -17,7 +17,7 @@ test("buildRooImport produces an openai-compatible provider profile (baseUrl /v1
   assert.equal(d.providerProfiles.currentApiConfigName, "RouteChi");
 });
 test("buildRooImport falls back to a placeholder key", () => {
-  assert.equal(buildRooImport({ baseUrl: "http://x/v1", apiKey: "", model: "m" }).providerProfiles.apiConfigs.RouteChi.openAiApiKey, "sk_routechi");
+  assert.equal(buildRooImport({ baseUrl: "http://x/v1", apiKey: "", model: "m" }).providerProfiles.apiConfigs.RouteChi.openAiApiKey, "sk-YOUR-API-KEY");
 });
 test("buildRooVscodeAutoImport sets the pointer, preserving other settings", () => {
   const s = buildRooVscodeAutoImport({ "editor.tabSize": 2 }, "/home/u/.omniroute/roo-settings.json");

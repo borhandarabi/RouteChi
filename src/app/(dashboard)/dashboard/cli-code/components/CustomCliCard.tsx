@@ -58,7 +58,7 @@ export default function CustomCliCard({
   const keyToUse =
     selectedKeyObj?.key ||
     (!cloudEnabled
-      ? "sk_routechi"
+      ? "sk-YOUR-API-KEY"
       : translateOrFallback("yourApiKeyPlaceholder", "sk-your-omniroute-key"));
   const baseUrlWithV1 = normalizeOpenAiBaseUrl(baseUrl || DEFAULT_DISPLAY_BASE_URL);
   const chatCompletionsEndpoint = `${baseUrlWithV1}/chat/completions`;
@@ -244,7 +244,7 @@ export default function CustomCliCard({
                 <p className="mt-2 text-xs text-text-muted">
                   {translateOrFallback(
                     "customCliKeyHelper",
-                    "For local installs RouteChi can use sk_routechi. In cloud mode, pick one of your management API keys."
+                    "For local installs RouteChi can use sk-YOUR-API-KEY. In cloud mode, pick one of your management API keys."
                   )}
                 </p>
               </div>

@@ -1,5 +1,5 @@
-export const SHOW_CONFIGURED_ONLY_STORAGE_KEY = "omniroute-providers-show-configured-only";
-export const PROVIDER_DISPLAY_MODE_STORAGE_KEY = "omniroute-providers-display-mode";
+export const SHOW_CONFIGURED_ONLY_STORAGE_KEY = "routechi-providers-show-configured-only";
+export const PROVIDER_DISPLAY_MODE_STORAGE_KEY = "routechi-providers-display-mode";
 
 export type ProviderDisplayMode = "all" | "configured" | "compact";
 

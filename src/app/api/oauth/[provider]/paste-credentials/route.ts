@@ -11,7 +11,7 @@ import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
  * POST /api/oauth/[provider]/paste-credentials
  *
  * Persist credentials produced by the local remote-login helper
- * (`omniroute login antigravity`). Google's `firstparty/nativeapp` consent only
+ * (`routechi login antigravity`). Google's `firstparty/nativeapp` consent only
  * releases the auth code when the loopback redirect is reachable, which never
  * happens on a remote VPS — so the helper runs the OAuth on the user's own
  * machine and prints a single-line credential blob. The dashboard pastes that

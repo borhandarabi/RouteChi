@@ -6,7 +6,7 @@
  * they share its only consumer.
  *
  * Background: before this helper, the Apply button was disabled whenever
- * `selectedApiKey` was empty — but the default `sk_routechi` key is a valid
+ * `selectedApiKey` was empty — but the default `sk-YOUR-API-KEY` key is a valid
  * local-mode default and should not block Apply. The Reset button was disabled
  * whenever `codexStatus.hasRouteChi` was false — but a user should always be
  * able to reset, even when Codex was never configured against RouteChi.
@@ -31,7 +31,7 @@ export interface ApplyButtonInput {
  * - cloud mode is enabled AND keys exist AND none is selected.
  *
  * In local mode (cloud disabled) OR when no keys are configured at all, the
- * `sk_routechi` default kicks in, so an empty `selectedApiKey` must NOT
+ * `sk-YOUR-API-KEY` default kicks in, so an empty `selectedApiKey` must NOT
  * disable Apply.
  */
 export function isApplyDisabled({

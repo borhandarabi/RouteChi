@@ -6,7 +6,7 @@ import { cliModelConfigSchema } from "../../src/shared/validation/schemas.ts";
 test("cliModelConfigSchema accepts Codex xhigh reasoning effort", () => {
   const result = cliModelConfigSchema.safeParse({
     baseUrl: "http://localhost:20128/api/v1",
-    apiKey: "sk_routechi",
+    apiKey: "sk-YOUR-API-KEY",
     model: "gpt-5.5",
     reasoningEffort: "xhigh",
     wireApi: "responses",
@@ -22,7 +22,7 @@ test("cliModelConfigSchema accepts Codex max and ultra reasoning efforts", () =>
   for (const reasoningEffort of ["max", "ultra"] as const) {
     const result = cliModelConfigSchema.safeParse({
       baseUrl: "http://localhost:20128/api/v1",
-      apiKey: "sk_routechi",
+      apiKey: "sk-YOUR-API-KEY",
       model: "gpt-5.6-sol",
       reasoningEffort,
       wireApi: "responses",

@@ -160,7 +160,7 @@ export default function DroidToolCard({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           baseUrl: getEffectiveBaseUrl(),
-          apiKey: !cloudEnabled ? "sk_routechi" : null,
+          apiKey: !cloudEnabled ? "sk-YOUR-API-KEY" : null,
           keyId: selectedKeyId,
           // (#618) Send both `model` (legacy, first entry) and `models` (array).
           // Backend prefers `models` when present; `model` keeps Zod happy
@@ -269,7 +269,7 @@ export default function DroidToolCard({
     // (#523) Look up the key object by id to get the masked display value.
     const selectedKeyObj = apiKeys?.find((k) => k.id === selectedApiKeyId);
     const keyToDisplay =
-      selectedKeyObj?.key || (!cloudEnabled ? "sk_routechi" : "<API_KEY_FROM_DASHBOARD>");
+      selectedKeyObj?.key || (!cloudEnabled ? "sk-YOUR-API-KEY" : "<API_KEY_FROM_DASHBOARD>");
 
     // (#618) Render one entry per requested model; fall back to a placeholder
     // when the list is empty so manual-config preview still shows the shape.

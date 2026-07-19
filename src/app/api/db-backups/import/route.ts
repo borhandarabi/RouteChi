@@ -117,7 +117,7 @@ export async function POST(request: Request) {
     }
 
     // Write uploaded file to temp location
-    tmpPath = path.join(os.tmpdir(), `omniroute-import-${Date.now()}.sqlite`);
+    tmpPath = path.join(os.tmpdir(), `routechi-import-${Date.now()}.sqlite`);
     fs.writeFileSync(tmpPath, fileBuffer!);
 
     // Validate SQLite integrity.
