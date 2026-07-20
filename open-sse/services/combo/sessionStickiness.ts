@@ -82,9 +82,7 @@ interface StickyEntry {
  * Injectable saturation fetcher seam (for unit tests).
  * Returns HeadroomSaturation or undefined when unknown.
  */
-export type SaturationFetcher = (
-  connectionId: string
-) => Promise<HeadroomSaturation | undefined>;
+export type SaturationFetcher = (connectionId: string) => Promise<HeadroomSaturation | undefined>;
 
 // ─── Saturation fetcher seam ─────────────────────────────────────────────────
 
@@ -143,11 +141,11 @@ async function resolveConnectionHealth(
   if (_connectionFetcherOverride) return _connectionFetcherOverride(connectionId, provider);
 
   try {
-    const mod = await import("../../../src/lib/db/providers");
-    const getProviderConnections = mod.getProviderConnections as (
+    const mod = await import("../../../src/lib/db/readCache");
+    const getCachedProviderConnections = mod.getCachedProviderConnections as (
       filter: Record<string, unknown>
     ) => Promise<StickyConnectionHealth[]>;
-    const connections = (await getProviderConnections({
+    const connections = (await getCachedProviderConnections({
       provider,
       isActive: true,
     })) as Array<StickyConnectionHealth & { id?: string }>;
@@ -184,9 +182,7 @@ export type QuotaExhaustionChecker = (connectionId: string) => boolean;
 let _quotaExhaustionOverride: QuotaExhaustionChecker | null = null;
 
 /** Test-only: inject the quota-exhaustion checker; pass null to restore default. */
-export function __setStickinessQuotaCheckerForTests(
-  checker: QuotaExhaustionChecker | null
-): void {
+export function __setStickinessQuotaCheckerForTests(checker: QuotaExhaustionChecker | null): void {
   _quotaExhaustionOverride = checker;
 }
 

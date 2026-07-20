@@ -11,7 +11,7 @@ import { getStaticModelsForProvider } from "@/lib/providers/staticModels";
 import { providerUsesCuratedModelsOnly } from "@/lib/providers/modelListingCapability";
 import { isProviderBlockedByIdOrAlias } from "@/shared/utils/noAuthProviders";
 import {
-  getProviderConnectionById,
+  getCachedProviderConnectionById,
   getSettings,
   getModelIsHidden,
   resolveProxyForProvider,
@@ -29,7 +29,10 @@ import {
 import { sanitizeErrorMessage } from "@omniroute/open-sse/utils/error";
 import { getStaticQoderModels } from "@omniroute/open-sse/services/qoderCli.ts";
 import { deriveConfigFromRegistryModelsUrl } from "./discoveryConfig";
-import { fetchGitHubCopilotModels } from "@omniroute/open-sse/services/githubCopilotModels.ts";
+import {
+  fetchGitHubCopilotModels,
+  fetchGheCopilotModels,
+} from "@omniroute/open-sse/services/githubCopilotModels.ts";
 import { fetchKiroAvailableModels } from "@omniroute/open-sse/services/kiroModels.ts";
 import {
   buildGlmCodingHeaders,
@@ -215,7 +218,7 @@ export async function GET(
     const excludeCustom = searchParams.get("excludeCustom") === "true";
     const refresh = searchParams.get("refresh") === "true";
 
-    const connection = await getProviderConnectionById(id);
+    const connection = await getCachedProviderConnectionById(id);
     const connectionProvider =
       typeof connection?.provider === "string" && connection.provider.trim().length > 0
         ? connection.provider
@@ -1567,6 +1570,51 @@ export async function GET(
         models: discovery.models,
         source: "local_catalog",
         warning: "Copilot models API unavailable — using local catalog",
+      });
+    }
+
+    if (provider === "ghe-copilot") {
+      // GHE Copilot exposes a per-enterprise chat model catalog at
+      // <copilotApiUrl>/models (endpoints.api from the token endpoint) — NOT the
+      // proxy host, which only serves NES/autocomplete models. The IDs are
+      // enterprise-specific (no static allowlist applies), so discover them live
+      // from copilotApiUrl with the Copilot bearer token.
+      const cachedResponse = maybeReturnCachedDiscovery();
+      if (cachedResponse) return cachedResponse;
+
+      const autoFetchDisabledResponse = maybeReturnAutoFetchDisabled();
+      if (autoFetchDisabledResponse) return autoFetchDisabledResponse;
+
+      const psd = asRecord(connection.providerSpecificData);
+      const copilotToken =
+        toNonEmptyString(psd.copilotToken) || toNonEmptyString(accessToken) || null;
+      // endpoints.api serves the real chat model catalog; endpoints.proxy only
+      // has NES/autocomplete models. Prefer the api host, fall back to proxy for
+      // legacy connections that predate copilotApiUrl capture.
+      const copilotApiUrl =
+        toNonEmptyString(psd.copilotApiUrl) || toNonEmptyString(psd.copilotProxyUrl) || null;
+
+      const models = await fetchGheCopilotModels({
+        apiUrl: copilotApiUrl,
+        token: copilotToken,
+        fetchImpl: (url, init) => fetch(url as string, init as RequestInit),
+      });
+
+      if (models.length > 0) {
+        return buildApiDiscoveryResponse(models);
+      }
+
+      const fallback = buildDiscoveryFallbackResponse({
+        cacheWarning: "GHE Copilot models API unavailable — using cached catalog",
+        localWarning: "GHE Copilot models API unavailable — using local catalog",
+      });
+      if (fallback) return fallback;
+      return buildResponse({
+        provider,
+        connectionId,
+        models: [],
+        source: "local_catalog",
+        warning: "GHE Copilot models API unavailable — using local catalog",
       });
     }
 

@@ -422,7 +422,10 @@ export async function handleChat(
         const entry = getRegistryEntry(providerHint);
         if (entry?.defaultModel) {
           modelStr = `${providerHint}/${entry.defaultModel}`;
-          log.info("CHAT", `No model specified — using ${providerHint} default: ${entry.defaultModel}`);
+          log.info(
+            "CHAT",
+            `No model specified — using ${providerHint} default: ${entry.defaultModel}`
+          );
         }
       } catch {
         // best-effort
@@ -907,6 +910,20 @@ export async function handleChat(
   telemetry.endPhase();
 
   // Single model request
+  // Try to resolve routing combo from model prefix for compression combo lookup
+  let routingComboId: string | null = null;
+  if (!combo) {
+    const providerPrefix = resolvedModelStr.split("/")[0];
+    if (providerPrefix) {
+      try {
+        const { getComboByName } = await import("@/lib/localDb");
+        const routingCombo = await getComboByName(providerPrefix);
+        if (routingCombo?.id) {
+          routingComboId = routingCombo.id;
+        }
+      } catch {}
+    }
+  }
   const response = await handleSingleModelChat(
     body,
     resolvedModelStr,
@@ -921,6 +938,7 @@ export async function handleChat(
       forceLiveComboTest: isComboLiveTest,
       forcedConnectionId: requestedConnectionId,
       correlationId: reqId,
+      routingComboId,
       reasoningDecision,
       reasoningIntent,
       reasoningRequestTags: requestRoutingTags.tags,
@@ -972,6 +990,7 @@ async function handleSingleModelChat(
     cachedSettings?: any;
     providerId?: string | null;
     correlationId?: string | null;
+    routingComboId?: string | null;
     modelPinned?: boolean;
     reasoningDecision?: ReasoningRuleDecision | null;
     reasoningIntent?: ExtractedReasoningIntent | null;
@@ -1399,6 +1418,7 @@ async function handleSingleModelChat(
         skipUpstreamRetry: runtimeOptions.skipUpstreamRetry ?? false,
         correlationId: runtimeOptions?.correlationId ?? null,
         modelPinned: runtimeOptions?.modelPinned ?? false,
+        routingComboId: runtimeOptions?.routingComboId ?? null,
       });
       if (telemetry) telemetry.endPhase();
 

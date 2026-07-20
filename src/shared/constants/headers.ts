@@ -3,6 +3,7 @@ export const OMNIROUTE_RESPONSE_HEADERS = {
   cacheHit: "X-RouteChi-Cache-Hit",
   compression: "X-RouteChi-Compression",
   costSaved: "X-RouteChi-Cost-Saved",
+  decision: "X-RouteChi-Decision",
   fallbackAttempts: "X-RouteChi-Fallback-Attempts",
   latencyMs: "X-RouteChi-Latency-Ms",
   model: "X-RouteChi-Model",

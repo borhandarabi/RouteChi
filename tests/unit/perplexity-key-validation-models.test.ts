@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Regression test for perplexity API key validation.
 //
 // Perplexity deprecated the unversioned `/models` endpoint (returns 404), so
@@ -9,8 +8,6 @@
 // 9router fix (see commit message); we port it RouteChi-style by
 // declaring an explicit `modelsUrl` on the perplexity registry entry.
 
-=======
->>>>>>> origin/release/v3.8.49
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 

@@ -92,8 +92,6 @@ afterEach(() => {
 // ── Tests ─────────────────────────────────────────────────────────────────────
 
 describe("FreePoolTab source toggles", () => {
-<<<<<<< HEAD:tests/unit/free-pool-tab.test.tsx
-=======
   it("has every render-critical German translation", () => {
     const requiredKeys = [
       "freePoolTab",
@@ -124,7 +122,6 @@ describe("FreePoolTab source toggles", () => {
     }
   });
 
->>>>>>> origin/release/v3.8.49:tests/unit/ui/free-pool-tab.test.tsx
   it("renders a toggle group with exactly 4 buttons", async () => {
     const el = renderTab();
     await waitForCondition(() => el.querySelector("[role='group']") !== null);

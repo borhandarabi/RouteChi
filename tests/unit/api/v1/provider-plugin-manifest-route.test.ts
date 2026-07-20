@@ -7,10 +7,16 @@ import {
   injectServiceModelsIntoManifest,
 } from "../../../../src/app/api/v1/provider-plugin-manifest/route.ts";
 import type { ServiceModel } from "../../../../src/lib/db/serviceModels.ts";
-import type { ProviderPluginManifest, ProviderPluginManifestEntry } from "../../../../open-sse/config/providerPluginManifest.ts";
+import type {
+  ProviderPluginManifest,
+  ProviderPluginManifestEntry,
+} from "../../../../open-sse/config/providerPluginManifest.ts";
 import { generateProviderPluginManifest } from "../../../../open-sse/config/providerPluginManifestRegistry.ts";
 
-function getProvider(manifest: ProviderPluginManifest, id: string): ProviderPluginManifestEntry | undefined {
+function getProvider(
+  manifest: ProviderPluginManifest,
+  id: string
+): ProviderPluginManifestEntry | undefined {
   return manifest.providers.find((provider) => provider.id === id);
 }
 
@@ -58,15 +64,9 @@ function withServicePluginEntries(manifest: ProviderPluginManifest): ProviderPlu
   };
 }
 
-<<<<<<< HEAD
 test("provider plugin manifest route returns JSON-safe manifest", async () => {
-  const response = await GET();
-  const body = (await response.json()) as ProviderPluginManifest;
-=======
-test("provider plugin manifest returns a stable ETag with its cache policy", async () => {
   const response = await GET(new Request("http://localhost/api/v1/provider-plugin-manifest"));
-  const body = await response.json();
->>>>>>> origin/release/v3.8.49
+  const body = (await response.json()) as ProviderPluginManifest;
 
   assert.equal(response.status, 200);
   assert.equal(response.headers.get("Cache-Control"), "public, max-age=60");
@@ -89,7 +89,6 @@ test("provider plugin manifest route handles CORS preflight", async () => {
   assert.equal(response.headers.get("Access-Control-Allow-Headers"), "*");
 });
 
-<<<<<<< HEAD
 test("provider plugin manifest route injects service models with a custom reader", async () => {
   const manifest = withServicePluginEntries(generateProviderPluginManifest());
   const withModels = await injectServiceModelsIntoManifest(
@@ -105,7 +104,7 @@ test("provider plugin manifest route injects service models with a custom reader
         return [{ id: "model-clone", name: "Cliproxy Test", available: true }];
       }
       return [];
-    },
+    }
   );
 
   const nineRouterEntry = getProvider(withModels, "9router");
@@ -160,7 +159,7 @@ test("provider plugin manifest route skips unavailable service models", async ()
         ];
       }
       return [];
-    },
+    }
   );
 
   const nineRouterEntry = getProvider(withModels, "9router");
@@ -179,7 +178,7 @@ test("provider plugin manifest route injects only when 9router exposure is enabl
       }
       return [];
     },
-    (toolName: string): boolean => (toolName === "9router" ? false : true),
+    (toolName: string): boolean => (toolName === "9router" ? false : true)
   );
 
   const nineRouterEntry = getProvider(withModels, "9router");
@@ -197,7 +196,7 @@ test("provider plugin manifest route injects for cliproxy when exposure is enabl
       }
       return [];
     },
-    () => true,
+    () => true
   );
 
   const cliproxyEntry = getProvider(withModels, "cliproxyapi");
@@ -215,13 +214,14 @@ test("provider plugin manifest route skips cliproxy models when exposure is disa
       }
       return [];
     },
-    (toolName: string): boolean => (toolName === "cliproxyapi" ? false : true),
+    (toolName: string): boolean => (toolName === "cliproxyapi" ? false : true)
   );
 
   const cliproxyEntry = getProvider(withModels, "cliproxyapi");
   assert.ok(cliproxyEntry);
   assert.equal(hasModel(cliproxyEntry, "cliproxyapi/model-clone"), false);
-=======
+});
+
 test("provider plugin manifest supports conditional sidecar refreshes", async () => {
   const initial = await GET(new Request("http://localhost/api/v1/provider-plugin-manifest"));
   const etag = initial.headers.get("ETag");
@@ -248,5 +248,4 @@ test("provider plugin manifest accepts weak conditional validators", async () =>
   );
 
   assert.equal(response.status, 304);
->>>>>>> origin/release/v3.8.49
 });

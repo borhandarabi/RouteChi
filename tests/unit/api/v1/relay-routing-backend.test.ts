@@ -177,8 +177,6 @@ test("automatic relay keeps the Bifrost timeout active until an SSE stream final
   assert.match(streamBranch, /error && backend === "auto"/);
   assert.match(streamBranch, /recordBifrostFailure\(/);
 });
-<<<<<<< HEAD
-=======
 
 test("relay routing fallback reason header strips dynamic cooldown detail to the stable code", () => {
   assert.equal(
@@ -205,4 +203,3 @@ test("relay routing fallback reason header stays unset for null/undefined/unreco
   assert.equal(getRoutingFallbackReasonHeader(undefined), undefined);
   assert.equal(getRoutingFallbackReasonHeader("something-unrecognized"), undefined);
 });
->>>>>>> origin/release/v3.8.49

@@ -236,9 +236,7 @@ function trimLeadingDashes(value: string): string {
  * applying defaults. Centralises the providerId fallback so every hook
  * sees a consistent identifier.
  */
-export function resolveRouteChiPluginOptions(
-  opts?: RouteChiPluginOptions
-): Required<
+export function resolveRouteChiPluginOptions(opts?: RouteChiPluginOptions): Required<
   Pick<RouteChiPluginOptions, "providerId" | "displayName" | "modelCacheTtl">
 > & {
   /**
@@ -266,9 +264,7 @@ export function resolveRouteChiPluginOptions(
     : `opencode-${rawProviderId}`;
   const displayName =
     opts?.displayName ??
-    (providerId === `opencode-${OMNIROUTE_PROVIDER_KEY}`
-      ? "RouteChi"
-      : `RouteChi (${providerId})`);
+    (providerId === `opencode-${OMNIROUTE_PROVIDER_KEY}` ? "RouteChi" : `RouteChi (${providerId})`);
   const modelCacheTtl =
     typeof opts?.modelCacheTtl === "number" && opts.modelCacheTtl > 0
       ? opts.modelCacheTtl
@@ -292,7 +288,9 @@ export function resolveRouteChiPluginOptions(
  * idempotent-prefix handling above.
  */
 function trimLeadingOpencodePrefix(rawProviderId: string): string {
-  return rawProviderId.startsWith("opencode-") ? rawProviderId.slice("opencode-".length) : rawProviderId;
+  return rawProviderId.startsWith("opencode-")
+    ? rawProviderId.slice("opencode-".length)
+    : rawProviderId;
 }
 
 /**
@@ -855,6 +853,14 @@ export interface RouteChiRawCombo {
   isHidden?: boolean;
   /** When RouteChi attaches a lifecycle hint we forward it; today it doesn't. */
   release_date?: string;
+  /**
+   * Server-computed context window for this combo (aggregated from member
+   * models using the same logic as /v1/models). When present, the client
+   * uses this value directly instead of re-aggregating from member models.
+   *
+   * Added in 3.9.x — old servers do not send it.
+   */
+  computed_context_length?: number;
 }
 
 /**
@@ -1059,7 +1065,12 @@ export function mapComboToModelV2(
       cache: { read: 0, write: 0 },
     },
     limit: {
-      context: contextValues.length > 0 ? Math.min(...contextValues) : 0,
+      context:
+        typeof combo.computed_context_length === "number" && combo.computed_context_length > 0
+          ? combo.computed_context_length
+          : contextValues.length > 0
+            ? Math.min(...contextValues)
+            : 0,
       ...(everyDeclaresInput ? { input: Math.min(...inputValues) } : {}),
       output: outputValues.length > 0 ? Math.min(...outputValues) : 0,
     },
