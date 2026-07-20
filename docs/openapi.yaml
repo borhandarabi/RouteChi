@@ -1,9 +1,9 @@
 openapi: 3.1.0
 info:
-  title: RouteChi API
+  title: OmniRoute API
   version: 3.8.49
   description: |
-    RouteChi is a local-first AI API proxy router. It provides an OpenAI-compatible
+    OmniRoute is a local-first AI API proxy router. It provides an OpenAI-compatible
     endpoint that routes requests to multiple AI providers with load balancing,
     failover, and usage tracking.
 
@@ -14,7 +14,7 @@ info:
     All proxy endpoints require a Bearer token (API key managed via the dashboard).
     Management endpoints are protected when `requireLogin` is enabled.
   contact:
-    name: RouteChi
+    name: OmniRoute
   license:
     name: MIT
 
@@ -82,7 +82,7 @@ tags:
   - name: Agent Skills
     description: >-
       Agent Skills catalog — 42 SKILL.md files (22 REST API + 20 CLI) for external agents,
-      MCP clients, and A2A orchestrators to discover RouteChi capabilities.
+      MCP clients, and A2A orchestrators to discover OmniRoute capabilities.
   - name: AgentBridge
     description: >-
       MITM proxy manager for 9 IDE agents (Antigravity, Kiro, Copilot, Codex, Cursor, Zed,
@@ -1093,54 +1093,54 @@ paths:
         "200":
           description: Chat completion response (or SSE stream)
           headers:
-            X-RouteChi-Response-Cost:
+            X-OmniRoute-Response-Cost:
               schema:
                 type: string
               description: Request cost in USD, fixed 10 decimals (e.g. `0.0001234500`; `0.0000000000` for free/unpriced).
-            X-RouteChi-Tokens-In:
+            X-OmniRoute-Tokens-In:
               schema:
                 type: string
               description: Input (prompt) token count.
-            X-RouteChi-Tokens-Out:
+            X-OmniRoute-Tokens-Out:
               schema:
                 type: string
               description: Output (completion) token count.
-            X-RouteChi-Model:
+            X-OmniRoute-Model:
               schema:
                 type: string
               description: Resolved model.
-            X-RouteChi-Provider:
+            X-OmniRoute-Provider:
               schema:
                 type: string
               description: Resolved provider alias.
-            X-RouteChi-Latency-Ms:
+            X-OmniRoute-Latency-Ms:
               schema:
                 type: string
               description: Handler latency in milliseconds.
-            X-RouteChi-Cache-Hit:
+            X-OmniRoute-Cache-Hit:
               schema:
                 type: string
                 enum: ["true", "false"]
               description: Whether the response was served from cache.
-            X-RouteChi-Fallback-Attempts:
+            X-OmniRoute-Fallback-Attempts:
               schema:
                 type: string
               description: Number of fallback attempts (only present when > 0).
-            X-RouteChi-Request-Id:
+            X-OmniRoute-Request-Id:
               schema:
                 type: string
               description: Request correlation id (present when known).
-            X-RouteChi-Version:
+            X-OmniRoute-Version:
               schema:
                 type: string
-              description: RouteChi build version (always present).
-            X-RouteChi-Cost-Saved:
+              description: OmniRoute build version (always present).
+            X-OmniRoute-Cost-Saved:
               schema:
                 type: string
               description: >-
                 On a semantic-cache HIT, the original (would-have-been) cost in USD that
                 the cache avoided (fixed 10 decimals). Present only on cache hits;
-                X-RouteChi-Response-Cost is 0 for the same response (incremental cost).
+                X-OmniRoute-Response-Cost is 0 for the same response (incremental cost).
           content:
             application/json:
               schema:
@@ -1248,9 +1248,9 @@ paths:
         "200":
           description: >-
             Message response (or SSE stream). Non-streaming success responses
-            carry the `X-RouteChi-*` cost-telemetry headers (see
-            `POST /api/v1/chat/completions`), including `X-RouteChi-Request-Id`
-            and `X-RouteChi-Version`.
+            carry the `X-OmniRoute-*` cost-telemetry headers (see
+            `POST /api/v1/chat/completions`), including `X-OmniRoute-Request-Id`
+            and `X-OmniRoute-Version`.
         "401":
           $ref: "#/components/responses/Unauthorized"
 
@@ -1287,9 +1287,9 @@ paths:
         "200":
           description: >-
             Response object or SSE stream. Non-streaming success responses carry
-            the `X-RouteChi-*` cost-telemetry headers (see
-            `POST /api/v1/chat/completions`), including `X-RouteChi-Request-Id`
-            and `X-RouteChi-Version`.
+            the `X-OmniRoute-*` cost-telemetry headers (see
+            `POST /api/v1/chat/completions`), including `X-OmniRoute-Request-Id`
+            and `X-OmniRoute-Version`.
         "401":
           $ref: "#/components/responses/Unauthorized"
 
@@ -1318,7 +1318,7 @@ paths:
       responses:
         "200":
           description: >-
-            Embedding vectors. Success responses carry the `X-RouteChi-*`
+            Embedding vectors. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`); media
             cost is computed per modality when pricing is available, otherwise
             `0` (fail-open).
@@ -1372,7 +1372,7 @@ paths:
       responses:
         "200":
           description: >-
-            Generated images. Success responses carry the `X-RouteChi-*`
+            Generated images. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`); image
             cost is computed per image when pricing is available, otherwise `0`
             (fail-open).
@@ -1423,7 +1423,7 @@ paths:
       responses:
         "200":
           description: >-
-            Audio data. Success responses carry the `X-RouteChi-*`
+            Audio data. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`); speech
             cost is computed per character when pricing is available, otherwise
             `0` (fail-open).
@@ -1451,7 +1451,7 @@ paths:
       responses:
         "200":
           description: >-
-            Transcription result. Success responses carry the `X-RouteChi-*`
+            Transcription result. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`);
             transcription cost is computed per second when pricing is available,
             otherwise `0` (fail-open).
@@ -1480,7 +1480,7 @@ paths:
       responses:
         "200":
           description: >-
-            Moderation result. Success responses carry the `X-RouteChi-*`
+            Moderation result. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`);
             moderations are always cost `0` (free).
 
@@ -1510,7 +1510,7 @@ paths:
       responses:
         "200":
           description: >-
-            Reranked documents. Success responses carry the `X-RouteChi-*`
+            Reranked documents. Success responses carry the `X-OmniRoute-*`
             cost-telemetry headers (see `POST /api/v1/chat/completions`); rerank
             cost is computed per search-unit when pricing is available,
             otherwise `0` (fail-open).
@@ -2200,6 +2200,36 @@ paths:
       responses:
         "200":
           description: RTK filter catalog and diagnostics
+
+  /api/context/rtk/import:
+    post:
+      tags: [Compression]
+      summary: Validate or install an RTK TOML schema v1 filter file
+      security:
+        - ManagementSessionAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [action, content]
+              additionalProperties: false
+              properties:
+                action:
+                  type: string
+                  enum: [validate, install]
+                content:
+                  type: string
+                  maxLength: 1048576
+                overwrite:
+                  type: boolean
+                  description: Replace an existing global file and create a backup
+      responses:
+        "200":
+          description: Filter metadata, inline-test outcomes, warnings, and installation status
+        "400":
+          description: Invalid TOML, schema, regular expression, inline test, or install request
 
   /api/context/rtk/test:
     post:
@@ -3258,7 +3288,7 @@ paths:
       tags: [Embedded Services]
       summary: Toggle 9Router auto-start
       description: >-
-        When enabled, 9Router starts automatically on the next RouteChi boot.
+        When enabled, 9Router starts automatically on the next OmniRoute boot.
         **LOCAL_ONLY** — loopback only.
       requestBody:
         required: true
@@ -3419,7 +3449,7 @@ paths:
       tags: [Embedded Services]
       summary: Toggle CLIProxyAPI auto-start
       description: >-
-        When enabled, CLIProxyAPI starts automatically on the next RouteChi boot.
+        When enabled, CLIProxyAPI starts automatically on the next OmniRoute boot.
         **LOCAL_ONLY** — loopback only.
       requestBody:
         required: true
@@ -3579,7 +3609,7 @@ paths:
       tags: [Embedded Services]
       summary: Toggle Mux auto-start
       description: >-
-        When enabled, Mux starts automatically on the next RouteChi boot.
+        When enabled, Mux starts automatically on the next OmniRoute boot.
         **LOCAL_ONLY** — loopback only.
       requestBody:
         required: true
@@ -3696,7 +3726,7 @@ paths:
       tags: [Embedded Services]
       summary: Toggle Bifrost auto-start
       description: >-
-        When enabled, Bifrost starts automatically on the next RouteChi boot.
+        When enabled, Bifrost starts automatically on the next OmniRoute boot.
         **LOCAL_ONLY** — loopback only.
       requestBody:
         required: true
@@ -3872,7 +3902,7 @@ paths:
     post:
       tags: [Cloud]
       summary: Authenticate with cloud worker
-      description: Authenticates with the RouteChi cloud worker for remote access.
+      description: Authenticates with the OmniRoute cloud worker for remote access.
       requestBody:
         required: true
         content:
@@ -4922,7 +4952,7 @@ paths:
   /api/tools/traffic-inspector/requests/{id}/replay:
     post:
       tags: [Traffic Inspector]
-      summary: Replay a captured request through RouteChi router
+      summary: Replay a captured request through OmniRoute router
       description: Re-executes the original request body against /v1/chat/completions. Consumes quota.
       parameters:
         - name: id
@@ -5317,7 +5347,7 @@ paths:
       summary: List agent skills catalog
       description: |
         Returns the full 42-entry Agent Skills catalog with optional filtering.
-        Skills describe how to use RouteChi's REST API and CLI — they are structured
+        Skills describe how to use OmniRoute's REST API and CLI — they are structured
         SKILL.md documentation files discoverable by external agents, MCP clients, and
         A2A orchestrators. No authentication required.
       parameters:
@@ -5542,7 +5572,7 @@ paths:
       description: >-
         Mistral OCR–compatible document OCR endpoint. Accepts a JSON body
         referencing a document/image and returns extracted text. Success
-        responses carry the `X-RouteChi-*` cost-telemetry headers.
+        responses carry the `X-OmniRoute-*` cost-telemetry headers.
       security:
         - BearerAuth: []
       requestBody:
@@ -5574,7 +5604,7 @@ paths:
         OpenAI Whisper–compatible audio translation (multipart/form-data).
         Unlike `/api/v1/audio/transcriptions`, output is always English
         regardless of the source language. Success responses carry the
-        `X-RouteChi-*` cost-telemetry headers.
+        `X-OmniRoute-*` cost-telemetry headers.
       security:
         - BearerAuth: []
       requestBody:
@@ -5687,8 +5717,8 @@ paths:
     get:
       tags:
         - CLI Tools
-      summary: Read Crush CLI RouteChi config
-      description: Local-only. Reads the RouteChi provider block in Crush's config.
+      summary: Read Crush CLI OmniRoute config
+      description: Local-only. Reads the OmniRoute provider block in Crush's config.
       x-internal: true
       responses:
         "200":
@@ -5696,8 +5726,8 @@ paths:
     post:
       tags:
         - CLI Tools
-      summary: Write Crush CLI RouteChi config
-      description: Local-only. Registers RouteChi as an `openai-compat` provider in Crush's config.
+      summary: Write Crush CLI OmniRoute config
+      description: Local-only. Registers OmniRoute as an `openai-compat` provider in Crush's config.
       x-internal: true
       responses:
         "200":
@@ -5705,8 +5735,8 @@ paths:
     delete:
       tags:
         - CLI Tools
-      summary: Remove RouteChi from Crush CLI config
-      description: Local-only. Removes the RouteChi provider block from Crush's config.
+      summary: Remove OmniRoute from Crush CLI config
+      description: Local-only. Removes the OmniRoute provider block from Crush's config.
       x-internal: true
       responses:
         "200":
@@ -5715,9 +5745,9 @@ paths:
     get:
       tags:
         - CLI Tools
-      summary: Read CodeWhale CLI RouteChi config
+      summary: Read CodeWhale CLI OmniRoute config
       description: >-
-        Local-only. Reads the RouteChi config block from
+        Local-only. Reads the OmniRoute config block from
         `~/.codewhale/config.toml` (with `~/.deepseek/config.toml` legacy
         fallback).
       x-internal: true
@@ -5727,8 +5757,8 @@ paths:
     post:
       tags:
         - CLI Tools
-      summary: Write CodeWhale CLI RouteChi config
-      description: Local-only. Writes the RouteChi config block in CodeWhale TOML format.
+      summary: Write CodeWhale CLI OmniRoute config
+      description: Local-only. Writes the OmniRoute config block in CodeWhale TOML format.
       x-internal: true
       responses:
         "200":
@@ -5736,8 +5766,8 @@ paths:
     delete:
       tags:
         - CLI Tools
-      summary: Remove RouteChi from CodeWhale CLI config
-      description: Local-only. Removes the RouteChi config block from CodeWhale's config.
+      summary: Remove OmniRoute from CodeWhale CLI config
+      description: Local-only. Removes the OmniRoute config block from CodeWhale's config.
       x-internal: true
       responses:
         "200":
@@ -5748,7 +5778,7 @@ components:
     BearerAuth:
       type: http
       scheme: bearer
-      description: API key obtained from the RouteChi dashboard
+      description: API key obtained from the OmniRoute dashboard
     ManagementSessionAuth:
       type: apiKey
       in: cookie
@@ -6023,7 +6053,7 @@ components:
     AgentSkill:
       type: object
       description: >-
-        Single entry in the Agent Skills catalog. Describes one RouteChi REST API surface
+        Single entry in the Agent Skills catalog. Describes one OmniRoute REST API surface
         (category: api) or CLI subcommand group (category: cli) with a canonical ID and a
         link to its SKILL.md documentation file.
       required: [id, name, description, category, area, rawUrl, githubUrl]
@@ -6079,12 +6109,12 @@ components:
           type: string
           format: uri
           description: GitHub raw URL of the SKILL.md file
-          example: "https://raw.githubusercontent.com/borhandarabi/routechi/refs/heads/main/skills/omni-providers/SKILL.md"
+          example: "https://raw.githubusercontent.com/diegosouzapw/OmniRoute/refs/heads/main/skills/omni-providers/SKILL.md"
         githubUrl:
           type: string
           format: uri
           description: GitHub blob URL for viewing the SKILL.md in the browser
-          example: "https://github.com/borhandarabi/routechi/blob/main/skills/omni-providers/SKILL.md"
+          example: "https://github.com/diegosouzapw/OmniRoute/blob/main/skills/omni-providers/SKILL.md"
 
     SkillCoverage:
       type: object

@@ -5,27 +5,22 @@ import Link from "next/link";
 import { Card, Button, Input, Modal, CardSkeleton, SegmentedControl } from "@/shared/components";
 import Toggle from "@/shared/components/Toggle";
 import { useCopyToClipboard } from "@/shared/hooks/useCopyToClipboard";
-import { useDisplayBaseUrl } from "@/shared/hooks";
+import { isPublicDisplayBaseUrl, useDisplayBaseUrl } from "@/shared/hooks";
 import { AI_PROVIDERS, getProviderByAlias } from "@/shared/constants/providers";
 import { getProviderDisplayName } from "@/lib/display/names";
 import { useTranslations } from "next-intl";
 import A2ADashboardPage from "./components/A2ADashboard";
 import McpDashboardPage from "./components/MCPDashboard";
 import NotionSourceCard from "./components/NotionSourceCard";
+import ObsidianSourceCard from "./components/ObsidianSourceCard";
 import VscodeTokenAliasCard from "./VscodeTokenAliasCard";
-import DeployWorkerModal from "./components/DeployWorkerModal";
 
 const BUILD_TIME_CLOUD_URL = process.env.NEXT_PUBLIC_CLOUD_URL || null;
 const CLOUD_ACTION_TIMEOUT_MS = 15000;
 
 type TranslationValues = Record<string, string | number | boolean | Date>;
 type CloudflaredTunnelPhase =
-  | "unsupported"
-  | "not_installed"
-  | "stopped"
-  | "starting"
-  | "running"
-  | "error";
+  "unsupported" | "not_installed" | "stopped" | "starting" | "running" | "error";
 
 type CloudflaredTunnelStatus = {
   supported: boolean;
@@ -44,12 +39,7 @@ type CloudflaredTunnelStatus = {
 };
 
 type TailscaleTunnelPhase =
-  | "unsupported"
-  | "not_installed"
-  | "needs_login"
-  | "stopped"
-  | "running"
-  | "error";
+  "unsupported" | "not_installed" | "needs_login" | "stopped" | "running" | "error";
 
 type TailscaleTunnelStatus = {
   supported: boolean;
@@ -71,13 +61,7 @@ type TailscaleTunnelStatus = {
 };
 
 type NgrokTunnelPhase =
-  | "unsupported"
-  | "not_installed"
-  | "stopped"
-  | "needs_auth"
-  | "starting"
-  | "running"
-  | "error";
+  "unsupported" | "not_installed" | "stopped" | "needs_auth" | "starting" | "running" | "error";
 
 type NgrokTunnelStatus = {
   supported: boolean;
@@ -167,9 +151,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const [selectedProvider, setSelectedProvider] = useState(null); // for provider models popup
   const [cloudBaseUrl, setCloudBaseUrl] = useState(BUILD_TIME_CLOUD_URL); // dynamic cloud URL from API response
   const [cloudConfigured, setCloudConfigured] = useState(Boolean(BUILD_TIME_CLOUD_URL));
-  const [cloudUrlInput, setCloudUrlInput] = useState("");
-  const [savingCloudUrl, setSavingCloudUrl] = useState(false);
-  const [showDeployModal, setShowDeployModal] = useState(false);
   const [mcpStatus, setMcpStatus] = useState<any>(null);
   const [a2aStatus, setA2aStatus] = useState<any>(null);
   const [searchProviders, setSearchProviders] = useState<any[]>([]);
@@ -191,6 +172,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const [ngrokToken, setNgrokToken] = useState("");
   const [showNgrokTunnel, setShowNgrokTunnel] = useState(true);
   const [expandedTunnel, setExpandedTunnel] = useState<string | null>(null);
+  const [localApiUrl, setLocalApiUrl] = useState("http://localhost:20128/v1");
   const [lanUrls, setLanUrls] = useState<string[]>([]);
   const [tailscaleIpUrl, setTailscaleIpUrl] = useState<string | null>(null);
   const [activeEndpointTab, setActiveEndpointTab] = useState<EndpointTab>("apis");
@@ -339,6 +321,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           if (res.ok) {
             const data = await res.json();
             if (mounted) {
+              if (data.localUrl) setLocalApiUrl(data.localUrl);
               setLanUrls(data.lanUrls ?? []);
               if (data.tailscaleIpUrl) setTailscaleIpUrl(data.tailscaleIpUrl);
             }
@@ -558,34 +541,6 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       setShowCloudModal(true);
     } else {
       setShowDisableModal(true);
-    }
-  };
-
-  // Save CLOUD_URL to settings DB so users can configure it from the dashboard
-  // without editing .env.
-  const handleSaveCloudUrl = async () => {
-    const trimmed = cloudUrlInput.trim().replace(/\/+$/, "");
-    if (!trimmed) return;
-    setSavingCloudUrl(true);
-    try {
-      const res = await fetch("/api/settings", {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ cloudUrl: trimmed }),
-      });
-      if (!res.ok) throw new Error("Failed to save cloud URL");
-      setCloudConfigured(true);
-      setCloudBaseUrl(trimmed);
-      setCloudUrlInput("");
-      // Refresh settings to pick up the new cloudUrl
-      window.location.reload();
-    } catch (err) {
-      setCloudStatus({
-        type: "error",
-        message: err instanceof Error ? err.message : "Failed to save",
-      });
-    } finally {
-      setSavingCloudUrl(false);
     }
   };
 
@@ -878,7 +833,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           type: "info",
           message: translateOrFallback(
             "tailscaleWaitingForLogin",
-            "Complete the Tailscale login in the opened browser tab. RouteChi will retry automatically."
+            "Complete the Tailscale login in the opened browser tab. OmniRoute will retry automatically."
           ),
         });
 
@@ -906,7 +861,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           type: "info",
           message: translateOrFallback(
             "tailscaleWaitingForFunnel",
-            "Enable Funnel for this device in the opened browser tab. RouteChi will keep polling."
+            "Enable Funnel for this device in the opened browser tab. OmniRoute will keep polling."
           ),
         });
 
@@ -1112,7 +1067,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   }, [fetchTailscaleStatus, handleTailscaleEnable, tailscalePassword, translateOrFallback]);
 
   const displayBaseUrl = useDisplayBaseUrl();
-  const baseUrl = `${displayBaseUrl}/v1`;
+  const displayApiUrl = `${displayBaseUrl}/v1`;
+  const publicDisplayApiUrl = isPublicDisplayBaseUrl(displayBaseUrl) ? displayApiUrl : null;
   const normalizedCloudBaseUrl = cloudBaseUrl
     ? resolvedMachineId && !cloudBaseUrl.endsWith(`/${resolvedMachineId}`)
       ? `${cloudBaseUrl}/${resolvedMachineId}`
@@ -1129,13 +1085,9 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
     );
   }
 
-  // Use new format endpoint (machineId embedded in key)
-  const currentEndpoint = cloudEnabled && cloudConfigured && cloudEndpointNew ? cloudEndpointNew : baseUrl;
-
-  const activeUrls = [
-    { label: "Local", url: baseUrl, key: "active_local" },
-    ...(cloudEnabled && cloudConfigured && cloudEndpointNew
-      ? [{ label: "Cloud", url: cloudEndpointNew, key: "active_cloud" }]
+  const activeTunnelUrls = [
+    ...(publicDisplayApiUrl
+      ? [{ label: t("tierPublic"), url: publicDisplayApiUrl, key: "active_public" }]
       : []),
     ...(cloudflaredStatus?.running && cloudflaredStatus.apiUrl
       ? [{ label: "Cloudflare", url: cloudflaredStatus.apiUrl, key: "active_cf" }]
@@ -1153,6 +1105,21 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       ? [{ label: "ngrok", url: ngrokStatus.apiUrl, key: "active_ngrok" }]
       : []),
   ];
+  const preferredTunnelUrl = activeTunnelUrls[0]?.url ?? null;
+  const currentEndpoint =
+    preferredTunnelUrl ??
+    (cloudEnabled && cloudEndpointNew ? cloudEndpointNew : null) ??
+    displayApiUrl;
+  const activeUrls = [
+    ...activeTunnelUrls,
+    ...(cloudEnabled && cloudEndpointNew
+      ? [{ label: "Cloud", url: cloudEndpointNew, key: "active_cloud" }]
+      : []),
+    { label: "Local", url: localApiUrl, key: "active_local" },
+  ].filter(
+    (candidate, index, candidates) =>
+      candidates.findIndex((other) => other.url === candidate.url) === index
+  );
   const visibleTunnelCount = [showCloudflaredTunnel, showTailscaleFunnel, showNgrokTunnel].filter(
     Boolean
   ).length;
@@ -1293,6 +1260,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       {activeEndpointTab === "context-sources" ? (
         <div className="flex flex-col gap-4">
           <NotionSourceCard />
+          <ObsidianSourceCard />
         </div>
       ) : null}
 
@@ -1389,7 +1357,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
               Running
             </span>
             <button
-              onClick={() => void copy(baseUrl, "endpoint_url")}
+              onClick={() => void copy(localApiUrl, "endpoint_url")}
               className="shrink-0 flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md border border-border/70 text-text-muted hover:text-text hover:border-border transition-colors"
             >
               <span className="material-symbols-outlined text-[14px]">
@@ -1413,7 +1381,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             </span>
           </div>
 
-          {/* Cloud RouteChi */}
+          {/* Cloud OmniRoute */}
           <div className="flex items-center gap-3 py-3">
             <span className="material-symbols-outlined text-[18px] text-blue-400 shrink-0">
               cloud
@@ -1423,17 +1391,17 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             </div>
             <span
               className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border shrink-0 ${
-                cloudEnabled && cloudConfigured
+                cloudEnabled
                   ? "bg-green-500/10 border-green-500/30 text-green-400"
                   : "bg-surface border-border/70 text-text-muted"
               }`}
             >
               <span
-                className={`w-1.5 h-1.5 rounded-full shrink-0 ${cloudEnabled && cloudConfigured ? "bg-green-400 animate-pulse" : "bg-text-muted"}`}
+                className={`w-1.5 h-1.5 rounded-full shrink-0 ${cloudEnabled ? "bg-green-400 animate-pulse" : "bg-text-muted"}`}
               />
-              {cloudEnabled && cloudConfigured ? "Active" : "Disabled"}
+              {cloudEnabled ? "Active" : "Disabled"}
             </span>
-            {cloudEnabled && cloudConfigured ? (
+            {cloudEnabled ? (
               <Button
                 size="sm"
                 variant="secondary"
@@ -1456,53 +1424,11 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                 {t("enableCloud")}
               </Button>
             ) : (
-              <div className="flex items-center gap-2 shrink-0">
-                <input
-                  type="text"
-                  placeholder="https://your-worker.workers.dev"
-                  value={cloudUrlInput}
-                  onChange={(e) => setCloudUrlInput(e.target.value)}
-                  className="w-48 rounded-md border border-border bg-bg px-2.5 py-1 text-xs text-text-main focus:border-primary focus:outline-none"
-                />
-                <Button
-                  size="sm"
-                  variant="primary"
-                  icon="save"
-                  onClick={handleSaveCloudUrl}
-                  disabled={!cloudUrlInput.trim() || savingCloudUrl}
-                  className="shrink-0"
-                >
-                  {savingCloudUrl ? "..." : "Set"}
-                </Button>
-                <Button
-                  size="sm"
-                  variant="secondary"
-                  icon="rocket_launch"
-                  onClick={() => setShowDeployModal(true)}
-                  className="shrink-0"
-                >
-                  Auto-Deploy
-                </Button>
-              </div>
+              <span className="text-xs text-text-muted shrink-0 px-2 py-1 rounded border border-border/70 bg-surface">
+                Not configured
+              </span>
             )}
           </div>
-
-          {/* Auto-Deploy Modal */}
-          {showDeployModal && (
-            <DeployWorkerModal
-              onClose={() => setShowDeployModal(false)}
-              onSuccess={(url, secret) => {
-                setCloudConfigured(true);
-                setCloudBaseUrl(url);
-                setShowDeployModal(false);
-                setCloudStatus({
-                  type: "success",
-                  message: `Worker deployed: ${url}. Set OMNIROUTE_CLOUD_SYNC_SECRET=${secret} in .env for HMAC verification.`,
-                });
-                setTimeout(() => window.location.reload(), 3000);
-              }}
-            />
-          )}
 
           {/* Cloudflare Quick Tunnel */}
           {showCloudflaredTunnel && (
@@ -2317,7 +2243,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             <p className="text-sm font-medium text-blue-300">
               {translateOrFallback(
                 "tailscaleInstallIntro",
-                "Installs Tailscale on this machine and prepares RouteChi to enable Funnel."
+                "Installs Tailscale on this machine and prepares OmniRoute to enable Funnel."
               )}
             </p>
             <p className="mt-2 text-sm text-blue-200/80">

@@ -1,4 +1,5 @@
 import { randomUUID, createHash } from "crypto";
+import { extractGoogApiKeyHeader } from "./googApiKeyAuth.ts";
 import {
   getProviderConnections,
   getProviderNodes,
@@ -201,7 +202,7 @@ function toBooleanOrDefault(value: unknown, fallback: boolean): boolean {
   return typeof value === "boolean" ? value : fallback;
 }
 
-function readHeaderValue(
+export function readHeaderValue(
   headers:
     | Headers
     | { get?: (name: string) => string | null }
@@ -1001,6 +1002,10 @@ const markMutexes = new Map<string, Promise<void>>();
 // Re-export for backwards compat with existing test imports.
 export { fisherYatesShuffle, getNextFromDeckSync as getNextFromDeck };
 
+const PROVIDER_SEARCH_PAIRS: string[][] = [
+  ["nvidia", "nvidia_nim"],
+  ["kimi-coding", "kimi-coding-apikey"],
+];
 /**
  * Resolve provider aliases (e.g., nvidia -> nvidia_nim) for DB lookup
  */
@@ -1008,12 +1013,8 @@ async function getProviderSearchPool(provider: string): Promise<string[]> {
   const canonicalProvider = resolveProviderId(provider);
   const canonicalAlias = getProviderAlias(canonicalProvider);
 
-  if (provider === "nvidia") {
-    return ["nvidia", "nvidia_nim"];
-  }
-  if (provider === "nvidia_nim") {
-    return ["nvidia_nim", "nvidia"];
-  }
+  const pair = PROVIDER_SEARCH_PAIRS.find((aliases) => aliases.includes(provider));
+  if (pair) return pair[0] === provider ? pair : [pair[1], pair[0]];
 
   const searchPool = new Set([provider, canonicalProvider, canonicalAlias].filter(Boolean));
 
@@ -1526,8 +1527,7 @@ export async function getProviderCredentials(
       { fallbackStrategy?: string; stickyRoundRobinLimit?: number }
     >;
     const providerOverride = providerStrategyOverrides[resolvedId] || {};
-    const strategy =
-      providerOverride.fallbackStrategy || settings.fallbackStrategy || "fill-first";
+    const strategy = providerOverride.fallbackStrategy || settings.fallbackStrategy || "fill-first";
 
     let connection;
     const affinityConnection = await selectSessionAffinityConnection(
@@ -1877,8 +1877,10 @@ export async function getProviderCredentialsWithQuotaPreflight(
       }
       return defaultThresholdPercent;
     };
+    // #6842: openrouter also needs requestedModel, for the :free-window check.
+    const modelAwarePreflight = provider === "codex" || provider === "openrouter";
     const preflightCredentials =
-      requestedModel && provider === "codex" ? { ...credentials, requestedModel } : credentials;
+      requestedModel && modelAwarePreflight ? { ...credentials, requestedModel } : credentials;
     const preflight = await preflightQuota(provider, connectionId, preflightCredentials, {
       resolveMinRemainingPercent,
       resolveWarnRemainingPercent: () => warnThresholdPercent,
@@ -2435,7 +2437,7 @@ function readNonEmptyUrlToken(request: AuthRequestLike): string | null {
  * path-scoped URL token:
  * - `Authorization: Bearer <key>` (OpenAI / RouteChi / Codex CLI / Bearer clients)
  * - `x-api-key: <key>` (Anthropic Messages API contract — Claude Code,
- *   `@anthropic-ai/sdk`, any SDK that sets `anthropic-version`)
+ *   `@anthropic-ai/sdk`, any SDK that sets `anthropic-version`) / `x-goog-api-key` (#7034)
  * - `/vscode/<key>/...` (path-scoped tokenized aliases — only when `allowUrl`)
  *
  * When multiple inputs are present, explicit auth headers win.
@@ -2480,6 +2482,8 @@ export function extractApiKey(request: AuthRequestLike, opts?: { allowUrl?: bool
     }
   }
 
+  const xGoogApiKey = extractGoogApiKeyHeader(request?.headers); // Issue #7034
+  if (xGoogApiKey) return xGoogApiKey;
   if (opts?.allowUrl === false) return null;
   return readNonEmptyUrlToken(request);
 }

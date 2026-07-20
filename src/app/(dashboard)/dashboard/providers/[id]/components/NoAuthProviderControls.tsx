@@ -2,8 +2,9 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { NoAuthAccountCard, NoAuthProviderCard } from "@/shared/components";
-import { getProviderAlias } from "@/shared/constants/providers";
+import { getProviderAlias, supportsNoAuthProviderProxy } from "@/shared/constants/providers";
 import { useNotificationStore } from "@/store/notificationStore";
+import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 
 // Lazy-load ZaiDeviceTokenPanel only on the zai-web-free provider page.
@@ -18,6 +19,8 @@ const KiloFreeDefaultModelPanel = dynamic(() => import("./KiloFreeDefaultModelPa
 const ACCOUNT_PROVIDER_NAMES: Record<string, string> = {
   mimocode: "MiMoCode",
   opencode: "OpenCode",
+  dahl: "Dahl",
+  // RouteChi additions — these no-auth providers ship their own account cards.
   "kilo-free": "Kilo Free",
   "zai-web-free": "Z.AI Free Web",
   "duckduckgo-web": "DuckDuckGo AI Chat",
@@ -27,13 +30,18 @@ const ACCOUNT_PROVIDER_NAMES: Record<string, string> = {
 interface NoAuthProviderControlsProps {
   providerId: string;
   providerName: string;
+  providerProxy?: { host?: string | null } | null;
+  onConfigureProviderProxy: () => void;
 }
 
 export default function NoAuthProviderControls({
   providerId,
   providerName,
+  providerProxy,
+  onConfigureProviderProxy,
 }: NoAuthProviderControlsProps) {
   const notify = useNotificationStore();
+  const t = useTranslations("providers");
   const [blockedProviders, setBlockedProviders] = useState<string[]>([]);
   const [savingEnabled, setSavingEnabled] = useState(false);
   const providerAlias = getProviderAlias(providerId);
@@ -96,8 +104,27 @@ export default function NoAuthProviderControls({
   );
 
   const accountProviderName = ACCOUNT_PROVIDER_NAMES[providerId];
+  const host = providerProxy?.host;
+  const providerProxyControl = supportsNoAuthProviderProxy(providerId) ? (
+    <button
+      type="button"
+      onClick={onConfigureProviderProxy}
+      className={`inline-flex items-center gap-1 rounded px-2 py-1 text-xs font-medium transition-all ${
+        host
+          ? "bg-amber-500/15 text-amber-500 hover:bg-amber-500/25"
+          : "bg-black/3 text-text-muted/50 hover:bg-black/6 hover:text-text-muted dark:bg-white/3 dark:hover:bg-white/6"
+      }`}
+      title={host ? t("providerProxyTitleConfigured", { host }) : t("providerProxyConfigureHint")}
+    >
+      <span className="material-symbols-outlined text-[14px]">vpn_lock</span>
+      <span className="max-w-30 truncate">{host || t("providerProxy")}</span>
+    </button>
+  ) : null;
+
   // Build the availableModels list for providers that have multiple models.
-  // This enables the per-account modelFilter dropdown in NoAuthAccountCard.
+  // This enables the per-account modelFilter dropdown in NoAuthAccountCard
+  // so users can restrict an account to a specific model (e.g. for kilo-free
+  // and zai-web-free where different models have different quotas).
   const availableModels =
     providerId === "kilo-free"
       ? [
@@ -116,6 +143,7 @@ export default function NoAuthProviderControls({
       : providerId === "zai-web-free"
         ? ["glm-4.7"]
         : undefined;
+
   if (accountProviderName) {
     return (
       <>
@@ -123,9 +151,22 @@ export default function NoAuthProviderControls({
           providerId={providerId}
           providerName={accountProviderName}
           generateAccountId={() => crypto.randomUUID().replace(/-/g, "")}
+          generateApiKey={
+            providerId === "dahl"
+              ? async () => {
+                  const res = await fetch("/api/dahl/tokens", { method: "POST" });
+                  const data = await res.json();
+                  if (!res.ok || !data.token) {
+                    throw new Error(data?.error || "Failed to create Dahl token");
+                  }
+                  return data.token as string;
+                }
+              : undefined
+          }
           enabled={enabled}
           savingEnabled={savingEnabled}
           onEnabledChange={handleEnabledChange}
+          providerProxyControl={providerProxyControl}
           availableModels={availableModels}
         />
         {/* zai-web-free gets an additional Device Token Pool + Aliyun Captcha Keys
@@ -144,6 +185,7 @@ export default function NoAuthProviderControls({
         enabled={enabled}
         saving={savingEnabled}
         onEnabledChange={handleEnabledChange}
+        providerProxyControl={providerProxyControl}
       />
       {/* zai-web-free gets an additional Device Token Pool + Aliyun Captcha Keys
           panel below the standard enable/disable card. */}

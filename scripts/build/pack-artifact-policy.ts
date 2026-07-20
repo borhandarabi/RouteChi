@@ -1,5 +1,5 @@
 /**
- * Shared policy for RouteChi npm publish artifact hygiene.
+ * Shared policy for OmniRoute npm publish artifact hygiene.
  *
  * The package publishes the standalone runtime under dist/ (Layer 1: renamed from app/).
  * This policy keeps local backups, QA scratch files, and development-only
@@ -168,6 +168,7 @@ export const PACK_ARTIFACT_REQUIRED_PATHS: string[] = [
   // tests/unit/pack-artifact-entrypoint-closures.test.ts).
   "bin/cli/data-dir.mjs",
   "bin/cli/utils/storageKeyProvision.mjs",
+  "bin/cli/utils/versionFastPath.mjs",
   "bin/mcp-server.mjs",
   "bin/nodeRuntimeSupport.mjs",
   "bin/omniroute.mjs",

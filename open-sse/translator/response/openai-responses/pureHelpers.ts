@@ -56,6 +56,14 @@ function isDroppableEmptyEntry(entry, propSchema, required, key, allowlisted) {
   return allowlisted || (propSchema != null && !required.has(key));
 }
 
+// #7023 — the request-side counterpart (injectOptionalEnumOmissionSentinel) widens
+// no-default optional enum properties to accept `null`, meaning "omitted" (OpenAI's own
+// nullable-union idiom for Responses-API strict mode). Drop the key when the model
+// follows that idiom for a non-required, schema-declared property.
+function isDroppableNullEntry(entry, propSchema, required, key) {
+  return entry === null && propSchema != null && !required.has(key);
+}
+
 function stripEmptyOptionalToolArgsObject(value, toolName, schema) {
   const properties = schemaProperties(schema);
   const required = schemaRequiredSet(schema);
@@ -66,7 +74,8 @@ function stripEmptyOptionalToolArgsObject(value, toolName, schema) {
     const propSchema = properties ? properties[key] : null;
     if (
       matchesSchemaDefault(propSchema, entry) ||
-      isDroppableEmptyEntry(entry, propSchema, required, key, allowlisted)
+      isDroppableEmptyEntry(entry, propSchema, required, key, allowlisted) ||
+      isDroppableNullEntry(entry, propSchema, required, key)
     ) {
       delete cleaned[key];
     }
@@ -174,7 +183,7 @@ export function extractResponsesReasoningSummaryText(item) {
 // This function computes the placeholder text WITHOUT mutating `item` — callers
 // use the returned text for synthetic client-facing events only.
 const ENCRYPTED_REASONING_PLACEHOLDER =
-  "Codex is reasoning, but the upstream Responses API exposed this reasoning block only as encrypted private reasoning. RouteChi cannot recover the plaintext.";
+  "Codex is reasoning, but the upstream Responses API exposed this reasoning block only as encrypted private reasoning. OmniRoute cannot recover the plaintext.";
 
 export function getVisibleResponsesReasoningSummaryText(item) {
   const existingSummary = extractResponsesReasoningSummaryText(item);

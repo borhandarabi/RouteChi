@@ -108,6 +108,10 @@ test("findMissingArtifactPaths flags missing root runtime files in the tarball",
     "bin/cli/data-dir.mjs",
     "bin/cli/program.mjs",
     "bin/cli/utils/storageKeyProvision.mjs",
+<<<<<<< HEAD
+=======
+    "bin/cli/utils/versionFastPath.mjs",
+>>>>>>> origin/release/v3.8.49
     "bin/mcp-server.mjs",
     "bin/nodeRuntimeSupport.mjs",
     "dist/head-response-guard.cjs",

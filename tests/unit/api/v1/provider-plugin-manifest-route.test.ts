@@ -58,11 +58,19 @@ function withServicePluginEntries(manifest: ProviderPluginManifest): ProviderPlu
   };
 }
 
+<<<<<<< HEAD
 test("provider plugin manifest route returns JSON-safe manifest", async () => {
   const response = await GET();
   const body = (await response.json()) as ProviderPluginManifest;
+=======
+test("provider plugin manifest returns a stable ETag with its cache policy", async () => {
+  const response = await GET(new Request("http://localhost/api/v1/provider-plugin-manifest"));
+  const body = await response.json();
+>>>>>>> origin/release/v3.8.49
 
   assert.equal(response.status, 200);
+  assert.equal(response.headers.get("Cache-Control"), "public, max-age=60");
+  assert.match(response.headers.get("ETag") ?? "", /^"[A-Za-z0-9_-]+"$/);
   assert.equal(response.headers.get("Content-Type"), "application/json");
   assert.equal(body.schemaVersion, 1);
   assert.equal(body.generatedFrom, "open-sse/config/providers");
@@ -81,6 +89,7 @@ test("provider plugin manifest route handles CORS preflight", async () => {
   assert.equal(response.headers.get("Access-Control-Allow-Headers"), "*");
 });
 
+<<<<<<< HEAD
 test("provider plugin manifest route injects service models with a custom reader", async () => {
   const manifest = withServicePluginEntries(generateProviderPluginManifest());
   const withModels = await injectServiceModelsIntoManifest(
@@ -212,4 +221,32 @@ test("provider plugin manifest route skips cliproxy models when exposure is disa
   const cliproxyEntry = getProvider(withModels, "cliproxyapi");
   assert.ok(cliproxyEntry);
   assert.equal(hasModel(cliproxyEntry, "cliproxyapi/model-clone"), false);
+=======
+test("provider plugin manifest supports conditional sidecar refreshes", async () => {
+  const initial = await GET(new Request("http://localhost/api/v1/provider-plugin-manifest"));
+  const etag = initial.headers.get("ETag");
+
+  const response = await GET(
+    new Request("http://localhost/api/v1/provider-plugin-manifest", {
+      headers: { "If-None-Match": etag ?? "" },
+    })
+  );
+
+  assert.equal(response.status, 304);
+  assert.equal(response.headers.get("ETag"), etag);
+  assert.equal(await response.text(), "");
+});
+
+test("provider plugin manifest accepts weak conditional validators", async () => {
+  const initial = await GET(new Request("http://localhost/api/v1/provider-plugin-manifest"));
+  const etag = initial.headers.get("ETag");
+
+  const response = await GET(
+    new Request("http://localhost/api/v1/provider-plugin-manifest", {
+      headers: { "If-None-Match": `W/${etag}` },
+    })
+  );
+
+  assert.equal(response.status, 304);
+>>>>>>> origin/release/v3.8.49
 });

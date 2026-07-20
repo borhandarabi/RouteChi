@@ -263,6 +263,7 @@ const KNOWN_PNGS = new Set([
   "piapi",
   "predibase",
   "reka",
+  "dahl",
   "zeroclaw",
 ]);
 

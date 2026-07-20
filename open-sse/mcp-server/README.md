@@ -1,10 +1,10 @@
-# RouteChi MCP Server
+# OmniRoute MCP Server
 
-> **Model Context Protocol server** that exposes RouteChi's gateway intelligence as **37 tools** for AI agents.
+> **Model Context Protocol server** that exposes OmniRoute's gateway intelligence as **104 tools** for AI agents.
 >
-> **Source of truth for the full tool catalog and REST surface:** [`docs/frameworks/MCP-SERVER.md`](../../docs/MCP-SERVER.md). This README focuses on architecture, configuration, and integration examples; the catalog below is a summary subset.
+> **Source of truth for the full tool catalog and REST surface:** [`docs/frameworks/MCP-SERVER.md`](../../docs/frameworks/MCP-SERVER.md). This README focuses on architecture, configuration, and integration examples; the catalog below is a summary subset.
 
-The MCP Server allows any AI agent (Claude Desktop, Cursor, VS Code Copilot, custom agents) to **monitor, control, and optimize** the RouteChi AI gateway programmatically.
+The MCP Server allows any AI agent (Claude Desktop, Cursor, VS Code Copilot, custom agents) to **monitor, control, and optimize** the OmniRoute AI gateway programmatically.
 
 ---
 
@@ -18,9 +18,9 @@ The MCP Server allows any AI agent (Claude Desktop, Cursor, VS Code Copilot, cus
                        │  MCP Protocol (stdio or HTTP)
                        ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│                      RouteChi MCP Server                        │
+│                      OmniRoute MCP Server                        │
 │  ┌──────────────┐  ┌─────────────────┐  ┌────────────────────┐  │
-│  │ Scope        │  │  37 MCP Tools   │  │   Audit Logger     │  │
+│  │ Scope        │  │ 104 MCP Tools   │  │   Audit Logger     │  │
 │  │ Enforcement  │──│ (core + memory  │──│   (SHA-256/SQLite) │  │
 │  │              │  │  + skills + …)  │  │                    │  │
 │  └──────────────┘  └────────┬────────┘  └────────────────────┘  │
@@ -28,7 +28,7 @@ The MCP Server allows any AI agent (Claude Desktop, Cursor, VS Code Copilot, cus
                               │  HTTP (internal)
                               ▼
 ┌──────────────────────────────────────────────────────────────────┐
-│                    RouteChi Gateway (port 20128)                 │
+│                    OmniRoute Gateway (port 20128)                 │
 │        /v1/chat/completions  /api/combos  /api/usage  ...        │
 └──────────────────────────────────────────────────────────────────┘
 ```
@@ -40,7 +40,7 @@ The MCP Server allows any AI agent (Claude Desktop, Cursor, VS Code Copilot, cus
 ### 1. Environment Variables
 
 ```bash
-# Required: RouteChi base URL
+# Required: OmniRoute base URL
 export OMNIROUTE_BASE_URL="http://localhost:20128"
 
 # Optional: API key for authenticated access
@@ -112,7 +112,7 @@ Add to your MCP client configuration:
 # Direct start (stdio)
 npx tsx open-sse/mcp-server/server.ts
 
-# Or via RouteChi CLI
+# Or via OmniRoute CLI
 omniroute --mcp
 ```
 
@@ -157,6 +157,16 @@ omniroute --mcp
 | 25  | `omniroute_set_compression_engine`  | `write:compression` | Set Caveman, RTK, or stacked compression mode and pipeline                   |
 | 26  | `omniroute_list_compression_combos` | `read:compression`  | List named compression combos and routing assignments                        |
 | 27  | `omniroute_compression_combo_stats` | `read:compression`  | Read analytics grouped by compression combo and engine                       |
+| 28  | `omniroute_ccr_store`               | `write:compression` | Store content in the caller-isolated in-memory CCR store                     |
+| 29  | `omniroute_ccr_retrieve`            | `read:compression`  | Retrieve full or ranged caller-owned CCR content                             |
+| 30  | `omniroute_ccr_inspect`             | `read:compression`  | Inspect CCR metadata without returning content                               |
+| 31  | `omniroute_ccr_list`                | `read:compression`  | List paginated caller-owned CCR metadata                                     |
+| 32  | `omniroute_ccr_delete`              | `write:compression` | Delete a caller-owned CCR block                                              |
+| 33  | `omniroute_ccr_stats`               | `read:compression`  | Report caller usage, bounded-store limits, and lifecycle counters            |
+
+CCR storage is bounded and in-memory only: 2 MiB per block, 16 MiB per principal, 64 MiB global,
+with a 24-hour default TTL. Full MCP retrieval is capped at 256 KiB; larger blocks use ranged or
+grep retrieval. All lifecycle operations are isolated by the authenticated caller principal.
 
 MCP listable metadata descriptions are compressed at registration/list time when description
 compression is enabled. `omniroute_compression_status` exposes those savings separately as
@@ -171,7 +181,7 @@ mistake metadata shrink estimates for provider token receipts.
 
 ```python
 """
-RouteChi MCP Client — Python example using the mcp SDK.
+OmniRoute MCP Client — Python example using the mcp SDK.
 Install: pip install mcp
 """
 import asyncio
@@ -307,11 +317,11 @@ import (
     "net/http"
 )
 
-// Simplified direct-API approach (bypass MCP, hit RouteChi APIs directly)
+// Simplified direct-API approach (bypass MCP, hit OmniRoute APIs directly)
 // Useful if you don't need MCP protocol framing.
 
 func callTool(baseURL, tool string, args map[string]any) (string, error) {
-    // MCP tools map to RouteChi APIs:
+    // MCP tools map to OmniRoute APIs:
     endpoints := map[string]string{
         "health": "/api/monitoring/health",
         "combos": "/api/combos",
@@ -369,7 +379,7 @@ func main() {
 
 ### 🔄 Use Case 1: Auto-Healing Agent
 
-An agent that monitors RouteChi health and auto-switches combos when providers degrade.
+An agent that monitors OmniRoute health and auto-switches combos when providers degrade.
 
 ```python
 async def auto_healing_loop(session):
@@ -608,4 +618,4 @@ mcp-server/
 
 ## License
 
-Part of [RouteChi](https://github.com/borhandarabi/routechi) — MIT License.
+Part of [OmniRoute](https://github.com/diegosouzapw/OmniRoute) — MIT License.

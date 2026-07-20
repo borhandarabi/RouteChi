@@ -155,6 +155,58 @@ function buildCloudflareAiRules(): ProviderErrorRule[] {
   ];
 }
 
+// ─── OpenRouter ─────────────────────────────────────────────────────────────
+// #6842: OpenRouter returns 402 for both a negative account balance and a
+// depleted per-key credit cap. The global `status_402` rule already maps this
+// to `quota_exhausted` with a zero cooldown (immediate fallback to the next
+// connection), but leaves the scope ambiguous and doesn't stop the SAME
+// connection from being reselected instantly (credits genuinely need a
+// top-up, not a timed wait). This explicit rule locks the whole connection
+// (scope: "connection" — credits are account-wide, not per-model) for a real
+// cooldown so combo routing skips it instead of hot-looping back onto it.
+function buildOpenrouterRules(): ProviderErrorRule[] {
+  return [
+    {
+      id: "openrouter-credit-exhausted-402",
+      match: ({ status }) => {
+        if (status !== 402) return null;
+        return { reason: "quota_exhausted", scope: "connection", cooldownMs: 2 * 60 * 1000 };
+      },
+    },
+  ];
+}
+
+// ─── Kilo Free ──────────────────────────────────────────────────────────────
+// Kilo's free tier (api.kilo.ai/api/openrouter) sometimes returns 429 with
+// a Chinese body. The transient rate-limit message ("您的请求频率过高，请稍后再试。")
+// is correctly handled by the global classify429 transient-rate-limit patterns.
+// BUT the quota-exhausted variants are Chinese-language and not recognized by
+// the global English-only quota patterns — without this rule, an exhausted
+// daily quota gets classified as transient rate_limit (~5s cooldown) and the
+// system retries every ~5s against a budget that won't reset until UTC midnight.
+//
+// Patterns covered (verified against Kilo's actual responses on 2026-07-18):
+//   - 每日限额     "daily limit exhausted"
+//   - 每日配额     "daily quota exhausted"
+//   - 额度已用完   "credits exhausted"
+//   - 额度不足     "insufficient credits"
+//
+// Scope: "connection" — Kilo's free-tier quota is account-wide (one anonymous
+// session per IP), so the whole connection must be locked until reset.
+function buildKiloFreeRules(): ProviderErrorRule[] {
+  return [
+    {
+      id: "kilo-free-chinese-quota-exhausted",
+      match: ({ status, body }) => {
+        if (status !== 429) return null;
+        const text = JSON.stringify(body ?? "");
+        if (!/每日限额|每日配额|额度已用完|额度不足/.test(text)) return null;
+        return { reason: "quota_exhausted", scope: "connection" };
+      },
+    },
+  ];
+}
+
 /**
  * Global registry. Provider name → ordered list of rules (first match wins).
  * Add new providers here; the matcher in classifyError will pick them up
@@ -167,6 +219,13 @@ export const providerRuleRegistry = new Map<string, ProviderErrorRule[]>([
   ["minimax", buildMinimaxRules()],
   ["minimax-passthrough", buildMinimaxRules()],
   ["cloudflare-ai", buildCloudflareAiRules()],
+  ["openrouter", buildOpenrouterRules()],
+  // Kilo Free uses OpenRouter's free-tier endpoint and sometimes returns
+  // Chinese-language quota-exhausted messages (e.g. "每日限额已用完" / "额度不足")
+  // that the global classify429 text patterns don't recognize. This rule
+  // catches them so the system applies a long cooldown instead of retrying
+  // every ~5s against a budget that won't reset until UTC midnight.
+  ["kilo-free", buildKiloFreeRules()],
 ]);
 
 /**
